@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/navigation_home"
+        android:icon="@drawable/home"
+        android:title=""/>
+
+    <item
+        android:id="@+id/navigation_itineraryPlanning"
+        android:icon="@drawable/tasks"
+        android:title=""/>
+    <item
+        android:id="@+id/navigation_foodMapSearch"
+        android:icon="@drawable/map"
+        android:title=""/>
+    <item
+        android:id="@+id/navigation_member"
+        android:icon="@drawable/flower"
+        android:title=""/>
+</menu>
