@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+<navigation
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/navigation"
@@ -9,5 +10,36 @@
         android:id="@+id/homeFragment"
         android:name="com.jessy.foodmap.home.homeFragment"
         android:label="fragment_home"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_home" >
+
+    </fragment>
+    <fragment
+        android:id="@+id/foodMapSearchFragment"
+        android:name="com.jessy.foodmap.foodMapSearch.FoodMapSearchFragment"
+        android:label="fragment_food_map_search"
+        tools:layout="@layout/fragment_food_map_search" />
+    <fragment
+        android:id="@+id/itineraryPlanningFragment"
+        android:name="com.jessy.foodmap.Itinerary.ItineraryPlanningFragment"
+        android:label="fragment_itinerary_planning"
+        tools:layout="@layout/fragment_itinerary_planning" />
+    <fragment
+        android:id="@+id/memberFragment"
+        android:name="com.jessy.foodmap.member.MemberFragment"
+        android:label="fragment_member"
+        tools:layout="@layout/fragment_member" />
+
+    <action android:id="@+id/navigate_to_member_fragment" app:destination="@id/memberFragment"
+        app:popUpTo="@id/navigation"
+        app:popUpToInclusive="true" />
+    <action android:id="@+id/navigate_to_itineraryPlanning_fragment" app:destination="@id/itineraryPlanningFragment"
+        app:popUpTo="@id/navigation"
+        app:popUpToInclusive="true" />
+    <action android:id="@+id/navigate_to_foodMapSearch_fragment" app:destination="@id/foodMapSearchFragment"
+        app:popUpTo="@id/navigation"
+        app:popUpToInclusive="true" />
+    <action android:id="@+id/navigate_to_home_fragment" app:destination="@id/homeFragment"
+        app:popUpTo="@id/navigation"
+        app:popUpToInclusive="true" />
+
 </navigation>
