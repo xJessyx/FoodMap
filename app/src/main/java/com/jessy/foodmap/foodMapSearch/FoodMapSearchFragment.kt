@@ -34,10 +34,16 @@ class FoodMapSearchFragment : Fragment(), OnMapReadyCallback {
     ): View? {
         val binding = FragmentFoodMapSearchBinding.inflate(inflater, container, false)
        // binding.lifecycleOwner = viewLifecycleOwner
+        Log.v("(2ContextCompat","${ContextCompat.checkSelfPermission(activity as Activity, Manifest.permission.ACCESS_FINE_LOCATION)}")
 
             if (ContextCompat.checkSelfPermission(activity as Activity, Manifest.permission.ACCESS_FINE_LOCATION)
                 != PackageManager.PERMISSION_GRANTED){
-                ActivityCompat.requestPermissions(activity as Activity, arrayOf(Manifest.permission.ACCESS_FINE_LOCATION), MY_PERMISSIONS_REQUEST_LOCATION)
+
+                Log.v("(ContextCompat.checkSelfPermission(activity as Activity, Manifest.permission.ACCESS_FINE_LOCATION","${ContextCompat.checkSelfPermission(activity as Activity, Manifest.permission.ACCESS_FINE_LOCATION)}")
+
+               // ActivityCompat.requestPermissions(activity as Activity, arrayOf(Manifest.permission.ACCESS_FINE_LOCATION), MY_PERMISSIONS_REQUEST_LOCATION)
+                requestPermissions(arrayOf(Manifest.permission.ACCESS_FINE_LOCATION), MY_PERMISSIONS_REQUEST_LOCATION)
+
             } else {
                 Log.v("成功","123")
             }
@@ -49,20 +55,16 @@ class FoodMapSearchFragment : Fragment(), OnMapReadyCallback {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-
-//        val mapFragment = SupportMapFragment.newInstance()
-//        activity?.supportFragmentManager
-//            ?.beginTransaction()
-//            ?.add(R.id.my_container, mapFragment)
-//            ?.commit()
-
-
-
+//val mapFragment = SupportMapFragment.newInstance()
+//        requireActivity().supportFragmentManager
+//            .beginTransaction()
+//            .add(R.id.my_container, mapFragment)
+//            .commit()
 
         val mapFragment = childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment
         Log.v("mapFragment","$mapFragment")
 
-        mapFragment.getMapAsync(this)
+      mapFragment.getMapAsync(this)
 
         // Create persistent LocationManager reference
         locationManager = activity?.getSystemService(Context.LOCATION_SERVICE) as LocationManager?
@@ -93,6 +95,8 @@ class FoodMapSearchFragment : Fragment(), OnMapReadyCallback {
     }
 
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray){
+        Log.v("b","$requestCode $MY_PERMISSIONS_REQUEST_LOCATION")
+
         if (requestCode == MY_PERMISSIONS_REQUEST_LOCATION) {
             Log.v("a","$requestCode $MY_PERMISSIONS_REQUEST_LOCATION")
             if (grantResults[0] == PackageManager.PERMISSION_GRANTED){
@@ -113,8 +117,7 @@ class FoodMapSearchFragment : Fragment(), OnMapReadyCallback {
         Log.v("onMapReady","$googleMap")
         mMap = googleMap
         Log.v("onMapReady2","$googleMap")
-
-        mMap.setMyLocationEnabled(true)
+        mMap.isMyLocationEnabled = true
         Log.v("onMapReady3","$googleMap")
 
 
