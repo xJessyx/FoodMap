@@ -1,4 +1,7 @@
 package com.jessy.foodmap.home
 
-class HomeViewModel {
+import androidx.lifecycle.ViewModel
+
+class HomeViewModel : ViewModel(){
+
 }

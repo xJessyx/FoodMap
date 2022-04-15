@@ -1,4 +1,4 @@
-package com.jessy.foodmap
+package com.jessy.foodmap.data
 
 import android.media.Image
 
@@ -36,11 +36,11 @@ class Data {
 //            )
 
     //發文
-    data class Post (
-        var image: Image,
-        var titleName:String,
-        var content: String
-            )
+//    data class article (
+//        var image: Image,
+//        var author:String,
+//        var collectNumber: String
+//            )
 
     //我的迷霧美食地圖
 //    data class MyFoodMap(

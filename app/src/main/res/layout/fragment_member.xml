@@ -1,16 +1,162 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+    <data>
+
+    </data>
+
+<androidx.constraintlayout.widget.ConstraintLayout
+
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".member.MemberFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="member"
-        android:textColor="@color/black"
-        android:textSize="50sp" />
+    <ImageView
+        android:id="@+id/member_img"
+        android:layout_width="146dp"
+        android:layout_height="143dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/shape_round"
+       android:src="@drawable/person_man"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-</FrameLayout>
+    <TextView
+        android:id="@+id/member_tv_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="35dp"
+        android:textSize="20dp"
+        app:layout_constraintStart_toEndOf="@+id/member_img"
+        app:layout_constraintTop_toTopOf="@+id/member_img"
+        tools:text="名字："
+        android:text="名字："/>
+
+
+    <TextView
+        android:id="@+id/member_tv_gender"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="20dp"
+        android:layout_marginTop="10dp"
+        app:layout_constraintStart_toStartOf="@+id/member_tv_name"
+        app:layout_constraintTop_toBottomOf="@+id/member_tv_name"
+        android:text="性別："
+        tools:text="性別：" />
+
+
+    <TextView
+        android:id="@+id/member_tv_age"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="20dp"
+        android:layout_marginTop="10dp"
+        app:layout_constraintStart_toStartOf="@+id/member_tv_gender"
+        app:layout_constraintTop_toBottomOf="@+id/member_tv_gender"
+        tools:text="年齡："
+        android:text="年齡："
+        />
+
+    <TextView
+        android:id="@+id/member_tv_grade"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="20dp"
+        android:layout_marginTop="10dp"
+        app:layout_constraintStart_toStartOf="@+id/member_tv_age"
+        app:layout_constraintTop_toBottomOf="@+id/member_tv_age"
+        android:text="等級："
+        tools:text="等級：" />
+
+
+    <TextView
+        android:id="@+id/member_tv_name_person"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="40dp"
+        android:textSize="18dp"
+        app:layout_constraintBottom_toBottomOf="@+id/member_tv_name"
+        app:layout_constraintStart_toEndOf="@+id/member_tv_name"
+        app:layout_constraintTop_toTopOf="@+id/member_tv_name"
+        android:text="小纖女"
+        tools:text="小纖女" />
+
+    <TextView
+        android:id="@+id/member_tv_gender_person"
+        android:layout_width="36dp"
+        android:layout_height="20dp"
+        android:textSize="18dp"
+        android:text="MAN"
+        app:layout_constraintBottom_toBottomOf="@+id/member_tv_gender"
+        app:layout_constraintStart_toStartOf="@+id/member_tv_name_person"
+        app:layout_constraintTop_toTopOf="@+id/member_tv_gender"
+        tools:text="MAN" />
+
+    <TextView
+        android:id="@+id/member_tv_age_person"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="18dp"
+        app:layout_constraintBottom_toBottomOf="@+id/member_tv_age"
+        app:layout_constraintStart_toStartOf="@+id/member_tv_gender_person"
+        app:layout_constraintTop_toTopOf="@+id/member_tv_age"
+        android:text="20"
+        tools:text="20" />
+
+    <TextView
+        android:id="@+id/member_tv_grade_person"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="18dp"
+        app:layout_constraintBottom_toBottomOf="@+id/member_tv_grade"
+        app:layout_constraintStart_toStartOf="@+id/member_tv_age_person"
+        app:layout_constraintTop_toTopOf="@+id/member_tv_grade"
+        android:text="初探"
+        tools:text="初探" />
+
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/member_tabs"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/member_img"
+        app:tabSelectedTextColor="#389DC3"
+        app:tabIndicatorColor="#389DC3"
+        app:tabIndicatorHeight="5dp">
+
+<!--        <com.google.android.material.tabs.TabItem-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="收藏" />-->
+
+<!--        <com.google.android.material.tabs.TabItem-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="我的迷霧地圖" />-->
+    </com.google.android.material.tabs.TabLayout>
+
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/member_viewpager2"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/member_tabs">
+
+
+    </androidx.viewpager2.widget.ViewPager2>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

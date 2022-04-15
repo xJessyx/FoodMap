@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+
+    <ImageView
+        android:id="@+id/foodMapSearch_img"
+        android:layout_width="225dp"
+        android:layout_height="284dp"
+        android:layout_marginRight="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/map_back" />
+
+    <TextView
+        android:id="@+id/foodMapSearch_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="TextView"
+        app:layout_constraintStart_toStartOf="@+id/foodMapSearch_img"
+        app:layout_constraintTop_toBottomOf="@+id/foodMapSearch_img" />
+
+    <TextView
+        android:id="@+id/foodMapSearch_number"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="TextView"
+        app:layout_constraintStart_toStartOf="@+id/foodMapSearch_title"
+        app:layout_constraintTop_toBottomOf="@+id/foodMapSearch_title" />
+
+    <Button
+        android:id="@+id/foodMapSearch_addJourney"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="加入行程"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/foodMapSearch_number"
+        app:layout_constraintTop_toBottomOf="@+id/foodMapSearch_number" />
+
+    <Button
+        android:id="@+id/foodMapSearch_group"
+        android:layout_width="52dp"
+        android:layout_height="54dp"
+        android:background="@drawable/shape_round"
+        android:text="揪"
+        app:layout_constraintEnd_toEndOf="parent"
+        tools:layout_editor_absoluteY="0dp" />
+</androidx.constraintlayout.widget.ConstraintLayout>
