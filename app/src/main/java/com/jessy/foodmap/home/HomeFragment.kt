@@ -6,43 +6,51 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
+import com.jessy.foodmap.MainActivity
+import com.jessy.foodmap.NavigationDirections
 import com.jessy.foodmap.R
-import com.jessy.foodmap.data.article
 import com.jessy.foodmap.databinding.FragmentHomeBinding
 
 class homeFragment : Fragment() {
-
+    private val viewModel: HomeViewModel by lazy {
+        ViewModelProvider(this).get(HomeViewModel::class.java)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View? {
+
+        (activity as MainActivity).showToolBar()
         val binding = FragmentHomeBinding.inflate(inflater, container, false)
         var manager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
         binding.homeRecyclerView.layoutManager = manager  //佈局管理
         manager.setAutoMeasureEnabled(true)
-        val adapter = HomeAdapter()
+        val adapter = HomeAdapter(HomeAdapter.OnClickListener {
+            viewModel.navigateToDetail(it)
+        })
         binding.homeRecyclerView.adapter = adapter
+        binding.lifecycleOwner = viewLifecycleOwner
+        binding.viewModel = viewModel
 
-        val item1 = article(R.drawable.cake,"天天","5212")
-        val item2 = article(R.drawable.cake_pops,"彎彎","234")
-        val item3 = article(R.drawable.churros,"略綠","33")
-        val item4 = article(R.drawable.cookies,"ㄏ黑","3432")
-        val item5 = article(R.drawable.cupcakes,"嘶嘶嘶","5555")
-        val item6 = article(R.drawable.macarons,"天已","5216662")
 
-        val dataList = mutableListOf<article>()
+        adapter.submitList(viewModel.dataList)
 
-        dataList.add(item1)
-        dataList.add(item2)
-        dataList.add(item3)
-        dataList.add(item4)
-        dataList.add(item5)
-        dataList.add(item6)
-        Log.v("dataList1","$dataList")
-        adapter.submitList(dataList)
-            Log.v("dataList2","$dataList")
+        viewModel.navigateToDetail.observe(
+            viewLifecycleOwner,
+            Observer {
+                it?.let {
+                    findNavController().navigate(NavigationDirections.navigateToDetailFragment(it))
+                    viewModel.onDetailNavigated()
+                }
+            }
+        )
+
+
 
         return binding.root
     }

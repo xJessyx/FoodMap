@@ -6,55 +6,42 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.jessy.foodmap.R
+import com.jessy.foodmap.data.Journey
+import com.jessy.foodmap.databinding.FragmentRecommendPagingBinding
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
 
-/**
- * A simple [Fragment] subclass.
- * Use the [RecommendPagingFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class RecommendPagingFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_recommend_paging, container, false)
+        val binding = FragmentRecommendPagingBinding.inflate(inflater, container, false)
+
+
+        val adapter = RecommendPagingAdapter()
+        binding.recommendRecyclerView.adapter = adapter
+        binding.lifecycleOwner = viewLifecycleOwner
+
+        val dataList1 = mutableListOf<Journey>()
+
+        val item1 = Journey(R.drawable.cake, "天天aaa ", ":2022/01/01", "2022/01/10","ya")
+        val item2 = Journey(R.drawable.cake_pops, "彎彎bbbb", "2022/02/01", "2022/02/03","cc")
+        val item3 = Journey(R.drawable.churros, "略綠ccc", "2022/01/01", "2022/01/22","")
+        val item4 = Journey(R.drawable.cookies, "ㄏ黑ss", "2022/02/01", "2022/02/21","qq")
+        val item5 = Journey(R.drawable.cupcakes, "嘶嘶嘶ddddd", "2022/03/01", "2022/03/15","joy")
+        val item6 = Journey(R.drawable.macarons, "天已aaaaaf", "2022/12/01", "2022/12/11","cd")
+        dataList1.add(item1)
+        dataList1.add(item2)
+        dataList1.add(item3)
+        dataList1.add(item4)
+        dataList1.add(item5)
+        dataList1.add(item6)
+
+        adapter.submitList(dataList1)
+
+        return binding.root
+
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment RecommendPagingFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            RecommendPagingFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
-    }
 }

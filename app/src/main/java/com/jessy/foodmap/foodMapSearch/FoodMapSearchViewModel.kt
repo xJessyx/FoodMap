@@ -1,4 +1,8 @@
 package com.jessy.foodmap.foodMapSearch
 
-class FoodMapSearchViewModel {
+import androidx.lifecycle.ViewModel
+
+class FoodMapSearchViewModel : ViewModel(){
+
+
 }

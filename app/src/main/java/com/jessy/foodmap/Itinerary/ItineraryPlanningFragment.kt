@@ -6,9 +6,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.google.android.material.tabs.TabLayoutMediator
-import com.jessy.foodmap.R
+import com.jessy.foodmap.Itinerary.paging.ItinerayPagingAdapter
+import com.jessy.foodmap.MainActivity
 import com.jessy.foodmap.databinding.FragmentItineraryPlanningBinding
-import com.jessy.foodmap.member.MemberPagingAdapter
 
 
 class ItineraryPlanningFragment : Fragment() {
@@ -17,6 +17,8 @@ class ItineraryPlanningFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View? {
+        (activity as MainActivity).hideToolBar()
+
         val binding = FragmentItineraryPlanningBinding.inflate(inflater, container, false)
 
         val pageAdapter = ItinerayPagingAdapter(requireActivity().supportFragmentManager, lifecycle)

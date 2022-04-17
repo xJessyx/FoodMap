@@ -14,12 +14,12 @@ class Data {
     )
 
     //加入行程
-    data class Journey (
-        var image: Image,
-        var journeyName:String,
-        var returnDate: Data
-
-    )
+//    data class Journey (
+//        var image: Image,
+//        var journeyName:String,
+//        var returnDate: Data,
+//        var user:String
+//    )
 
     //加入景點
     data class Place (

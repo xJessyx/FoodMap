@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.google.android.material.tabs.TabLayoutMediator
+import com.jessy.foodmap.MainActivity
 import com.jessy.foodmap.databinding.FragmentMemberBinding
 
 
@@ -16,11 +17,12 @@ class MemberFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View? {
-        // Inflate the layout for this fragment
+        (activity as MainActivity).hideToolBar()
         val binding = FragmentMemberBinding.inflate(inflater, container, false)
 
         val pageAdapter = MemberPagingAdapter(requireActivity().supportFragmentManager, lifecycle)
         binding.memberViewpager2.adapter = pageAdapter
+        binding.lifecycleOwner = viewLifecycleOwner
 
         TabLayoutMediator(binding.memberTabs, binding.memberViewpager2) { tab, position ->
             when (position) {

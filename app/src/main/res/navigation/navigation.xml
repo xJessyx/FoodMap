@@ -29,6 +29,33 @@
         android:label="fragment_member"
         tools:layout="@layout/fragment_member" />
 
+    <fragment
+        android:id="@+id/detailFragment"
+        android:name="com.jessy.foodmap.detail.DetailFragment"
+        android:label="fragment_detail"
+        tools:layout="@layout/fragment_detail">
+
+        <argument android:name="articleKey"
+            app:argType="com.jessy.foodmap.data.Article"
+            app:nullable="false"/>
+    </fragment>
+
+    <fragment
+        android:id="@+id/myItineraryPagingFragment"
+        android:name="com.jessy.foodmap.Itinerary.paging.MyItineraryPagingFragment"
+        android:label="MyItineraryPagingFragment" >
+
+    </fragment>
+    <dialog
+        android:id="@+id/addItineraryFragment"
+        android:name="com.jessy.foodmap.Itinerary.AddItineraryFragment"
+        android:label="AddItineraryFragment" />
+
+    <dialog
+        android:id="@+id/itineraryDetailFragment"
+        android:name="com.jessy.foodmap.Itinerary.ItineraryDetailFragment"
+        android:label="ItineraryDetailFragment" />
+
     <action android:id="@+id/navigate_to_member_fragment" app:destination="@id/memberFragment"
         app:popUpTo="@id/navigation"
         app:popUpToInclusive="true" />
@@ -39,6 +66,15 @@
         app:popUpTo="@id/navigation"
         app:popUpToInclusive="true" />
     <action android:id="@+id/navigate_to_home_fragment" app:destination="@id/homeFragment"
+        app:popUpTo="@id/navigation"
+        app:popUpToInclusive="true" />
+    <action android:id="@+id/navigate_to_detail_fragment" app:destination="@id/detailFragment"
+        app:popUpTo="@id/navigation"
+        app:popUpToInclusive="true" />
+    <action android:id="@+id/action_myItineraryPagingFragment_to_addItineraryFragment" app:destination="@id/addItineraryFragment"
+        app:popUpTo="@id/navigation"
+        app:popUpToInclusive="true" />
+    <action android:id="@+id/addItineraryFragment_to_itineraryDetailFragment" app:destination="@id/itineraryDetailFragment"
         app:popUpTo="@id/navigation"
         app:popUpToInclusive="true" />
 

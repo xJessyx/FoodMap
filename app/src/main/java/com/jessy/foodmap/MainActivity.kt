@@ -4,6 +4,7 @@ import android.content.pm.ApplicationInfo
 import android.content.pm.PackageManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.findNavController
@@ -32,21 +33,21 @@ class MainActivity : AppCompatActivity() {
     private fun setupBottomNav() {
         binding.myBottomNavigationView.setOnItemSelectedListener { item ->
             when (item.itemId) {
-                R.id.navigation_home -> {
+                R.id.homeFragment -> {
                     findNavController(R.id.myNavHostFragment).navigate(NavigationDirections.navigateToHomeFragment())
                     return@setOnItemSelectedListener true
                 }
-                R.id.navigation_itineraryPlanning -> {
+                R.id.itineraryPlanningFragment -> {
 
                     findNavController(R.id.myNavHostFragment).navigate(NavigationDirections.navigateToItineraryPlanningFragment())
                     return@setOnItemSelectedListener true
                 }
-                R.id.navigation_foodMapSearch -> {
+                R.id.foodMapSearchFragment -> {
 
                     findNavController(R.id.myNavHostFragment).navigate(NavigationDirections.navigateToFoodMapSearchFragment())
                     return@setOnItemSelectedListener true
                 }
-                R.id.navigation_member -> {
+                R.id.memberFragment -> {
                     findNavController(R.id.myNavHostFragment).navigate(NavigationDirections.navigateToMemberFragment())
 //                    when (viewModel.isLoggedIn) {
 //                        true -> {
@@ -67,4 +68,17 @@ class MainActivity : AppCompatActivity() {
             false
         }
     }
+
+
+
+    fun hideToolBar() {
+        binding.toolbar.visibility = View.GONE
+
+    }
+
+    fun showToolBar() {
+        binding.toolbar.visibility = View.VISIBLE
+    }
+
+
 }

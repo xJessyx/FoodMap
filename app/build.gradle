@@ -83,7 +83,6 @@ dependencies {
     //noinspection GradleCompatible
     implementation 'com.android.support:recyclerview-v7:23.2.1'
 
-
     //places SDK for Android
     implementation 'com.google.android.libraries.places:places:2.6.0'
     implementation 'com.google.android.ads:mediation-test-suite:2.0.0'

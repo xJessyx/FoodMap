@@ -1,19 +1,17 @@
-package com.jessy.foodmap.Itinerary
+package com.jessy.foodmap.Itinerary.detailpaging
 
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.Lifecycle
 import androidx.viewpager2.adapter.FragmentStateAdapter
-import com.jessy.foodmap.Itinerary.paging.MyItineraryPagingFragment
-import com.jessy.foodmap.Itinerary.paging.RecommendPagingFragment
 
-class ItinerayPagingAdapter (fragmentManager: FragmentManager, lifecycle: Lifecycle) :
+class ItinerayDetailPagingAdapter (fragmentManager: FragmentManager, lifecycle: Lifecycle) :
     FragmentStateAdapter(fragmentManager, lifecycle) {
 
 
     var fragments: ArrayList<Fragment> = arrayListOf(
-        MyItineraryPagingFragment(),
-        RecommendPagingFragment()
+        AddItinerayDetailDateFragment(),AddItinerayDetailDateFragment(),AddItinerayDetailDateFragment(),AddItinerayDetailDateFragment()
+
     )
 
     override fun getItemCount(): Int {
