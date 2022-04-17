@@ -134,7 +134,6 @@ class FoodMapSearchFragment : Fragment(), OnMapReadyCallback {
         return binding.root
     }
 
-    @SuppressLint("MissingPermission")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -177,37 +176,39 @@ class FoodMapSearchFragment : Fragment(), OnMapReadyCallback {
     }
 
 
-    override fun onRequestPermissionsResult(
-        requestCode: Int,
-        permissions: Array<out String>,
-        grantResults: IntArray,
-    ) {
-        Log.v("b", "$requestCode $MY_PERMISSIONS_REQUEST_LOCATION")
-
-        if (requestCode == MY_PERMISSIONS_REQUEST_LOCATION) {
-            Log.v("a", "$requestCode $MY_PERMISSIONS_REQUEST_LOCATION")
-            if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                Toast.makeText(activity as Activity, "已成功定位功能", Toast.LENGTH_SHORT).show()
-                Log.v("已成功定位功能", "已成功定位功能")
-                mMap.isMyLocationEnabled = true
-
-
-            } else {
-                Toast.makeText(activity as Activity, "需要定位功能", Toast.LENGTH_SHORT).show()
-                Log.v("需要定位功能", "需要定位功能")
-
-            }
-        }
-
-    }
-
+//    override fun onRequestPermissionsResult(
+//        requestCode: Int,
+//        permissions: Array<out String>,
+//        grantResults: IntArray,
+//    ) {
+//        Log.v("b", "$requestCode $MY_PERMISSIONS_REQUEST_LOCATION")
+//
+//        if (requestCode == MY_PERMISSIONS_REQUEST_LOCATION) {
+//            Log.v("a", "$requestCode $MY_PERMISSIONS_REQUEST_LOCATION")
+//            if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+//                Toast.makeText(activity as Activity, "已成功定位功能", Toast.LENGTH_SHORT).show()
+//                Log.v("已成功定位功能", "已成功定位功能")
+//
+//
+//            } else {
+//                Toast.makeText(activity as Activity, "需要定位功能", Toast.LENGTH_SHORT).show()
+//                Log.v("需要定位功能", "需要定位功能")
+//
+//
+//
+//            }
+//        }
+//
+//    }
     @SuppressLint("MissingPermission")
+
     override fun onMapReady(googleMap: GoogleMap) {
 
         mMap = googleMap
+    mMap.isMyLocationEnabled = true
+
 
         //確認定位權限是否開啟
-        //----------bug----聽不到使用者權限是否開啟------只有第一次會跳權限設定-----
         if (ContextCompat.checkSelfPermission(this.requireActivity().applicationContext,
                 Manifest.permission.ACCESS_FINE_LOCATION)
             != PackageManager.PERMISSION_GRANTED
@@ -215,7 +216,6 @@ class FoodMapSearchFragment : Fragment(), OnMapReadyCallback {
             // ActivityCompat.requestPermissions(activity as Activity, arrayOf(Manifest.permission.ACCESS_FINE_LOCATION), MY_PERMISSIONS_REQUEST_LOCATION)
             requestPermissions(arrayOf(Manifest.permission.ACCESS_FINE_LOCATION),
                 MY_PERMISSIONS_REQUEST_LOCATION)
-            //    mMap.isMyLocationEnabled = true
         } else {
             Log.v("成功", "已定位")
 
@@ -245,16 +245,10 @@ class FoodMapSearchFragment : Fragment(), OnMapReadyCallback {
                         var predictionsResponse = it.result
                         predictionList =
                             predictionsResponse!!.autocompletePredictions
-                        Log.v("it.isSuccessful", "${it.result}")
-
-                        Log.v("predictionList2", "$predictionList")
 
                         createList()
-                        Log.v("predictionList3", "$predictionList")
-
                     }
                 })
-        Log.v("predictionList4", "$predictionList")
 
 
     }
@@ -267,12 +261,10 @@ class FoodMapSearchFragment : Fragment(), OnMapReadyCallback {
                 Log.v("suggestionsStringArray[]", "${suggestionsStringArray[i]}")
 
             }
-            Log.v("predictionList5", "$predictionList")
-            Log.v("suggestionsStringArray1", "${suggestionsStringArray}")
+
 
             //  populateAdapter(suggestionsStringArray)
         }
-        Log.v("suggestionsStringArray2", "${suggestionsStringArray}")
     }
 //    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
 //        if (requestCode == AUTOCOMPLETE_REQUEST_CODE) {
