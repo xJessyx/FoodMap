@@ -15,7 +15,7 @@ class FoodMapSearchAdapter : ListAdapter<StoreInformation, FoodMapSearchAdapter.
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(storeInformation: StoreInformation) {
-            binding.foodMapSearchImg.setImageResource(storeInformation.storeImg)
+            binding.foodMapSearchImg.setImageBitmap(storeInformation.storeImg)
             binding.foodMapSearchTitle.setText(storeInformation.storeTitle)
             binding.foodMapSearchAddress.setText(storeInformation.storeAddress)
             binding.foodMapSearchScore.setText(storeInformation.storeScore)
