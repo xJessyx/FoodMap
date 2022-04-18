@@ -16,6 +16,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.google.android.gms.common.api.ApiException
@@ -47,7 +48,7 @@ import com.jessy.foodmap.databinding.FragmentHomeBinding
 import com.jessy.foodmap.home.HomeAdapter
 
 
-class FoodMapSearchFragment : Fragment(), OnMapReadyCallback {
+class FoodMapSearchFragment : Fragment(), OnMapReadyCallback,ActivityCompat.OnRequestPermissionsResultCallback {
 
 
     val MY_PERMISSIONS_REQUEST_LOCATION = 100
@@ -81,6 +82,19 @@ class FoodMapSearchFragment : Fragment(), OnMapReadyCallback {
 //            .build(activity as Activity)
 //        startActivityForResult(intent, AUTOCOMPLETE_REQUEST_CODE)
 
+        //確認定位權限是否開啟
+        if (ContextCompat.checkSelfPermission(this.requireActivity().applicationContext,
+                Manifest.permission.ACCESS_FINE_LOCATION)
+            != PackageManager.PERMISSION_GRANTED
+        ) {
+            // ActivityCompat.requestPermissions(activity as Activity, arrayOf(Manifest.permission.ACCESS_FINE_LOCATION), MY_PERMISSIONS_REQUEST_LOCATION)
+            requestPermissions(arrayOf(Manifest.permission.ACCESS_FINE_LOCATION),
+                MY_PERMISSIONS_REQUEST_LOCATION)
+        } else {
+            Log.v("成功", "已定位")
+
+        }
+
 
         //   Initialize the AutocompleteSupportFragment.
         val autocompleteFragment =
@@ -95,14 +109,17 @@ class FoodMapSearchFragment : Fragment(), OnMapReadyCallback {
             Place.Field.PHOTO_METADATAS,
             Place.Field.RATING,
             Place.Field.LAT_LNG))
-        getSuggestions(Place.Field.NAME.toString())
-        Log.v("predictionList1", "$predictionList")
+
+
         // Set up a PlaceSelectionListener to handle the response.
         autocompleteFragment.setOnPlaceSelectedListener(object : PlaceSelectionListener {
             override fun onPlaceSelected(place: Place) {
                 Log.i(TAG,
                     "Place: ${place.name}, ${place.id}, ${Place.Field.PHOTO_METADATAS}, ${Place.Field.RATING} , ${place.latLng}")
-                mMap.addMarker(MarkerOptions().position(place.latLng))
+                getSuggestions(place.name)
+                Log.v("Place.Field.NAME.toString()", "${place.name}")
+
+               mMap.addMarker(MarkerOptions().position(place.latLng))
             }
 
             override fun onError(status: Status) {
@@ -194,32 +211,16 @@ class FoodMapSearchFragment : Fragment(), OnMapReadyCallback {
 //                Toast.makeText(activity as Activity, "需要定位功能", Toast.LENGTH_SHORT).show()
 //                Log.v("需要定位功能", "需要定位功能")
 //
-//
-//
 //            }
 //        }
 //
 //    }
-    @SuppressLint("MissingPermission")
 
+    @SuppressLint("MissingPermission")
     override fun onMapReady(googleMap: GoogleMap) {
 
         mMap = googleMap
-    mMap.isMyLocationEnabled = true
-
-
-        //確認定位權限是否開啟
-        if (ContextCompat.checkSelfPermission(this.requireActivity().applicationContext,
-                Manifest.permission.ACCESS_FINE_LOCATION)
-            != PackageManager.PERMISSION_GRANTED
-        ) {
-            // ActivityCompat.requestPermissions(activity as Activity, arrayOf(Manifest.permission.ACCESS_FINE_LOCATION), MY_PERMISSIONS_REQUEST_LOCATION)
-            requestPermissions(arrayOf(Manifest.permission.ACCESS_FINE_LOCATION),
-                MY_PERMISSIONS_REQUEST_LOCATION)
-        } else {
-            Log.v("成功", "已定位")
-
-        }
+        mMap.isMyLocationEnabled = true
 
     }
 

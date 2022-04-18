@@ -9,7 +9,7 @@
                 android:endColor="#449def"
                 android:angle="270" />
 
-            <solid android:color="#CEFFCE"/>
+            <solid android:color="#efffff"/>
 
             <!--邊框顏色、粗細-->
             <stroke

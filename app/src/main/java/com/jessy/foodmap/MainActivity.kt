@@ -20,14 +20,6 @@ class MainActivity : AppCompatActivity() {
        binding.lifecycleOwner = this
         setupBottomNav()
 
-//  show Api value
-//        val ai: ApplicationInfo = applicationContext.packageManager
-//            .getApplicationInfo(applicationContext.packageName, PackageManager.GET_META_DATA)
-//        val value = ai.metaData["com.google.android.geo.API_KEY"]
-//
-//        val key = value.toString()
-//        Toast.makeText(applicationContext,key, Toast.LENGTH_LONG).show()
-
 
     }
     private fun setupBottomNav() {
@@ -68,8 +60,6 @@ class MainActivity : AppCompatActivity() {
             false
         }
     }
-
-
 
     fun hideToolBar() {
         binding.toolbar.visibility = View.GONE
