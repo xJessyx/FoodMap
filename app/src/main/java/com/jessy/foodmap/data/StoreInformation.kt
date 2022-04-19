@@ -7,10 +7,10 @@ import kotlinx.parcelize.Parcelize
 
 @Parcelize
 data class StoreInformation(
-    var storeImg: Bitmap,
-    var storeTitle:String,
-    var storeAddress:String,
-    var storeScore:String
+    var storeImg: Bitmap? = null,
+    var storeTitle:String ="",
+    var storeAddress:String ="",
+    var storeScore:String=""
 
 
 ): Parcelable

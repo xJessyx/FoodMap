@@ -18,6 +18,8 @@ import android.view.ViewGroup
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.ViewModelProvider
 import com.google.android.gms.common.api.ApiException
 import com.google.android.gms.common.api.Status
 import com.google.android.gms.maps.CameraUpdateFactory
@@ -42,14 +44,16 @@ import com.jessy.foodmap.databinding.FragmentFoodMapSearchBinding
 class FoodMapSearchFragment : Fragment(), OnMapReadyCallback,
     ActivityCompat.OnRequestPermissionsResultCallback {
 
-
+    private val viewModel: FoodMapSearchViewModel by lazy {
+        ViewModelProvider(this).get(FoodMapSearchViewModel::class.java)
+    }
+    val dataList = mutableListOf<StoreInformation>()
     val MY_PERMISSIONS_REQUEST_LOCATION = 100
     private lateinit var mMap: GoogleMap
     private var locationManager: LocationManager? = null
     private lateinit var placesClient: PlacesClient
     lateinit var autocompleteSessionToken: AutocompleteSessionToken
     var predictionList = mutableListOf<AutocompletePrediction>()
-    val dataList = mutableListOf<StoreInformation>()
     val adapter = FoodMapSearchAdapter()
 
     override fun onCreateView(
@@ -60,20 +64,11 @@ class FoodMapSearchFragment : Fragment(), OnMapReadyCallback,
         (activity as MainActivity).hideToolBar()
 
         val binding = FragmentFoodMapSearchBinding.inflate(inflater, container, false)
-        //binding.lifecycleOwner = viewLifecycleOwner
+        binding.lifecycleOwner = viewLifecycleOwner
+        binding.searchRecyclerView.adapter = adapter
+        binding.viewModel = viewModel
+
         initPlaces()
-//        Places.initialize(requireActivity().getApplicationContext(), BuildConfig.MAPS_API_KEY)
-//        placesClient = Places.createClient(activity as Activity)
-
-
-        // Set the fields to specify which types of place data to
-        // return after the user has made a selection.
-//        val fields = listOf(Place.Field.ID, Place.Field.NAME)
-//
-//        // Start the autocomplete intent.
-//        val intent = Autocomplete.IntentBuilder(AutocompleteActivityMode.FULLSCREEN, fields)
-//            .build(activity as Activity)
-//        startActivityForResult(intent, AUTOCOMPLETE_REQUEST_CODE)
 
         //確認定位權限是否開啟
         if (ContextCompat.checkSelfPermission(this.requireActivity().applicationContext,
@@ -111,25 +106,6 @@ class FoodMapSearchFragment : Fragment(), OnMapReadyCallback,
                 Log.i(TAG, "An error occurred: $status")
             }
         })
-
-        binding.searchRecyclerView.adapter = adapter
-        binding.lifecycleOwner = viewLifecycleOwner
-
-
-//        val item1 = StoreInformation(R.drawable.cake, "天天", ":台灣少莉莉路123號5樓", "5.0")
-//        val item2 = StoreInformation(R.drawable.cake_pops, "彎彎", "金星省原來路235號1樓", "4.6")
-//        val item3 = StoreInformation(R.drawable.churros, "略綠", "黑心省黃泉路33號9樓", "8.2")
-//        val item4 = StoreInformation(R.drawable.cookies, "ㄏ黑", "台北彎彎曲第一人民廣場5號3432號1樓", "3.0")
-//        val item5 = StoreInformation(R.drawable.cupcakes, "嘶嘶嘶", "北極星天天里5555號2樓", "1.0")
-//        val item6 = StoreInformation(R.drawable.macarons, "天已", "台灣省南投區自投羅網路522號1樓", "5.0")
-//        dataList1.add(item1)
-//        dataList1.add(item2)
-//        dataList1.add(item3)
-//        dataList1.add(item4)
-//        dataList1.add(item5)
-//        dataList1.add(item6)
-//
-//        adapter.submitList(dataList1)
 
         return binding.root
     }
@@ -175,29 +151,7 @@ class FoodMapSearchFragment : Fragment(), OnMapReadyCallback,
         override fun onProviderDisabled(provider: String) {}
     }
 
-
-//    override fun onRequestPermissionsResult(
-//        requestCode: Int,
-//        permissions: Array<out String>,
-//        grantResults: IntArray,
-//    ) {
-//        Log.v("b", "$requestCode $MY_PERMISSIONS_REQUEST_LOCATION")
-//
-//        if (requestCode == MY_PERMISSIONS_REQUEST_LOCATION) {
-//            Log.v("a", "$requestCode $MY_PERMISSIONS_REQUEST_LOCATION")
-//            if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-//                Toast.makeText(activity as Activity, "已成功定位功能", Toast.LENGTH_SHORT).show()
-//                Log.v("已成功定位功能", "已成功定位功能")
-//
-//
-//            } else {
-//                Toast.makeText(activity as Activity, "需要定位功能", Toast.LENGTH_SHORT).show()
-//                Log.v("需要定位功能", "需要定位功能")
-//
-//            }
-//        }
-//
-//    }
+    //---------------------------------------------------------------------------------------------
 
     @SuppressLint("MissingPermission")
     override fun onMapReady(googleMap: GoogleMap) {
@@ -206,8 +160,6 @@ class FoodMapSearchFragment : Fragment(), OnMapReadyCallback,
         mMap.isMyLocationEnabled = true
 
     }
-
-    //---------------------------------------------------------------------------------------------
     private fun initPlaces() {
         Places.initialize(requireActivity().getApplicationContext(), BuildConfig.MAPS_API_KEY)
         placesClient = Places.createClient(activity as Activity)
@@ -233,26 +185,14 @@ class FoodMapSearchFragment : Fragment(), OnMapReadyCallback,
                         Log.d("PlaceTest", "size=${it.result!!.autocompletePredictions.size}")
                         predictionList =
                             it.result!!.autocompletePredictions
-
                         createList()
+
                     }
                 })
-
-
     }
 
     //剖析預測相關列表，並加入adapter
     private fun createList() {
-
-        //    var suggestionsStringArray = Array<String>(predictionList!!.size) { "" }
-
-//        if (predictionList!!.isNotEmpty()) {
-//            for (i in predictionList!!.indices) {
-//                suggestionsStringArray[i] = predictionList!![i].getFullText(null).toString()
-//                Log.v("suggestionsStringArray[]", "${suggestionsStringArray[i]}")
-//              }
-//
-//            }
 
         var totalCount = 0
         Log.i(TAG, "Place found: predictionList.size=${predictionList.size}")
@@ -263,7 +203,6 @@ class FoodMapSearchFragment : Fragment(), OnMapReadyCallback,
                 Place.Field.NAME,
                 Place.Field.ADDRESS,
                 Place.Field.RATING)
-
 
             // Construct a request object, passing the place ID and fields array.
             val request = FetchPlaceRequest.newInstance(predictionItem.placeId, placeFields)
@@ -283,17 +222,15 @@ class FoodMapSearchFragment : Fragment(), OnMapReadyCallback,
                         .build()
                     placesClient.fetchPhoto(photoRequest)
                         .addOnSuccessListener { fetchPhotoResponse: FetchPhotoResponse ->
-                           val bitmap = fetchPhotoResponse.bitmap
+                            val bitmap = fetchPhotoResponse.bitmap
 
                             val place = StoreInformation(bitmap,
                                 response.place.name,
                                 response.place.address,
                                 response.place.rating.toString())
-
-                                Log.v("place","$place")
-
-                            dataList.add(place)
-                            adapter.submitList(dataList)
+                                dataList.add(place)
+                                adapter.submitList(dataList)
+                        Log.v("dataList","dataList additem= $dataList")
 
                         }.addOnFailureListener { exception: Exception ->
                             if (exception is ApiException) {
@@ -301,16 +238,8 @@ class FoodMapSearchFragment : Fragment(), OnMapReadyCallback,
                                 val statusCode = exception.statusCode
                             }
                         }
-
-
-
-
-                    Log.i(TAG,
-                        "response.place.photoMetadatas.first(): ${response.place.photoMetadatas.first()}")
-
                     totalCount += 1
                     if (totalCount == predictionList.size) {
-                        Log.d("PlaceTest", "我是最後一個 程式碼可以往下跑")
                     } else {
                     }
                 }.addOnFailureListener { exception: Exception ->
@@ -321,34 +250,16 @@ class FoodMapSearchFragment : Fragment(), OnMapReadyCallback,
                         TODO("Handle error with given status code")
                     }
                 }
+
+            Log.v("dataList","createList內結束前1= $dataList")
+
         }
-        //  populateAdapter(suggestionsStringArray)
+        Log.v("dataList","createList內結束後2 = $dataList")
+
     }
+
 }
-//    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-//        if (requestCode == AUTOCOMPLETE_REQUEST_CODE) {
-//            when (resultCode) {
-//                Activity.RESULT_OK -> {
-//                    data?.let {
-//                        val place = Autocomplete.getPlaceFromIntent(data)
-//                        Log.i(TAG, "Place: ${place.name}, ${place.id}")
-//                    }
-//                }
-//                AutocompleteActivity.RESULT_ERROR -> {
-//                    // TODO: Handle the error.
-//                    data?.let {
-//                        val status = Autocomplete.getStatusFromIntent(data)
-//                        Log.i(TAG, status.statusMessage ?: "")
-//                    }
-//                }
-//                Activity.RESULT_CANCELED -> {
-//                    // The user canceled the operation.
-//                }
-//            }
-//            return
-//        }
-//        super.onActivityResult(requestCode, resultCode, data)
-//    }
+
 
 
 
