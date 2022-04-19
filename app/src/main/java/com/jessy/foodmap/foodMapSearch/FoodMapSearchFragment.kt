@@ -7,6 +7,9 @@ import android.content.ContentValues.TAG
 import android.content.Context
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
+import android.graphics.BitmapFactory
+import android.graphics.Canvas
+import android.graphics.drawable.Drawable
 import android.location.Location
 import android.location.LocationListener
 import android.location.LocationManager
@@ -18,7 +21,6 @@ import android.view.ViewGroup
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import com.google.android.gms.common.api.ApiException
 import com.google.android.gms.common.api.Status
@@ -26,6 +28,8 @@ import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
+import com.google.android.gms.maps.model.BitmapDescriptor
+import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 import com.google.android.gms.tasks.OnCompleteListener
@@ -39,6 +43,7 @@ import com.jessy.foodmap.MainActivity
 import com.jessy.foodmap.R
 import com.jessy.foodmap.data.StoreInformation
 import com.jessy.foodmap.databinding.FragmentFoodMapSearchBinding
+import com.jessy.foodmap.foodMapSearch.FoodMapSearchFragment.ImgUtil.getBitmapDescriptor
 
 
 class FoodMapSearchFragment : Fragment(), OnMapReadyCallback,
@@ -54,8 +59,12 @@ class FoodMapSearchFragment : Fragment(), OnMapReadyCallback,
     private lateinit var placesClient: PlacesClient
     lateinit var autocompleteSessionToken: AutocompleteSessionToken
     var predictionList = mutableListOf<AutocompletePrediction>()
-    val adapter = FoodMapSearchAdapter()
-
+    var getStoreLatLng :LatLng? = null
+    val adapter = FoodMapSearchAdapter(FoodMapSearchAdapter.OnClickListener {
+        getStoreLatLng = it.storeLatLng
+        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(LatLng(getStoreLatLng!!.latitude,
+            getStoreLatLng!!.longitude), 12.0f))
+    })
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
@@ -65,6 +74,8 @@ class FoodMapSearchFragment : Fragment(), OnMapReadyCallback,
 
         val binding = FragmentFoodMapSearchBinding.inflate(inflater, container, false)
         binding.lifecycleOwner = viewLifecycleOwner
+
+
         binding.searchRecyclerView.adapter = adapter
         binding.viewModel = viewModel
 
@@ -87,21 +98,19 @@ class FoodMapSearchFragment : Fragment(), OnMapReadyCallback,
             childFragmentManager.findFragmentById(R.id.search_autocomplete)
                     as AutocompleteSupportFragment
 
-//        // Specify the types of place data to return.
-        // autocompleteFragment.setTypeFilter(TypeFilter.ESTABLISHMENT)
-
         autocompleteFragment.setPlaceFields(listOf(Place.Field.ID,
             Place.Field.NAME,
             Place.Field.ADDRESS,
             Place.Field.PHOTO_METADATAS,
             Place.Field.RATING,
             Place.Field.LAT_LNG))
-        // Set up a PlaceSelectionListener to handle the response.
+
         autocompleteFragment.setOnPlaceSelectedListener(object : PlaceSelectionListener {
             override fun onPlaceSelected(place: Place) {
                 getSuggestions(place.name)
-                mMap.addMarker(MarkerOptions().position(place.latLng))
+//                mMap.addMarker(MarkerOptions().position(place.latLng))
             }
+
             override fun onError(status: Status) {
                 Log.i(TAG, "An error occurred: $status")
             }
@@ -133,6 +142,7 @@ class FoodMapSearchFragment : Fragment(), OnMapReadyCallback,
             Log.d("myTag", "Security Exception, no location available")
         }
 
+
     }
 
     //define the listener
@@ -160,6 +170,7 @@ class FoodMapSearchFragment : Fragment(), OnMapReadyCallback,
         mMap.isMyLocationEnabled = true
 
     }
+
     private fun initPlaces() {
         Places.initialize(requireActivity().getApplicationContext(), BuildConfig.MAPS_API_KEY)
         placesClient = Places.createClient(activity as Activity)
@@ -186,14 +197,14 @@ class FoodMapSearchFragment : Fragment(), OnMapReadyCallback,
                         predictionList =
                             it.result!!.autocompletePredictions
                         createList()
-
                     }
                 })
     }
 
     //剖析預測相關列表，並加入adapter
     private fun createList() {
-
+        dataList.clear()
+        mMap.clear()
         var totalCount = 0
         Log.i(TAG, "Place found: predictionList.size=${predictionList.size}")
         for (predictionItem in predictionList) {
@@ -202,7 +213,8 @@ class FoodMapSearchFragment : Fragment(), OnMapReadyCallback,
                 Place.Field.ID,
                 Place.Field.NAME,
                 Place.Field.ADDRESS,
-                Place.Field.RATING)
+                Place.Field.RATING,
+                Place.Field.LAT_LNG)
 
             // Construct a request object, passing the place ID and fields array.
             val request = FetchPlaceRequest.newInstance(predictionItem.placeId, placeFields)
@@ -227,11 +239,26 @@ class FoodMapSearchFragment : Fragment(), OnMapReadyCallback,
                             val place = StoreInformation(bitmap,
                                 response.place.name,
                                 response.place.address,
-                                response.place.rating.toString())
-                                dataList.add(place)
-                                adapter.submitList(dataList)
-                        Log.v("dataList","dataList additem= $dataList")
+                                response.place.rating.toString(),
+                                response.place.latLng)
+                            dataList.add(place)
+                            mMap.addMarker(MarkerOptions()
+                                .position(response.place.latLng)
+                                .icon(
+                                    context?.let {
+                                        getBitmapDescriptor(
+                                            it,
+                                            R.drawable.marker2,
+                                            150,
+                                            150
+                                        )
+                                    }
+                                )
+                                .title(response.place.name)
+                            )
 
+                            adapter.submitList(dataList)
+                            adapter.notifyDataSetChanged()
                         }.addOnFailureListener { exception: Exception ->
                             if (exception is ApiException) {
                                 Log.e(TAG, "Place not found: " + exception.message)
@@ -250,16 +277,38 @@ class FoodMapSearchFragment : Fragment(), OnMapReadyCallback,
                         TODO("Handle error with given status code")
                     }
                 }
-
-            Log.v("dataList","createList內結束前1= $dataList")
-
         }
-        Log.v("dataList","createList內結束後2 = $dataList")
 
     }
 
+    //將向量圖片轉為 bitmap 的小程式，並擴充 Int 功能，新增轉 dp 和 px 功能。
+    object ImgUtil {
+        fun getBitmapDescriptor(
+            context: Context,
+            id: Int,
+            width: Int = 0,
+            height: Int = 0
+        ): BitmapDescriptor? {
+            val vectorDrawable: Drawable? =
+                if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
+                    context.getDrawable(id)
+                } else {
+                    ContextCompat.getDrawable(context, id)
+                }
+            return if (vectorDrawable != null) {
+                if (width == 0) vectorDrawable.intrinsicWidth
+                if (height == 0) vectorDrawable.intrinsicHeight
+                vectorDrawable.setBounds(0, 0, width, height)
+                val bm = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
+                val canvas = Canvas(bm);
+                vectorDrawable.draw(canvas);
+                BitmapDescriptorFactory.fromBitmap(bm);
+            } else {
+                null
+            }
+        }
+    }
+
+
 }
-
-
-
 

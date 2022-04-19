@@ -5,10 +5,12 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.jessy.foodmap.data.Article
 import com.jessy.foodmap.data.StoreInformation
 import com.jessy.foodmap.databinding.ItemFoodmapsearchBinding
+import com.jessy.foodmap.home.HomeAdapter
 
-class FoodMapSearchAdapter : ListAdapter<StoreInformation, FoodMapSearchAdapter.FoodMapSearchViewHolder>(
+class FoodMapSearchAdapter(val onClickListener: FoodMapSearchAdapter.OnClickListener) : ListAdapter<StoreInformation, FoodMapSearchAdapter.FoodMapSearchViewHolder>(
     DiffCallback()){
 
     class FoodMapSearchViewHolder private constructor(var binding: ItemFoodmapsearchBinding) :
@@ -49,8 +51,17 @@ class FoodMapSearchAdapter : ListAdapter<StoreInformation, FoodMapSearchAdapter.
     }
 
     override fun onBindViewHolder(holder: FoodMapSearchViewHolder, position: Int) {
-        holder.bind(getItem(position))
+//        holder.bind(getItem(position))
+        val item = getItem(position)
+        holder.itemView.setOnClickListener {
+            onClickListener.onClick(item)
+        }
+        holder.bind(item)
+
     }
 
 
+    class OnClickListener(val clickListener: (storeInformation: StoreInformation) -> Unit) {
+        fun onClick(storeInformation: StoreInformation) = clickListener(storeInformation)
+    }
 }
