@@ -18,6 +18,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
@@ -38,6 +39,7 @@ import com.google.android.libraries.places.api.model.*
 import com.google.android.libraries.places.api.net.*
 import com.google.android.libraries.places.widget.AutocompleteSupportFragment
 import com.google.android.libraries.places.widget.listener.PlaceSelectionListener
+import com.google.android.material.snackbar.Snackbar
 import com.jessy.foodmap.BuildConfig
 import com.jessy.foodmap.MainActivity
 import com.jessy.foodmap.R
@@ -63,8 +65,10 @@ class FoodMapSearchFragment : Fragment(), OnMapReadyCallback,
     val adapter = FoodMapSearchAdapter(FoodMapSearchAdapter.OnClickListener {
         getStoreLatLng = it.storeLatLng
         mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(LatLng(getStoreLatLng!!.latitude,
-            getStoreLatLng!!.longitude), 12.0f))
+        getStoreLatLng!!.longitude), 12.0f))
     })
+    var oriLocation : Location? = null
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
@@ -74,29 +78,23 @@ class FoodMapSearchFragment : Fragment(), OnMapReadyCallback,
 
         val binding = FragmentFoodMapSearchBinding.inflate(inflater, container, false)
         binding.lifecycleOwner = viewLifecycleOwner
-
-
         binding.searchRecyclerView.adapter = adapter
         binding.viewModel = viewModel
 
-        initPlaces()
 
-        //確認定位權限是否開啟
-        if (ContextCompat.checkSelfPermission(this.requireActivity().applicationContext,
-                Manifest.permission.ACCESS_FINE_LOCATION)
-            != PackageManager.PERMISSION_GRANTED
-        ) {
-            // ActivityCompat.requestPermissions(activity as Activity, arrayOf(Manifest.permission.ACCESS_FINE_LOCATION), MY_PERMISSIONS_REQUEST_LOCATION)
-            requestPermissions(arrayOf(Manifest.permission.ACCESS_FINE_LOCATION),
-                MY_PERMISSIONS_REQUEST_LOCATION)
-        } else {
-            Log.v("成功", "已定位")
 
-        }
-        //   Initialize the AutocompleteSupportFragment.
+        //   Initialize.
         val autocompleteFragment =
             childFragmentManager.findFragmentById(R.id.search_autocomplete)
                     as AutocompleteSupportFragment
+
+        val mapFragment = childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment
+        mapFragment.getMapAsync(this)
+
+        initPlaces()
+        checkGPS()
+        locationManager()
+
 
         autocompleteFragment.setPlaceFields(listOf(Place.Field.ID,
             Place.Field.NAME,
@@ -108,9 +106,7 @@ class FoodMapSearchFragment : Fragment(), OnMapReadyCallback,
         autocompleteFragment.setOnPlaceSelectedListener(object : PlaceSelectionListener {
             override fun onPlaceSelected(place: Place) {
                 getSuggestions(place.name)
-//                mMap.addMarker(MarkerOptions().position(place.latLng))
             }
-
             override fun onError(status: Status) {
                 Log.i(TAG, "An error occurred: $status")
             }
@@ -119,58 +115,98 @@ class FoodMapSearchFragment : Fragment(), OnMapReadyCallback,
         return binding.root
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
 
-        //connent mapfragment
-        val mapFragment = childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment
-        Log.v("mapFragment", "$mapFragment")
-        mapFragment.getMapAsync(this)
+    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray){
+        if (requestCode == MY_PERMISSIONS_REQUEST_LOCATION) {
 
+            if (grantResults[0] == PackageManager.PERMISSION_GRANTED){
+                Toast.makeText(activity, "已成功定位功能", Toast.LENGTH_SHORT).show()
+
+            } else {
+                Toast.makeText(activity, "需要定位功能", Toast.LENGTH_SHORT).show()
+            }
+        }
+    }
+    //向使用者要權限
+    private  fun checkGPS(){
+        //確認定位權限是否開啟
+        if (ContextCompat.checkSelfPermission(this.requireActivity().applicationContext,
+                Manifest.permission.ACCESS_FINE_LOCATION)
+            != PackageManager.PERMISSION_GRANTED
+        ) {
+            //請求權限
+
+            requestPermissions(arrayOf(Manifest.permission.ACCESS_FINE_LOCATION),
+                MY_PERMISSIONS_REQUEST_LOCATION)
+
+        } else {
+            Log.v("成功", "已定位")
+
+        }
+    }
+
+    @SuppressLint("MissingPermission")
+    //判定使用者是否開啟gps
+    private  fun locationManager(){
 
         // Create persistent LocationManager reference
         locationManager = activity?.getSystemService(Context.LOCATION_SERVICE) as LocationManager?
         Log.v("locationManager", "$locationManager")
 
-        try {
-            // Request location updates
-            locationManager?.requestLocationUpdates(LocationManager.NETWORK_PROVIDER,
-                0L,
-                0f,
-                locationListener)
-        } catch (ex: SecurityException) {
-            Log.d("myTag", "Security Exception, no location available")
-        }
+        var isGPSEnabled = locationManager!!.isProviderEnabled(LocationManager.GPS_PROVIDER)
+        var isNetworkEnabled = locationManager!!.isProviderEnabled(LocationManager.NETWORK_PROVIDER)
 
+        if (!(isGPSEnabled || isNetworkEnabled))
+
+                Toast.makeText(activity, "目前無開啟任何定位功能", Toast.LENGTH_SHORT).show()
+
+        else
+            try {
+                if (isGPSEnabled ) {
+                    locationManager!!.requestLocationUpdates(LocationManager.GPS_PROVIDER,
+                        0L, 0f, locationListener)
+                    oriLocation = locationManager!!.getLastKnownLocation(LocationManager.GPS_PROVIDER)
+                    Toast.makeText(activity, "已成功開啟 GPS 定位服務", Toast.LENGTH_SHORT).show()
+                    mMap.isMyLocationEnabled = true
+
+                }
+                else if (isNetworkEnabled) {
+                    locationManager!!.requestLocationUpdates(LocationManager.NETWORK_PROVIDER,
+                        0L, 0f, locationListener)
+                    oriLocation = locationManager!!.getLastKnownLocation(LocationManager.NETWORK_PROVIDER)
+                    Toast.makeText(activity, "已成功開啟網路定位服務", Toast.LENGTH_SHORT).show()
+                    mMap.isMyLocationEnabled = true
+
+                }
+            } catch(ex: SecurityException) {
+                Log.d("myTag", "Security Exception, no location available")
+            }
 
     }
 
-    //define the listener
+    //define the myLocationListener
     private val locationListener: LocationListener = object : LocationListener {
 
         override fun onLocationChanged(location: Location) {
+
             Log.v("location", "$location")
             mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(LatLng(location.latitude,
                 location.longitude), 12.0f))
             Log.v("座標", "${location.latitude} - ${location.longitude}")
 
         }
-
         override fun onStatusChanged(provider: String, status: Int, extras: Bundle) {}
         override fun onProviderEnabled(provider: String) {}
         override fun onProviderDisabled(provider: String) {}
     }
 
-    //---------------------------------------------------------------------------------------------
-
-    @SuppressLint("MissingPermission")
     override fun onMapReady(googleMap: GoogleMap) {
 
         mMap = googleMap
-        mMap.isMyLocationEnabled = true
 
     }
 
+    // Initialize the SDK
     private fun initPlaces() {
         Places.initialize(requireActivity().getApplicationContext(), BuildConfig.MAPS_API_KEY)
         placesClient = Places.createClient(activity as Activity)
@@ -178,7 +214,6 @@ class FoodMapSearchFragment : Fragment(), OnMapReadyCallback,
     }
 
     //抓取搜尋的預測相關列表
-
     private fun getSuggestions(query: String) {
         var findAutocompletePredictionsRequest = FindAutocompletePredictionsRequest
             .builder()
