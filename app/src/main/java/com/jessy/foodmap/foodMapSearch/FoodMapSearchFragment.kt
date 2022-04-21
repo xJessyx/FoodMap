@@ -145,7 +145,6 @@ class FoodMapSearchFragment : Fragment(), OnMapReadyCallback,
         }
     }
 
-    @SuppressLint("MissingPermission")
     //判定使用者是否開啟gps
     private  fun locationManager(){
 
@@ -157,8 +156,7 @@ class FoodMapSearchFragment : Fragment(), OnMapReadyCallback,
         var isNetworkEnabled = locationManager!!.isProviderEnabled(LocationManager.NETWORK_PROVIDER)
 
         if (!(isGPSEnabled || isNetworkEnabled))
-
-                Toast.makeText(activity, "目前無開啟任何定位功能", Toast.LENGTH_SHORT).show()
+            Toast.makeText(activity, "目前無開啟任何定位功能", Toast.LENGTH_SHORT).show()
 
         else
             try {
@@ -167,7 +165,7 @@ class FoodMapSearchFragment : Fragment(), OnMapReadyCallback,
                         0L, 0f, locationListener)
                     oriLocation = locationManager!!.getLastKnownLocation(LocationManager.GPS_PROVIDER)
                     Toast.makeText(activity, "已成功開啟 GPS 定位服務", Toast.LENGTH_SHORT).show()
-                    mMap.isMyLocationEnabled = true
+                 // mMap.isMyLocationEnabled = true
 
                 }
                 else if (isNetworkEnabled) {
@@ -175,7 +173,7 @@ class FoodMapSearchFragment : Fragment(), OnMapReadyCallback,
                         0L, 0f, locationListener)
                     oriLocation = locationManager!!.getLastKnownLocation(LocationManager.NETWORK_PROVIDER)
                     Toast.makeText(activity, "已成功開啟網路定位服務", Toast.LENGTH_SHORT).show()
-                    mMap.isMyLocationEnabled = true
+                   // mMap.isMyLocationEnabled = true
 
                 }
             } catch(ex: SecurityException) {
@@ -200,15 +198,25 @@ class FoodMapSearchFragment : Fragment(), OnMapReadyCallback,
         override fun onProviderDisabled(provider: String) {}
     }
 
+    @SuppressLint("MissingPermission")
     override fun onMapReady(googleMap: GoogleMap) {
 
         mMap = googleMap
-
+        mMap.isMyLocationEnabled = true
     }
 
     // Initialize the SDK
     private fun initPlaces() {
-        Places.initialize(requireActivity().getApplicationContext(), BuildConfig.MAPS_API_KEY)
+        val info = (activity as MainActivity).applicationContext.packageManager
+            .getApplicationInfo(
+                (activity as MainActivity).packageName,
+                PackageManager.GET_META_DATA
+            )
+
+        val key = info.metaData[resources.getString(R.string.map_api_key_name)].toString()
+        Places.initialize(requireContext(), key)
+
+//        Places.initialize(requireActivity().getApplicationContext(), BuildConfig.MAPS_API_KEY)
         placesClient = Places.createClient(activity as Activity)
         autocompleteSessionToken = AutocompleteSessionToken.newInstance()
     }
@@ -309,7 +317,6 @@ class FoodMapSearchFragment : Fragment(), OnMapReadyCallback,
                     if (exception is ApiException) {
                         Log.e(TAG, "Place not found: ${exception.message}")
                         val statusCode = exception.statusCode
-                        TODO("Handle error with given status code")
                     }
                 }
         }

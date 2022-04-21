@@ -20,7 +20,7 @@
         tools:layout="@layout/fragment_food_map_search" />
     <fragment
         android:id="@+id/itineraryPlanningFragment"
-        android:name="com.jessy.foodmap.Itinerary.ItineraryPlanningFragment"
+        android:name="com.jessy.foodmap.itinerary.ItineraryPlanningFragment"
         android:label="fragment_itinerary_planning"
         tools:layout="@layout/fragment_itinerary_planning" />
     <fragment
@@ -42,19 +42,25 @@
 
     <fragment
         android:id="@+id/myItineraryPagingFragment"
-        android:name="com.jessy.foodmap.Itinerary.paging.MyItineraryPagingFragment"
+        android:name="com.jessy.foodmap.itinerary.paging.MyItineraryPagingFragment"
         android:label="MyItineraryPagingFragment" >
 
     </fragment>
     <dialog
         android:id="@+id/addItineraryFragment"
-        android:name="com.jessy.foodmap.Itinerary.AddItineraryFragment"
-        android:label="AddItineraryFragment" />
+        android:name="com.jessy.foodmap.itinerary.AddItineraryFragment"
+        android:label="AddItineraryFragment"
+/>
 
     <dialog
         android:id="@+id/itineraryDetailFragment"
-        android:name="com.jessy.foodmap.Itinerary.ItineraryDetailFragment"
-        android:label="ItineraryDetailFragment" />
+        android:name="com.jessy.foodmap.itinerary.ItineraryDetailFragment"
+        android:label="ItineraryDetailFragment">
+
+        <argument android:name="journeyKey"
+            app:argType="com.jessy.foodmap.data.Journey"
+            app:nullable="false"/>
+    </dialog>
 
     <action android:id="@+id/navigate_to_member_fragment" app:destination="@id/memberFragment"
         app:popUpTo="@id/navigation"

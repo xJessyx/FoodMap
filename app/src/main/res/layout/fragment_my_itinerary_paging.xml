@@ -11,7 +11,7 @@
 
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".Itinerary.paging.MyItineraryPagingFragment">
+        tools:context=".itinerary.paging.MyItineraryPagingFragment">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/myitinerary_recyclerView"

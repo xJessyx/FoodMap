@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+
+    >
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.jessy.foodmap.itinerary.detailpaging.AddItineraryDtailDateViewModel" />
+    </data>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:background="@drawable/shape_sheet_dialog_bg"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:ignore="MissingConstraints">
+
+            <ImageView
+                android:id="@+id/itineraryDetailDate_img_circle"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginLeft="50dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/blue_circle"
+                app:layout_constraintBottom_toBottomOf="@+id/itineraryDetailDate_tv_time"
+                app:layout_constraintStart_toEndOf="@+id/itineraryDetailDate_tv_time"
+                app:layout_constraintTop_toTopOf="@+id/itineraryDetailDate_tv_time" />
+
+            <TextView
+
+                android:id="@+id/itineraryDetailDate_tv_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="36dp"
+                android:textSize="18sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="10:00" />
+            <!--        android:onClick="@{() -> viewModel.showStoreInfo()}"-->
+
+            <Button
+                android:id="@+id/itineraryDetailDate_bt_place"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="50dp"
+                app:layout_constraintBottom_toBottomOf="@+id/itineraryDetailDate_img_circle"
+                app:layout_constraintStart_toEndOf="@+id/itineraryDetailDate_img_circle"
+                app:layout_constraintTop_toTopOf="@+id/itineraryDetailDate_img_circle"
+                tools:text="新增地點" />
+
+
+            <ImageView
+                android:layout_width="5dp"
+                android:layout_height="113dp"
+                android:layout_marginTop="24dp"
+                android:layout_marginBottom="24dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/line"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/itineraryDetailDate_img_circle"
+                app:layout_constraintHorizontal_bias="0.52"
+                app:layout_constraintStart_toStartOf="@+id/itineraryDetailDate_img_circle"
+                app:layout_constraintTop_toBottomOf="@+id/itineraryDetailDate_img_circle"
+                app:layout_constraintVertical_bias="0.0" />
+
+            <TextView
+                android:id="@+id/itineraryDetailDate_tv_storeName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="50dp"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:visibility="gone"
+                app:layout_constraintStart_toEndOf="@+id/itineraryDetailDate_img_circle"
+                app:layout_constraintTop_toTopOf="@+id/itineraryDetailDate_img_circle"
+                tools:text="w u0w uw0 uw0 " />
+
+            <TextView
+                android:id="@+id/itineraryDetailDate_tv_dwellTimeTitle"
+                android:layout_width="43dp"
+                android:layout_height="26dp"
+                android:textSize="15sp"
+                android:visibility="gone"
+                app:layout_constraintStart_toStartOf="@+id/itineraryDetailDate_tv_storeName"
+                app:layout_constraintTop_toBottomOf="@+id/itineraryDetailDate_tv_storeName"
+                tools:text="停留: " />
+
+            <TextView
+                android:id="@+id/itineraryDetailDate_tv_dwellTime"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:textSize="15sp"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="@+id/itineraryDetailDate_tv_storeName"
+                app:layout_constraintStart_toEndOf="@+id/itineraryDetailDate_tv_dwellTimeTitle"
+                app:layout_constraintTop_toBottomOf="@+id/itineraryDetailDate_tv_storeName"
+                tools:text="01 時 00 分" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

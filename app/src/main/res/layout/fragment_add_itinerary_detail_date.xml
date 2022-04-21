@@ -1,72 +1,93 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <data>
+<variable
+    name="viewMedel"
+    type="com.jessy.foodmap.itinerary.detailpaging.AddItineraryDtailDateViewModel" />
+    </data>
+<androidx.constraintlayout.widget.ConstraintLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Itinerary.detailpaging.AddItinerayDetailDateFragment">
+    tools:context=".itinerary.detailpaging.AddItineraryDetailDateFragment">
 
-    <ImageView
-        android:id="@+id/imageView3"
-        android:layout_width="36dp"
-        android:layout_height="43dp"
-        android:layout_marginTop="100dp"
-        android:layout_marginLeft="64dp"
-        android:src="@drawable/blue_circle"
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/detail_recyclerView_date"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent">
+        <!--    <ImageView-->
+        <!--        android:id="@+id/imageView3"-->
+        <!--        android:layout_width="36dp"-->
+        <!--        android:layout_height="43dp"-->
+        <!--        android:layout_marginTop="100dp"-->
+        <!--        android:layout_marginLeft="64dp"-->
+        <!--        android:src="@drawable/blue_circle"-->
+        <!--        app:layout_constraintStart_toStartOf="parent"-->
+        <!--        app:layout_constraintTop_toTopOf="parent" />-->
 
-    <ImageView
-        android:id="@+id/imageView4"
-        android:layout_width="56dp"
-        android:layout_height="87dp"
-        android:src="@drawable/line"
-        app:layout_constraintEnd_toEndOf="@+id/imageView3"
-        app:layout_constraintStart_toStartOf="@+id/imageView3"
-        app:layout_constraintTop_toBottomOf="@+id/imageView3" />
+        <!--    <ImageView-->
+        <!--        android:id="@+id/imageView4"-->
+        <!--        android:layout_width="56dp"-->
+        <!--        android:layout_height="87dp"-->
+        <!--        android:src="@drawable/line"-->
+        <!--        app:layout_constraintEnd_toEndOf="@+id/imageView3"-->
+        <!--        app:layout_constraintStart_toStartOf="@+id/imageView3"-->
+        <!--        app:layout_constraintTop_toBottomOf="@+id/imageView3" />-->
 
-    <Button
-        android:id="@+id/itinerary_bt_first"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:backgroundTint="@color/white"
-        android:text="新增地點"
-        android:layout_marginLeft="56dp"
-        android:textColor="@color/black"
-        app:layout_constraintBottom_toBottomOf="@+id/imageView3"
-        app:layout_constraintStart_toEndOf="@+id/imageView3"
-        app:layout_constraintTop_toTopOf="@+id/imageView3"
-        app:layout_constraintVertical_bias="1.0" />
+        <!--    <Button-->
+        <!--        android:id="@+id/itinerary_bt_first"-->
+        <!--        android:layout_width="wrap_content"-->
+        <!--        android:layout_height="wrap_content"-->
+        <!--        android:backgroundTint="@color/white"-->
+        <!--        android:text="新增地點"-->
+        <!--        android:layout_marginLeft="56dp"-->
+        <!--        android:textColor="@color/black"-->
+        <!--        app:layout_constraintBottom_toBottomOf="@+id/imageView3"-->
+        <!--        app:layout_constraintStart_toEndOf="@+id/imageView3"-->
+        <!--        app:layout_constraintTop_toTopOf="@+id/imageView3"-->
+        <!--        app:layout_constraintVertical_bias="1.0" />-->
 
-    <ImageView
-        android:id="@+id/imageView2"
-        android:layout_width="56dp"
-        android:layout_height="87dp"
-        android:src="@drawable/line"
-        app:layout_constraintEnd_toEndOf="@+id/imageView"
-        app:layout_constraintStart_toStartOf="@+id/imageView"
-        app:layout_constraintTop_toBottomOf="@+id/imageView" />
+        <!--    <ImageView-->
+        <!--        android:id="@+id/imageView2"-->
+        <!--        android:layout_width="56dp"-->
+        <!--        android:layout_height="87dp"-->
+        <!--        android:src="@drawable/line"-->
+        <!--        app:layout_constraintEnd_toEndOf="@+id/imageView"-->
+        <!--        app:layout_constraintStart_toStartOf="@+id/imageView"-->
+        <!--        app:layout_constraintTop_toBottomOf="@+id/imageView" />-->
 
-    <Button
-        android:id="@+id/two"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:backgroundTint="@color/white"
-        android:layout_marginLeft="56dp"
-        android:text="新增地點"
-        android:textColor="@color/black"
-        app:layout_constraintBottom_toTopOf="@+id/imageView2"
-        app:layout_constraintStart_toEndOf="@+id/imageView"
-        app:layout_constraintTop_toBottomOf="@+id/itinerary_bt_first"
-        app:layout_constraintVertical_bias="1.0" />
+        <!--    <Button-->
+        <!--        android:id="@+id/two"-->
+        <!--        android:layout_width="wrap_content"-->
+        <!--        android:layout_height="wrap_content"-->
+        <!--        android:backgroundTint="@color/white"-->
+        <!--        android:layout_marginLeft="56dp"-->
+        <!--        android:text="新增地點"-->
+        <!--        android:textColor="@color/black"-->
+        <!--        app:layout_constraintBottom_toTopOf="@+id/imageView2"-->
+        <!--        app:layout_constraintStart_toEndOf="@+id/imageView"-->
+        <!--        app:layout_constraintTop_toBottomOf="@+id/itinerary_bt_first"-->
+        <!--        app:layout_constraintVertical_bias="1.0" />-->
 
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="36dp"
-        android:layout_height="43dp"
-        android:src="@drawable/blue_circle"
-        app:layout_constraintEnd_toEndOf="@+id/imageView4"
-        app:layout_constraintStart_toStartOf="@+id/imageView4"
-        app:layout_constraintTop_toBottomOf="@+id/imageView4" />
+        <!--    <ImageView-->
+        <!--        android:id="@+id/imageView"-->
+        <!--        android:layout_width="36dp"-->
+        <!--        android:layout_height="43dp"-->
+        <!--        android:src="@drawable/blue_circle"-->
+        <!--        app:layout_constraintEnd_toEndOf="@+id/imageView4"-->
+        <!--        app:layout_constraintStart_toStartOf="@+id/imageView4"-->
+        <!--        app:layout_constraintTop_toBottomOf="@+id/imageView4" />-->
+
+
+    </androidx.recyclerview.widget.RecyclerView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
