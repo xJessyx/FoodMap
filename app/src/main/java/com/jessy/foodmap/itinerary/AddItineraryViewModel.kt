@@ -11,12 +11,13 @@ import com.jessy.foodmap.data.Journey
 
 class AddItineraryViewModel : ViewModel() {
 
-
+//    val _addItinerary = MutableLiveData<List<Journey>>()
+//    val addItinerary: LiveData<List<Journey>>
+//        get() = _addItinerary
 
     val _addItinerary = MutableLiveData<Journey>()
     val addItinerary: LiveData<Journey>
         get() = _addItinerary
-
 
     val db = Firebase.firestore
     val itineraryName = MutableLiveData<String>()
@@ -24,7 +25,7 @@ class AddItineraryViewModel : ViewModel() {
     val itineraryEndDate = MutableLiveData<String>()
 
     fun addFireBaseJourney() {
-        Log.v("addItinerary", "${addItinerary.value?.journeyName}")
+        Log.v("addItinerary", "${addItinerary.value}")
 
         db.collection("journey")
             .add(addItinerary)
@@ -37,12 +38,39 @@ class AddItineraryViewModel : ViewModel() {
     }
 
     fun addItineraryItem() {
-        _addItinerary.value.apply {
-            this?.journeyName = itineraryName.toString()
-            this?.startDate = itineraryStartDate.toString()
-            this?.endtDate = itineraryEndDate.toString()
+//        val list = mutableListOf<Journey>()
+//        val data = Journey(
+//            journeyName = itineraryName.value!!,
+//           startDate = itineraryStartDate.value!!,
+//           endtDate = itineraryEndDate.value!!
+//        )
+//        list.add(data)
+//        _addItinerary.value= list
 
-        }
+//        _addItinerary.value?.journeyName = itineraryName.value.toString()
+//        _addItinerary.value?.startDate = itineraryStartDate.value.toString()
+//        _addItinerary.value?.endtTime = itineraryEndDate.value.toString()
+
+ //             _addItinerary.value.apply {
+//            this?.journeyName =itineraryName.value.toString()
+//            this?.startDate = itineraryStartDate.value.toString()
+//            this?.endtTime = itineraryEndDate.value.toString()
+//        }
+
+
+
+
+        val data = Journey(
+            journeyName = itineraryName.value!!,
+           startDate = itineraryStartDate.value!!,
+           endtDate = itineraryEndDate.value!!
+        )
+        _addItinerary.value = data
+
+        Log.v("journeyName","${itineraryName.value}")
+        Log.v("startDate","${itineraryStartDate.value}")
+        Log.v("startDate","${itineraryEndDate.value}")
+        Log.v("_addItinerary","${_addItinerary.value}")
     }
 
 }

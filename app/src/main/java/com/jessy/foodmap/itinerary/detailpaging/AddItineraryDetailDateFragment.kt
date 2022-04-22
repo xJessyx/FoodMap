@@ -12,7 +12,7 @@ import com.jessy.foodmap.home.HomeAdapter
 import com.jessy.foodmap.home.HomeViewModel
 
 
-class AddItineraryDetailDateFragment : Fragment() {
+class AddItineraryDetailDateFragment(position: Int) : Fragment() {
     private val viewModel: AddItineraryDtailDateViewModel by lazy {
         ViewModelProvider(this).get(AddItineraryDtailDateViewModel::class.java)
     }

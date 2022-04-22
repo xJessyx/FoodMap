@@ -19,7 +19,7 @@ class RecommendPagingAdapter : ListAdapter<Journey, RecommendPagingAdapter.Recom
             binding.recommendItineraryName.setText(journey.journeyName)
             binding.recommendItineraryStartDate.setText(journey.startDate)
             binding.recommendItineraryEndDate.setText(journey.endtDate)
-            binding.recommendName.setText(journey.user)
+            binding.recommendName.setText("user: ya")
 
             binding.executePendingBindings()
 

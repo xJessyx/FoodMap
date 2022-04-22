@@ -25,12 +25,12 @@ class RecommendPagingFragment : Fragment() {
 
         val dataList1 = mutableListOf<Journey>()
 
-        val item1 = Journey(R.drawable.cake, "天天aaa ", ":2022/01/01", "2022/01/10","ya","","","ya","")
-        val item2 = Journey(R.drawable.cake_pops, "彎彎bbbb", "2022/02/01", "2022/02/03","cc","","","cc","")
-        val item3 = Journey(R.drawable.churros, "略綠ccc", "2022/01/01", "2022/01/22","","","","dd","")
-        val item4 = Journey(R.drawable.cookies, "ㄏ黑ss", "2022/02/01", "2022/02/21","qq","","","dds","")
-        val item5 = Journey(R.drawable.cupcakes, "嘶嘶嘶ddddd", "2022/03/01", "2022/03/15","joy","","","cds","")
-        val item6 = Journey(R.drawable.macarons, "天已aaaaaf", "2022/12/01", "2022/12/11","cd","","","ccc","")
+        val item1 = Journey(R.drawable.cake, "天天aaa ", ":2022/01/01", "2022/01/10")
+        val item2 = Journey(R.drawable.cake_pops, "彎彎bbbb", "2022/02/01", "2022/02/03")
+        val item3 = Journey(R.drawable.churros, "略綠ccc", "2022/01/01", "2022/01/22")
+        val item4 = Journey(R.drawable.cookies, "ㄏ黑ss", "2022/02/01", "2022/02/21")
+        val item5 = Journey(R.drawable.cupcakes, "嘶嘶嘶ddddd", "2022/03/01", "2022/03/15")
+        val item6 = Journey(R.drawable.macarons, "天已aaaaaf", "2022/12/01", "2022/12/11")
         dataList1.add(item1)
         dataList1.add(item2)
         dataList1.add(item3)

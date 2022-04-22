@@ -64,12 +64,11 @@ class AddItineraryFragment : BottomSheetDialogFragment() {
             if( (viewModel.itineraryName.value != null) &&( viewModel.itineraryStartDate.value !=null) &&( viewModel.itineraryEndDate.value !=null) ) {
                 viewModel.addItineraryItem()
                 viewModel.addFireBaseJourney()
-
                 viewModel.addItinerary.observe(viewLifecycleOwner){
                     it?.let {
-                        findNavController().navigate(NavigationDirections.addItineraryFragmentToItineraryDetailFragment(
-                            it))
+                        findNavController().navigate(NavigationDirections.addItineraryFragmentToItineraryDetailFragment(it))
                         Log.v("it", "$it")
+
                     }
                 }
 
@@ -97,7 +96,7 @@ class AddItineraryFragment : BottomSheetDialogFragment() {
         val day = c.get(Calendar.DAY_OF_MONTH)
         DatePickerDialog(activity as Activity, { _, year, month, day ->
             run {
-                val format = "出發:${setDateFormat(year, month, day)}"
+                val format = "${setDateFormat(year, month, day)}"
                startDate.text = format
             }
         }, year, month, day).show()
@@ -109,13 +108,19 @@ class AddItineraryFragment : BottomSheetDialogFragment() {
         val day = c.get(Calendar.DAY_OF_MONTH)
         DatePickerDialog(activity as Activity, { _, year, month, day ->
             run {
-                val format = "結束:${setDateFormat(year, month, day)}"
+                val format = "${setDateFormat(year, month, day)}"
                 endDate.text = format
             }
         }, year, month, day).show()
     }
     private fun setDateFormat(year: Int, month: Int, day: Int): String {
-        return "$year-${month + 1}-$day"
+
+        val monthString = String.format("%02d", month + 1)
+        val dayString = String.format("%02d", day)
+        Log.d("Yaj", "monthString=$monthString")
+        Log.d("Yaj", "dayString=$dayString")
+
+        return "$year-$monthString-$dayString"
     }
 
 }
