@@ -4,7 +4,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
     <data>
-
+        <variable
+            name="storeInformation"
+            type="com.jessy.foodmap.data.StoreInformation" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -74,7 +76,7 @@
                     android:textSize="10sp"
                     tools:text="5.0" />
                 <Button
-                    android:id="@+id/foodMapSearch_group2"
+                    android:id="@+id/foodMapSearch_addPlace"
                     android:layout_width="20dp"
                     android:layout_height="20dp"
                     android:background="@drawable/add3"

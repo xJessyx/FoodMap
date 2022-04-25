@@ -15,7 +15,7 @@
         android:id="@+id/item_collect_tv_Name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textColor="#003E3E"
+        android:textColor="#330033"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

@@ -16,6 +16,6 @@
         android:title=""/>
     <item
         android:id="@+id/memberFragment"
-        android:icon="@drawable/flower"
+        android:icon="@drawable/person3"
         android:title=""/>
 </menu>

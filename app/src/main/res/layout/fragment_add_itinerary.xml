@@ -4,12 +4,17 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
     <data>
-
+            <variable
+                name="viewModel"
+                type="com.jessy.foodmap.itinerary.AddItineraryViewModel" />
     </data>
 
 <androidx.constraintlayout.widget.ConstraintLayout
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@drawable/shape_sheet_dialog_bg"
+
+    >
 
     <ScrollView
         android:id="@+id/addItinerary_ScrollView"
@@ -20,7 +25,8 @@
 <androidx.constraintlayout.widget.ConstraintLayout
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    tools:context=".Itinerary.AddItineraryFragment">
+    android:background="@drawable/shape_sheet_dialog_bg"
+    tools:context=".itinerary.AddItineraryFragment">
 
     <TextView
         android:id="@+id/addItinerary_title"
@@ -61,6 +67,7 @@
         android:layout_width="300dp"
         android:layout_height="48dp"
         android:layout_marginTop="16dp"
+        android:text="@={viewModel.itineraryName}"
         android:hint="請輸入行程名稱"
         app:layout_constraintEnd_toEndOf="@+id/addItinerary_img"
         app:layout_constraintStart_toStartOf="@+id/addItinerary_img"
@@ -72,6 +79,7 @@
         android:layout_height="80dp"
         android:layout_marginTop="16dp"
         android:background="@drawable/shape_oval"
+        android:text="@={viewModel.itineraryStartDate}"
         android:hint="請選擇出發日期"
         app:layout_constraintStart_toStartOf="@+id/addItinerary_ed_ItineraryName"
         app:layout_constraintTop_toBottomOf="@+id/addItinerary_ed_ItineraryName" />
@@ -83,6 +91,7 @@
         android:layout_marginTop="16dp"
         android:background="@drawable/shape_oval"
         android:hint="請選擇結束日期"
+        android:text="@={viewModel.itineraryEndDate}"
         app:layout_constraintEnd_toEndOf="@+id/addItinerary_ed_ItineraryName"
         app:layout_constraintTop_toBottomOf="@+id/addItinerary_ed_ItineraryName" />
 
@@ -91,10 +100,10 @@
         android:layout_width="138dp"
         android:layout_height="49dp"
         android:layout_marginTop="30dp"
-        android:backgroundTint="@color/black"
+        android:background="@drawable/shape_round"
         android:text="Submit"
         android:layout_marginBottom="30dp"
-        android:textColor="@color/white"
+        android:textColor="#8D602E"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/addItinerary_ed_EndDate"
         app:layout_constraintStart_toStartOf="@+id/addItinerary_ed_StartDate"

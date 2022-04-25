@@ -22,13 +22,13 @@ class Data {
 //    )
 
     //加入景點
-    data class Place (
-        var journeyName:String,
-        var anyDay:String,
-        var transportation: String,
-        var dwellTime: String
-
-        )
+//    data class Place (
+//        var journeyName:String,
+//        var anyDay:String,
+//        var transportation: String,
+//        var dwellTime: String
+//
+//        )
 
     //邀請好友
 //    data class AddFriend (
