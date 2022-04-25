@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+    <data>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+
+        <ImageView
+            android:layout_marginLeft="5dp"
+            android:id="@+id/foodMapSearch_img"
+            android:layout_width="104dp"
+            android:layout_height="110dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="5dp"
+            android:scaleType="centerCrop"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/map_back" />
+
+        <LinearLayout
+            android:layout_width="104dp"
+            android:layout_height="wrap_content"
+            android:paddingLeft="3dp"
+            android:background="@color/white"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/foodMapSearch_img"
+            app:layout_constraintStart_toStartOf="@+id/foodMapSearch_img"
+            app:layout_constraintTop_toBottomOf="@+id/foodMapSearch_img">
+
+            <TextView
+                android:id="@+id/foodMapSearch_title"
+                android:layout_width="104dp"
+                android:layout_height="24dp"
+                android:layout_marginTop="3dp"
+                android:textSize="10sp"
+                android:ellipsize="end"
+                tools:text="甜甜圈專賣店" />
+
+            <TextView
+                android:id="@+id/foodMapSearch_address"
+                android:layout_width="104dp"
+                android:layout_height="36dp"
+                android:ellipsize="end"
+                android:textSize="10sp"
+                tools:text="台北彎彎曲第一人民廣場5號" />
+
+            <LinearLayout
+                android:layout_width="104dp"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:paddingBottom="3dp">
+
+                <TextView
+                    android:id="@+id/foodMapSearch_scoreName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="評分："
+                    android:textSize="10sp" />
+
+                <TextView
+                    android:id="@+id/foodMapSearch_score"
+                    android:layout_width="51dp"
+                    android:layout_height="wrap_content"
+                    android:textSize="10sp"
+                    tools:text="5.0" />
+                <Button
+                    android:id="@+id/foodMapSearch_group2"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:background="@drawable/add3"
+                    android:text=""
+                    android:textAlignment="center"
+                    android:textColor="@color/black"
+                    android:textSize="9sp" />
+
+
+            </LinearLayout>
+        </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
