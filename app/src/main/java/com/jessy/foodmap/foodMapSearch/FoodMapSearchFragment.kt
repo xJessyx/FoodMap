@@ -23,6 +23,7 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import com.google.android.gms.common.api.ApiException
 import com.google.android.gms.common.api.Status
 import com.google.android.gms.maps.CameraUpdateFactory
@@ -39,9 +40,9 @@ import com.google.android.libraries.places.api.model.*
 import com.google.android.libraries.places.api.net.*
 import com.google.android.libraries.places.widget.AutocompleteSupportFragment
 import com.google.android.libraries.places.widget.listener.PlaceSelectionListener
-import com.google.android.material.snackbar.Snackbar
 import com.jessy.foodmap.BuildConfig
 import com.jessy.foodmap.MainActivity
+import com.jessy.foodmap.NavigationDirections
 import com.jessy.foodmap.R
 import com.jessy.foodmap.data.StoreInformation
 import com.jessy.foodmap.databinding.FragmentFoodMapSearchBinding
@@ -61,13 +62,15 @@ class FoodMapSearchFragment : Fragment(), OnMapReadyCallback,
     private lateinit var placesClient: PlacesClient
     lateinit var autocompleteSessionToken: AutocompleteSessionToken
     var predictionList = mutableListOf<AutocompletePrediction>()
-    var getStoreLatLng :LatLng? = null
+    var getStoreLatLng: LatLng? = null
     val adapter = FoodMapSearchAdapter(FoodMapSearchAdapter.OnClickListener {
+
         getStoreLatLng = it.storeLatLng
         mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(LatLng(getStoreLatLng!!.latitude,
-        getStoreLatLng!!.longitude), 12.0f))
+            getStoreLatLng!!.longitude), 12.0f))
+
     })
-    var oriLocation : Location? = null
+    var oriLocation: Location? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -80,7 +83,6 @@ class FoodMapSearchFragment : Fragment(), OnMapReadyCallback,
         binding.lifecycleOwner = viewLifecycleOwner
         binding.searchRecyclerView.adapter = adapter
         binding.viewModel = viewModel
-
 
 
         //   Initialize.
@@ -107,6 +109,7 @@ class FoodMapSearchFragment : Fragment(), OnMapReadyCallback,
             override fun onPlaceSelected(place: Place) {
                 getSuggestions(place.name)
             }
+
             override fun onError(status: Status) {
                 Log.i(TAG, "An error occurred: $status")
             }
@@ -116,10 +119,14 @@ class FoodMapSearchFragment : Fragment(), OnMapReadyCallback,
     }
 
 
-    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray){
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray,
+    ) {
         if (requestCode == MY_PERMISSIONS_REQUEST_LOCATION) {
 
-            if (grantResults[0] == PackageManager.PERMISSION_GRANTED){
+            if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 Toast.makeText(activity, "已成功定位功能", Toast.LENGTH_SHORT).show()
 
             } else {
@@ -127,8 +134,9 @@ class FoodMapSearchFragment : Fragment(), OnMapReadyCallback,
             }
         }
     }
+
     //向使用者要權限
-    private  fun checkGPS(){
+    private fun checkGPS() {
         //確認定位權限是否開啟
         if (ContextCompat.checkSelfPermission(this.requireActivity().applicationContext,
                 Manifest.permission.ACCESS_FINE_LOCATION)
@@ -146,7 +154,8 @@ class FoodMapSearchFragment : Fragment(), OnMapReadyCallback,
     }
 
     //判定使用者是否開啟gps
-    private  fun locationManager(){
+    @SuppressLint("MissingPermission")
+    private fun locationManager() {
 
         // Create persistent LocationManager reference
         locationManager = activity?.getSystemService(Context.LOCATION_SERVICE) as LocationManager?
@@ -157,26 +166,26 @@ class FoodMapSearchFragment : Fragment(), OnMapReadyCallback,
 
         if (!(isGPSEnabled || isNetworkEnabled))
             Toast.makeText(activity, "目前無開啟任何定位功能", Toast.LENGTH_SHORT).show()
-
         else
             try {
-                if (isGPSEnabled ) {
+                if (isGPSEnabled) {
                     locationManager!!.requestLocationUpdates(LocationManager.GPS_PROVIDER,
                         0L, 0f, locationListener)
-                    oriLocation = locationManager!!.getLastKnownLocation(LocationManager.GPS_PROVIDER)
+                    oriLocation =
+                        locationManager!!.getLastKnownLocation(LocationManager.GPS_PROVIDER)
                     Toast.makeText(activity, "已成功開啟 GPS 定位服務", Toast.LENGTH_SHORT).show()
-                 // mMap.isMyLocationEnabled = true
+                    // mMap.isMyLocationEnabled = true
 
-                }
-                else if (isNetworkEnabled) {
+                } else if (isNetworkEnabled) {
                     locationManager!!.requestLocationUpdates(LocationManager.NETWORK_PROVIDER,
                         0L, 0f, locationListener)
-                    oriLocation = locationManager!!.getLastKnownLocation(LocationManager.NETWORK_PROVIDER)
+                    oriLocation =
+                        locationManager!!.getLastKnownLocation(LocationManager.NETWORK_PROVIDER)
                     Toast.makeText(activity, "已成功開啟網路定位服務", Toast.LENGTH_SHORT).show()
-                   // mMap.isMyLocationEnabled = true
+                    // mMap.isMyLocationEnabled = true
 
                 }
-            } catch(ex: SecurityException) {
+            } catch (ex: SecurityException) {
                 Log.d("myTag", "Security Exception, no location available")
             }
 
@@ -187,12 +196,12 @@ class FoodMapSearchFragment : Fragment(), OnMapReadyCallback,
 
         override fun onLocationChanged(location: Location) {
 
-            Log.v("location", "$location")
-            mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(LatLng(location.latitude,
-                location.longitude), 12.0f))
-            Log.v("座標", "${location.latitude} - ${location.longitude}")
+//            mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(LatLng(location.latitude,
+//                location.longitude), 12.0f))
+         //   Log.v("座標", "${location.latitude} - ${location.longitude}")
 
         }
+
         override fun onStatusChanged(provider: String, status: Int, extras: Bundle) {}
         override fun onProviderEnabled(provider: String) {}
         override fun onProviderDisabled(provider: String) {}
@@ -329,7 +338,7 @@ class FoodMapSearchFragment : Fragment(), OnMapReadyCallback,
             context: Context,
             id: Int,
             width: Int = 0,
-            height: Int = 0
+            height: Int = 0,
         ): BitmapDescriptor? {
             val vectorDrawable: Drawable? =
                 if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {

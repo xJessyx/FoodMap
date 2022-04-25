@@ -2,9 +2,13 @@ package com.jessy.foodmap.foodMapSearch
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.navigation.Navigation.findNavController
+import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.jessy.foodmap.NavigationDirections
 import com.jessy.foodmap.data.Article
 import com.jessy.foodmap.data.StoreInformation
 import com.jessy.foodmap.databinding.ItemFoodmapsearchBinding
@@ -17,10 +21,15 @@ class FoodMapSearchAdapter(val onClickListener: FoodMapSearchAdapter.OnClickList
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(storeInformation: StoreInformation) {
+
             binding.foodMapSearchImg.setImageBitmap(storeInformation.storeImg)
             binding.foodMapSearchTitle.setText(storeInformation.storeTitle)
             binding.foodMapSearchAddress.setText(storeInformation.storeAddress)
             binding.foodMapSearchScore.setText(storeInformation.storeScore)
+            binding.foodMapSearchAddPlace.setOnClickListener {
+                it.findNavController().navigate(NavigationDirections.foodMapSearchFragmentToAddPlaceFragment(storeInformation))
+
+            }
             binding.executePendingBindings()
 
         }
@@ -51,8 +60,9 @@ class FoodMapSearchAdapter(val onClickListener: FoodMapSearchAdapter.OnClickList
     }
 
     override fun onBindViewHolder(holder: FoodMapSearchViewHolder, position: Int) {
-//        holder.bind(getItem(position))
+        //holder.bind(getItem(position))
         val item = getItem(position)
+
         holder.itemView.setOnClickListener {
             onClickListener.onClick(item)
         }

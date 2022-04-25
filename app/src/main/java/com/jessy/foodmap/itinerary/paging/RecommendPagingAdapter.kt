@@ -5,10 +5,12 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.jessy.foodmap.data.Article
 import com.jessy.foodmap.data.Journey
 import com.jessy.foodmap.databinding.ItemRecommendPagingBinding
+import com.jessy.foodmap.home.HomeAdapter
 
-class RecommendPagingAdapter : ListAdapter<Journey, RecommendPagingAdapter.RecommendPagingViewHolder>(
+class RecommendPagingAdapter(val onClickListener: OnClickListener) : ListAdapter<Journey, RecommendPagingAdapter.RecommendPagingViewHolder>(
     RecommendPagingAdapter.DiffCallback()){
 
     class RecommendPagingViewHolder private constructor(var binding: ItemRecommendPagingBinding) :
@@ -41,7 +43,11 @@ class RecommendPagingAdapter : ListAdapter<Journey, RecommendPagingAdapter.Recom
     }
 
     override fun onBindViewHolder(holder: RecommendPagingViewHolder, position: Int) {
-        holder.bind(getItem(position))
+        val item = getItem(position)
+        holder.itemView.setOnClickListener {
+            onClickListener.onClick(item)
+        }
+        holder.bind(item)
 
     }
     class DiffCallback : DiffUtil.ItemCallback<Journey>() {
@@ -54,5 +60,7 @@ class RecommendPagingAdapter : ListAdapter<Journey, RecommendPagingAdapter.Recom
             return    oldItem == newItem
         }
     }
-
+    class OnClickListener(val clickListener: (journey: Journey) -> Unit) {
+        fun onClick(journey: Journey) = clickListener(journey)
+    }
 }

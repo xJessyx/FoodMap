@@ -51,7 +51,6 @@
         android:name="com.jessy.foodmap.itinerary.AddItineraryFragment"
         android:label="AddItineraryFragment"
 />
-
     <dialog
         android:id="@+id/itineraryDetailFragment"
         android:name="com.jessy.foodmap.itinerary.ItineraryDetailFragment"
@@ -61,6 +60,15 @@
             app:argType="com.jessy.foodmap.data.Journey"
             app:nullable="false"/>
     </dialog>
+
+    <fragment
+        android:id="@+id/addPlaceFragment"
+        android:name="com.jessy.foodmap.addPlace.AddPlaceFragment"
+        android:label="AddPlaceFragment">
+         <argument android:name="storeKey"
+            app:argType="com.jessy.foodmap.data.StoreInformation"
+            app:nullable="false"/>
+    </fragment>
 
     <action android:id="@+id/navigate_to_member_fragment" app:destination="@id/memberFragment"
         app:popUpTo="@id/navigation"
@@ -83,5 +91,14 @@
     <action android:id="@+id/addItineraryFragment_to_itineraryDetailFragment" app:destination="@id/itineraryDetailFragment"
         app:popUpTo="@id/navigation"
         app:popUpToInclusive="true" />
+
+    <action android:id="@+id/foodMapSearchFragment_to_addPlaceFragment" app:destination="@id/addPlaceFragment"
+        app:popUpTo="@id/navigation"
+        app:popUpToInclusive="true" />
+
+    <action android:id="@+id/navigate_to_itineraryDetailFragment" app:destination="@id/itineraryDetailFragment"
+        app:popUpTo="@id/navigation"
+        app:popUpToInclusive="true" />
+
 
 </navigation>

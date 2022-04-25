@@ -12,20 +12,23 @@
     </data>
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="200dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
             tools:ignore="MissingConstraints">
 
             <ImageView
                 android:id="@+id/itineraryDetailDate_img_circle"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
-                android:layout_marginLeft="50dp"
+                android:layout_marginLeft="16dp"
                 android:scaleType="centerCrop"
                 android:src="@drawable/blue_circle"
                 app:layout_constraintBottom_toBottomOf="@+id/itineraryDetailDate_tv_time"
@@ -39,7 +42,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="16dp"
                 android:layout_marginTop="36dp"
-                android:textSize="18sp"
+                android:textSize="20sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:text="10:00" />
@@ -50,6 +53,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="50dp"
+                android:visibility="gone"
                 app:layout_constraintBottom_toBottomOf="@+id/itineraryDetailDate_img_circle"
                 app:layout_constraintStart_toEndOf="@+id/itineraryDetailDate_img_circle"
                 app:layout_constraintTop_toTopOf="@+id/itineraryDetailDate_img_circle"
@@ -59,49 +63,80 @@
             <ImageView
                 android:layout_width="5dp"
                 android:layout_height="113dp"
-                android:layout_marginTop="24dp"
-                android:layout_marginBottom="24dp"
+                android:layout_marginTop="36dp"
                 android:scaleType="centerCrop"
                 android:src="@drawable/line"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="@+id/itineraryDetailDate_img_circle"
                 app:layout_constraintHorizontal_bias="0.52"
                 app:layout_constraintStart_toStartOf="@+id/itineraryDetailDate_img_circle"
-                app:layout_constraintTop_toBottomOf="@+id/itineraryDetailDate_img_circle"
-                app:layout_constraintVertical_bias="0.0" />
+                app:layout_constraintTop_toBottomOf="@+id/itineraryDetailDate_img_circle" />
 
             <TextView
                 android:id="@+id/itineraryDetailDate_tv_storeName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="50dp"
+                android:layout_marginLeft="16dp"
+                android:text="地點名稱"
+                android:ellipsize = "end"
+                android:textColor="@color/black"
                 android:textSize="20sp"
                 android:textStyle="bold"
-                android:visibility="gone"
+                android:visibility="visible"
                 app:layout_constraintStart_toEndOf="@+id/itineraryDetailDate_img_circle"
                 app:layout_constraintTop_toTopOf="@+id/itineraryDetailDate_img_circle"
-                tools:text="w u0w uw0 uw0 " />
+                tools:text="地點名稱" />
 
             <TextView
                 android:id="@+id/itineraryDetailDate_tv_dwellTimeTitle"
-                android:layout_width="43dp"
-                android:layout_height="26dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:text="停留："
+                android:gravity="center"
                 android:textSize="15sp"
-                android:visibility="gone"
+                android:visibility="visible"
                 app:layout_constraintStart_toStartOf="@+id/itineraryDetailDate_tv_storeName"
                 app:layout_constraintTop_toBottomOf="@+id/itineraryDetailDate_tv_storeName"
                 tools:text="停留: " />
 
             <TextView
                 android:id="@+id/itineraryDetailDate_tv_dwellTime"
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:text="01 時 00 分"
+                android:textColor="@color/black"
                 android:textSize="15sp"
-                android:visibility="gone"
-                app:layout_constraintEnd_toEndOf="@+id/itineraryDetailDate_tv_storeName"
+                android:visibility="visible"
+                app:layout_constraintBottom_toBottomOf="@+id/itineraryDetailDate_tv_dwellTimeTitle"
                 app:layout_constraintStart_toEndOf="@+id/itineraryDetailDate_tv_dwellTimeTitle"
                 app:layout_constraintTop_toBottomOf="@+id/itineraryDetailDate_tv_storeName"
+                app:layout_constraintVertical_bias="0.0"
                 tools:text="01 時 00 分" />
+
+            <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_marginRight="16dp"
+                android:src="@drawable/train"
+                app:layout_constraintBottom_toBottomOf="@+id/itineraryDetailDate_tv_trafficTime"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/itineraryDetailDate_tv_trafficTime" />
+
+            <TextView
+                android:id="@+id/itineraryDetailDate_tv_trafficTime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="6dp"
+                android:layout_marginBottom="8dp"
+                android:textSize="18sp"
+                android:textColor="@color/black"
+                android:text="59分"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/imageView"
+                tools:text="59分" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -22,6 +22,9 @@ import com.jessy.foodmap.data.Journey
 import com.jessy.foodmap.databinding.FragmentAddItineraryBinding
 import java.lang.String.format
 import java.text.SimpleDateFormat
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter
+import java.time.temporal.ChronoUnit
 import java.util.*
 
 
@@ -50,7 +53,6 @@ class AddItineraryFragment : BottomSheetDialogFragment() {
         startDate = binding.addItineraryEdStartDate
         endDate = binding.addItineraryEdEndDate
         binding.viewModel = viewModel
-
         binding.addItineraryEdStartDate.setOnClickListener {
            setStartData()
         }
@@ -62,6 +64,7 @@ class AddItineraryFragment : BottomSheetDialogFragment() {
         binding.addItineraryBt.setOnClickListener {
 
             if( (viewModel.itineraryName.value != null) &&( viewModel.itineraryStartDate.value !=null) &&( viewModel.itineraryEndDate.value !=null) ) {
+                viewModel.differenceDay()
                 viewModel.addItineraryItem()
                 viewModel.addFireBaseJourney()
                 viewModel.addItinerary.observe(viewLifecycleOwner){
@@ -77,17 +80,10 @@ class AddItineraryFragment : BottomSheetDialogFragment() {
                 Toast.makeText(activity as Activity, "有資料尚未填寫!!!", Toast.LENGTH_SHORT).show()
             }
         }
-
-//        viewModel.addItinerary.observe(viewLifecycleOwner){
-//
-//            Log.v("viewModel.itineraryName1","$viewModel.itineraryName")
-//            viewModel.addItineraryItem()
-//            Log.v("viewModel.itineraryName2","$viewModel.itineraryName")
-//
-//        }
-
         return binding.root
     }
+
+
 
     private fun setStartData(){
         val c = Calendar.getInstance()
@@ -117,8 +113,6 @@ class AddItineraryFragment : BottomSheetDialogFragment() {
 
         val monthString = String.format("%02d", month + 1)
         val dayString = String.format("%02d", day)
-        Log.d("Yaj", "monthString=$monthString")
-        Log.d("Yaj", "dayString=$dayString")
 
         return "$year-$monthString-$dayString"
     }

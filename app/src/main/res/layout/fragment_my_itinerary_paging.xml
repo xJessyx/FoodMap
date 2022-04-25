@@ -26,14 +26,16 @@
 
         <Button
             android:id="@+id/myitinerary_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp"
+            android:layout_width="116dp"
+            android:layout_height="58dp"
             android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp"
+            android:background="@drawable/shape_round"
             android:text="新增行程"
-            app:layout_constraintTop_toBottomOf="@+id/myitinerary_recyclerView"
+            android:textColor="#8D602E"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/myitinerary_recyclerView" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
