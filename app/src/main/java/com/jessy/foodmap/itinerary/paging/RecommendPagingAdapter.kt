@@ -17,13 +17,17 @@ class RecommendPagingAdapter(val onClickListener: OnClickListener) : ListAdapter
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(journey: Journey) {
-            binding.recommendImg.setImageResource(journey.journeImage)
-            binding.recommendItineraryName.setText(journey.journeyName)
-            binding.recommendItineraryStartDate.setText(journey.startDate)
-            binding.recommendItineraryEndDate.setText(journey.endtDate)
-            binding.recommendName.setText("user: ya")
+           binding.journey = journey
+           binding.executePendingBindings()
 
-            binding.executePendingBindings()
+         //  binding.recommendStatus.setText(journey.status?.let { Integer.toString(it) })
+//            binding.recommendImg.setImageURI(journey.journeImage)
+//            binding.recommendItineraryName.setText(journey.journeyName)
+//            binding.recommendItineraryStartDate.setText(journey.startDate)
+//            binding.recommendItineraryEndDate.setText(journey.endtDate)
+//            binding.recommendName.setText("user: ya")
+
+
 
         }
 

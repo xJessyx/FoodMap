@@ -22,13 +22,13 @@ class AddItineraryViewModel : ViewModel() {
     val itineraryStartDate = MutableLiveData<String>()
     val itineraryEndDate = MutableLiveData<String>()
     var itineraryTotalDay :Int =0
-    var journeyId = db.collection("journey").document().id
+    var journeyId = db.collection("journeys").document().id
 
     fun addFireBaseJourney() {
         val itineraryObject = addItinerary.value
 
         if (itineraryObject != null) {
-            db.collection("journey").document(journeyId)
+            db.collection("journeys").document(journeyId)
                 .set(itineraryObject)
                 .addOnSuccessListener {
                     Log.d(TAG, "DocumentSnapshot successfull")
@@ -52,13 +52,12 @@ class AddItineraryViewModel : ViewModel() {
 
         val data = Journey(
             id = journeyId,
-            journeyName =itineraryName.value!!,
+            name =itineraryName.value!!,
             startDate =  itineraryStartDate.value!!,
-            endtDate =  itineraryEndDate.value!!,
-            journeImage = 0,
+            endDate =  itineraryEndDate.value!!,
+            image = "0",
             totalDay = itineraryTotalDay,
         )
-
         _addItinerary.value = data
 
     }

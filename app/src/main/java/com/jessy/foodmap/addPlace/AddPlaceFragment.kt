@@ -100,8 +100,12 @@ class AddPlaceFragment : Fragment() {
             timePickerDialog.show()
         }
         binding.addPlaceBtSubmit.setOnClickListener {
-            viewModel.addPlaceItem()
-           viewModel.updateFireBasePlace()
+            if((viewModel.placeName != null)&&(viewModel.daySinner != null) &&
+                (viewModel.transportationSinner != null)&&(viewModel.startTime != null)&&(viewModel.dwellTime != null)){
+                viewModel.addPlaceItem()
+                viewModel.addFireBasePlace()
+            }
+
         }
 
         viewModel.addAllJourney.observe(viewLifecycleOwner){
@@ -140,7 +144,7 @@ class AddPlaceFragment : Fragment() {
     fun setJourneySpinner() {
         var lunch = mutableListOf<String>()
         for ( item in viewModel.getAllJourney){
-            lunch.add(item.journeyName)
+            lunch.add(item.name)
             Log.v("lunch","$lunch")
         }
         val adapter =

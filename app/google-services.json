@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "944185652421",
+    "project_id": "foodmapfirebase-51cff",
+    "storage_bucket": "foodmapfirebase-51cff.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:944185652421:android:35d1434137b01aecd1ecac",
+        "android_client_info": {
+          "package_name": "com.jessy.foodmap"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "944185652421-d424eodd2u74vpscr4u1jcniif48r5nh.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA8jeK2tTdww5SaZ66abHN7X8EbrvHTtBo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "944185652421-d424eodd2u74vpscr4u1jcniif48r5nh.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

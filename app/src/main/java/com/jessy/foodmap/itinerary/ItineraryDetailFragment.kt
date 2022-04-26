@@ -1,7 +1,5 @@
 package com.jessy.foodmap.itinerary
 
-import android.icu.text.SimpleDateFormat
-import android.icu.util.Calendar
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -10,13 +8,9 @@ import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.google.android.material.tabs.TabLayoutMediator
-import com.jessy.foodmap.R
 import com.jessy.foodmap.itinerary.detailpaging.ItineraryDetailPagingAdapter
 import com.jessy.foodmap.databinding.FragmentItineraryDetailBinding
-import com.jessy.foodmap.detail.DetailFragmentArgs
-import com.jessy.foodmap.foodMapSearch.FoodMapSearchViewModel
 import java.time.LocalDate
-import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 import java.time.temporal.ChronoUnit
 import java.util.*
@@ -38,9 +32,9 @@ class ItineraryDetailFragment : BottomSheetDialogFragment() {
         Log.v("journey","$journeyArg")
         binding.viewModel = viewModel
 
-        binding.itineraryDeatailName.text = journeyArg.journeyName
+        binding.itineraryDeatailName.text = journeyArg.name
         binding.itineraryDeatailStartDate.text =journeyArg.startDate
-        binding.itineraryDeatailEndDate.text=journeyArg.endtDate
+        binding.itineraryDeatailEndDate.text=journeyArg.endDate
 
 //        val startDateTimestamp =TimeUtil.DateToStamp(binding.itineraryDeatailStartDate.text.toString(), Locale.TAIWAN)
 //        val endDateTimestamp  =TimeUtil.DateToStamp(binding.itineraryDeatailStartDate.text.toString(), Locale.TAIWAN)

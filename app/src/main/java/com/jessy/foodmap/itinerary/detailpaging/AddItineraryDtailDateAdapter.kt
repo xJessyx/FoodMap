@@ -27,7 +27,7 @@ class AddItineraryDtailDateAdapter (val onClickListener: AddItineraryDtailDateAd
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(journey: Journey) {
-            binding.itineraryDetailDateBtPlace.setText(journey.journeyName)
+            binding.itineraryDetailDateBtPlace.setText(journey.name)
             binding.itineraryDetailDateTvTime.setText("10:00")//假資料
             binding.itineraryDetailDateTvDwellTime.setText("Place.dwellTime")
             binding.executePendingBindings()

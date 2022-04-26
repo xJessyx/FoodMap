@@ -52,7 +52,7 @@ class AddPlaceViewModel : ViewModel() {
 
 }
 
-    fun updateFireBasePlace() {
+    fun addFireBasePlace() {
 //        val placeObject = addPlace.value
 //        if (placeObject != null) {
 //                db.collection("journey").document("TN92aQVeH48ryTqu50nW")
@@ -66,9 +66,8 @@ class AddPlaceViewModel : ViewModel() {
 //                    }
 //        }
         val placeObject = addPlace.value
-        if (placeObject != null) {
-                db
-                    .collection("place").document(placeId)
+        if (placeObject != null ) {
+                db.collection("place").document(placeId)
                     .set(placeObject)
                     .addOnSuccessListener {
                         Log.d(ContentValues.TAG, "success")
@@ -81,7 +80,13 @@ class AddPlaceViewModel : ViewModel() {
 
     fun addPlaceItem(){
         val data = Place(
-       placeId,placeName,daySinner,transportationSinner,dwellTime,startTime)
+            id = placeId,
+            name = placeName,
+            day = daySinner,
+            transportation = transportationSinner,
+            dwellTime = dwellTime,
+            startTime = startTime
+        )
         _addPlace.value = data
     }
 
