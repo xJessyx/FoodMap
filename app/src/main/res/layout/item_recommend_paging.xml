@@ -1,117 +1,150 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:tools="http://schemas.android.com/tools"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    >
+    xmlns:tools="http://schemas.android.com/tools">
+
     <data>
 
+        <variable
+            name="journey"
+            type="com.jessy.foodmap.data.Journey" />
     </data>
 
-<androidx.constraintlayout.widget.ConstraintLayout
-    android:layout_width="match_parent"
-    android:layout_height="300dp">
-
-    <androidx.cardview.widget.CardView
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_margin="13dp"
-        android:clickable="true"
-        app:cardCornerRadius="35dp"
-        app:cardElevation="10dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.473"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" >
+        android:layout_height="300dp">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:layout_margin="13dp"
+            android:clickable="false"
+            app:cardCornerRadius="35dp"
+            app:cardElevation="10dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.473"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
-            <ImageView
-                android:id="@+id/recommend_img"
+
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:scaleType="centerCrop"
-                android:src="@drawable/ice_cream"
-                tools:layout_editor_absoluteX="48dp"
-                tools:layout_editor_absoluteY="0dp" />
-
-            <TextView
-
-                android:id="@+id/recommend_itineraryName"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                android:textColor="@color/white"
-                android:textSize="20sp"
-                android:textStyle="bold"
-                android:layout_marginTop="32dp"
-                android:layout_marginLeft="20dp"
-                tools:text="甜點之旅" />
-
-            <TextView
-                android:id="@+id/recommend_itineraryStartDate"
-                android:layout_marginTop="8dp"
-                android:textColor="@color/white"
-                android:textStyle="bold"
-                android:textSize="18sp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:layout_constraintStart_toStartOf="@+id/recommend_itineraryName"
-                app:layout_constraintTop_toBottomOf="@+id/recommend_itineraryName"
-                tools:text="2020/01/20" />
-
-            <TextView
-                android:id="@+id/textView4"
-                android:layout_width="21dp"
-                android:layout_height="21dp"
-                android:layout_marginLeft="8dp"
-                android:gravity="center"
-                android:text="~"
-                android:textColor="@color/white"
-                android:textSize="20sp"
-                android:textStyle="bold"
-                app:layout_constraintBottom_toBottomOf="@+id/recommend_itineraryStartDate"
-                app:layout_constraintStart_toEndOf="@+id/recommend_itineraryStartDate"
-                app:layout_constraintTop_toTopOf="@+id/recommend_itineraryStartDate" />
-
-
-            <TextView
-                android:id="@+id/recommend_itineraryEndDate"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:textColor="@color/white"
-                android:textSize="18sp"
-                android:layout_marginLeft="8dp"
-                app:layout_constraintBottom_toBottomOf="@+id/textView4"
-                app:layout_constraintStart_toEndOf="@+id/textView4"
-                app:layout_constraintTop_toTopOf="@+id/textView4"
-                app:layout_constraintVertical_bias="1.0"
-                tools:text="2020/02/20" />
-
-            <TextView
-                android:id="@+id/recommend_name"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:layout_marginTop="8dp"
-                tools:text="ya"
-                android:textColor="#006030"
-                android:textSize="20sp"
-                android:gravity="center"
-                android:background="@drawable/shape_round2"
-                app:layout_constraintStart_toStartOf="@+id/recommend_itineraryStartDate"
-                app:layout_constraintTop_toBottomOf="@+id/recommend_itineraryStartDate" />
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
+                android:layout_height="match_parent">
 
 
 
-    </androidx.cardview.widget.CardView>
+                <ImageView
+                        android:id="@+id/recommend_img"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:scaleType="centerCrop"
+                        app:imageUrl="@{journey.image}"/>
+<!--                android:alpha="0.6"-->
+
+                <FrameLayout
+                    android:id="@+id/frameLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/mask_round"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                </FrameLayout>
+
+                <TextView
+
+                    android:id="@+id/recommend_itineraryName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="25dp"
+                    android:layout_marginTop="25dp"
+                    android:text="@{journey.name}"
+                    android:textColor="@color/white"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="甜點之旅" />
+
+                <TextView
+                    android:id="@+id/recommend_itineraryStartDate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="@{journey.startDate}"
+                    android:textColor="@color/white"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="@+id/recommend_itineraryName"
+                    app:layout_constraintTop_toBottomOf="@+id/recommend_itineraryName"
+                    tools:text="2020/01/20" />
+
+                <TextView
+                    android:id="@+id/textView4"
+                    android:layout_width="23dp"
+                    android:layout_height="23dp"
+                    android:layout_marginLeft="8dp"
+                    android:gravity="center"
+                    android:text="～"
+                    android:textColor="@color/white"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="@+id/recommend_itineraryStartDate"
+                    app:layout_constraintStart_toEndOf="@+id/recommend_itineraryStartDate"
+                    app:layout_constraintTop_toTopOf="@+id/recommend_itineraryStartDate" />
 
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+                <TextView
+                    android:id="@+id/recommend_itineraryEndDate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="8dp"
+                    android:gravity="center"
+                    android:text="@{journey.endDate}"
+                    android:textColor="@color/white"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="@+id/textView4"
+                    app:layout_constraintStart_toEndOf="@+id/textView4"
+                    app:layout_constraintTop_toTopOf="@+id/textView4"
+                    app:layout_constraintVertical_bias="1.0"
+                    tools:text="2020/02/20" />
+
+                <TextView
+                    android:id="@+id/recommend_name"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_marginTop="8dp"
+                    android:background="@drawable/shape_round2"
+                    android:gravity="center"
+                    android:text="@{journey.userId}"
+                    android:textColor="#006030"
+                    android:textSize="20sp"
+                    app:layout_constraintStart_toStartOf="@+id/recommend_itineraryStartDate"
+                    app:layout_constraintTop_toBottomOf="@+id/recommend_itineraryStartDate"
+                    tools:text="ysssssssssssa" />
+
+
+                <TextView
+                    android:id="@+id/recommend_status"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginBottom="16dp"
+                    android:text="@{String.valueOf(journey.status)}"
+                    android:textColor="@color/white"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    tools:text="進行中" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        </androidx.cardview.widget.CardView>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </layout>

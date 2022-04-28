@@ -5,6 +5,8 @@
       <map>
         <entry key="..\:/Users/as110/AppWorkSchoolProject/FoodMap/app/src/main/res/drawable/background_round.xml" value="0.1255" />
         <entry key="..\:/Users/as110/AppWorkSchoolProject/FoodMap/app/src/main/res/drawable/frame_line.xml" value="0.2915" />
+        <entry key="..\:/Users/as110/AppWorkSchoolProject/FoodMap/app/src/main/res/drawable/ic_broken_image.xml" value="0.1" />
+        <entry key="..\:/Users/as110/AppWorkSchoolProject/FoodMap/app/src/main/res/drawable/mask_round.xml" value="0.1" />
         <entry key="..\:/Users/as110/AppWorkSchoolProject/FoodMap/app/src/main/res/drawable/select_homeicon.xml" value="0.1395" />
         <entry key="..\:/Users/as110/AppWorkSchoolProject/FoodMap/app/src/main/res/drawable/shape_oval.xml" value="0.2025" />
         <entry key="..\:/Users/as110/AppWorkSchoolProject/FoodMap/app/src/main/res/drawable/shape_round.xml" value="0.1" />
@@ -21,7 +23,7 @@
         <entry key="..\:/Users/as110/AppWorkSchoolProject/FoodMap/app/src/main/res/layout/fragment_detail.xml" value="0.24869791666666666" />
         <entry key="..\:/Users/as110/AppWorkSchoolProject/FoodMap/app/src/main/res/layout/fragment_food_map_search.xml" value="0.264" />
         <entry key="..\:/Users/as110/AppWorkSchoolProject/FoodMap/app/src/main/res/layout/fragment_home.xml" value="0.2296875" />
-        <entry key="..\:/Users/as110/AppWorkSchoolProject/FoodMap/app/src/main/res/layout/fragment_itinerary_detail.xml" value="0.1684981684981685" />
+        <entry key="..\:/Users/as110/AppWorkSchoolProject/FoodMap/app/src/main/res/layout/fragment_itinerary_detail.xml" value="0.264" />
         <entry key="..\:/Users/as110/AppWorkSchoolProject/FoodMap/app/src/main/res/layout/fragment_itinerary_planning.xml" value="0.24087591240875914" />
         <entry key="..\:/Users/as110/AppWorkSchoolProject/FoodMap/app/src/main/res/layout/fragment_maps.xml" value="0.2390625" />
         <entry key="..\:/Users/as110/AppWorkSchoolProject/FoodMap/app/src/main/res/layout/fragment_maps_paging.xml" value="0.12158054711246201" />
@@ -34,7 +36,7 @@
         <entry key="..\:/Users/as110/AppWorkSchoolProject/FoodMap/app/src/main/res/layout/item_home_article.xml" value="0.264" />
         <entry key="..\:/Users/as110/AppWorkSchoolProject/FoodMap/app/src/main/res/layout/item_member_collect.xml" value="0.17798913043478262" />
         <entry key="..\:/Users/as110/AppWorkSchoolProject/FoodMap/app/src/main/res/layout/item_member_collect_class.xml" value="0.17798913043478262" />
-        <entry key="..\:/Users/as110/AppWorkSchoolProject/FoodMap/app/src/main/res/layout/item_recommend_paging.xml" value="0.264" />
+        <entry key="..\:/Users/as110/AppWorkSchoolProject/FoodMap/app/src/main/res/layout/item_recommend_paging.xml" value="0.4" />
         <entry key="..\:/Users/as110/AppWorkSchoolProject/FoodMap/app/src/main/res/menu/menu.xml" value="0.24947916666666667" />
         <entry key="..\:/Users/as110/AppWorkSchoolProject/FoodMap/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.1" />
         <entry key="..\:/Users/as110/AppWorkSchoolProject/FoodMap/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.1" />

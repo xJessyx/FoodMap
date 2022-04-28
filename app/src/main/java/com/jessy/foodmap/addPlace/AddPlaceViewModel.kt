@@ -27,51 +27,46 @@ class AddPlaceViewModel : ViewModel() {
    var journeySinner : String =""
     var daySinner : Int = 0
     var transportationSinner : Int = 0
-    var dwellTime : Int = 0
+    var dwellTime : Long? = null
     var placeName :String = ""
     var startTime : Long? = null
+    var trafficTime :Long? =3600000
     var getAllJourney = mutableListOf<Journey>()
-    var placeId = db.collection("place").document().id
-
+    var placeId = db.collection("places").document().id
+    var journeyId :String = ""
 
     fun getAllJourney() {
-    db.collection("journey")
+    db.collection("journeys")
         .get()
         .addOnSuccessListener { result ->
             for (document in result) {
                 Log.d(TAG, "${document.id} => ${document.data}")
                 val data = document.toObject(Journey::class.java)
                 getAllJourney.add(data)
+                Log.v("getAllJourney","$getAllJourney")
+
             }
             _addAllJourney.value = getAllJourney
-
+            Log.v("getAllJourney2","$getAllJourney")
         }
         .addOnFailureListener { exception ->
             Log.d(TAG, "Error getting documents: ", exception)
         }
 
 }
+    fun addFireBasePlace() {
 
-    fun updateFireBasePlace() {
-//        val placeObject = addPlace.value
-//        if (placeObject != null) {
-//                db.collection("journey").document("TN92aQVeH48ryTqu50nW")
-//                    .update("placeList", FieldValue.arrayUnion(placeObject))
-//
-//                    .addOnSuccessListener {
-//                        Log.d(ContentValues.TAG, "success")
-//                    }
-//                    .addOnFailureListener {
-//                        Log.w(ContentValues.TAG, "Error adding document")
-//                    }
-//        }
         val placeObject = addPlace.value
-        if (placeObject != null) {
-                db
-                    .collection("place").document(placeId)
+        Log.v("placeObject.id","${placeObject!!.id}")
+
+        if (placeObject != null ) {
+            db.collection("journeys").document(journeyId)
+                .collection("places").document(placeId)
                     .set(placeObject)
                     .addOnSuccessListener {
                         Log.d(ContentValues.TAG, "success")
+                        Log.v("placeId","${placeId}")
+
                     }
                     .addOnFailureListener {
                         Log.w(ContentValues.TAG, "Error adding document")
@@ -81,7 +76,14 @@ class AddPlaceViewModel : ViewModel() {
 
     fun addPlaceItem(){
         val data = Place(
-       placeId,placeName,daySinner,transportationSinner,dwellTime,startTime)
+            id = placeId,
+            name = placeName,
+            day = daySinner,
+            transportation = transportationSinner,
+            dwellTime = dwellTime,
+            startTime = startTime,
+            trafficTime = trafficTime
+        )
         _addPlace.value = data
     }
 

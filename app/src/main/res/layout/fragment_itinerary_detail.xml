@@ -94,13 +94,14 @@
                 android:id="@+id/itineraryDeatail_tabs"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="84dp"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/itineraryDeatail_img"
-                app:tabMode="scrollable"
                 app:tabIndicatorColor="#389DC3"
                 app:tabIndicatorHeight="5dp"
+                app:tabMode="scrollable"
                 app:tabSelectedTextColor="#389DC3">
 
             </com.google.android.material.tabs.TabLayout>
@@ -108,12 +109,34 @@
             <androidx.viewpager2.widget.ViewPager2
                 android:id="@+id/itineraryDeatail_viewPager2"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
+                android:layout_height="500dp"
+                android:layout_marginTop="4dp"
+                android:paddingBottom="8dp"
+                android:layout_marginBottom="32dp"
+                app:layout_constraintBottom_toTopOf="@+id/itineraryDetail_fabBtn"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/itineraryDeatail_tabs" />
+                app:layout_constraintTop_toBottomOf="@+id/itineraryDeatail_tabs"
+                app:layout_constraintVertical_bias="0.0">
+
+            </androidx.viewpager2.widget.ViewPager2>
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/itineraryDetail_fabBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end|bottom"
+                android:layout_marginBottom="272dp"
+                android:backgroundTint="#ECECFF"
+                android:contentDescription="submit"
+                android:src="@drawable/add2"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/itineraryDeatail_viewPager2"
+                app:layout_constraintHorizontal_bias="0.498"
+                app:layout_constraintStart_toStartOf="parent"></com.google.android.material.floatingactionbutton.FloatingActionButton>
+
+
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </ScrollView>

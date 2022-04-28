@@ -5,8 +5,10 @@
     >
     <data>
 <!--        <variable name="viewModel" type="String" />-->
-        <variable name="article" type="com.jessy.foodmap.home.HomeViewModel"/>
-
+        <variable name="viewModel" type="com.jessy.foodmap.home.HomeViewModel"/>
+        <variable
+            name="article"
+            type="com.jessy.foodmap.data.Article" />
     </data>
 
 <androidx.constraintlayout.widget.ConstraintLayout
@@ -16,51 +18,61 @@
     <ImageView
 
         android:id="@+id/home_img"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="400dp"
+        android:layout_height="500dp"
         android:scaleType="centerCrop"
-        android:src="@drawable/cake"
+        app:imageUrl="@{article.image}"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+
+    <ImageView
+        android:id="@+id/home_authorImg"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:layout_marginLeft="8dp"
+        android:background="@drawable/shape_round"
+        app:imageUrl="@{article.authorImage}"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/home_img"
+        app:layout_constraintVertical_bias="1.0" />
+
     <TextView
         android:id="@+id/home_author"
-        android:layout_width="75dp"
+        android:layout_width="wrap_content"
         android:layout_height="24dp"
-        android:layout_marginTop="5dp"
+        android:layout_marginStart="8dp"
         android:gravity="left"
         android:textColor="@color/black"
         android:textSize="15sp"
         android:textStyle="bold"
-        android:layout_marginBottom="10dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/home_img"
-        app:layout_constraintTop_toBottomOf="@+id/home_img"
+        android:text="@{article.author}"
+        app:layout_constraintBottom_toBottomOf="@+id/home_authorImg"
+        app:layout_constraintStart_toEndOf="@+id/home_authorImg"
+        app:layout_constraintTop_toTopOf="@+id/home_authorImg"
         tools:text="u0wu0" />
 
     <Button
         android:id="@+id/home_collect"
         android:layout_width="20dp"
         android:layout_height="20dp"
-        android:layout_marginLeft="8dp"
         android:background="@drawable/heart"
+        android:layout_marginRight="8dp"
         app:layout_constraintBottom_toBottomOf="@+id/home_author"
-        app:layout_constraintLeft_toRightOf="@+id/home_author"
-        app:layout_constraintRight_toLeftOf="@+id/home_collectNumber"
+        app:layout_constraintRight_toLeftOf="@+id/home_totalLike"
         app:layout_constraintTop_toTopOf="@+id/home_author"
         app:layout_constraintVertical_bias="0.5" />
 
     <TextView
-        android:id="@+id/home_collectNumber"
-        android:layout_width="0dp"
-        android:textSize="13sp"
+        android:id="@+id/home_totalLike"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="8dp"
+        android:textSize="13sp"
+        android:layout_marginRight="8dp"
         app:layout_constraintBottom_toBottomOf="@+id/home_collect"
         app:layout_constraintEnd_toEndOf="@+id/home_img"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/home_collect"
         app:layout_constraintTop_toTopOf="@+id/home_collect"
         tools:text="5236" />
 </androidx.constraintlayout.widget.ConstraintLayout>

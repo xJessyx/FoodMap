@@ -5,7 +5,9 @@
 
     >
     <data>
-
+        <variable
+            name="place"
+            type="com.jessy.foodmap.data.Place" />
         <variable
             name="viewModel"
             type="com.jessy.foodmap.itinerary.detailpaging.AddItineraryDtailDateViewModel" />
@@ -31,13 +33,13 @@
                 android:layout_marginLeft="16dp"
                 android:scaleType="centerCrop"
                 android:src="@drawable/blue_circle"
-                app:layout_constraintBottom_toBottomOf="@+id/itineraryDetailDate_tv_time"
-                app:layout_constraintStart_toEndOf="@+id/itineraryDetailDate_tv_time"
-                app:layout_constraintTop_toTopOf="@+id/itineraryDetailDate_tv_time" />
+                app:layout_constraintBottom_toBottomOf="@+id/itineraryDetailDate_tv_startTime"
+                app:layout_constraintStart_toEndOf="@+id/itineraryDetailDate_tv_startTime"
+                app:layout_constraintTop_toTopOf="@+id/itineraryDetailDate_tv_startTime" />
 
             <TextView
 
-                android:id="@+id/itineraryDetailDate_tv_time"
+                android:id="@+id/itineraryDetailDate_tv_startTime"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="16dp"
@@ -64,20 +66,21 @@
                 android:layout_width="5dp"
                 android:layout_height="113dp"
                 android:layout_marginTop="36dp"
+                android:layout_marginBottom="16dp"
                 android:scaleType="centerCrop"
                 android:src="@drawable/line"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="@+id/itineraryDetailDate_img_circle"
                 app:layout_constraintHorizontal_bias="0.52"
                 app:layout_constraintStart_toStartOf="@+id/itineraryDetailDate_img_circle"
-                app:layout_constraintTop_toBottomOf="@+id/itineraryDetailDate_img_circle" />
+                app:layout_constraintTop_toBottomOf="@+id/itineraryDetailDate_img_circle"
+                app:layout_constraintVertical_bias="1.0" />
 
             <TextView
                 android:id="@+id/itineraryDetailDate_tv_storeName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="16dp"
-                android:text="地點名稱"
                 android:ellipsize = "end"
                 android:textColor="@color/black"
                 android:textSize="20sp"
@@ -105,7 +108,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center_vertical"
-                android:text="01 時 00 分"
                 android:textColor="@color/black"
                 android:textSize="15sp"
                 android:visibility="visible"
@@ -131,9 +133,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginRight="6dp"
                 android:layout_marginBottom="8dp"
-                android:textSize="18sp"
+                android:textSize="13sp"
                 android:textColor="@color/black"
-                android:text="59分"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/imageView"
                 tools:text="59分" />

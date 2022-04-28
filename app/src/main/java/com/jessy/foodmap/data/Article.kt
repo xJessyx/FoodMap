@@ -6,7 +6,9 @@ import kotlinx.parcelize.Parcelize
 
 @Parcelize
 data class Article (
-    var image: Int,
+    var id:String,
+    var image: String,
     var author:String,
-    var collectNumber: String
+    var authorImage:String,
+    var totalLike:Int
 ): Parcelable

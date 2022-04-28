@@ -7,71 +7,82 @@
 
   </data>
 
-<androidx.constraintlayout.widget.ConstraintLayout
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".itinerary.ItineraryPlanningFragment">
-
-  <androidx.appcompat.widget.Toolbar
-      android:id="@+id/itineraryPlanning_toolbar"
+  <androidx.constraintlayout.widget.ConstraintLayout
       android:layout_width="match_parent"
-      android:layout_height="80dp"
-      android:textAlignment="center"
-      android:background="@drawable/brush"
-      android:textSize="16sp"
-      app:layout_constraintEnd_toEndOf="parent"
-      app:layout_constraintHorizontal_bias="1.0"
-      app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toTopOf="parent"
-      app:layout_constraintVertical_weight="1">
-    <androidx.constraintlayout.widget.ConstraintLayout
+      android:layout_height="match_parent"
+      tools:context=".itinerary.ItineraryPlanningFragment">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/itineraryPlanning_toolbar"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="80dp"
+        android:background="@drawable/brush"
+        android:textAlignment="center"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_weight="1">
 
-      <ImageView
-          android:layout_width="310dp"
-          android:layout_height="50dp"
-          android:src="@drawable/itinerary_type"
-          app:layout_constraintBottom_toBottomOf="parent"
-          app:layout_constraintEnd_toEndOf="parent"
-          app:layout_constraintHorizontal_bias="1.0"
-          app:layout_constraintStart_toStartOf="parent"
-          app:layout_constraintTop_toTopOf="parent"
-          app:layout_constraintVertical_bias="0.033" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
+      <androidx.constraintlayout.widget.ConstraintLayout
+          android:layout_width="match_parent"
+          android:layout_height="match_parent">
 
-  </androidx.appcompat.widget.Toolbar>
+        <ImageView
+            android:layout_width="310dp"
+            android:layout_height="50dp"
+            android:src="@drawable/itinerary_type"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.033" />
+      </androidx.constraintlayout.widget.ConstraintLayout>
 
-  <com.google.android.material.tabs.TabLayout
-      android:id="@+id/itineraryPlanning_tabs"
-      android:layout_width="match_parent"
-      android:layout_marginTop="16dp"
-      android:layout_height="48dp"
-      app:tabSelectedTextColor="#669999"
-      app:tabIndicatorColor="#669999"
-      app:tabIndicatorHeight="5dp"
-      app:layout_constraintEnd_toEndOf="parent"
-      app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toBottomOf="@+id/itineraryPlanning_toolbar"
-      tools:ignore="MissingConstraints">
+    </androidx.appcompat.widget.Toolbar>
 
-  </com.google.android.material.tabs.TabLayout>
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/itineraryPlanning_tabs"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/itineraryPlanning_toolbar"
+        app:tabIndicatorColor="#669999"
+        app:tabIndicatorHeight="5dp"
+        app:tabSelectedTextColor="#669999"
+        tools:ignore="MissingConstraints">
 
-  <androidx.viewpager2.widget.ViewPager2
-      android:id="@+id/itineraryPlanning_viewPager2"
-      android:orientation="horizontal"
-      android:layout_width="match_parent"
-      android:layout_height="0dp"
-      app:layout_constraintBottom_toBottomOf="parent"
-      app:layout_constraintEnd_toEndOf="parent"
-      app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toBottomOf="@+id/itineraryPlanning_tabs"
-      app:layout_constraintVertical_bias="0.0"
-      tools:ignore="MissingConstraints">
+    </com.google.android.material.tabs.TabLayout>
 
-  </androidx.viewpager2.widget.ViewPager2>
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/itineraryPlanning_viewPager2"
+        android:layout_width="410dp"
+        android:layout_height="0dp"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/itineraryPlanning_tabs"
+        app:layout_constraintVertical_bias="0.0"
+        tools:ignore="MissingConstraints">
+    </androidx.viewpager2.widget.ViewPager2>
 
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/itineraryPlanning_fabBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end|bottom"
+        android:contentDescription="submit"
+        android:src="@drawable/add2"
+        android:backgroundTint="#ECECFF"
+        android:layout_marginBottom="8dp"
+        android:layout_marginRight="8dp"
+        app:layout_constraintBottom_toBottomOf="@+id/itineraryPlanning_viewPager2"
+        app:layout_constraintEnd_toEndOf="parent" />
+  </androidx.constraintlayout.widget.ConstraintLayout>
 
 </layout>
