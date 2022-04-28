@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.jessy.foodmap.NavigationDirections
@@ -25,11 +26,12 @@ class RecommendPagingFragment : Fragment() {
         savedInstanceState: Bundle?,
     ): View? {
         val binding = FragmentRecommendPagingBinding.inflate(inflater, container, false)
-        val adapter = RecommendPagingAdapter(RecommendPagingAdapter.OnClickListener{
-            findNavController().navigate(NavigationDirections.navigateToItineraryDetailFragment(it))
 
-        })
-        binding.recommendRecyclerView.adapter = adapter
+
+       binding.recommendRecyclerView.adapter = RecommendPagingAdapter(RecommendPagingAdapter.OnClickListener{
+           viewModel.navigateToDetailDate(it)
+       }
+       )
         binding.lifecycleOwner = viewLifecycleOwner
         binding.viewModel = viewModel
 
@@ -37,10 +39,19 @@ class RecommendPagingFragment : Fragment() {
         viewModel.getFireBaseJourney()
         viewModel.getAllJourneyLiveData.observe(viewLifecycleOwner){
 
-            adapter.submitList(viewModel.getAllJourney)
+            (binding.recommendRecyclerView.adapter as RecommendPagingAdapter).submitList(it)
+            Log.v("it","$it")
+
         }
 
-
+        viewModel.navigateToDetailDate.observe(
+            viewLifecycleOwner,
+            Observer{
+                it?.let {
+               findNavController().navigate(NavigationDirections.recommendPagingFragmentItineraryDetailFragment(it))
+               viewModel.onDetailNavigated()
+           }
+        })
         return binding.root
 
     }

@@ -30,15 +30,7 @@ class HomeAdapter(val onClickListener: OnClickListener): ListAdapter<Article,
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(articleData: Article) {
-         //   binding.article = articleData
-//            articleData.author = binding.homeAuthor.toString()
-//            articleData.image = binding.homeImg.toString()
-//            articleData.collectNumber = binding.homeCollectNumber.toString()
-            binding.homeAuthor.setText(articleData.author)
-            binding.homeImg.setImageResource(articleData.image)
-            binding.homeCollectNumber.setText(articleData.collectNumber)
-
-
+          binding.article = articleData
             binding.executePendingBindings()
 
         }

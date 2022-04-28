@@ -5,6 +5,7 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.google.firebase.firestore.Query
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.jessy.foodmap.data.Journey
@@ -19,10 +20,15 @@ class RecommendPagingViewModel : ViewModel() {
     val getAllJourneyLiveData: LiveData<List<Journey>>
         get() = _getAllJourneyLiveData
 
+    private val _navigateToDetailDate = MutableLiveData<Journey>()
+    val navigateToDetailDate: LiveData<Journey>
+        get() = _navigateToDetailDate
+
 
     fun getFireBaseJourney() {
-
         db.collection("journeys")
+            .whereEqualTo("userId","wTPHw6wltIsXl4avWJ1m")
+            .orderBy("startDate", Query.Direction.DESCENDING)
             .get()
             .addOnSuccessListener { result ->
                 for (document in result) {
@@ -38,4 +44,12 @@ class RecommendPagingViewModel : ViewModel() {
             }
     }
 
+    fun navigateToDetailDate(journey: Journey) {
+        _navigateToDetailDate.value = journey
+
     }
+
+    fun onDetailNavigated() {
+        _navigateToDetailDate.value = null
+    }
+}

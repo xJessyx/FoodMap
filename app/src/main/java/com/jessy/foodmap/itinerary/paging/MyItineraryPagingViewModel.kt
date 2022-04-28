@@ -20,7 +20,9 @@ class MyItineraryPagingViewModel : ViewModel() {
     val getAllJourneyLiveData: LiveData<List<Journey>>
         get() = _getAllJourneyLiveData
 
-
+    private val _navigateToDetailDate = MutableLiveData<Journey>()
+    val navigateToDetailDate: LiveData<Journey>
+        get() = _navigateToDetailDate
 
 
     fun getFireBaseJourney() {
@@ -41,7 +43,13 @@ class MyItineraryPagingViewModel : ViewModel() {
             .addOnFailureListener { exception ->
                 Log.d(ContentValues.TAG, "Error getting documents: ", exception)
             }
+        }
+
+    fun navigateToDetailDate(journey: Journey) {
+        _navigateToDetailDate.value = journey
     }
 
-
+    fun onDetailNavigated() {
+        _navigateToDetailDate.value = null
+    }
 }

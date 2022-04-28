@@ -70,6 +70,11 @@
             app:nullable="false"/>
     </fragment>
 
+    <fragment
+        android:id="@+id/addItineraryDetailDateFragment"
+        android:name="com.jessy.foodmap.itinerary.detailpaging.AddItineraryDetailDateFragment"
+        android:label="AddItineraryDetailDateFragment" />
+
     <action android:id="@+id/navigate_to_member_fragment" app:destination="@id/memberFragment"
         app:popUpTo="@id/navigation"
         app:popUpToInclusive="true" />
@@ -82,10 +87,10 @@
     <action android:id="@+id/navigate_to_home_fragment" app:destination="@id/homeFragment"
         app:popUpTo="@id/navigation"
         app:popUpToInclusive="true" />
-    <action android:id="@+id/navigate_to_detail_fragment" app:destination="@id/detailFragment"
+    <action android:id="@+id/home_to_detail_fragment" app:destination="@id/detailFragment"
         app:popUpTo="@id/navigation"
         app:popUpToInclusive="true" />
-    <action android:id="@+id/action_myItineraryPagingFragment_to_addItineraryFragment" app:destination="@id/addItineraryFragment"
+    <action android:id="@+id/itineraryPlanningFragment_to_addItineraryFragment" app:destination="@id/addItineraryFragment"
         app:popUpTo="@id/navigation"
         app:popUpToInclusive="true" />
     <action android:id="@+id/addItineraryFragment_to_itineraryDetailFragment" app:destination="@id/itineraryDetailFragment"
@@ -96,7 +101,11 @@
         app:popUpTo="@id/navigation"
         app:popUpToInclusive="true" />
 
-    <action android:id="@+id/navigate_to_itineraryDetailFragment" app:destination="@id/itineraryDetailFragment"
+    <action android:id="@+id/recommendPagingFragment_itineraryDetailFragment" app:destination="@id/itineraryDetailFragment"
+        app:popUpTo="@id/navigation"
+        app:popUpToInclusive="true" />
+
+    <action android:id="@+id/addItineraryDetailDateFragment_foodMapSearchFragment" app:destination="@id/foodMapSearchFragment"
         app:popUpTo="@id/navigation"
         app:popUpToInclusive="true" />
 

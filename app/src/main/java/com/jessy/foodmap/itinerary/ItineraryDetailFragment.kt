@@ -6,8 +6,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
+import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.tabs.TabLayoutMediator
+import com.jessy.foodmap.NavigationDirections
 import com.jessy.foodmap.itinerary.detailpaging.ItineraryDetailPagingAdapter
 import com.jessy.foodmap.databinding.FragmentItineraryDetailBinding
 import java.time.LocalDate
@@ -29,49 +32,36 @@ class ItineraryDetailFragment : BottomSheetDialogFragment() {
         val binding = FragmentItineraryDetailBinding.inflate(inflater, container, false)
         binding.lifecycleOwner = this
         val journeyArg = ItineraryDetailFragmentArgs.fromBundle(requireArguments()).journeyKey
-        Log.v("journey","$journeyArg")
-        binding.viewModel = viewModel
 
+        binding.viewModel = viewModel
         binding.itineraryDeatailName.text = journeyArg.name
         binding.itineraryDeatailStartDate.text =journeyArg.startDate
         binding.itineraryDeatailEndDate.text=journeyArg.endDate
+//        viewModel.journeyItemId = journeyArg.id
 
-//        val startDateTimestamp =TimeUtil.DateToStamp(binding.itineraryDeatailStartDate.text.toString(), Locale.TAIWAN)
-//        val endDateTimestamp  =TimeUtil.DateToStamp(binding.itineraryDeatailStartDate.text.toString(), Locale.TAIWAN)
-//        val dateDifference = endDateTimestamp -startDateTimestamp
-//        Log.v("startDate+endDate","${endDateTimestamp } ${startDateTimestamp }")
-//        Log.v("dateDifference","$dateDifference")
-        val format = DateTimeFormatter.ofPattern("yyyy-MM-dd")
-        val mStart = LocalDate.parse(binding.itineraryDeatailStartDate.text, format)
-        val mEnd = LocalDate.parse(binding.itineraryDeatailEndDate.text, format)
-        val difference = ChronoUnit.DAYS.between(mStart, mEnd)
-        Log.v("difference","$difference")
+       // viewModel.getFireBasePlace()
 
-        val pageAdapter = ItineraryDetailPagingAdapter(this, difference.toInt())
+//        val format = DateTimeFormatter.ofPattern("yyyy-MM-dd")
+//        val mStart = LocalDate.parse(binding.itineraryDeatailStartDate.text, format)
+//        val mEnd = LocalDate.parse(binding.itineraryDeatailEndDate.text, format)
+//        val difference = ChronoUnit.DAYS.between(mStart, mEnd)
+        val pageAdapter = ItineraryDetailPagingAdapter(this,journeyArg)
+
         binding.itineraryDeatailViewPager2.adapter = pageAdapter
         TabLayoutMediator(binding.itineraryDeatailTabs,
             binding.itineraryDeatailViewPager2) { tab, position ->
 
             tab.text = "第 ${position + 1} 天"
         }.attach()
+
+        binding.itineraryDetailFabBtn.setOnClickListener {
+                view ->
+            Snackbar.make(view, "Here's a Snackbar", Snackbar.LENGTH_LONG)
+                .setAction("Action", null)
+                .show()
+            findNavController().navigate(NavigationDirections.addItineraryDetailDateFragmentFoodMapSearchFragment())
+        }
         return binding.root
     }
-//    object TimeUtil {
-//        @JvmStatic
-//        fun StampToDate(time: Long, locale: Locale): String {
-//            // 進來的time以秒為單位，Date輸入為毫秒為單位，要注意
-//
-//            val simpleDateFormat = SimpleDateFormat("yyyy-MM-dd", locale)
-//
-//            return simpleDateFormat.format(Date(time))
-//        }
-//
-//        @JvmStatic
-//        fun DateToStamp(date: String, locale: Locale): Long {
-//            val simpleDateFormat = SimpleDateFormat("yyyy-MM-dd", locale)
-//
-//            /// 輸出為毫秒為單位
-//            return simpleDateFormat.parse(date).time
-//        }
-//    }
+
 }

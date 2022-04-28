@@ -1,5 +1,6 @@
 package com.jessy.foodmap.itinerary.paging
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
@@ -10,7 +11,7 @@ import com.jessy.foodmap.data.Journey
 import com.jessy.foodmap.databinding.ItemRecommendPagingBinding
 import com.jessy.foodmap.home.HomeAdapter
 
-class RecommendPagingAdapter(val onClickListener: OnClickListener) : ListAdapter<Journey, RecommendPagingAdapter.RecommendPagingViewHolder>(
+class RecommendPagingAdapter(private val onClickListener: OnClickListener) : ListAdapter<Journey, RecommendPagingAdapter.RecommendPagingViewHolder>(
     RecommendPagingAdapter.DiffCallback()){
 
     class RecommendPagingViewHolder private constructor(var binding: ItemRecommendPagingBinding) :
@@ -19,15 +20,6 @@ class RecommendPagingAdapter(val onClickListener: OnClickListener) : ListAdapter
         fun bind(journey: Journey) {
            binding.journey = journey
            binding.executePendingBindings()
-
-         //  binding.recommendStatus.setText(journey.status?.let { Integer.toString(it) })
-//            binding.recommendImg.setImageURI(journey.journeImage)
-//            binding.recommendItineraryName.setText(journey.journeyName)
-//            binding.recommendItineraryStartDate.setText(journey.startDate)
-//            binding.recommendItineraryEndDate.setText(journey.endtDate)
-//            binding.recommendName.setText("user: ya")
-
-
 
         }
 
@@ -47,12 +39,16 @@ class RecommendPagingAdapter(val onClickListener: OnClickListener) : ListAdapter
     }
 
     override fun onBindViewHolder(holder: RecommendPagingViewHolder, position: Int) {
-        val item = getItem(position)
-        holder.itemView.setOnClickListener {
-            onClickListener.onClick(item)
-        }
-        holder.bind(item)
 
+        val item = getItem(position)
+
+        if (item != null) {
+            holder.itemView.setOnClickListener {
+                onClickListener.onClick(item)
+                Log.v("item in ", "$item")
+            }
+            holder.bind(item)
+        }
     }
     class DiffCallback : DiffUtil.ItemCallback<Journey>() {
 
@@ -67,4 +63,5 @@ class RecommendPagingAdapter(val onClickListener: OnClickListener) : ListAdapter
     class OnClickListener(val clickListener: (journey: Journey) -> Unit) {
         fun onClick(journey: Journey) = clickListener(journey)
     }
+
 }

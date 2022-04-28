@@ -1,10 +1,12 @@
 package com.jessy.foodmap.itinerary.paging
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.jessy.foodmap.NavigationDirections
@@ -25,24 +27,32 @@ class MyItineraryPagingFragment : Fragment() {
     ): View? {
 
         val binding = FragmentMyItineraryPagingBinding.inflate(inflater, container, false)
-        val adapter = RecommendPagingAdapter(RecommendPagingAdapter.OnClickListener{
-            findNavController().navigate(NavigationDirections.navigateToItineraryDetailFragment(it))
-        })
-        binding.myitineraryRecyclerView.adapter = adapter
+        binding.myitineraryRecyclerView.adapter = RecommendPagingAdapter(RecommendPagingAdapter.OnClickListener{
+            viewModel.navigateToDetailDate(it)
+        }
+        )
         binding.lifecycleOwner = viewLifecycleOwner
         binding.viewModel = viewModel
 
         viewModel.getFireBaseJourney()
         viewModel.getAllJourneyLiveData.observe(viewLifecycleOwner){
 
-            adapter.submitList(viewModel.getAllJourney)
+            (binding.myitineraryRecyclerView.adapter as RecommendPagingAdapter).submitList(viewModel.getAllJourney)
         }
 
+        viewModel.navigateToDetailDate.observe(
+            viewLifecycleOwner,
+            Observer{
+                it?.let {
+                    findNavController().navigate(NavigationDirections.recommendPagingFragmentItineraryDetailFragment(it))
+                    Log.v("it","#${it}")
+                    Log.v("it.id","#${it.id}")
+
+                    viewModel.onDetailNavigated()
+                }
+            })
 
 
-        binding.myitineraryButton.setOnClickListener {
-            findNavController().navigate(NavigationDirections.actionMyItineraryPagingFragmentToAddItineraryFragment())
-        }
 
         return binding.root
 

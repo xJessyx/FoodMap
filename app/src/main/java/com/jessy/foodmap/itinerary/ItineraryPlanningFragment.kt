@@ -5,9 +5,12 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.fragment.findNavController
+import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.tabs.TabLayoutMediator
 import com.jessy.foodmap.itinerary.paging.ItinerayPagingAdapter
 import com.jessy.foodmap.MainActivity
+import com.jessy.foodmap.NavigationDirections
 import com.jessy.foodmap.databinding.FragmentItineraryPlanningBinding
 
 
@@ -37,6 +40,14 @@ class ItineraryPlanningFragment : Fragment() {
 
             }
         }.attach()
+
+        binding.itineraryPlanningFabBtn.setOnClickListener {
+                view ->
+            Snackbar.make(view, "Here's a Snackbar", Snackbar.LENGTH_LONG)
+                .setAction("Action", null)
+                .show()
+                findNavController().navigate(NavigationDirections.itineraryPlanningFragmentToAddItineraryFragment())
+        }
         return binding.root
 
     }

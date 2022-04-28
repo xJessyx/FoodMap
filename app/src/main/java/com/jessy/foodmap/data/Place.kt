@@ -10,7 +10,7 @@ data class Place(
         var name:String = "",
         var day:Int = 0,
         var transportation: Int = 0,
-        var dwellTime: Int = 0,
-        var startTime: Long? = null
-
+        var dwellTime:  Long? = null,
+        var startTime: Long? = null,
+        var trafficTime: Long? = null
         ): Parcelable
