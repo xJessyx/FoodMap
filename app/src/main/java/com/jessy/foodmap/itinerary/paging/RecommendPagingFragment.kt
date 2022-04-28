@@ -40,7 +40,6 @@ class RecommendPagingFragment : Fragment() {
         viewModel.getAllJourneyLiveData.observe(viewLifecycleOwner){
 
             (binding.recommendRecyclerView.adapter as RecommendPagingAdapter).submitList(it)
-            Log.v("it","$it")
 
         }
 

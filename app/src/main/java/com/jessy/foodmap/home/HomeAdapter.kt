@@ -29,8 +29,8 @@ class HomeAdapter(val onClickListener: OnClickListener): ListAdapter<Article,
     class HomeViewHolder private constructor(var binding:ItemHomeArticleBinding ) :
         RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(articleData: Article) {
-          binding.article = articleData
+        fun bind(article: Article) {
+          binding.article = article
             binding.executePendingBindings()
 
         }

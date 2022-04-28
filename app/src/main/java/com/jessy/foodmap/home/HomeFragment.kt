@@ -14,6 +14,7 @@ import com.jessy.foodmap.MainActivity
 import com.jessy.foodmap.NavigationDirections
 import com.jessy.foodmap.R
 import com.jessy.foodmap.databinding.FragmentHomeBinding
+import com.jessy.foodmap.itinerary.paging.RecommendPagingAdapter
 
 class homeFragment : Fragment() {
     private val viewModel: HomeViewModel by lazy {
@@ -30,16 +31,19 @@ class homeFragment : Fragment() {
         var manager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
         binding.homeRecyclerView.layoutManager = manager  //佈局管理
         manager.setAutoMeasureEnabled(true)
-        val adapter = HomeAdapter(HomeAdapter.OnClickListener {
+        binding.homeRecyclerView.adapter = HomeAdapter(HomeAdapter.OnClickListener {
             viewModel.navigateToDetail(it)
         })
-        binding.homeRecyclerView.adapter = adapter
         binding.lifecycleOwner = viewLifecycleOwner
         binding.viewModel = viewModel
+        viewModel.getFireBaseArticle()
 
+        viewModel.getAllArticlesLiveData.observe(viewLifecycleOwner){
+            (binding.homeRecyclerView.adapter as HomeAdapter).submitList(it)
+            Log.v("it","$it")
 
-        adapter.submitList(viewModel.dataList)
-
+        }
+        
         viewModel.navigateToDetail.observe(
             viewLifecycleOwner,
             Observer {
