@@ -75,6 +75,12 @@
         android:name="com.jessy.foodmap.itinerary.detailpaging.AddItineraryDetailDateFragment"
         android:label="AddItineraryDetailDateFragment" />
 
+    <fragment
+        android:id="@+id/addArticleFragment"
+        android:name="com.jessy.foodmap.home.addArticles.AddArticleFragment"
+        android:label="AddArticleFragment" />
+
+
     <action android:id="@+id/navigate_to_member_fragment" app:destination="@id/memberFragment"
         app:popUpTo="@id/navigation"
         app:popUpToInclusive="true" />
@@ -109,5 +115,12 @@
         app:popUpTo="@id/navigation"
         app:popUpToInclusive="true" />
 
+    <action android:id="@+id/addArticleFragment_homeFragment" app:destination="@id/homeFragment"
+        app:popUpTo="@id/navigation"
+        app:popUpToInclusive="true" />
+
+    <action android:id="@+id/homeFragment_addArticleFragment" app:destination="@id/addArticleFragment"
+        app:popUpTo="@id/navigation"
+        app:popUpToInclusive="true" />
 
 </navigation>

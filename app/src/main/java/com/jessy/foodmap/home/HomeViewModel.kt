@@ -32,6 +32,7 @@ class HomeViewModel : ViewModel(){
 
    fun getFireBaseArticle(){
         db.collection("articles")
+            .orderBy("createdTime", Query.Direction.DESCENDING)
             .get()
             .addOnSuccessListener { result ->
                 for (document in result) {

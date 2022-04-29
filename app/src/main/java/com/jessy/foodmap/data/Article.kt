@@ -2,6 +2,7 @@ package com.jessy.foodmap.data
 
 import android.media.Image
 import android.os.Parcelable
+import com.google.firebase.Timestamp
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
@@ -10,5 +11,12 @@ data class Article (
     var image: String ="",
     var author:String = "",
     var authorImage:String = "",
-    var totalLike:Int = 0
-): Parcelable
+    var totalLike:Int = 0,
+    var userId :String ="",
+    var title:String = "",
+    var content: String = "",
+    var placeName:String = "",
+    var createdTime: Long = -1
+
+
+    ): Parcelable

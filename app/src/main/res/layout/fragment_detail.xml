@@ -28,35 +28,42 @@
                 android:id="@+id/detail_img"
                 android:layout_width="match_parent"
                 android:layout_height="400dp"
-                android:layout_marginTop="70dp"
-                android:layout_marginBottom="8dp"
+                android:layout_marginTop="24dp"
                 android:scaleType="centerCrop"
                 app:imageUrl="@{viewModel.article.image}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toBottomOf="@+id/detail_bt_back" />
 
             <TextView
                 android:id="@+id/detail_tv_date"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:text="2021年08月01日 "
+                app:layout_constraintEnd_toStartOf="@+id/detail_like"
+                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="@+id/detail_title"
-                app:layout_constraintTop_toBottomOf="@+id/detail_img" />
+                app:layout_constraintTop_toBottomOf="@+id/detail_img"
+                app:timeToDisplayFormat="@{viewModel.article.createdTime}"
+                tools:text="2021年08月01日 16:00 " />
 
             <TextView
                 android:id="@+id/detail_title"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="16dp"
-                android:layout_marginTop="16dp"
-                android:text="讓人一眼就對這家糕點店好感滿滿！"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="16dp"
+                android:ellipsize="end"
+                android:lineSpacingExtra="6dp"
+                android:text="@{viewModel.article.title}"
                 android:textSize="20sp"
                 android:textStyle="bold"
-
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/detail_tv_date" />
+                app:layout_constraintTop_toBottomOf="@+id/detail_tv_place"
+                tools:text="讓人一眼就對這家糕點店好感滿滿！" />
 
             <TextView
                 android:id="@+id/detail_content"
@@ -69,68 +76,56 @@
                 android:ellipsize="end"
                 android:lineSpacingExtra="6dp"
                 android:lineSpacingMultiplier="1.0"
-                android:text="潔白的外包裝與簡潔的設計感，讓人一眼就對這家糕點店好感滿滿！也會根據季節相對應推出不同的限定口味"
+                android:text="@{viewModel.article.content}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="1.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/detail_title" />
+                app:layout_constraintTop_toBottomOf="@+id/detail_title"
+                tools:text="潔白的外包裝與簡潔的設計感，讓人一眼就對這家糕點店好感滿滿！也會根據季節相對應推出不同的限定口味" />
+
 
             <TextView
                 android:id="@+id/detail_tv_authorName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="8dp"
+                android:layout_marginStart="8dp"
                 android:text="@{viewModel.article.author}"
                 android:textSize="20sp"
                 android:textStyle="bold"
-                app:layout_constraintBottom_toBottomOf="@+id/detail_img_person"
-                app:layout_constraintStart_toEndOf="@+id/detail_img_person"
-                app:layout_constraintTop_toTopOf="@+id/detail_img_person"
+                app:layout_constraintBottom_toBottomOf="@+id/detail_cardView"
+                app:layout_constraintStart_toEndOf="@+id/detail_cardView"
+                app:layout_constraintTop_toTopOf="@+id/detail_cardView"
                 tools:text="天天" />
-
-
-            <ImageView
-                android:id="@+id/detail_img_person"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:layout_marginLeft="16dp"
-                android:background="@drawable/shape_round"
-                android:scaleType="centerCrop"
-                app:imageUrl="@{viewModel.article.authorImage}"
-                app:layout_constraintBottom_toBottomOf="@+id/detail_bt_back"
-                app:layout_constraintStart_toEndOf="@+id/detail_bt_back"
-                app:layout_constraintTop_toTopOf="@+id/detail_bt_back" />
 
             <Button
                 android:id="@+id/detail_bt_back"
                 android:layout_width="20dp"
                 android:layout_height="20dp"
-                android:layout_marginStart="3dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginBottom="14dp"
+                android:layout_marginStart="13dp"
+                android:layout_marginTop="16dp"
                 android:background="@drawable/back"
-                app:layout_constraintBottom_toTopOf="@+id/detail_img"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <Button
                 android:id="@+id/detail_addStore"
-                android:layout_width="25dp"
-                android:layout_height="25dp"
-                android:layout_marginEnd="16dp"
-                android:textColor="@color/black"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_marginStart="2dp"
                 android:background="@drawable/add_pointer"
-                app:layout_constraintEnd_toEndOf="parent"
-                tools:layout_editor_absoluteY="483dp" />
+                android:textColor="@color/black"
+                app:layout_constraintBottom_toTopOf="@+id/detail_title"
+                app:layout_constraintStart_toStartOf="@+id/detail_tv_date"
+                app:layout_constraintTop_toBottomOf="@+id/detail_tv_date" />
 
             <Button
                 android:id="@+id/detail_like"
                 android:layout_width="25dp"
                 android:layout_height="25dp"
                 android:layout_marginEnd="8dp"
-                android:textColor="@color/black"
                 android:background="@drawable/heart_like"
+                android:textColor="@color/black"
                 app:layout_constraintBottom_toBottomOf="@+id/detail_collect"
                 app:layout_constraintEnd_toStartOf="@+id/detail_collect"
                 app:layout_constraintTop_toTopOf="@+id/detail_collect" />
@@ -150,12 +145,44 @@
                 android:id="@+id/detail_chat"
                 android:layout_width="25dp"
                 android:layout_height="25dp"
-                android:layout_marginEnd="8dp"
-                android:textColor="@color/black"
                 android:background="@drawable/chat"
-                app:layout_constraintBottom_toBottomOf="@+id/detail_addStore"
-                app:layout_constraintEnd_toStartOf="@+id/detail_addStore"
-                app:layout_constraintTop_toTopOf="@+id/detail_addStore" />
+                android:textColor="@color/black"
+                android:layout_marginRight="16dp"
+                app:layout_constraintBottom_toBottomOf="@+id/detail_tv_date"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/detail_tv_date" />
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/detail_cardView"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginStart="10dp"
+                app:cardCornerRadius="360dp"
+                app:layout_constraintBottom_toBottomOf="@+id/detail_bt_back"
+                app:layout_constraintStart_toEndOf="@+id/detail_bt_back"
+                app:layout_constraintTop_toTopOf="@+id/detail_bt_back">
+
+                <ImageView
+                    android:id="@+id/detail_img_person"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:scaleType="centerCrop"
+                    app:imageUrl="@{viewModel.article.authorImage}"
+                    tools:layout_editor_absoluteX="50dp"
+                    tools:layout_editor_absoluteY="13dp" />
+            </androidx.cardview.widget.CardView>
+
+            <TextView
+                android:id="@+id/detail_tv_place"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="6dp"
+                app:layout_constraintStart_toEndOf="@+id/detail_addStore"
+                app:layout_constraintTop_toBottomOf="@+id/detail_tv_date"
+                android:text="@{viewModel.article.placeName}"
+                tools:text="清境農場" />
+
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>

@@ -1,6 +1,7 @@
 package com.jessy.foodmap
 
 import android.icu.text.SimpleDateFormat
+import android.util.Log
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.net.toUri
@@ -26,8 +27,14 @@ fun bindImage(imgView: ImageView, imgUrl: String?) {
             .into(imgView)
     }
 
-
 }
+@BindingAdapter("timeToDisplayFormat")
+fun bindDisplayFormatTime(textView: TextView, time: Long?) {
+    Log.v("time","$time")
+    textView.text = time?.toDisplayFormat()
+}
+
+
 //
 //@BindingAdapter("time")
 //

@@ -4,14 +4,15 @@ import android.media.Image
 
 class Data {
 
-    //建立會員
-    data class Member (
-        var userName:String,
-        var age:Int,
-        var gender: String,
-        var email: String,
-        var password: String
-    )
+//    //建立會員
+//    data class Member (
+//        var userName:String,
+//        var age:Int,
+//        var gender: String,
+//        var email: String,
+//        var password: String,
+//        var image :String
+//    )
 
     //加入行程
 //    data class Journey (

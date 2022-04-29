@@ -61,7 +61,7 @@ class AddItineraryFragment : BottomSheetDialogFragment() {
             setEndData()
         }
 
-        binding.addItineraryBt.setOnClickListener {
+        binding.addItineraryBtn.setOnClickListener {
 
             if( (viewModel.itineraryName.value != null) &&( viewModel.itineraryStartDate.value !=null) &&( viewModel.itineraryEndDate.value !=null) ) {
                 viewModel.differenceDay()

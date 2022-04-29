@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+    <data>
+        <variable
+            name="viewModel"
+            type="com.jessy.foodmap.home.addArticles.AddArticleViewModel" />
+    </data>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:context=".home.addArticles.AddArticleFragment">
+
+            <EditText
+                android:id="@+id/addArticle_title"
+                android:layout_width="300dp"
+                android:layout_height="50dp"
+                android:layout_marginTop="16dp"
+                android:hint="請輸入標題"
+                android:text="@={viewModel.articleTitle}"
+                app:layout_constraintEnd_toEndOf="@+id/addArticle_img"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/addArticle_img"
+                app:layout_constraintTop_toBottomOf="@+id/addArticle_img" />
+
+            <EditText
+                android:id="@+id/addArticle_content"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:background="@null"
+                android:gravity="top"
+                android:hint="請輸入內容"
+                android:text="@={viewModel.articleConent}"
+                app:layout_constraintEnd_toEndOf="@+id/addArticle_addPlace"
+                app:layout_constraintStart_toStartOf="@+id/addArticle_addPlace"
+                app:layout_constraintTop_toBottomOf="@+id/addArticle_addPlace"
+                tools:text="" />
+
+            <TextView
+                android:id="@+id/addArticle_post"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:gravity="center"
+                android:text="發文"
+                android:textSize="25sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <View
+                android:id="@+id/addArticle_view"
+                android:layout_width="344dp"
+                android:layout_height="7dp"
+                android:background="@color/black"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                tools:layout_editor_absoluteY="53dp" />
+
+            <ImageView
+                android:id="@+id/addArticle_img"
+                imageUrl="@{viewModel.articleImage}"
+                android:layout_width="300dp"
+                android:layout_height="250dp"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/add"
+                android:scaleType="centerCrop"
+                app:layout_constraintEnd_toEndOf="@+id/addArticle_view"
+                app:layout_constraintStart_toStartOf="@+id/addArticle_view"
+                app:layout_constraintTop_toBottomOf="@+id/addArticle_view" />
+
+            <EditText
+                android:id="@+id/addArticle_addPlace"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="14dp"
+                android:hint="請選擇店家"
+                app:layout_constraintEnd_toEndOf="@+id/addArticle_title"
+                app:layout_constraintStart_toStartOf="@+id/addArticle_title"
+                app:layout_constraintTop_toBottomOf="@+id/addArticle_title" />
+
+            <Button
+                android:id="@+id/addArticle_btn"
+                android:layout_width="138dp"
+                android:layout_height="49dp"
+                android:layout_marginTop="24dp"
+                android:background="@drawable/shape_round"
+                android:text="Submit"
+                android:textColor="#8D602E"
+                app:layout_constraintEnd_toEndOf="@+id/addArticle_content"
+                app:layout_constraintHorizontal_bias="0.493"
+                app:layout_constraintStart_toStartOf="@+id/addArticle_content"
+                app:layout_constraintTop_toBottomOf="@+id/addArticle_content" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+</layout>

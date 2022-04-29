@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.android.volley.toolbox.ImageLoader
+import com.google.common.collect.Iterables.size
 import com.jessy.foodmap.data.Article
 import com.jessy.foodmap.databinding.ItemHomeArticleBinding
 
@@ -54,6 +55,8 @@ class HomeAdapter(val onClickListener: OnClickListener): ListAdapter<Article,
             return    oldItem == newItem
         }
     }
+
+
     //--------------------------------------------------------------------------------------------------------------------------------------------------------
 
     class OnClickListener(val clickListener: (article:Article) -> Unit) {
