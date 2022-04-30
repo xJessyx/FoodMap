@@ -119,7 +119,7 @@
                     android:background="@drawable/shape_round2"
                     android:gravity="center"
                     android:text="@{journey.userId}"
-                    android:textColor="#006030"
+                    android:textColor="#292929"
                     android:textSize="20sp"
                     app:layout_constraintStart_toStartOf="@+id/recommend_itineraryStartDate"
                     app:layout_constraintTop_toBottomOf="@+id/recommend_itineraryStartDate"

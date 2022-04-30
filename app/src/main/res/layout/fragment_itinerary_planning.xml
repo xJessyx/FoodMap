@@ -15,8 +15,7 @@
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/itineraryPlanning_toolbar"
         android:layout_width="match_parent"
-        android:layout_height="80dp"
-        android:background="@drawable/brush"
+        android:layout_height="55dp"
         android:textAlignment="center"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -25,21 +24,14 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_weight="1">
 
-      <androidx.constraintlayout.widget.ConstraintLayout
-          android:layout_width="match_parent"
-          android:layout_height="match_parent">
-
-        <ImageView
-            android:layout_width="310dp"
-            android:layout_height="50dp"
-            android:src="@drawable/itinerary_type"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="1.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.033" />
-      </androidx.constraintlayout.widget.ConstraintLayout>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Itinerary"
+            android:textColor="#381100"
+            android:layout_gravity="center"
+            android:textSize="20sp"
+            android:textStyle="bold"/>
 
     </androidx.appcompat.widget.Toolbar>
 
@@ -51,9 +43,9 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/itineraryPlanning_toolbar"
-        app:tabIndicatorColor="#669999"
-        app:tabIndicatorHeight="5dp"
-        app:tabSelectedTextColor="#669999"
+        app:tabSelectedTextColor="#31404E"
+        app:tabIndicatorColor="#31404E"
+        app:tabIndicatorHeight="4dp"
         tools:ignore="MissingConstraints">
 
     </com.google.android.material.tabs.TabLayout>
@@ -78,7 +70,7 @@
         android:layout_gravity="end|bottom"
         android:contentDescription="submit"
         android:src="@drawable/add2"
-        android:backgroundTint="#ECECFF"
+        android:backgroundTint="#DFEAFF"
         android:layout_marginBottom="8dp"
         android:layout_marginRight="8dp"
         app:layout_constraintBottom_toBottomOf="@+id/itineraryPlanning_viewPager2"

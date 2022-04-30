@@ -33,6 +33,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="center"
+        android:textColor="@color/black"
         android:layout_marginTop="8dp"
         android:text="建立行程"
         android:textSize="25sp"
@@ -43,10 +44,10 @@
 
     <View
         android:id="@+id/addItinerary_view"
+        android:layout_marginTop="16dp"
         android:layout_width="350dp"
         android:layout_height="3dp"
-        android:layout_marginTop="10dp"
-        android:background="@color/black"
+        android:background="#E45D0F"
         app:layout_constraintEnd_toEndOf="@+id/addItinerary_title"
         app:layout_constraintStart_toStartOf="@+id/addItinerary_title"
         app:layout_constraintTop_toBottomOf="@+id/addItinerary_title" />
@@ -65,10 +66,12 @@
     <EditText
         android:id="@+id/addItinerary_ed_ItineraryName"
         android:layout_width="300dp"
-        android:layout_height="48dp"
-        android:layout_marginTop="16dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="32dp"
         android:text="@={viewModel.itineraryName}"
         android:hint="請輸入行程名稱"
+        android:gravity="center"
+        android:background="@drawable/shape_round3"
         app:layout_constraintEnd_toEndOf="@+id/addItinerary_img"
         app:layout_constraintStart_toStartOf="@+id/addItinerary_img"
         app:layout_constraintTop_toBottomOf="@+id/addItinerary_img" />
@@ -77,7 +80,7 @@
         android:id="@+id/addItinerary_ed_StartDate"
         android:layout_width="140dp"
         android:layout_height="80dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="32dp"
         android:background="@drawable/shape_oval"
         android:text="@={viewModel.itineraryStartDate}"
         android:hint="請選擇出發日期"
@@ -88,7 +91,7 @@
         android:id="@+id/addItinerary_ed_EndDate"
         android:layout_width="140dp"
         android:layout_height="80dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="32dp"
         android:background="@drawable/shape_oval"
         android:hint="請選擇結束日期"
         android:text="@={viewModel.itineraryEndDate}"

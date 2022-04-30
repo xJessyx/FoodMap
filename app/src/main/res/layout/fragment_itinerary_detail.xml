@@ -128,7 +128,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="end|bottom"
                 android:layout_marginBottom="272dp"
-                android:backgroundTint="#ECECFF"
+                android:backgroundTint="#DFEAFF"
                 android:contentDescription="submit"
                 android:src="@drawable/add2"
                 app:layout_constraintBottom_toBottomOf="parent"

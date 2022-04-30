@@ -17,10 +17,9 @@
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/member_toolbar"
         android:layout_width="match_parent"
-        android:layout_height="80dp"
+        android:layout_height="55dp"
         android:textSize="16sp"
         android:scaleType="centerCrop"
-        android:background="@drawable/brush"
         android:textAlignment="center"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -28,30 +27,16 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_weight="1">
 
-<!--        <TextView-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:text="會員中心"-->
-<!--            android:textColor="#381100"-->
-<!--            android:layout_gravity="center"-->
-<!--            android:textSize="20sp"-->
-<!--            android:textStyle="bold"-->
-<!--            />-->
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
 
-            <ImageView
-                android:layout_width="310dp"
-                android:layout_height="50dp"
-                android:src="@drawable/member_type2"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.797"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.166" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="會員中心"
+            android:textColor="#381100"
+            android:layout_gravity="center"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            />
 
     </androidx.appcompat.widget.Toolbar>
 
@@ -61,7 +46,7 @@
         android:layout_height="143dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
-        android:background="@drawable/shape_round"
+        android:background="@drawable/shape_round3"
        android:src="@drawable/person_man"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/member_toolbar" />
@@ -72,7 +57,6 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="35dp"
         android:textSize="20dp"
-        android:fontFamily="@font/eaep5lnl4tjfqg0zuq9r"
         android:textColor="#333333"
         app:layout_constraintStart_toEndOf="@+id/member_img"
         app:layout_constraintTop_toTopOf="@+id/member_img"
@@ -85,7 +69,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:fontFamily="@font/eaep5lnl4tjfqg0zuq9r"
         android:text="gnetder："
         android:textColor="#333333"
         android:textSize="20dp"
@@ -98,7 +81,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="20dp"
-        android:fontFamily="@font/eaep5lnl4tjfqg0zuq9r"
         android:layout_marginTop="10dp"
         app:layout_constraintStart_toStartOf="@+id/member_tv_gender"
         app:layout_constraintTop_toBottomOf="@+id/member_tv_gender"
@@ -112,7 +94,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="20dp"
-        android:fontFamily="@font/eaep5lnl4tjfqg0zuq9r"
         android:layout_marginTop="10dp"
         app:layout_constraintStart_toStartOf="@+id/member_tv_age"
         app:layout_constraintTop_toBottomOf="@+id/member_tv_age"
@@ -127,7 +108,6 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
         android:textSize="18dp"
-        android:fontFamily="@font/eaep5lnl4tjfqg0zuq9r"
         android:textColor="#333333"
         app:layout_constraintBottom_toBottomOf="@+id/member_tv_name"
         app:layout_constraintStart_toEndOf="@+id/member_tv_name"
@@ -141,7 +121,6 @@
         android:layout_height="20dp"
         android:textSize="18dp"
         android:text="MAN"
-        android:fontFamily="@font/eaep5lnl4tjfqg0zuq9r"
         android:textColor="#333333"
         app:layout_constraintBottom_toBottomOf="@+id/member_tv_gender"
         app:layout_constraintStart_toStartOf="@+id/member_tv_name_person"
@@ -153,7 +132,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="18dp"
-        android:fontFamily="@font/eaep5lnl4tjfqg0zuq9r"
         android:textColor="#333333"
         app:layout_constraintBottom_toBottomOf="@+id/member_tv_age"
         app:layout_constraintStart_toStartOf="@+id/member_tv_gender_person"
@@ -167,7 +145,6 @@
         android:layout_height="wrap_content"
         android:textSize="18dp"
         android:textColor="#333333"
-        android:fontFamily="@font/eaep5lnl4tjfqg0zuq9r"
         app:layout_constraintBottom_toBottomOf="@+id/member_tv_grade"
         app:layout_constraintStart_toStartOf="@+id/member_tv_age_person"
         app:layout_constraintTop_toTopOf="@+id/member_tv_grade"
@@ -183,9 +160,9 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/member_img"
-        app:tabSelectedTextColor="#669999"
-        app:tabIndicatorColor="#669999"
-        app:tabIndicatorHeight="5dp">
+        app:tabSelectedTextColor="#31404E"
+        app:tabIndicatorColor="#31404E"
+        app:tabIndicatorHeight="4dp">
 
 <!--        <com.google.android.material.tabs.TabItem-->
 <!--            android:layout_width="wrap_content"-->

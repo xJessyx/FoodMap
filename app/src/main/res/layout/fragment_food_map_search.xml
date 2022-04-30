@@ -17,8 +17,7 @@
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/search_toolbar"
             android:layout_width="match_parent"
-            android:layout_height="80dp"
-            android:background="@drawable/brush"
+            android:layout_height="55dp"
             android:textAlignment="center"
             android:textSize="16sp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -27,21 +26,15 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_weight="1">
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="SearchMap"
+                android:textColor="#381100"
+                android:layout_gravity="center"
+                android:textSize="20sp"
+                android:textStyle="bold"/>
 
-                <ImageView
-                    android:layout_width="310dp"
-                    android:layout_height="50dp"
-                    android:src="@drawable/searchmap_type"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="1.0"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.166" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.appcompat.widget.Toolbar>
 
 
@@ -66,7 +59,7 @@
             android:layout_width="match_parent"
             android:layout_height="30dp"
             android:layout_marginTop="16dp"
-            android:background="#666666"
+            android:background="#EEEDEC"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/search_toolbar" />

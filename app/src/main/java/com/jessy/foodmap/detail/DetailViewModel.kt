@@ -17,4 +17,6 @@ class DetailViewModel(private val articleKey: Article): ViewModel(){
     val article: LiveData<Article>
         get() = _article
 
+
+
 }

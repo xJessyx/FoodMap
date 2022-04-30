@@ -1,21 +1,17 @@
 package com.jessy.foodmap.detail
 
-import android.app.Activity
-import android.icu.text.SimpleDateFormat
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
-import com.google.android.ads.mediationtestsuite.viewmodels.HomeActivityViewModel
 import com.jessy.foodmap.MainActivity
+import com.jessy.foodmap.NavigationDirections
 import com.jessy.foodmap.R
+import com.jessy.foodmap.data.StoreInformation
 import com.jessy.foodmap.databinding.FragmentDetailBinding
-import com.jessy.foodmap.itinerary.ItineraryDetailViewModel
-import java.util.*
 
 class DetailFragment : Fragment() {
     //    private val viewModel: DetailViewModel by lazy {
@@ -37,13 +33,25 @@ class DetailFragment : Fragment() {
 //        viewModel.authorImage= articleKey.authorImage
 //        viewModel.image =articleKey.image
         binding.viewModel = viewModel
+        binding.lifecycleOwner = viewLifecycleOwner
 
-
-//
 //        binding.detailTvAuthorName.text = articleKey.author
 //       binding.detailImg.imageurl = articleKey.authorImage.toString()
 //       binding.detailImgPerson.
     //    var aa =  TimeUtil.StampToDate(1560839160000, Locale.TAIWAN)
+
+       viewModel.article.observe(viewLifecycleOwner) {
+
+
+
+           val data = StoreInformation(null, it.placeName,"","",null)
+
+           binding.detailAddStore.setOnClickListener {
+               findNavController().navigate(NavigationDirections.detailFragmentAddPlaceFragment(data))
+           }
+
+       }
+
 
 
 

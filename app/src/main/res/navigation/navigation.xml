@@ -123,4 +123,8 @@
         app:popUpTo="@id/navigation"
         app:popUpToInclusive="true" />
 
+    <action android:id="@+id/detailFragment_addPlaceFragment" app:destination="@id/addPlaceFragment"
+        app:popUpTo="@id/navigation"
+        app:popUpToInclusive="true" />
+
 </navigation>

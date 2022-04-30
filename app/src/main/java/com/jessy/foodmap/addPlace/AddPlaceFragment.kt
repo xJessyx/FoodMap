@@ -14,6 +14,7 @@ import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Spinner
 import androidx.lifecycle.ViewModelProvider
+import com.jessy.foodmap.MainActivity
 import com.jessy.foodmap.databinding.FragmentAddPlaceBinding
 import java.util.*
 
@@ -32,7 +33,7 @@ class AddPlaceFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View? {
-
+        (activity as MainActivity).hideToolBar()
         val binding = FragmentAddPlaceBinding.inflate(inflater, container, false)
         binding.lifecycleOwner = this
         binding.viewModel = viewModel
@@ -123,7 +124,7 @@ class AddPlaceFragment : Fragment() {
     }
 
     fun setJourneySpinner() {
-        var lunch = mutableListOf<String>()
+        var lunch = mutableListOf<String>("請選擇旅程")
         for (item in viewModel.getAllJourney) {
             lunch.add(item.name)
         }
@@ -137,8 +138,11 @@ class AddPlaceFragment : Fragment() {
                 position: Int,
                 id: Long,
             ) {
+
+                view!!.textAlignment = View.TEXT_ALIGNMENT_CENTER
                 viewModel.journeySinner = selectJourney?.selectedItem.toString()
                 lunchDay.clear()
+                lunchDay.add("請選擇哪天")
 
                 for (item in viewModel.getAllJourney) {
                     if (item.name == selectJourney?.selectedItem.toString()) {
@@ -168,7 +172,6 @@ class AddPlaceFragment : Fragment() {
             ArrayAdapter(activity as Activity,
                 android.R.layout.simple_spinner_dropdown_item,
                 lunchDay)
-        Log.v("lunchDay","$lunchDay")
         selectDay?.adapter = adapter2
         //監聽「第幾天」下拉選單選擇
         selectDay?.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
@@ -178,11 +181,13 @@ class AddPlaceFragment : Fragment() {
                 position: Int,
                 id: Long,
             ) {
+                view!!.textAlignment = View.TEXT_ALIGNMENT_CENTER
+
                 viewModel.daySinner = selectDay?.selectedItemPosition!!.toInt()
-                Log.v("viewModel.daySinner","${viewModel.daySinner}")
             }
 
             override fun onNothingSelected(parent: AdapterView<*>?) {
+
             }
         }
     }
@@ -204,6 +209,8 @@ class AddPlaceFragment : Fragment() {
                     position: Int,
                     id: Long,
                 ) {
+                    view!!.textAlignment = View.TEXT_ALIGNMENT_CENTER
+
                     viewModel.transportationSinner =
                         selectTransportation?.selectedItemPosition!!.toInt()
                 }

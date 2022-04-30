@@ -16,6 +16,7 @@ import androidx.navigation.fragment.findNavController
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
+import com.jessy.foodmap.MainActivity
 import com.jessy.foodmap.NavigationDirections
 import com.jessy.foodmap.R
 import com.jessy.foodmap.data.Journey
@@ -47,7 +48,7 @@ class AddItineraryFragment : BottomSheetDialogFragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View? {
-
+        (activity as MainActivity).hideToolBar()
         val binding = FragmentAddItineraryBinding.inflate(inflater, container, false)
         binding.lifecycleOwner = this
         startDate = binding.addItineraryEdStartDate

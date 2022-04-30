@@ -31,7 +31,7 @@
         android:layout_gravity="end|bottom"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="16dp"
-        android:backgroundTint="#ECECFF"
+        android:backgroundTint="#DFEAFF"
         android:contentDescription="submit"
         android:src="@drawable/add2"
         app:layout_constraintBottom_toBottomOf="parent"

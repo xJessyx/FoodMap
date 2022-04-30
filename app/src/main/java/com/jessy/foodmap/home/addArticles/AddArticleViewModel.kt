@@ -23,6 +23,8 @@ class AddArticleViewModel :ViewModel(){
     val articleTitle = MutableLiveData<String>()
     val articleConent = MutableLiveData<String>()
     val articleImage = MutableLiveData<String>()
+    var articlePlaceName :String =""
+
 
 
     fun addFireBaseArticle() {
@@ -51,7 +53,7 @@ class AddArticleViewModel :ViewModel(){
             userId = "32fRAA8nlkV2gAojqHB1",
             title = articleTitle.value!!,
             content = articleConent.value!!,
-            placeName = "全家",
+            placeName = articlePlaceName,
             createdTime =  Calendar.getInstance().timeInMillis
         )
         _addArticle.value = data
