@@ -1,12 +1,15 @@
 package com.jessy.foodmap.detail
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.fragment.findNavController
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
 import com.jessy.foodmap.MainActivity
 import com.jessy.foodmap.NavigationDirections
 import com.jessy.foodmap.R
@@ -17,6 +20,8 @@ class DetailFragment : Fragment() {
     //    private val viewModel: DetailViewModel by lazy {
 //        ViewModelProvider(this).get(DetailViewModel::class.java)
 //    }
+    val db = Firebase.firestore
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
@@ -25,6 +30,7 @@ class DetailFragment : Fragment() {
             inflater, R.layout.fragment_detail, container, false)
         val articleKey = DetailFragmentArgs.fromBundle(requireArguments()).articleKey
         var viewModel = DetailViewModel(articleKey)
+
         (activity as MainActivity).hidbottomNavigation()
 
 //        viewModel.article.value?.let { binding.detailImg.setImageResource(it.image) }
@@ -35,6 +41,7 @@ class DetailFragment : Fragment() {
         binding.viewModel = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
 
+        var likeSum :Int =0
 //        binding.detailTvAuthorName.text = articleKey.author
 //       binding.detailImg.imageurl = articleKey.authorImage.toString()
 //       binding.detailImgPerson.
@@ -52,7 +59,28 @@ class DetailFragment : Fragment() {
 
        }
 
+        binding.detailLike.setOnClickListener {
 
+            likeSum =likeSum+1
+
+            if(likeSum % 2 != 0){
+                Log.v("likeSum+1","$likeSum")
+               db.collection("articles").document(articleKey.id)
+                   .update("totalLike", articleKey.totalLike +1)
+                    Log.v("likeSum totalLike+1","${articleKey.totalLike}")
+            }else{
+                Log.v("likeSum-1","$likeSum")
+
+                db.collection("articles").document(articleKey.id)
+                    .update("totalLike",articleKey.totalLike )
+                Log.v("likeSum totalLike-1","${articleKey.totalLike}")
+
+
+            }
+
+
+
+        }
 
 
 
