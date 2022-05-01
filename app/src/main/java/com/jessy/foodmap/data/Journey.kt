@@ -13,5 +13,5 @@ data class Journey(
     var endDate: String = "",
     var totalDay: Int =0,
     var status:Int =0,
-    var userId: String =""
+    var userId: String ="32fRAA8nlkV2gAojqHB1"
 ): Parcelable

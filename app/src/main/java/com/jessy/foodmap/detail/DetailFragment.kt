@@ -42,6 +42,7 @@ class DetailFragment : Fragment() {
         binding.lifecycleOwner = viewLifecycleOwner
 
         var likeSum :Int =0
+        var collectSum:Int = 0
 //        binding.detailTvAuthorName.text = articleKey.author
 //       binding.detailImg.imageurl = articleKey.authorImage.toString()
 //       binding.detailImgPerson.
@@ -64,25 +65,29 @@ class DetailFragment : Fragment() {
             likeSum =likeSum+1
 
             if(likeSum % 2 != 0){
-                Log.v("likeSum+1","$likeSum")
                db.collection("articles").document(articleKey.id)
                    .update("totalLike", articleKey.totalLike +1)
-                    Log.v("likeSum totalLike+1","${articleKey.totalLike}")
             }else{
-                Log.v("likeSum-1","$likeSum")
-
                 db.collection("articles").document(articleKey.id)
                     .update("totalLike",articleKey.totalLike )
-                Log.v("likeSum totalLike-1","${articleKey.totalLike}")
-
-
             }
-
-
 
         }
 
+        binding.detailCollect.setOnClickListener {
+            var favoriteUsersItem= mutableListOf<String>()
 
+            collectSum =collectSum+1
+            if(collectSum % 2 != 0) {
+                favoriteUsersItem.add(0, "32fRAA8nlkV2gAojqHB1")
+                db.collection("articles").document(articleKey.id)
+                    .update("favoriteUsers", favoriteUsersItem)
+            }else{
+                favoriteUsersItem.add(0, "")
+                db.collection("articles").document(articleKey.id)
+                    .update("favoriteUsers", favoriteUsersItem)
+            }
+        }
 
         binding.detailBtBack.setOnClickListener {
             this.findNavController().navigateUp()

@@ -9,7 +9,6 @@ import androidx.lifecycle.ViewModel
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.jessy.foodmap.data.Article
-import com.jessy.foodmap.data.Journey
 
 class AddArticleViewModel :ViewModel(){
     val db = Firebase.firestore
@@ -24,7 +23,6 @@ class AddArticleViewModel :ViewModel(){
     val articleConent = MutableLiveData<String>()
     val articleImage = MutableLiveData<String>()
     var articlePlaceName :String =""
-
 
 
     fun addFireBaseArticle() {
@@ -54,8 +52,11 @@ class AddArticleViewModel :ViewModel(){
             title = articleTitle.value!!,
             content = articleConent.value!!,
             placeName = articlePlaceName,
-            createdTime =  Calendar.getInstance().timeInMillis
+            createdTime =  Calendar.getInstance().timeInMillis,
+            favoriteUsers = mutableListOf()
+
         )
+
         _addArticle.value = data
 
     }

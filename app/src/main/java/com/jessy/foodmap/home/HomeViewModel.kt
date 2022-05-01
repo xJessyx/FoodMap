@@ -14,7 +14,6 @@ import com.jessy.foodmap.data.Journey
 
 class HomeViewModel : ViewModel(){
 
-    val dataList = mutableListOf<Article>()
     val db = Firebase.firestore
 
 
@@ -23,14 +22,20 @@ class HomeViewModel : ViewModel(){
 
     val navigateToDetail: LiveData<Article>
         get() = _navigateToDetail
-    var articleId = db.collection("articles").document().id
+  //  var articleId = db.collection("articles").document().id
 
     var getAllArticles = mutableListOf<Article>()
     val _getAllArticlesLiveData = MutableLiveData<List<Article>>()
     val getAllArticlesLiveData: LiveData<List<Article>>
         get() = _getAllArticlesLiveData
 
-   fun getFireBaseArticle(){
+    var getAllArticlesCollect = mutableListOf<Article>()
+    val _getAllArticlesCollectLiveData = MutableLiveData<List<Article>>()
+    val getAllArticlesCollectLiveData: LiveData<List<Article>>
+        get() = _getAllArticlesCollectLiveData
+
+
+    fun getFireBaseArticle(){
         db.collection("articles")
             .orderBy("createdTime", Query.Direction.DESCENDING)
             .get()
@@ -48,14 +53,27 @@ class HomeViewModel : ViewModel(){
             }
     }
 
+    fun getFireBaseArticleCollect(){
+        db.collection("articles")
+            .whereArrayContains("favoriteUsers","32fRAA8nlkV2gAojqHB1")
+           // .orderBy("createdTime", Query.Direction.DESCENDING)
+            .get()
+            .addOnSuccessListener { result ->
+                for (document in result) {
+                    Log.d(ContentValues.TAG, "${document.id} => ${document.data}")
+                    val data = document.toObject(Article::class.java)
+                    getAllArticlesCollect.add(data)
+                }
+                _getAllArticlesCollectLiveData.value = getAllArticlesCollect
 
-
-
-
+            }
+            .addOnFailureListener { exception ->
+                Log.d(ContentValues.TAG, "Error getting documents: ", exception)
+            }
+    }
 
     fun navigateToDetail(article: Article) {
         _navigateToDetail.value = article
-        Log.v("article","${article}")
 
     }
     fun onDetailNavigated() {
