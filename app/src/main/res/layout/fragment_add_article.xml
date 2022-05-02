@@ -24,13 +24,12 @@
                 android:id="@+id/addArticle_title"
                 android:layout_width="300dp"
                 android:layout_height="50dp"
-                android:layout_marginTop="32dp"
+                android:layout_marginTop="50dp"
                 android:background="@drawable/shape_oval"
                 android:gravity="center"
                 android:hint="請輸入標題"
                 android:text="@={viewModel.articleTitle}"
                 app:layout_constraintEnd_toEndOf="@+id/addArticle_img"
-                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="@+id/addArticle_img"
                 app:layout_constraintTop_toBottomOf="@+id/addArticle_img" />
 
@@ -85,7 +84,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/addArticle_post" />
 
-            <ImageView
+            <ImageButton
                 android:id="@+id/addArticle_img"
                 imageUrl="@{viewModel.articleImage}"
                 android:layout_width="300dp"
@@ -96,6 +95,21 @@
                 app:layout_constraintEnd_toEndOf="@+id/addArticle_view"
                 app:layout_constraintStart_toStartOf="@+id/addArticle_view"
                 app:layout_constraintTop_toBottomOf="@+id/addArticle_view" />
+
+
+            <ProgressBar
+                android:id="@+id/addArticle_upload_progress"
+                style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="16dp"
+                android:visibility="gone"
+                app:layout_constraintBottom_toTopOf="@+id/addArticle_title"
+                app:layout_constraintEnd_toEndOf="@+id/addArticle_img"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/addArticle_img"
+                app:layout_constraintTop_toBottomOf="@+id/addArticle_img" />
 
             <TextView
                 android:id="@+id/addArticle_addPlace"

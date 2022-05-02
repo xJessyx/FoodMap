@@ -40,6 +40,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
+                android:textColor="#272727	"
                 app:layout_constraintEnd_toStartOf="@+id/detail_like"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="@+id/detail_title"
@@ -55,6 +56,7 @@
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="16dp"
                 android:ellipsize="end"
+                android:textColor="@color/black"
                 android:lineSpacingExtra="6dp"
                 android:text="@{viewModel.article.title}"
                 android:textSize="20sp"
@@ -65,6 +67,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/detail_tv_place"
                 tools:text="讓人一眼就對這家糕點店好感滿滿！" />
 
+
             <TextView
                 android:id="@+id/detail_content"
                 android:layout_width="match_parent"
@@ -74,16 +77,16 @@
                 android:layout_marginRight="16dp"
                 android:layout_marginBottom="50dp"
                 android:ellipsize="end"
+                android:textColor="#9F9EA4"
                 android:lineSpacingExtra="6dp"
                 android:lineSpacingMultiplier="1.0"
                 android:text="@{viewModel.article.content}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="1.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/detail_title"
+                app:layout_constraintVertical_bias="0.0"
                 tools:text="潔白的外包裝與簡潔的設計感，讓人一眼就對這家糕點店好感滿滿！也會根據季節相對應推出不同的限定口味" />
-
 
             <TextView
                 android:id="@+id/detail_tv_authorName"
@@ -114,7 +117,7 @@
                 android:layout_height="20dp"
                 android:layout_marginStart="2dp"
                 android:background="@drawable/add_pointer"
-                android:textColor="@color/black"
+                android:textColor="#F9BA45"
                 app:layout_constraintBottom_toTopOf="@+id/detail_title"
                 app:layout_constraintStart_toStartOf="@+id/detail_tv_date"
                 app:layout_constraintTop_toBottomOf="@+id/detail_tv_date" />
@@ -124,18 +127,18 @@
                 android:layout_width="25dp"
                 android:layout_height="25dp"
                 android:layout_marginEnd="8dp"
-                android:background="@drawable/btn_like_image"
+                android:background="@drawable/heart"
                 android:textColor="@color/black"
                 app:layout_constraintBottom_toBottomOf="@+id/detail_collect"
                 app:layout_constraintEnd_toStartOf="@+id/detail_collect"
                 app:layout_constraintTop_toTopOf="@+id/detail_collect" />
 
-            <Button
+            <ImageButton
                 android:id="@+id/detail_collect"
                 android:layout_width="25dp"
                 android:layout_height="25dp"
                 android:layout_marginEnd="8dp"
-                android:background="@drawable/btn_collect_image"
+                android:background="@drawable/star"
                 android:textColor="@color/black"
                 app:layout_constraintBottom_toBottomOf="@+id/detail_chat"
                 app:layout_constraintEnd_toStartOf="@+id/detail_chat"
@@ -178,6 +181,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="6dp"
+                android:textColor="#43541E"
                 app:layout_constraintStart_toEndOf="@+id/detail_addStore"
                 app:layout_constraintTop_toBottomOf="@+id/detail_tv_date"
                 android:text="@{viewModel.article.placeName}"

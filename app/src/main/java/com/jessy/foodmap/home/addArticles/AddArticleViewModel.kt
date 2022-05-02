@@ -23,6 +23,7 @@ class AddArticleViewModel :ViewModel(){
     val articleConent = MutableLiveData<String>()
     val articleImage = MutableLiveData<String>()
     var articlePlaceName :String =""
+    // Create a storage reference from our app
 
 
     fun addFireBaseArticle() {
@@ -60,5 +61,6 @@ class AddArticleViewModel :ViewModel(){
         _addArticle.value = data
 
     }
+
 
 }

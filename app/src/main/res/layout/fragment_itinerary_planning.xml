@@ -30,7 +30,8 @@
             android:text="Itinerary"
             android:textColor="#381100"
             android:layout_gravity="center"
-            android:textSize="20sp"
+            android:fontFamily="@font/smallcase"
+            android:textSize="50sp"
             android:textStyle="bold"/>
 
     </androidx.appcompat.widget.Toolbar>

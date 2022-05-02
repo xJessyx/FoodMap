@@ -44,8 +44,8 @@
 
                 <FrameLayout
                     android:id="@+id/frameLayout"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_width="389dp"
+                    android:layout_height="275dp"
                     android:background="@drawable/mask_round"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent">

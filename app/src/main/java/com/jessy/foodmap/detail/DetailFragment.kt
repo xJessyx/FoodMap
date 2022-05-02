@@ -65,9 +65,11 @@ class DetailFragment : Fragment() {
             likeSum =likeSum+1
 
             if(likeSum % 2 != 0){
+                binding.detailLike.setBackgroundResource(R.drawable.heart2)
                db.collection("articles").document(articleKey.id)
                    .update("totalLike", articleKey.totalLike +1)
             }else{
+                binding.detailLike.setBackgroundResource(R.drawable.like2)
                 db.collection("articles").document(articleKey.id)
                     .update("totalLike",articleKey.totalLike )
             }
@@ -79,10 +81,14 @@ class DetailFragment : Fragment() {
 
             collectSum =collectSum+1
             if(collectSum % 2 != 0) {
+                binding.detailCollect.setBackgroundResource(R.drawable.star3)
+
                 favoriteUsersItem.add(0, "32fRAA8nlkV2gAojqHB1")
                 db.collection("articles").document(articleKey.id)
                     .update("favoriteUsers", favoriteUsersItem)
             }else{
+                binding.detailCollect.setBackgroundResource(R.drawable.star)
+
                 favoriteUsersItem.add(0, "")
                 db.collection("articles").document(articleKey.id)
                     .update("favoriteUsers", favoriteUsersItem)
