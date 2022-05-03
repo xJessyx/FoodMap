@@ -36,7 +36,8 @@ class ItineraryDetailFragment : BottomSheetDialogFragment() {
         binding.viewModel = viewModel
         binding.itineraryDeatailName.text = journeyArg.name
         binding.itineraryDeatailStartDate.text =journeyArg.startDate
-        binding.itineraryDeatailEndDate.text=journeyArg.endDate
+        binding.itineraryDeatailEndDate.text= journeyArg.endDate
+        viewModel.itineraryDeatailImg = journeyArg.image
 //        viewModel.journeyItemId = journeyArg.id
 
        // viewModel.getFireBasePlace()

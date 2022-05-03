@@ -3,6 +3,7 @@ package com.jessy.foodmap.itinerary.detailpaging
 import android.icu.text.SimpleDateFormat
 import android.util.Log
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
@@ -39,7 +40,6 @@ class AddItineraryDtailDateAdapter(val onClickListener: AddItineraryDtailDateAda
                 TimeUtil.StampToTime(it, Locale.TAIWAN).toString()
             })
 
-
             binding.itineraryDetailDateTvDwellTime.setText(place.dwellTime?.let {
                 TimeUtil.StampToTimeText(it, Locale.TAIWAN).toString()
             })
@@ -71,8 +71,18 @@ class AddItineraryDtailDateAdapter(val onClickListener: AddItineraryDtailDateAda
 
     override fun onBindViewHolder(
         holder: AddItineraryDtailDateViewHolder,
-        position: Int,
+        position: Int
     ) {
+        if(position == currentList.size-1){
+
+            holder.binding.itineraryDetailDateLine.visibility = View.GONE
+
+        }else{
+
+            holder.binding.itineraryDetailDateLine.visibility = View.VISIBLE
+
+        }
+
         val item = getItem(position)
         holder.itemView.setOnClickListener {
             onClickListener.onClick(item)

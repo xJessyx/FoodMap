@@ -45,6 +45,9 @@ class AddPlaceFragment : Fragment() {
 
         binding.addPlaceTvPlaceName.text = storeInformationArg!!.storeTitle
         viewModel.placeName = storeInformationArg.storeTitle
+        viewModel.latitude = storeInformationArg.storeLatLng!!.latitude
+        viewModel.longitude = storeInformationArg.storeLatLng!!.longitude
+
         binding.addPlaceSpSelectDwellTime.setOnClickListener {
 
             val ca = Calendar.getInstance()

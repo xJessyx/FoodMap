@@ -16,7 +16,7 @@ fun bindImage(imgView: ImageView, imgUrl: String?) {
         val imgUri = it.toUri().buildUpon().build()
         Glide.with(imgView.context)
             .load(imgUri)
-//            .centerCrop()
+           .centerCrop()
             .disallowHardwareConfig()
 
             .apply(

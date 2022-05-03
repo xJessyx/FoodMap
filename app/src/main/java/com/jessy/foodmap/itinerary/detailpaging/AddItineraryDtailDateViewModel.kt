@@ -1,17 +1,28 @@
 package com.jessy.foodmap.itinerary.detailpaging
 
 import android.content.ContentValues
-import android.icu.text.SimpleDateFormat
+import android.content.pm.PackageManager
+import android.provider.Settings
 import android.util.Log
+import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.google.android.libraries.places.api.Places
 import com.google.firebase.firestore.Query
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
-import com.jessy.foodmap.addPlace.AddPlaceFragment
+import com.jessy.foodmap.MainActivity
+import com.jessy.foodmap.R
+import com.jessy.foodmap.data.DirectionResponses
 import com.jessy.foodmap.data.Journey
 import com.jessy.foodmap.data.Place
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
+import retrofit2.http.GET
 import java.util.*
 
 class AddItineraryDtailDateViewModel (position : Int,journeyArg: Journey): ViewModel(){
@@ -46,6 +57,7 @@ class AddItineraryDtailDateViewModel (position : Int,journeyArg: Journey): ViewM
                 Log.d(ContentValues.TAG, "Error getting documents: ", exception)
             }
     }
+
 
 
 //    fun selectItemAddData(){

@@ -2,12 +2,12 @@ package com.jessy.foodmap.itinerary
 
 import android.app.Activity
 import android.app.DatePickerDialog
-import android.content.ContentValues
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.icu.util.Calendar
 import android.net.Uri
 import android.os.Bundle
+import android.provider.Settings
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -17,31 +17,28 @@ import android.widget.ImageButton
 import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
+import androidx.core.content.ContentProviderCompat
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.github.dhaval2404.imagepicker.ImagePicker
 import com.google.android.libraries.places.api.Places
-import com.google.android.libraries.places.api.model.AutocompleteSessionToken
-import com.google.android.libraries.places.api.net.PlacesClient
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
-import com.google.firebase.firestore.ktx.firestore
-import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageMetadata
 import com.google.firebase.storage.StorageReference
 import com.jessy.foodmap.MainActivity
 import com.jessy.foodmap.NavigationDirections
 import com.jessy.foodmap.R
-import com.jessy.foodmap.data.Journey
+import com.jessy.foodmap.data.DirectionResponses
 import com.jessy.foodmap.databinding.FragmentAddItineraryBinding
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
+import retrofit2.http.GET
 import java.io.File
-import java.lang.String.format
-import java.text.SimpleDateFormat
-import java.time.LocalDate
-import java.time.format.DateTimeFormatter
-import java.time.temporal.ChronoUnit
-import java.util.*
 
 
 class AddItineraryFragment : BottomSheetDialogFragment() {
@@ -180,7 +177,7 @@ class AddItineraryFragment : BottomSheetDialogFragment() {
 
             }
         }
-        
+
         uploadTask?.addOnFailureListener { exception ->
             Log.v("exception.message fail","${exception.message}")
 
@@ -255,6 +252,7 @@ class AddItineraryFragment : BottomSheetDialogFragment() {
             else -> Toast.makeText(activity as Activity, "Task Cancelled", Toast.LENGTH_SHORT).show()
         }
     }
+
 
 
 }

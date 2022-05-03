@@ -14,6 +14,8 @@ import com.jessy.foodmap.data.Place
 class ItineraryDetailViewModel : ViewModel() {
 
 
+ var itineraryDeatailImg:String?=null
+
 }
 
 

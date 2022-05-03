@@ -14,11 +14,11 @@
     </data>
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="200dp">
+        android:layout_height="150dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="150dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
@@ -43,38 +43,26 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="16dp"
-                android:layout_marginTop="36dp"
                 android:textSize="20sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:text="10:00" />
             <!--        android:onClick="@{() -> viewModel.showStoreInfo()}"-->
 
-            <Button
-                android:id="@+id/itineraryDetailDate_bt_place"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="50dp"
-                android:visibility="gone"
-                app:layout_constraintBottom_toBottomOf="@+id/itineraryDetailDate_img_circle"
-                app:layout_constraintStart_toEndOf="@+id/itineraryDetailDate_img_circle"
-                app:layout_constraintTop_toTopOf="@+id/itineraryDetailDate_img_circle"
-                tools:text="新增地點" />
-
 
             <ImageView
+                android:id="@+id/itineraryDetailDate_line"
                 android:layout_width="3dp"
-                android:layout_height="113dp"
-                android:layout_marginTop="36dp"
-                android:layout_marginBottom="16dp"
+                android:layout_height="123dp"
                 android:scaleType="centerCrop"
                 android:src="@drawable/line"
+                android:visibility="visible"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="@+id/itineraryDetailDate_img_circle"
-                app:layout_constraintHorizontal_bias="0.52"
+                app:layout_constraintHorizontal_bias="0.518"
                 app:layout_constraintStart_toStartOf="@+id/itineraryDetailDate_img_circle"
                 app:layout_constraintTop_toBottomOf="@+id/itineraryDetailDate_img_circle"
-                app:layout_constraintVertical_bias="0.45" />
+                app:layout_constraintVertical_bias="1.0" />
 
             <TextView
                 android:id="@+id/itineraryDetailDate_tv_storeName"

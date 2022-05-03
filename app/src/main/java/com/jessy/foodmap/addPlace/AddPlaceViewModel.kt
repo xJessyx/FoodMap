@@ -7,6 +7,7 @@ import androidx.lifecycle.LiveData
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.google.android.gms.maps.model.LatLng
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.jessy.foodmap.data.Journey
@@ -34,6 +35,8 @@ class AddPlaceViewModel : ViewModel() {
     var getAllJourney = mutableListOf<Journey>()
     var placeId = db.collection("places").document().id
     var journeyId :String = ""
+    var latitude:Double? =null
+    var longitude:Double? =null
 
     fun getAllJourney() {
     db.collection("journeys")
@@ -82,7 +85,9 @@ class AddPlaceViewModel : ViewModel() {
             transportation = transportationSinner,
             dwellTime = dwellTime,
             startTime = startTime,
-            trafficTime = trafficTime
+            trafficTime = trafficTime,
+            latitude = latitude,
+            longitude = longitude
         )
         _addPlace.value = data
     }
