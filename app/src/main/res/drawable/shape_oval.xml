@@ -8,5 +8,5 @@
         <!--設定圓角-->
         <corners android:radius="25dp"/>
         <!--設定邊框線的寬度和顏色-->
-        <stroke android:width="3dp" android:color="#FECB51" />
+        <stroke android:width="3dp" android:color="#FBBD3E" />
     </shape>

@@ -17,9 +17,9 @@
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/member_toolbar"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="55dp"
         android:textSize="16sp"
-        android:background="#FCFCFC"
+        android:scaleType="centerCrop"
         android:textAlignment="center"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -27,14 +27,18 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_weight="1">
 
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="會員中心"
+            android:text="Member"
+            android:textColor="#381100"
             android:layout_gravity="center"
-            android:textSize="20sp"
+            android:fontFamily="@font/smallcase"
+            android:textSize="50sp"
             android:textStyle="bold"
             />
+
     </androidx.appcompat.widget.Toolbar>
 
     <ImageView
@@ -43,7 +47,7 @@
         android:layout_height="143dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
-        android:background="@drawable/shape_round"
+        android:background="@drawable/shape_round3"
        android:src="@drawable/person_man"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/member_toolbar" />
@@ -53,55 +57,64 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="35dp"
-        android:textSize="20dp"
+        android:textSize="30sp"
+        android:fontFamily="@font/smallcase"
+        android:textColor="#333333"
         app:layout_constraintStart_toEndOf="@+id/member_img"
         app:layout_constraintTop_toTopOf="@+id/member_img"
-        tools:text="名字："
-        android:text="名字："/>
+        tools:text="name："
+        android:text="name："/>
 
 
     <TextView
         android:id="@+id/member_tv_gender"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="20dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="8dp"
+        android:text="gnetder:"
+        android:textColor="#333333"
+        android:textSize="30sp"
+        android:fontFamily="@font/smallcase"
         app:layout_constraintStart_toStartOf="@+id/member_tv_name"
         app:layout_constraintTop_toBottomOf="@+id/member_tv_name"
-        android:text="性別："
-        tools:text="性別：" />
-
+        tools:text="gnetder:" />
 
     <TextView
         android:id="@+id/member_tv_age"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="20dp"
+        android:textSize="30sp"
+        android:fontFamily="@font/smallcase"
         android:layout_marginTop="10dp"
         app:layout_constraintStart_toStartOf="@+id/member_tv_gender"
         app:layout_constraintTop_toBottomOf="@+id/member_tv_gender"
-        tools:text="年齡："
-        android:text="年齡："
+        tools:text="age："
+        android:textColor="#333333"
+        android:text="age："
         />
 
     <TextView
         android:id="@+id/member_tv_grade"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="20dp"
+        android:textSize="30sp"
+        android:fontFamily="@font/smallcase"
         android:layout_marginTop="10dp"
         app:layout_constraintStart_toStartOf="@+id/member_tv_age"
         app:layout_constraintTop_toBottomOf="@+id/member_tv_age"
-        android:text="等級："
-        tools:text="等級：" />
+        android:text="level："
+        android:textColor="#333333"
+        tools:text="level：" />
 
 
     <TextView
         android:id="@+id/member_tv_name_person"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:textSize="18dp"
+        android:layout_marginStart="12dp"
+        android:textSize="25sp"
+        android:fontFamily="@font/smallcase"
+        android:textColor="#333333"
         app:layout_constraintBottom_toBottomOf="@+id/member_tv_name"
         app:layout_constraintStart_toEndOf="@+id/member_tv_name"
         app:layout_constraintTop_toTopOf="@+id/member_tv_name"
@@ -110,10 +123,12 @@
 
     <TextView
         android:id="@+id/member_tv_gender_person"
-        android:layout_width="36dp"
-        android:layout_height="20dp"
-        android:textSize="18dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="25sp"
+        android:fontFamily="@font/smallcase"
         android:text="MAN"
+        android:textColor="#333333"
         app:layout_constraintBottom_toBottomOf="@+id/member_tv_gender"
         app:layout_constraintStart_toStartOf="@+id/member_tv_name_person"
         app:layout_constraintTop_toTopOf="@+id/member_tv_gender"
@@ -123,7 +138,9 @@
         android:id="@+id/member_tv_age_person"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="18dp"
+        android:textSize="30sp"
+        android:fontFamily="@font/smallcase"
+        android:textColor="#333333"
         app:layout_constraintBottom_toBottomOf="@+id/member_tv_age"
         app:layout_constraintStart_toStartOf="@+id/member_tv_gender_person"
         app:layout_constraintTop_toTopOf="@+id/member_tv_age"
@@ -134,25 +151,27 @@
         android:id="@+id/member_tv_grade_person"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="18dp"
+        android:textSize="30sp"
+        android:fontFamily="@font/smallcase"
+        android:textColor="#333333"
         app:layout_constraintBottom_toBottomOf="@+id/member_tv_grade"
         app:layout_constraintStart_toStartOf="@+id/member_tv_age_person"
         app:layout_constraintTop_toTopOf="@+id/member_tv_grade"
-        android:text="初探"
-        tools:text="初探" />
+        android:text="1"
+        tools:text="1" />
 
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/member_tabs"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="25dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/member_img"
-        app:tabSelectedTextColor="#389DC3"
-        app:tabIndicatorColor="#389DC3"
-        app:tabIndicatorHeight="5dp">
+        app:tabSelectedTextColor="#31404E"
+        app:tabIndicatorColor="#31404E"
+        app:tabIndicatorHeight="4dp">
 
 <!--        <com.google.android.material.tabs.TabItem-->
 <!--            android:layout_width="wrap_content"-->

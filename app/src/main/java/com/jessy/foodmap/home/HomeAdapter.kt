@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.android.volley.toolbox.ImageLoader
+import com.google.common.collect.Iterables.size
 import com.jessy.foodmap.data.Article
 import com.jessy.foodmap.databinding.ItemHomeArticleBinding
 
@@ -29,16 +30,8 @@ class HomeAdapter(val onClickListener: OnClickListener): ListAdapter<Article,
     class HomeViewHolder private constructor(var binding:ItemHomeArticleBinding ) :
         RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(articleData: Article) {
-         //   binding.article = articleData
-//            articleData.author = binding.homeAuthor.toString()
-//            articleData.image = binding.homeImg.toString()
-//            articleData.collectNumber = binding.homeCollectNumber.toString()
-            binding.homeAuthor.setText(articleData.author)
-            binding.homeImg.setImageResource(articleData.image)
-            binding.homeCollectNumber.setText(articleData.collectNumber)
-
-
+        fun bind(article: Article) {
+          binding.article = article
             binding.executePendingBindings()
 
         }
@@ -62,6 +55,8 @@ class HomeAdapter(val onClickListener: OnClickListener): ListAdapter<Article,
             return    oldItem == newItem
         }
     }
+
+
     //--------------------------------------------------------------------------------------------------------------------------------------------------------
 
     class OnClickListener(val clickListener: (article:Article) -> Unit) {

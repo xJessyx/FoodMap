@@ -20,7 +20,7 @@
         tools:layout="@layout/fragment_food_map_search" />
     <fragment
         android:id="@+id/itineraryPlanningFragment"
-        android:name="com.jessy.foodmap.Itinerary.ItineraryPlanningFragment"
+        android:name="com.jessy.foodmap.itinerary.ItineraryPlanningFragment"
         android:label="fragment_itinerary_planning"
         tools:layout="@layout/fragment_itinerary_planning" />
     <fragment
@@ -42,19 +42,44 @@
 
     <fragment
         android:id="@+id/myItineraryPagingFragment"
-        android:name="com.jessy.foodmap.Itinerary.paging.MyItineraryPagingFragment"
+        android:name="com.jessy.foodmap.itinerary.paging.MyItineraryPagingFragment"
         android:label="MyItineraryPagingFragment" >
 
     </fragment>
     <dialog
         android:id="@+id/addItineraryFragment"
-        android:name="com.jessy.foodmap.Itinerary.AddItineraryFragment"
-        android:label="AddItineraryFragment" />
-
+        android:name="com.jessy.foodmap.itinerary.AddItineraryFragment"
+        android:label="AddItineraryFragment"
+/>
     <dialog
         android:id="@+id/itineraryDetailFragment"
-        android:name="com.jessy.foodmap.Itinerary.ItineraryDetailFragment"
-        android:label="ItineraryDetailFragment" />
+        android:name="com.jessy.foodmap.itinerary.ItineraryDetailFragment"
+        android:label="ItineraryDetailFragment">
+
+        <argument android:name="journeyKey"
+            app:argType="com.jessy.foodmap.data.Journey"
+            app:nullable="false"/>
+    </dialog>
+
+    <fragment
+        android:id="@+id/addPlaceFragment"
+        android:name="com.jessy.foodmap.addPlace.AddPlaceFragment"
+        android:label="AddPlaceFragment">
+         <argument android:name="storeKey"
+            app:argType="com.jessy.foodmap.data.StoreInformation"
+            app:nullable="false"/>
+    </fragment>
+
+    <fragment
+        android:id="@+id/addItineraryDetailDateFragment"
+        android:name="com.jessy.foodmap.itinerary.detailpaging.AddItineraryDetailDateFragment"
+        android:label="AddItineraryDetailDateFragment" />
+
+    <fragment
+        android:id="@+id/addArticleFragment"
+        android:name="com.jessy.foodmap.home.addArticles.AddArticleFragment"
+        android:label="AddArticleFragment" />
+
 
     <action android:id="@+id/navigate_to_member_fragment" app:destination="@id/memberFragment"
         app:popUpTo="@id/navigation"
@@ -68,13 +93,37 @@
     <action android:id="@+id/navigate_to_home_fragment" app:destination="@id/homeFragment"
         app:popUpTo="@id/navigation"
         app:popUpToInclusive="true" />
-    <action android:id="@+id/navigate_to_detail_fragment" app:destination="@id/detailFragment"
+    <action android:id="@+id/home_to_detail_fragment" app:destination="@id/detailFragment"
         app:popUpTo="@id/navigation"
         app:popUpToInclusive="true" />
-    <action android:id="@+id/action_myItineraryPagingFragment_to_addItineraryFragment" app:destination="@id/addItineraryFragment"
+    <action android:id="@+id/itineraryPlanningFragment_to_addItineraryFragment" app:destination="@id/addItineraryFragment"
         app:popUpTo="@id/navigation"
         app:popUpToInclusive="true" />
     <action android:id="@+id/addItineraryFragment_to_itineraryDetailFragment" app:destination="@id/itineraryDetailFragment"
+        app:popUpTo="@id/navigation"
+        app:popUpToInclusive="true" />
+
+    <action android:id="@+id/foodMapSearchFragment_to_addPlaceFragment" app:destination="@id/addPlaceFragment"
+        app:popUpTo="@id/navigation"
+        app:popUpToInclusive="true" />
+
+    <action android:id="@+id/recommendPagingFragment_itineraryDetailFragment" app:destination="@id/itineraryDetailFragment"
+        app:popUpTo="@id/navigation"
+        app:popUpToInclusive="true" />
+
+    <action android:id="@+id/addItineraryDetailDateFragment_foodMapSearchFragment" app:destination="@id/foodMapSearchFragment"
+        app:popUpTo="@id/navigation"
+        app:popUpToInclusive="true" />
+
+    <action android:id="@+id/addArticleFragment_homeFragment" app:destination="@id/homeFragment"
+        app:popUpTo="@id/navigation"
+        app:popUpToInclusive="true" />
+
+    <action android:id="@+id/homeFragment_addArticleFragment" app:destination="@id/addArticleFragment"
+        app:popUpTo="@id/navigation"
+        app:popUpToInclusive="true" />
+
+    <action android:id="@+id/detailFragment_addPlaceFragment" app:destination="@id/addPlaceFragment"
         app:popUpTo="@id/navigation"
         app:popUpToInclusive="true" />
 

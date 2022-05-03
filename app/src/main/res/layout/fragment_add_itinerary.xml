@@ -4,12 +4,17 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
     <data>
-
+            <variable
+                name="viewModel"
+                type="com.jessy.foodmap.itinerary.AddItineraryViewModel" />
     </data>
 
 <androidx.constraintlayout.widget.ConstraintLayout
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@drawable/shape_sheet_dialog_bg"
+
+    >
 
     <ScrollView
         android:id="@+id/addItinerary_ScrollView"
@@ -20,13 +25,15 @@
 <androidx.constraintlayout.widget.ConstraintLayout
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    tools:context=".Itinerary.AddItineraryFragment">
+    android:background="@drawable/shape_sheet_dialog_bg"
+    tools:context=".itinerary.AddItineraryFragment">
 
     <TextView
         android:id="@+id/addItinerary_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="center"
+        android:textColor="@color/black"
         android:layout_marginTop="8dp"
         android:text="建立行程"
         android:textSize="25sp"
@@ -36,33 +43,49 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <View
-        android:id="@+id/view"
+        android:id="@+id/addItinerary_view"
+        android:layout_marginTop="16dp"
         android:layout_width="350dp"
         android:layout_height="3dp"
-        android:layout_marginTop="10dp"
-        android:background="@color/black"
+        android:background="#E45D0F"
         app:layout_constraintEnd_toEndOf="@+id/addItinerary_title"
         app:layout_constraintStart_toStartOf="@+id/addItinerary_title"
         app:layout_constraintTop_toBottomOf="@+id/addItinerary_title" />
 
-    <ImageView
+    <ImageButton
         android:id="@+id/addItinerary_img"
         android:layout_width="300dp"
-        android:scaleType="centerCrop"
         android:layout_height="250dp"
         android:layout_marginTop="20dp"
         android:background="@drawable/add"
-        app:layout_constraintEnd_toEndOf="@+id/view"
-        app:layout_constraintStart_toStartOf="@+id/view"
-        app:layout_constraintTop_toBottomOf="@+id/view"/>
+        android:scaleType="centerCrop"
+        app:layout_constraintEnd_toEndOf="@+id/addItinerary_view"
+        app:layout_constraintStart_toStartOf="@+id/addItinerary_view"
+        app:layout_constraintTop_toBottomOf="@+id/addItinerary_view" />
+
+    <ProgressBar
+        android:id="@+id/addItinerary_upload_progress"
+        style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="@+id/addItinerary_img"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/addItinerary_img"
+        app:layout_constraintTop_toBottomOf="@+id/addItinerary_img" />
 
     <EditText
         android:id="@+id/addItinerary_ed_ItineraryName"
         android:layout_width="300dp"
-        android:layout_height="48dp"
-        android:layout_marginTop="16dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="48dp"
+        android:background="@drawable/shape_round3"
+        android:gravity="center"
         android:hint="請輸入行程名稱"
+        android:text="@={viewModel.itineraryName}"
         app:layout_constraintEnd_toEndOf="@+id/addItinerary_img"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/addItinerary_img"
         app:layout_constraintTop_toBottomOf="@+id/addItinerary_img" />
 
@@ -70,8 +93,9 @@
         android:id="@+id/addItinerary_ed_StartDate"
         android:layout_width="140dp"
         android:layout_height="80dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="32dp"
         android:background="@drawable/shape_oval"
+        android:text="@={viewModel.itineraryStartDate}"
         android:hint="請選擇出發日期"
         app:layout_constraintStart_toStartOf="@+id/addItinerary_ed_ItineraryName"
         app:layout_constraintTop_toBottomOf="@+id/addItinerary_ed_ItineraryName" />
@@ -80,21 +104,22 @@
         android:id="@+id/addItinerary_ed_EndDate"
         android:layout_width="140dp"
         android:layout_height="80dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="32dp"
         android:background="@drawable/shape_oval"
         android:hint="請選擇結束日期"
+        android:text="@={viewModel.itineraryEndDate}"
         app:layout_constraintEnd_toEndOf="@+id/addItinerary_ed_ItineraryName"
         app:layout_constraintTop_toBottomOf="@+id/addItinerary_ed_ItineraryName" />
 
     <Button
-        android:id="@+id/addItinerary_bt"
+        android:id="@+id/addItinerary_btn"
         android:layout_width="138dp"
         android:layout_height="49dp"
         android:layout_marginTop="30dp"
-        android:backgroundTint="@color/black"
+        android:background="@drawable/shape_round"
         android:text="Submit"
         android:layout_marginBottom="30dp"
-        android:textColor="@color/white"
+        android:textColor="#8D602E"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/addItinerary_ed_EndDate"
         app:layout_constraintStart_toStartOf="@+id/addItinerary_ed_StartDate"

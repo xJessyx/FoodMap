@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+    <data>
+        <variable
+            name="viewModel"
+            type="com.jessy.foodmap.addPlace.AddPlaceViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".addPlace.AddPlaceFragment">
+
+        <View
+            android:id="@+id/addPlace_view"
+            android:layout_width="350dp"
+            android:layout_height="3dp"
+            android:layout_marginTop="16dp"
+            android:background="#E45D0F"
+
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.491"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/addPlace_tv_placeName" />
+
+        <TextView
+            android:id="@+id/addPlace_tv_placeName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="48dp"
+            android:textColor="@color/black"
+            android:textSize="25sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="光一續集" />
+
+        <Spinner
+            android:id="@+id/addPlace_sp_selectJourney"
+            android:layout_width="260dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="32dp"
+            android:background="@drawable/shape_round2"
+            app:layout_constraintEnd_toEndOf="@+id/addPlace_view"
+            app:layout_constraintStart_toStartOf="@+id/addPlace_view"
+            app:layout_constraintTop_toBottomOf="@+id/addPlace_view" />
+
+        <Spinner
+            android:id="@+id/addPlace_sp_selectDay"
+            android:layout_width="260dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="40dp"
+            android:background="@drawable/shape_round2"
+            app:layout_constraintEnd_toEndOf="@+id/addPlace_sp_selectJourney"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/addPlace_sp_selectJourney"
+            app:layout_constraintTop_toBottomOf="@+id/addPlace_sp_selectJourney" />
+
+        <Spinner
+            android:id="@+id/addPlace_sp_selectTransportation"
+            android:layout_width="260dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="40dp"
+            android:background="@drawable/shape_round2"
+            app:layout_constraintEnd_toEndOf="@+id/addPlace_sp_selectDay"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/addPlace_sp_selectDay"
+            app:layout_constraintTop_toBottomOf="@+id/addPlace_sp_selectDay" />
+
+        <EditText
+            android:id="@+id/addPlace_sp_selectDwellTime"
+            android:layout_width="260dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="40dp"
+            android:background="@drawable/shape_round2"
+            android:hint="請輸入停留時間"
+            android:gravity="center"
+            android:paddingLeft="8dp"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="@+id/addPlace_sp_selectTransportation"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/addPlace_sp_selectTransportation"
+            app:layout_constraintTop_toBottomOf="@+id/addPlace_sp_selectTransportation" />
+        <!--
+android:inputType="time"-->
+
+        <EditText
+            android:id="@+id/addPlace_sp_selectStartTime"
+            android:layout_width="260dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="40dp"
+            android:background="@drawable/shape_round2"
+            android:hint="請輸入開始時間"
+            android:gravity="center"
+            android:paddingLeft="8dp"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="@+id/addPlace_sp_selectDwellTime"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/addPlace_sp_selectDwellTime"
+            app:layout_constraintTop_toBottomOf="@+id/addPlace_sp_selectDwellTime" />
+
+        <Button
+            android:id="@+id/addPlace_bt_submit"
+            android:layout_width="151dp"
+            android:layout_height="66dp"
+            android:layout_marginTop="56dp"
+            android:background="@drawable/shape_round"
+            android:text="送出"
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toEndOf="@+id/addPlace_sp_selectStartTime"
+            app:layout_constraintHorizontal_bias="0.504"
+            app:layout_constraintStart_toStartOf="@+id/addPlace_sp_selectStartTime"
+            app:layout_constraintTop_toBottomOf="@+id/addPlace_sp_selectStartTime" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

@@ -1,14 +1,20 @@
 package com.jessy.foodmap.home
 
+import android.content.ContentValues
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.google.firebase.firestore.Query
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
 import com.jessy.foodmap.R
 import com.jessy.foodmap.data.Article
+import com.jessy.foodmap.data.Journey
 
 class HomeViewModel : ViewModel(){
 
-    val dataList = mutableListOf<Article>()
+    val db = Firebase.firestore
 
 
     // Handle navigation to detail
@@ -16,32 +22,59 @@ class HomeViewModel : ViewModel(){
 
     val navigateToDetail: LiveData<Article>
         get() = _navigateToDetail
+  //  var articleId = db.collection("articles").document().id
 
-    //---------------------------------------------------------------------------------------
+    var getAllArticles = mutableListOf<Article>()
+    val _getAllArticlesLiveData = MutableLiveData<List<Article>>()
+    val getAllArticlesLiveData: LiveData<List<Article>>
+        get() = _getAllArticlesLiveData
 
-    init {
+    var getAllArticlesCollect = mutableListOf<Article>()
+    val _getAllArticlesCollectLiveData = MutableLiveData<List<Article>>()
+    val getAllArticlesCollectLiveData: LiveData<List<Article>>
+        get() = _getAllArticlesCollectLiveData
 
-        addData()
+
+    fun getFireBaseArticle(){
+        db.collection("articles")
+            .orderBy("createdTime", Query.Direction.DESCENDING)
+            .get()
+            .addOnSuccessListener { result ->
+                for (document in result) {
+                    Log.d(ContentValues.TAG, "${document.id} => ${document.data}")
+                    val data = document.toObject(Article::class.java)
+                    getAllArticles.add(data)
+                }
+                _getAllArticlesLiveData.value = getAllArticles
+
+            }
+            .addOnFailureListener { exception ->
+                Log.d(ContentValues.TAG, "Error getting documents: ", exception)
+            }
     }
 
-    //---------------------------------------------------------------------------------------
-    fun addData(){
-        val item1 = Article(R.drawable.cake,"天天","5212")
-        val item2 = Article(R.drawable.cake_pops,"彎彎","234")
-        val item3 = Article(R.drawable.churros,"略綠","33")
-        val item4 = Article(R.drawable.cookies,"ㄏ黑","3432")
-        val item5 = Article(R.drawable.cupcakes,"嘶嘶嘶","5555")
-        val item6 = Article(R.drawable.macarons,"天已","5216662")
-        dataList.add(item1)
-        dataList.add(item2)
-        dataList.add(item3)
-        dataList.add(item4)
-        dataList.add(item5)
-        dataList.add(item6)
+    fun getFireBaseArticleCollect(){
+        db.collection("articles")
+            .whereArrayContains("favoriteUsers","32fRAA8nlkV2gAojqHB1")
+           // .orderBy("createdTime", Query.Direction.DESCENDING)
+            .get()
+            .addOnSuccessListener { result ->
+                for (document in result) {
+                    Log.d(ContentValues.TAG, "${document.id} => ${document.data}")
+                    val data = document.toObject(Article::class.java)
+                    getAllArticlesCollect.add(data)
+                }
+                _getAllArticlesCollectLiveData.value = getAllArticlesCollect
+
+            }
+            .addOnFailureListener { exception ->
+                Log.d(ContentValues.TAG, "Error getting documents: ", exception)
+            }
     }
 
     fun navigateToDetail(article: Article) {
         _navigateToDetail.value = article
+
     }
     fun onDetailNavigated() {
         _navigateToDetail.value = null

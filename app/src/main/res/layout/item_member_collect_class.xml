@@ -17,6 +17,6 @@
         android:layout_marginBottom="10dp"
         android:layout_marginStart="40dp"
         android:textSize="17sp"
-        android:textColor="@color/black"/>
+        android:textColor="#7C8697"/>
 </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

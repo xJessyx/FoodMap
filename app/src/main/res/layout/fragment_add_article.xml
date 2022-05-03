@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+    <data>
+        <variable
+            name="viewModel"
+            type="com.jessy.foodmap.home.addArticles.AddArticleViewModel" />
+    </data>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:context=".home.addArticles.AddArticleFragment">
+
+            <EditText
+                android:id="@+id/addArticle_title"
+                android:layout_width="300dp"
+                android:layout_height="50dp"
+                android:layout_marginTop="50dp"
+                android:background="@drawable/shape_oval"
+                android:gravity="center"
+                android:hint="請輸入標題"
+                android:text="@={viewModel.articleTitle}"
+                app:layout_constraintEnd_toEndOf="@+id/addArticle_img"
+                app:layout_constraintStart_toStartOf="@+id/addArticle_img"
+                app:layout_constraintTop_toBottomOf="@+id/addArticle_img" />
+
+            <EditText
+                android:id="@+id/addArticle_content"
+                android:layout_width="300dp"
+                android:layout_height="50dp"
+                android:layout_marginTop="32dp"
+                android:background="@drawable/shape_oval"
+                android:gravity="center"
+                android:hint="請輸入內容"
+                android:text="@={viewModel.articleConent}"
+                app:layout_constraintEnd_toEndOf="@+id/addArticle_title"
+                app:layout_constraintStart_toStartOf="@+id/addArticle_title"
+                app:layout_constraintTop_toBottomOf="@+id/addArticle_title"
+                tools:text="" />
+
+
+            <fragment
+                android:id="@+id/addArticle_autocomplete"
+                android:name="com.google.android.libraries.places.widget.AutocompleteSupportFragment"
+                android:layout_width="300dp"
+                android:layout_height="50dp"
+                android:layout_marginTop="4dp"
+                android:background="@drawable/shape_oval"
+                app:layout_constraintEnd_toEndOf="@+id/addArticle_addPlace"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/addArticle_addPlace"
+                app:layout_constraintTop_toBottomOf="@+id/addArticle_addPlace" />
+
+            <TextView
+                android:id="@+id/addArticle_post"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:gravity="center"
+                android:text="發文"
+                android:textColor="@color/black"
+                android:textSize="25sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <View
+                android:id="@+id/addArticle_view"
+                android:layout_width="350dp"
+                android:layout_height="3dp"
+                android:layout_marginTop="16dp"
+                android:background="#E45D0F"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/addArticle_post" />
+
+            <ImageButton
+                android:id="@+id/addArticle_img"
+                imageUrl="@{viewModel.articleImage}"
+                android:layout_width="300dp"
+                android:layout_height="250dp"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/add"
+                android:scaleType="centerCrop"
+                app:layout_constraintEnd_toEndOf="@+id/addArticle_view"
+                app:layout_constraintStart_toStartOf="@+id/addArticle_view"
+                app:layout_constraintTop_toBottomOf="@+id/addArticle_view" />
+
+
+            <ProgressBar
+                android:id="@+id/addArticle_upload_progress"
+                style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+                android:layout_width="300dp"
+                android:layout_height="30dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="16dp"
+                android:visibility="gone"
+                app:layout_constraintBottom_toTopOf="@+id/addArticle_title"
+                app:layout_constraintEnd_toEndOf="@+id/addArticle_img"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/addArticle_img"
+                app:layout_constraintTop_toBottomOf="@+id/addArticle_img" />
+
+            <TextView
+                android:id="@+id/addArticle_addPlace"
+                android:layout_width="300dp"
+                android:layout_height="41dp"
+                android:gravity="center"
+                android:hint="請在以下輸入店家名稱"
+                android:layout_marginTop="32dp"
+                android:textColor="@color/black"
+                app:layout_constraintEnd_toEndOf="@+id/addArticle_content"
+                app:layout_constraintStart_toStartOf="@+id/addArticle_content"
+                app:layout_constraintTop_toBottomOf="@+id/addArticle_content" />
+
+            <Button
+                android:id="@+id/addArticle_btn"
+                android:layout_width="138dp"
+                android:layout_height="49dp"
+                android:layout_marginTop="52dp"
+                android:background="@drawable/shape_round"
+                android:text="Submit"
+                android:textColor="@color/white"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/addArticle_autocomplete" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+</layout>
