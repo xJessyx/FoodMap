@@ -81,7 +81,7 @@ class DetailFragment : Fragment() {
 
             collectSum =collectSum+1
             if(collectSum % 2 != 0) {
-                binding.detailCollect.setBackgroundResource(R.drawable.star3)
+                binding.detailCollect.setBackgroundResource(R.drawable.star2)
 
                 favoriteUsersItem.add(0, "32fRAA8nlkV2gAojqHB1")
                 db.collection("articles").document(articleKey.id)

@@ -3,6 +3,7 @@ package com.jessy.foodmap.home.addArticles
 import android.content.ContentValues
 import android.icu.util.Calendar
 import android.util.Log
+import android.widget.ImageButton
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -21,8 +22,9 @@ class AddArticleViewModel :ViewModel(){
 
     val articleTitle = MutableLiveData<String>()
     val articleConent = MutableLiveData<String>()
-    val articleImage = MutableLiveData<String>()
+    var articleImage :String? = null
     var articlePlaceName :String =""
+
     // Create a storage reference from our app
 
 
@@ -45,9 +47,9 @@ class AddArticleViewModel :ViewModel(){
 
         val data = Article(
             id = articleId,
-            image = "https://images.unsplash.com/photo-1553452118-621e1f860f43?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MzE4fHxmb29kfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60",
+            image = articleImage ?: "",
             author = "jessy",
-            authorImage = "https://images.unsplash.com/photo-1524250502761-1ac6f2e30d43?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTh8fGdpcmx8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60",
+            authorImage = "https://images.unsplash.com/photo-1504203772830-87fba72385ee?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8Ym95fGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60",
             totalLike = 0,
             userId = "32fRAA8nlkV2gAojqHB1",
             title = articleTitle.value!!,

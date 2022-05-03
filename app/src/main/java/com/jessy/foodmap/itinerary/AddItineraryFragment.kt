@@ -161,6 +161,26 @@ class AddItineraryFragment : BottomSheetDialogFragment() {
             .build()
         riversRef = mStorageRef?.child(file.lastPathSegment ?: "")
         val uploadTask = riversRef?.putFile(file, metadata)
+
+        val urlTask = uploadTask!!.continueWithTask { task ->
+            if (!task.isSuccessful) {
+                task.exception?.let {
+                    throw it
+                }
+            }
+            riversRef!!.downloadUrl
+        }.addOnCompleteListener { task ->
+            if (task.isSuccessful) {
+                val downloadUri = task.result
+                viewModel.itineraryImage = downloadUri.toString()
+                Log.v("downloadUri", "$downloadUri")
+
+            } else {
+                Log.v("downloadUri error", "下載失敗")
+
+            }
+        }
+        
         uploadTask?.addOnFailureListener { exception ->
             Log.v("exception.message fail","${exception.message}")
 

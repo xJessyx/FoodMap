@@ -26,11 +26,9 @@ import com.google.android.libraries.places.api.model.Place
 import com.google.android.libraries.places.api.net.PlacesClient
 import com.google.android.libraries.places.widget.AutocompleteSupportFragment
 import com.google.android.libraries.places.widget.listener.PlaceSelectionListener
-import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageMetadata
 import com.google.firebase.storage.StorageReference
-import com.google.firebase.storage.ktx.storage
 import com.jessy.foodmap.MainActivity
 import com.jessy.foodmap.NavigationDirections
 import com.jessy.foodmap.R
@@ -50,6 +48,7 @@ class AddArticleFragment : Fragment() {
     private var mStorageRef: StorageReference? = null
     var addArticle_upload_progress: ProgressBar? =null
     var pick_img: ImageButton ?=null
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -137,6 +136,25 @@ class AddArticleFragment : Fragment() {
             .build()
         riversRef = mStorageRef?.child(file.lastPathSegment ?: "")
         val uploadTask = riversRef?.putFile(file, metadata)
+        val urlTask = uploadTask!!.continueWithTask { task ->
+            if (!task.isSuccessful) {
+                task.exception?.let {
+                    throw it
+                }
+            }
+            riversRef!!.downloadUrl
+        }.addOnCompleteListener { task ->
+            if (task.isSuccessful) {
+                val downloadUri = task.result
+                viewModel.articleImage = downloadUri.toString()
+                Log.v("downloadUri", "$downloadUri")
+
+            } else {
+                Log.v("downloadUri error", "下載失敗")
+
+            }
+        }
+
         uploadTask?.addOnFailureListener { exception ->
                 Log.v("exception.message fail","${exception.message}")
 

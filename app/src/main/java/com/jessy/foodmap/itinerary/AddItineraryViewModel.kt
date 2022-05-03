@@ -22,6 +22,7 @@ class AddItineraryViewModel : ViewModel() {
     val itineraryStartDate = MutableLiveData<String>()
     val itineraryEndDate = MutableLiveData<String>()
     var itineraryTotalDay :Int =0
+    var itineraryImage:String?= null
     var journeyId = db.collection("journeys").document().id
 
 
@@ -56,7 +57,7 @@ class AddItineraryViewModel : ViewModel() {
             name =itineraryName.value!!,
             startDate =  itineraryStartDate.value!!,
             endDate =  itineraryEndDate.value!!,
-            image = "0",
+            image = itineraryImage ?: "",
             totalDay = itineraryTotalDay,
         )
         _addItinerary.value = data
