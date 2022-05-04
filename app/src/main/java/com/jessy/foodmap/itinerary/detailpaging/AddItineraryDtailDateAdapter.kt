@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.jessy.foodmap.R
 import com.jessy.foodmap.data.Journey
 import com.jessy.foodmap.data.Place
 import com.jessy.foodmap.databinding.ItemAddItineraryDetailDateBinding
@@ -34,8 +35,6 @@ class AddItineraryDtailDateAdapter(val onClickListener: AddItineraryDtailDateAda
 
         fun bind(place: Place) {
 
-//            binding.place = place
-
             binding.itineraryDetailDateTvStartTime.setText(place.startTime?.let {
                 TimeUtil.StampToTime(it, Locale.TAIWAN).toString()
             })
@@ -49,6 +48,14 @@ class AddItineraryDtailDateAdapter(val onClickListener: AddItineraryDtailDateAda
             })
 
             binding.itineraryDetailDateTvStoreName.setText(place.name)
+
+             when(place.transportation){
+                 1 ->binding.itineraryDetailDateImgTransportation.setImageResource(R.drawable.walking)
+                 2 -> binding.itineraryDetailDateImgTransportation.setImageResource(R.drawable.sedan)
+                 3 ->binding.itineraryDetailDateImgTransportation.setImageResource(R.drawable.bicycle)
+                 4 ->binding.itineraryDetailDateImgTransportation.setImageResource(R.drawable.train)
+            }
+
 
         }
 
@@ -74,8 +81,8 @@ class AddItineraryDtailDateAdapter(val onClickListener: AddItineraryDtailDateAda
         position: Int
     ) {
         if(position == currentList.size-1){
-
             holder.binding.itineraryDetailDateLine.visibility = View.GONE
+            holder.binding.itineraryDetailDateImgTransportation.visibility = View.GONE
 
         }else{
 
@@ -84,10 +91,12 @@ class AddItineraryDtailDateAdapter(val onClickListener: AddItineraryDtailDateAda
         }
 
         val item = getItem(position)
+        holder.binding.itineraryDetailDateImgTransportation.visibility = View.VISIBLE
         holder.itemView.setOnClickListener {
             onClickListener.onClick(item)
         }
         holder.bind(item)
+
     }
 
     class OnClickListener(val clickListener: (place: Place) -> Unit) {

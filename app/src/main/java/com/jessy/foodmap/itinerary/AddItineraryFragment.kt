@@ -7,7 +7,6 @@ import android.content.pm.PackageManager
 import android.icu.util.Calendar
 import android.net.Uri
 import android.os.Bundle
-import android.provider.Settings
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -17,12 +16,10 @@ import android.widget.ImageButton
 import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
-import androidx.core.content.ContentProviderCompat
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.github.dhaval2404.imagepicker.ImagePicker
-import com.google.android.libraries.places.api.Places
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageMetadata
@@ -30,14 +27,8 @@ import com.google.firebase.storage.StorageReference
 import com.jessy.foodmap.MainActivity
 import com.jessy.foodmap.NavigationDirections
 import com.jessy.foodmap.R
-import com.jessy.foodmap.data.DirectionResponses
 import com.jessy.foodmap.databinding.FragmentAddItineraryBinding
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
-import retrofit2.http.GET
+import com.jessy.foodmap.home.addArticles.getFilePathFromContentUri
 import java.io.File
 
 
@@ -231,22 +222,29 @@ class AddItineraryFragment : BottomSheetDialogFragment() {
         super.onActivityResult(requestCode, resultCode, data)
         when (resultCode) {
             Activity.RESULT_OK -> {
-                val filePath: String = ImagePicker.getFilePath(data) ?: ""
-                if (filePath.isNotEmpty()) {
-                    var imgPath = filePath
-                    //Toast.makeText(activity as Activity , imgPath, Toast.LENGTH_SHORT).show()
-                    Log.v("imgPath","imgPath =$imgPath")
-                    pick_img?.let { Glide.with(activity as Activity).load(filePath).into(it) }
 
-                    if (imgPath.isNotEmpty()) {
-                        addArticle_upload_progress!!.visibility = View.VISIBLE
-                        uploadImg(imgPath)
+                data?.data?.let { uri ->
+                    Log.d("Wayne", "uri = $uri")
+
+                    val filePath = uri.path ?: ""
+                    Log.d("Wayne", "filePath = $filePath")
+                    if (filePath.isNotEmpty()) {
+                        var imgPath = filePath
+                        //Toast.makeText(activity as Activity , imgPath, Toast.LENGTH_SHORT).show()
+                        Log.v("imgPath","imgPath =$imgPath")
+                        pick_img?.let { Glide.with(activity as Activity).load(filePath).into(it) }
+
+                        if (imgPath.isNotEmpty()) {
+                            addArticle_upload_progress!!.visibility = View.VISIBLE
+                            uploadImg(imgPath)
+                        } else {
+                            Toast.makeText(activity as Activity, "請選取照片", Toast.LENGTH_SHORT).show()
+                        }
                     } else {
-                        Toast.makeText(activity as Activity, "請選取照片", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(activity as Activity,"讀取圖片失敗", Toast.LENGTH_SHORT).show()
                     }
-                } else {
-                    Toast.makeText(activity as Activity,"讀取圖片失敗", Toast.LENGTH_SHORT).show()
                 }
+
             }
             ImagePicker.RESULT_ERROR -> Toast.makeText(activity as Activity, ImagePicker.getError(data), Toast.LENGTH_SHORT).show()
             else -> Toast.makeText(activity as Activity, "Task Cancelled", Toast.LENGTH_SHORT).show()

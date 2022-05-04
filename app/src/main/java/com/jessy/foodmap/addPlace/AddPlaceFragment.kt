@@ -197,7 +197,7 @@ class AddPlaceFragment : Fragment() {
 
     fun setTransportationSinner() {
 
-        val lunch = arrayListOf("請選擇交通工具", "步行", "公車", "捷運", "火車")
+        val lunch = arrayListOf("請選擇交通工具", "步行", "開車", "腳踏車", "火車")
         val adapter =
             ArrayAdapter(activity as Activity,
                 android.R.layout.simple_spinner_dropdown_item,
