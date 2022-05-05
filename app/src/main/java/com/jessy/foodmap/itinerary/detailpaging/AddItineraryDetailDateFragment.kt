@@ -24,19 +24,25 @@ import retrofit2.http.Query
 
 
 class AddItineraryDetailDateFragment(position: Int, journey: Journey) : Fragment() {
+    var totalDuration: Long = 0
+    var fromFKIP :String=""
+    var toMonas :String=""
+
     val index = position
     val journeyArg = journey
 
-    var totalDuration: Int = 0
-    private val viewModel: AddItineraryDtailDateViewModel by lazy {
-        ViewModelProvider(this).get(AddItineraryDtailDateViewModel::class.java)
-    }
+//    val fromFKIP = "25.039200200557467" + "," + "121.53668180769186"
+//    val toMonas = "25.04239495522209" + "," + "121.53291102384694"
+
+//
+//    private val viewModel: AddItineraryDtailDateViewModel by lazy {
+//        ViewModelProvider(this).get(AddItineraryDtailDateViewModel::class.java)
+//    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View? {
-        getApiResult()
         val binding = FragmentAddItineraryDetailDateBinding.inflate(inflater, container, false)
         binding.lifecycleOwner = viewLifecycleOwner
         val AddItineraryDtailDateViewModel = AddItineraryDtailDateViewModel(index, journeyArg)
@@ -49,65 +55,130 @@ class AddItineraryDetailDateFragment(position: Int, journey: Journey) : Fragment
 
         binding.detailRecyclerViewDate.adapter = adapter
 
-        AddItineraryDtailDateViewModel.placeLiveData.observe(viewLifecycleOwner, {
-            Log.v("viewModel.places", "${AddItineraryDtailDateViewModel.places}")
+        AddItineraryDtailDateViewModel.placeLiveData.observe(viewLifecycleOwner) {
+//           fromFKIP = it[0].latitude.toString() + ","+it[0].longitude.toString()
+//           toMonas = it[1].latitude.toString() + ","+ it[1].longitude.toString()
+
+            for( i in 0 until AddItineraryDtailDateViewModel.places.size-1){
+                fromFKIP = it[i].latitude.toString() + ","+it[i].longitude.toString()
+                toMonas = it[i+1].latitude.toString() + ","+ it[i+1].longitude.toString()
+                Log.v("i","a:$i")
+
+                Log.v("fromFKIP","$fromFKIP")
+                Log.v("toMonas","$toMonas")
+
+                val mode = when(AddItineraryDtailDateViewModel.places[i+1].transportation){
+                    1->"walking"
+                    2->"driving"
+                    3->"bicycling"
+                    4->"transit"
+                    else -> {
+                            Log.v("error","選擇錯誤")
+                    }
+                }
+                Log.v("transportation","${AddItineraryDtailDateViewModel.places[i+1].transportation}")
+                val info = (activity as MainActivity).applicationContext.packageManager
+                    .getApplicationInfo(
+                        (activity as MainActivity).packageName,
+                        PackageManager.GET_META_DATA
+                    )
+                val key = info.metaData[resources.getString(R.string.map_api_key_name)].toString()
+                Places.initialize(requireContext(), key)
+
+                val apiServices = RetrofitClient.apiServices(this)
+                Log.v("fromFKIP,toMonas","$fromFKIP + $toMonas")
+                apiServices.getDirection(mode as String, fromFKIP, toMonas, key)
+                    .enqueue(object : Callback<DirectionResponses> {
+                        override fun onResponse(
+                            call: Call<DirectionResponses>,
+                            response: Response<DirectionResponses>,
+                        ) {
+                            Log.v("response","${response}")
+                            val legs = response.body()!!.routes!![0]!!.legs!!
+                            for (leg in legs) {
+//                        Log.v("totalDuration",
+//                            "leg?.duration?.value = ${(leg?.duration?.value ?: 0)}")
+                                totalDuration += (leg?.duration?.value ?: 0)
+
+                                leg?.steps?.let { steps ->
+                                    for (step in steps) {
+//                                Log.v("totalDuration",
+//                                "step?.duration?.value = ${(step?.duration?.value ?: 0)}")
+                                        totalDuration += (step?.duration?.value ?: 0)
+                                    }
+                                }
+
+                            }
+                            AddItineraryDtailDateViewModel.places[i].trafficTime = totalDuration*1000
+//                    viewModel.places[0].trafficTime = totalDuration*1000
+                   Log.v("totalDuration*1000", "${totalDuration*1000}")
+
+                            Log.v("totalDuration", "$totalDuration")
+                        }
+
+                        override fun onFailure(call: Call<DirectionResponses>, t: Throwable) {
+                            Log.e("error", t.localizedMessage)
+                        }
+
+                    })
+            }
+
 
             adapter.submitList(AddItineraryDtailDateViewModel.places)
-        })
+        }
 
-
-        //adapter.submitList(viewModel.dataList1)
 
         return binding.root
 
     }
 
-
     fun getApiResult() {
-        val fromFKIP = "25.039200200557467" + "," + "121.53668180769186"
-        val toMonas = "25.04239495522209" + "," + "121.53291102384694"
-        val mode = "walking"
-        val info = (activity as MainActivity).applicationContext.packageManager
-            .getApplicationInfo(
-                (activity as MainActivity).packageName,
-                PackageManager.GET_META_DATA
-            )
-        val key = info.metaData[resources.getString(R.string.map_api_key_name)].toString()
-        Places.initialize(requireContext(), key)
-
-        val apiServices = RetrofitClient.apiServices(this)
-        apiServices.getDirection(mode, fromFKIP, toMonas, key)
-            .enqueue(object : Callback<DirectionResponses> {
-                override fun onResponse(
-                    call: Call<DirectionResponses>,
-                    response: Response<DirectionResponses>,
-                ) {
-
-                    val legs = response.body()!!.routes!![0]!!.legs!!
-
-                    for (leg in legs) {
-                        Log.v("totalDuration",
-                            "leg?.duration?.value = ${(leg?.duration?.value ?: 0)}")
-                        totalDuration += (leg?.duration?.value ?: 0)
-
-                        leg?.steps?.let { steps ->
-                            for (step in steps) {
-                                Log.v("totalDuration",
-                                    "step?.duration?.value = ${(step?.duration?.value ?: 0)}")
-                                totalDuration += (step?.duration?.value ?: 0)
-                            }
-                        }
-
-                    }
-                    Log.v("totalDuration", "$totalDuration")
-
-                }
-
-                override fun onFailure(call: Call<DirectionResponses>, t: Throwable) {
-                    Log.e("anjir error", t.localizedMessage)
-                }
-
-            })
+//        val mode = "walking"
+//        val info = (activity as MainActivity).applicationContext.packageManager
+//            .getApplicationInfo(
+//                (activity as MainActivity).packageName,
+//                PackageManager.GET_META_DATA
+//            )
+//        val key = info.metaData[resources.getString(R.string.map_api_key_name)].toString()
+//        Places.initialize(requireContext(), key)
+//
+//        val apiServices = RetrofitClient.apiServices(this)
+//        Log.v("fromFKIP,toMonas","$fromFKIP + $toMonas")
+//        apiServices.getDirection(mode, fromFKIP, toMonas, key)
+//            .enqueue(object : Callback<DirectionResponses> {
+//                override fun onResponse(
+//                    call: Call<DirectionResponses>,
+//                    response: Response<DirectionResponses>,
+//                ) {
+//                    Log.v("response","${response}")
+//                    val legs = response.body()!!.routes!![0]!!.legs!!
+//                    for (leg in legs) {
+////                        Log.v("totalDuration",
+////                            "leg?.duration?.value = ${(leg?.duration?.value ?: 0)}")
+//                        totalDuration += (leg?.duration?.value ?: 0)
+//
+//                        leg?.steps?.let { steps ->
+//                            for (step in steps) {
+////                                Log.v("totalDuration",
+////                                "step?.duration?.value = ${(step?.duration?.value ?: 0)}")
+//                                totalDuration += (step?.duration?.value ?: 0)
+//                            }
+//                        }
+//
+//                    }
+////                    viewModel.places[0].trafficTime = totalDuration*1000
+////                    Log.v("viewModel.places[0].trafficTime", "${viewModel.places[0].trafficTime}")
+//
+//                    Log.v("totalDuration", "$totalDuration")
+//                }
+//
+//                override fun onFailure(call: Call<DirectionResponses>, t: Throwable) {
+//                    Log.e("error", t.localizedMessage)
+//                }
+//
+//            })
+       // return  totalDuration
+  //      Log.v("totalDuration2","$totalDuration")
     }
 
     private interface ApiServices {

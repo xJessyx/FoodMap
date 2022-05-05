@@ -76,22 +76,26 @@ class AddPlaceFragment : Fragment() {
         binding.addPlaceSpSelectStartTime.setOnClickListener {
 
             val ca = Calendar.getInstance()
-            var mHour = ca[Calendar.HOUR_OF_DAY]
-            var mMinute = ca[Calendar.MINUTE]
+            var mStartHour = ca[Calendar.HOUR_OF_DAY]
+            var mStartMinute = ca[Calendar.MINUTE]
 
             val timePickerDialog = TimePickerDialog(
                 activity as Activity, TimePickerDialog.OnTimeSetListener { _, hourofDay, minute ->
-                    mHour = hourofDay
-                    mMinute = minute
-                    val mHourString = String.format("%02d", mHour)
-                    val mMinuteString = String.format("%02d", mMinute)
-                    val mTime = "${mHourString}:${mMinuteString}"
-                    val totalMillis = TimeUtil.DateToStamp(mTime, Locale.TAIWAN)
+                    mStartHour = hourofDay
+                    mStartMinute = minute
+                    val mHourStartString = String.format("%02d", mStartHour)
+                    val mMinuteStartString = String.format("%02d", mStartMinute)
+                    val mStartTime = "${mHourStartString}:${mMinuteStartString}"
+                    val totalMillis = TimeUtil.DateToStamp(mStartTime, Locale.TAIWAN)
+                    Log.v("totalMillis1","$totalMillis")
+                    binding.addPlaceSpSelectStartTime.setText(mStartTime)
+                    Log.v("totalMillis2","$totalMillis")
                     viewModel.startTime = totalMillis
+                    Log.v("totalMillis3","$totalMillis")
 
-                    binding.addPlaceSpSelectStartTime.setText(mTime)
+
                 },
-                mHour, mMinute, true
+                mStartHour, mStartMinute, true
             )
             timePickerDialog.show()
         }
@@ -99,8 +103,15 @@ class AddPlaceFragment : Fragment() {
             if ((viewModel.placeName != null) && (viewModel.daySinner != null) &&
                 (viewModel.transportationSinner != null) && (viewModel.startTime != null) && (viewModel.dwellTime != null)
             ) {
+
+
                 viewModel.addPlaceItem()
                 viewModel.addFireBasePlace()
+            }else{
+                Log.v("新增地點失敗","viewModel.placeName= ${viewModel.placeName},viewModel.daySinner= ${viewModel.daySinner}," +
+                        "viewModel.transportationSinner=${viewModel.transportationSinner},viewModel.startTime= ${viewModel.startTime}," +
+                        "viewModel.dwellTime=${viewModel.dwellTime}")
+
             }
 
         }
