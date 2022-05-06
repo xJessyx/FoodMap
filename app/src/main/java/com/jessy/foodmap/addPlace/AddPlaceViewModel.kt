@@ -31,7 +31,7 @@ class AddPlaceViewModel : ViewModel() {
     var dwellTime : Long? = null
     var placeName :String = ""
     var startTime : Long? = null
-    var trafficTime :Long? =3600000
+    var trafficTime :Long? =null
     var getAllJourney = mutableListOf<Journey>()
     var placeId = db.collection("places").document().id
     var journeyId :String = ""

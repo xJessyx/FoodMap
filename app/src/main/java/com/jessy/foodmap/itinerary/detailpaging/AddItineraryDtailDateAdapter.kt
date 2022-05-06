@@ -82,7 +82,7 @@ class AddItineraryDtailDateAdapter(val onClickListener: AddItineraryDtailDateAda
     ) {
 
         val item = getItem(position)
-        Log.v("當下item","${item.transportation}")
+        Log.v("當下item", "${item.transportation}")
 
         holder.itemView.setOnClickListener {
             onClickListener.onClick(item)
@@ -92,28 +92,33 @@ class AddItineraryDtailDateAdapter(val onClickListener: AddItineraryDtailDateAda
 
 
         //  val nextItem = getItem(position + 1).transportation
-            if (position == currentList.size - 1) {
-                holder.binding.itineraryDetailDateLine.visibility = View.GONE
-                holder.binding.itineraryDetailDateImgTransportation.visibility = View.GONE
+        if (position == currentList.size - 1) {
+            holder.binding.itineraryDetailDateLine.visibility = View.GONE
+            holder.binding.itineraryDetailDateImgTransportation.visibility = View.GONE
+            holder.binding.itineraryDetailDateTvTrafficTime.visibility = View.GONE
 
-            } else {
+        } else {
 
-                holder.binding.itineraryDetailDateLine.visibility = View.VISIBLE
-                val nextItem = getItem(position + 1).transportation
-                Log.v("nextItem1","$nextItem")
+            holder.binding.itineraryDetailDateLine.visibility = View.VISIBLE
 
-                when (nextItem) {
 
-                    1 -> holder.binding.itineraryDetailDateImgTransportation.setImageResource(R.drawable.walking)
-                    2 -> holder.binding.itineraryDetailDateImgTransportation.setImageResource(R.drawable.sedan)
-                    3 -> holder.binding.itineraryDetailDateImgTransportation.setImageResource(R.drawable.bicycle)
-                    4 -> holder.binding.itineraryDetailDateImgTransportation.setImageResource(R.drawable.train)
-                }
-                Log.v("nextItem2","$nextItem")
+            val nextItem = getItem(position + 1).transportation
+            Log.v("nextItem1", "$nextItem")
 
-                holder.binding.itineraryDetailDateImgTransportation.visibility = View.VISIBLE
+            when (nextItem) {
+
+                1 -> holder.binding.itineraryDetailDateImgTransportation.setImageResource(R.drawable.walking)
+                2 -> holder.binding.itineraryDetailDateImgTransportation.setImageResource(R.drawable.sedan)
+                3 -> holder.binding.itineraryDetailDateImgTransportation.setImageResource(R.drawable.bicycle)
+                4 -> holder.binding.itineraryDetailDateImgTransportation.setImageResource(R.drawable.train)
             }
+            Log.v("nextItem2", "$nextItem")
+            Log.v("item", "${item.trafficTime}")
 
+            holder.binding.itineraryDetailDateImgTransportation.visibility = View.VISIBLE
+            holder.binding.itineraryDetailDateTvTrafficTime.visibility = View.VISIBLE
+
+        }
 
 
     }
