@@ -14,6 +14,8 @@ import com.jessy.foodmap.R
 import com.jessy.foodmap.data.Journey
 import com.jessy.foodmap.databinding.FragmentMyItineraryPagingBinding
 import com.jessy.foodmap.itinerary.ItineraryDetailViewModel
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter
 
 class MyItineraryPagingFragment : Fragment() {
 
@@ -44,9 +46,36 @@ class MyItineraryPagingFragment : Fragment() {
             viewLifecycleOwner,
             Observer{
                 it?.let {
-                    findNavController().navigate(NavigationDirections.recommendPagingFragmentItineraryDetailFragment(it))
-                    Log.v("it","#${it}")
-                    Log.v("it.id","#${it.id}")
+//                    findNavController().navigate(NavigationDirections.recommendPagingFragmentItineraryDetailFragment(it))
+
+
+                    val today = LocalDate.now()
+                    val fmt = DateTimeFormatter.ofPattern("yyyy-MM-dd")
+                    val startDate= it.startDate
+                    val endDate= it.endDate
+                    val parseStartDate = LocalDate.parse(startDate, fmt)
+                    val parseEndDate = LocalDate.parse(endDate, fmt)
+
+
+                 //   findNavController().navigate(NavigationDirections.recommendPagingFragmentItineraryDetailFragment(it))
+
+                    if(today.isBefore(parseStartDate)) {
+
+                        findNavController().navigate(NavigationDirections.recommendPagingFragmentItineraryDetailFragment(it))
+
+                        Log.v("today< start","$today <  $parseStartDate")
+                    }else if(today.isAfter(parseEndDate)){
+                        findNavController().navigate(NavigationDirections.myItineraryPagingFragmentLtineraryDetailEndFragment(it))
+
+                        Log.v("today > end","$today >  $parseEndDate")
+
+                    }else{
+                        findNavController().navigate(NavigationDirections.recommendPagingFragmentItineraryDetailFragment(it))
+
+                        Log.v("start <today< end"," $parseStartDate < $today <  $parseEndDate ")
+
+                    }
+
 
                     viewModel.onDetailNavigated()
                 }

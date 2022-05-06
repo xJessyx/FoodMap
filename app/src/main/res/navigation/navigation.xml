@@ -80,6 +80,15 @@
         android:name="com.jessy.foodmap.home.addArticles.AddArticleFragment"
         android:label="AddArticleFragment" />
 
+    <fragment
+        android:id="@+id/ltineraryDetailEndFragment"
+        android:name="com.jessy.foodmap.itinerary.ltineraryDetailEndFragment"
+        android:label="ltineraryDetailEndFragment" >
+        <argument android:name="journeyKey"
+            app:argType="com.jessy.foodmap.data.Journey"
+            app:nullable="false"/>
+    </fragment>
+
 
     <action android:id="@+id/navigate_to_member_fragment" app:destination="@id/memberFragment"
         app:popUpTo="@id/navigation"
@@ -124,6 +133,10 @@
         app:popUpToInclusive="true" />
 
     <action android:id="@+id/detailFragment_addPlaceFragment" app:destination="@id/addPlaceFragment"
+        app:popUpTo="@id/navigation"
+        app:popUpToInclusive="true" />
+
+    <action android:id="@+id/myItineraryPagingFragment_ltineraryDetailEndFragment" app:destination="@id/ltineraryDetailEndFragment"
         app:popUpTo="@id/navigation"
         app:popUpToInclusive="true" />
 
