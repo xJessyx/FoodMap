@@ -117,7 +117,7 @@ class AddItineraryDetailDateFragment(position: Int, journey: Journey) : Fragment
 //                            db.collection("journeys").document(AddItineraryDtailDateViewModel.journeyItemId)
 //                                .collection("places")
 //                                .update("trafficTime", totalDuration*1000)
-
+                            Log.v("AddItineraryDtailDateViewModel.places","${AddItineraryDtailDateViewModel.places}")
                             adapter.submitList(AddItineraryDtailDateViewModel.places)
                             adapter.notifyDataSetChanged()
 
@@ -131,11 +131,9 @@ class AddItineraryDetailDateFragment(position: Int, journey: Journey) : Fragment
 
                     })
             }
-//            adapter.submitList(AddItineraryDtailDateViewModel.places)
-
+           adapter.submitList(AddItineraryDtailDateViewModel.places)
 
         }
-
 
         return binding.root
 

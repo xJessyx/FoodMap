@@ -99,6 +99,7 @@ class AddArticleFragment : Fragment() {
                 viewModel.addFireBaseArticle()
                 viewModel.addArticle.observe(viewLifecycleOwner){
                     it?.let {
+                        Toast.makeText(activity as Activity, "已新增成功!!!", Toast.LENGTH_SHORT).show()
                         findNavController().navigate(NavigationDirections.addArticleFragmentHomeFragment())
 
                     }

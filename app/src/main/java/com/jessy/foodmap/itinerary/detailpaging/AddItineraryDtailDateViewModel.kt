@@ -38,6 +38,8 @@ class AddItineraryDtailDateViewModel (position : Int,journeyArg: Journey): ViewM
 
                 }
                 _placeLiveData.value = places
+                Log.v("places","${places}")
+
             }
             .addOnFailureListener { exception ->
                 Log.d(ContentValues.TAG, "Error getting documents: ", exception)

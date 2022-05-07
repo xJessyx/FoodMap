@@ -169,6 +169,7 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/member_img"
+        android:textSize="18sp"
         app:tabSelectedTextColor="#31404E"
         app:tabIndicatorColor="#31404E"
         app:tabIndicatorHeight="4dp">

@@ -9,6 +9,12 @@
             type="com.jessy.foodmap.addPlace.AddPlaceViewModel" />
     </data>
 
+
+    <ScrollView
+        android:id="@+id/addItinerary_ScrollView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
     <androidx.constraintlayout.widget.ConstraintLayout
 
         android:layout_width="match_parent"
@@ -43,7 +49,7 @@
 
         <Spinner
             android:id="@+id/addPlace_sp_selectJourney"
-            android:layout_width="260dp"
+            android:layout_width="300dp"
             android:layout_height="50dp"
             android:layout_marginTop="32dp"
             android:background="@drawable/shape_round2"
@@ -53,9 +59,9 @@
 
         <Spinner
             android:id="@+id/addPlace_sp_selectDay"
-            android:layout_width="260dp"
+            android:layout_width="300dp"
             android:layout_height="50dp"
-            android:layout_marginTop="40dp"
+            android:layout_marginTop="32dp"
             android:background="@drawable/shape_round2"
             app:layout_constraintEnd_toEndOf="@+id/addPlace_sp_selectJourney"
             app:layout_constraintHorizontal_bias="0.0"
@@ -64,9 +70,9 @@
 
         <Spinner
             android:id="@+id/addPlace_sp_selectTransportation"
-            android:layout_width="260dp"
+            android:layout_width="300dp"
             android:layout_height="50dp"
-            android:layout_marginTop="40dp"
+            android:layout_marginTop="32dp"
             android:background="@drawable/shape_round2"
             app:layout_constraintEnd_toEndOf="@+id/addPlace_sp_selectDay"
             app:layout_constraintHorizontal_bias="0.0"
@@ -75,9 +81,9 @@
 
         <EditText
             android:id="@+id/addPlace_sp_selectDwellTime"
-            android:layout_width="260dp"
+            android:layout_width="300dp"
             android:layout_height="50dp"
-            android:layout_marginTop="40dp"
+            android:layout_marginTop="32dp"
             android:background="@drawable/shape_round2"
             android:hint="請輸入停留時間"
             android:gravity="center"
@@ -93,9 +99,9 @@ android:inputType="time"-->
 
         <EditText
             android:id="@+id/addPlace_sp_selectStartTime"
-            android:layout_width="260dp"
+            android:layout_width="300dp"
             android:layout_height="50dp"
-            android:layout_marginTop="40dp"
+            android:layout_marginTop="32dp"
             android:background="@drawable/shape_round2"
             android:hint="請輸入開始時間"
             android:gravity="center"
@@ -109,9 +115,9 @@ android:inputType="time"-->
 
         <Button
             android:id="@+id/addPlace_bt_submit"
-            android:layout_width="151dp"
-            android:layout_height="66dp"
-            android:layout_marginTop="56dp"
+            android:layout_width="150dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="48dp"
             android:background="@drawable/shape_round"
             android:text="送出"
             android:textColor="@color/white"
@@ -122,4 +128,6 @@ android:inputType="time"-->
             app:layout_constraintTop_toBottomOf="@+id/addPlace_sp_selectStartTime" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </ScrollView>
 </layout>

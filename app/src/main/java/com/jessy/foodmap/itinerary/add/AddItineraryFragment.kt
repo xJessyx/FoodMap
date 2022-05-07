@@ -82,6 +82,8 @@ class AddItineraryFragment : BottomSheetDialogFragment() {
                 viewModel.addFireBaseJourney()
                 viewModel.addItinerary.observe(viewLifecycleOwner){
                     it?.let {
+                        Toast.makeText(activity as Activity, "已新增成功!!!", Toast.LENGTH_SHORT).show()
+
                         findNavController().navigate(NavigationDirections.addItineraryFragmentToItineraryDetailFragment(it))
                         Log.v("it", "$it")
 

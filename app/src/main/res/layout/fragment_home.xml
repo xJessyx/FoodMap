@@ -36,6 +36,8 @@
         android:backgroundTint="#DFEAFF"
         android:contentDescription="submit"
         android:src="@drawable/add2"
+        android:elevation="16dp"
+        app:rippleColor="#fafcff"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
 

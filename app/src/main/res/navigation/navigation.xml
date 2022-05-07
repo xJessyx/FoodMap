@@ -143,7 +143,7 @@
         app:popUpTo="@id/navigation"
         app:popUpToInclusive="true" />
 
-    <action android:id="@+id/detailFragment_addPlaceFragment" app:destination="@id/addPlaceFragment"
+    <action android:id="@+id/detailFragment_AddPlaceFragment" app:destination="@id/addPlaceFragment"
         app:popUpTo="@id/navigation"
         app:popUpToInclusive="true" />
 
@@ -152,6 +152,10 @@
 <!--        app:popUpToInclusive="true" />-->
 
     <action android:id="@+id/myItineraryPagingFragment_itineraryDetailFragment" app:destination="@id/itineraryDetailFragment"
+        app:popUpTo="@id/navigation"
+        app:popUpToInclusive="true" />
+
+    <action android:id="@+id/addPlaceFragment_itineraryPlanningFragment" app:destination="@id/itineraryPlanningFragment"
         app:popUpTo="@id/navigation"
         app:popUpToInclusive="true" />
 

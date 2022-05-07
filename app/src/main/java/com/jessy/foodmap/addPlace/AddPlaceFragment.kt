@@ -13,8 +13,11 @@ import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Spinner
+import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import com.jessy.foodmap.MainActivity
+import com.jessy.foodmap.NavigationDirections
 import com.jessy.foodmap.databinding.FragmentAddPlaceBinding
 import java.util.*
 
@@ -103,14 +106,16 @@ class AddPlaceFragment : Fragment() {
             if ((viewModel.placeName != null) && (viewModel.daySinner != null) &&
                 (viewModel.transportationSinner != null) && (viewModel.startTime != null) && (viewModel.dwellTime != null)
             ) {
-
-
                 viewModel.addPlaceItem()
                 viewModel.addFireBasePlace()
+
+                Toast.makeText(activity as Activity, "已新增成功!!!", Toast.LENGTH_SHORT).show()
+                findNavController().navigate(NavigationDirections.addPlaceFragmentItineraryPlanningFragment())
+
+
             }else{
-                Log.v("新增地點失敗","viewModel.placeName= ${viewModel.placeName},viewModel.daySinner= ${viewModel.daySinner}," +
-                        "viewModel.transportationSinner=${viewModel.transportationSinner},viewModel.startTime= ${viewModel.startTime}," +
-                        "viewModel.dwellTime=${viewModel.dwellTime}")
+
+                Toast.makeText(activity as Activity, "有資料尚未填寫!!!", Toast.LENGTH_SHORT).show()
 
             }
 
@@ -119,8 +124,6 @@ class AddPlaceFragment : Fragment() {
         viewModel.addAllJourney.observe(viewLifecycleOwner) {
             setJourneySpinner()
             //setDaySinner()
-
-
             setTransportationSinner()
         }
 
