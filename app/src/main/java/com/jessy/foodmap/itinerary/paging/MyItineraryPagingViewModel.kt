@@ -29,6 +29,7 @@ class MyItineraryPagingViewModel : ViewModel() {
 
         db.collection("journeys")
             .whereEqualTo("userId","32fRAA8nlkV2gAojqHB1")
+            .whereEqualTo("share",false)
             .orderBy("startDate", Query.Direction.DESCENDING)
             .get()
                 .addOnSuccessListener { result ->

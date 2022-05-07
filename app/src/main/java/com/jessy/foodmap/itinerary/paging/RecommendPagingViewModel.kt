@@ -27,7 +27,8 @@ class RecommendPagingViewModel : ViewModel() {
 
     fun getFireBaseJourney() {
         db.collection("journeys")
-            .whereEqualTo("userId","wTPHw6wltIsXl4avWJ1m")
+            .whereEqualTo("share", true)
+            //.whereEqualTo("userId","wTPHw6wltIsXl4avWJ1m")
             .orderBy("startDate", Query.Direction.DESCENDING)
             .get()
             .addOnSuccessListener { result ->

@@ -1,5 +1,6 @@
 package com.jessy.foodmap.itinerary.detailpaging
 
+import android.annotation.SuppressLint
 import android.content.pm.PackageManager
 import android.os.Bundle
 import android.util.Log
@@ -9,6 +10,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
 import com.google.android.libraries.places.api.Places
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
 import com.jessy.foodmap.MainActivity
 import com.jessy.foodmap.R
 import com.jessy.foodmap.data.Journey
@@ -29,6 +32,7 @@ class AddItineraryDetailDateFragment(position: Int, journey: Journey) : Fragment
     var toMonas :String=""
     val index = position
     val journeyArg = journey
+    val db = Firebase.firestore
 
 //
 //    private val viewModel: AddItineraryDtailDateViewModel by lazy {
@@ -82,6 +86,7 @@ class AddItineraryDetailDateFragment(position: Int, journey: Journey) : Fragment
                 val apiServices = RetrofitClient.apiServices(this)
                 apiServices.getDirection(mode as String, fromFKIP, toMonas, key)
                     .enqueue(object : Callback<DirectionResponses> {
+                        @SuppressLint("NotifyDataSetChanged")
                         override fun onResponse(
                             call: Call<DirectionResponses>,
                             response: Response<DirectionResponses>,
@@ -109,8 +114,13 @@ class AddItineraryDetailDateFragment(position: Int, journey: Journey) : Fragment
                    Log.v("totalDuration*1000", "AddItineraryDtailDateViewModel.places[$i]= ${AddItineraryDtailDateViewModel.places[i].trafficTime}")
 
                             Log.v("totalDuration*1000", "AddItineraryDtailDateViewModel.places= ${AddItineraryDtailDateViewModel.places}")
+//                            db.collection("journeys").document(AddItineraryDtailDateViewModel.journeyItemId)
+//                                .collection("places")
+//                                .update("trafficTime", totalDuration*1000)
+
                             adapter.submitList(AddItineraryDtailDateViewModel.places)
                             adapter.notifyDataSetChanged()
+
 
                             Log.v("totalDuration", "$totalDuration")
                         }

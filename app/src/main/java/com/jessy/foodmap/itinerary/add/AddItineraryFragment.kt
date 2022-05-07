@@ -1,4 +1,4 @@
-package com.jessy.foodmap.itinerary
+package com.jessy.foodmap.itinerary.add
 
 import android.app.Activity
 import android.app.DatePickerDialog
@@ -28,7 +28,6 @@ import com.jessy.foodmap.MainActivity
 import com.jessy.foodmap.NavigationDirections
 import com.jessy.foodmap.R
 import com.jessy.foodmap.databinding.FragmentAddItineraryBinding
-import com.jessy.foodmap.home.addArticles.getFilePathFromContentUri
 import java.io.File
 
 

@@ -1,4 +1,4 @@
-package com.jessy.foodmap.itinerary
+package com.jessy.foodmap.itinerary.add
 
 import android.content.ContentValues.TAG
 import android.util.Log
@@ -59,6 +59,7 @@ class AddItineraryViewModel : ViewModel() {
             endDate =  itineraryEndDate.value!!,
             image = itineraryImage ?: "",
             totalDay = itineraryTotalDay,
+            share = false
         )
         _addItinerary.value = data
 

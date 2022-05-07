@@ -29,7 +29,7 @@ class MyItineraryPagingFragment : Fragment() {
     ): View? {
 
         val binding = FragmentMyItineraryPagingBinding.inflate(inflater, container, false)
-        binding.myitineraryRecyclerView.adapter = RecommendPagingAdapter(RecommendPagingAdapter.OnClickListener{
+        binding.myitineraryRecyclerView.adapter = MyItineraryPagingAdapter(MyItineraryPagingAdapter.OnClickListener{
             viewModel.navigateToDetailDate(it)
         }
         )
@@ -39,42 +39,42 @@ class MyItineraryPagingFragment : Fragment() {
         viewModel.getFireBaseJourney()
         viewModel.getAllJourneyLiveData.observe(viewLifecycleOwner){
 
-            (binding.myitineraryRecyclerView.adapter as RecommendPagingAdapter).submitList(viewModel.getAllJourney)
+            (binding.myitineraryRecyclerView.adapter as MyItineraryPagingAdapter).submitList(viewModel.getAllJourney)
+            (binding.myitineraryRecyclerView.adapter as MyItineraryPagingAdapter).notifyDataSetChanged()
+
         }
 
         viewModel.navigateToDetailDate.observe(
             viewLifecycleOwner,
             Observer{
                 it?.let {
-//                    findNavController().navigate(NavigationDirections.recommendPagingFragmentItineraryDetailFragment(it))
 
 
-                    val today = LocalDate.now()
-                    val fmt = DateTimeFormatter.ofPattern("yyyy-MM-dd")
-                    val startDate= it.startDate
-                    val endDate= it.endDate
-                    val parseStartDate = LocalDate.parse(startDate, fmt)
-                    val parseEndDate = LocalDate.parse(endDate, fmt)
+                    findNavController().navigate(NavigationDirections.myItineraryPagingFragmentItineraryDetailFragment(it))
 
+//                    val today = LocalDate.now()
+//                    val fmt = DateTimeFormatter.ofPattern("yyyy-MM-dd")
+//                    val startDate= it.startDate
+//                    val endDate= it.endDate
+//                    val parseStartDate = LocalDate.parse(startDate, fmt)
+//                    val parseEndDate = LocalDate.parse(endDate, fmt)
 
-                 //   findNavController().navigate(NavigationDirections.recommendPagingFragmentItineraryDetailFragment(it))
-
-                    if(today.isBefore(parseStartDate)) {
-
-                        findNavController().navigate(NavigationDirections.recommendPagingFragmentItineraryDetailFragment(it))
-
-                        Log.v("today< start","$today <  $parseStartDate")
-                    }else if(today.isAfter(parseEndDate)){
-                        findNavController().navigate(NavigationDirections.myItineraryPagingFragmentLtineraryDetailEndFragment(it))
-
-                        Log.v("today > end","$today >  $parseEndDate")
-
-                    }else{
-                        findNavController().navigate(NavigationDirections.recommendPagingFragmentItineraryDetailFragment(it))
-
-                        Log.v("start <today< end"," $parseStartDate < $today <  $parseEndDate ")
-
-                    }
+//                    if(today.isBefore(parseStartDate)) {
+//
+//                        findNavController().navigate(NavigationDirections.myItineraryPagingFragmentItineraryDetailFragment(it))
+//
+//                        Log.v("today< start","$today <  $parseStartDate")
+//                    }else if(today.isAfter(parseEndDate)){
+//                        findNavController().navigate(NavigationDirections.myItineraryPagingFragmentItineraryDetailEndFragment(it))
+//
+//                        Log.v("today > end","$today >  $parseEndDate")
+//
+//                    }else{
+//                        findNavController().navigate(NavigationDirections.myItineraryPagingFragmentItineraryDetailFragment(it))
+//
+//                        Log.v("start <today< end"," $parseStartDate < $today <  $parseEndDate ")
+//
+//                    }
 
 
                     viewModel.onDetailNavigated()

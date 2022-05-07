@@ -48,7 +48,7 @@
     </fragment>
     <dialog
         android:id="@+id/addItineraryFragment"
-        android:name="com.jessy.foodmap.itinerary.AddItineraryFragment"
+        android:name="com.jessy.foodmap.itinerary.add.AddItineraryFragment"
         android:label="AddItineraryFragment"
 />
     <dialog
@@ -80,14 +80,25 @@
         android:name="com.jessy.foodmap.home.addArticles.AddArticleFragment"
         android:label="AddArticleFragment" />
 
-    <fragment
-        android:id="@+id/ltineraryDetailEndFragment"
-        android:name="com.jessy.foodmap.itinerary.ltineraryDetailEndFragment"
-        android:label="ltineraryDetailEndFragment" >
-        <argument android:name="journeyKey"
-            app:argType="com.jessy.foodmap.data.Journey"
-            app:nullable="false"/>
-    </fragment>
+<!--    <fragment-->
+<!--        android:id="@+id/itineraryDetailEndFragment"-->
+<!--        android:name="com.jessy.foodmap.itinerary.end.ItineraryDetailEndFragment"-->
+<!--        android:label="itineraryDetailEndFragment" >-->
+
+<!--        <argument android:name="journeyEndKey"-->
+<!--            app:argType="com.jessy.foodmap.data.Journey"-->
+<!--            app:nullable="false"/>-->
+<!--    </fragment>-->
+
+<!--    <fragment-->
+<!--        android:id="@+id/itineraryDetailRecommendEndFragment"-->
+<!--        android:name="com.jessy.foodmap.itinerary.end.ItineraryDetailRecommendEndFragment"-->
+<!--        android:label="ItineraryDetailRecommendEndFragment" >-->
+
+<!--    <argument android:name="journeyRecommendEndKey"-->
+<!--        app:argType="com.jessy.foodmap.data.Journey"-->
+<!--        app:nullable="false"/>-->
+<!--    </fragment>-->
 
 
     <action android:id="@+id/navigate_to_member_fragment" app:destination="@id/memberFragment"
@@ -116,9 +127,9 @@
         app:popUpTo="@id/navigation"
         app:popUpToInclusive="true" />
 
-    <action android:id="@+id/recommendPagingFragment_itineraryDetailFragment" app:destination="@id/itineraryDetailFragment"
-        app:popUpTo="@id/navigation"
-        app:popUpToInclusive="true" />
+<!--    <action android:id="@+id/recommendPagingFragment_itineraryDetailRecommendEndFragment" app:destination="@id/itineraryDetailRecommendEndFragment"-->
+<!--        app:popUpTo="@id/navigation"-->
+<!--        app:popUpToInclusive="true" />-->
 
     <action android:id="@+id/addItineraryDetailDateFragment_foodMapSearchFragment" app:destination="@id/foodMapSearchFragment"
         app:popUpTo="@id/navigation"
@@ -136,7 +147,11 @@
         app:popUpTo="@id/navigation"
         app:popUpToInclusive="true" />
 
-    <action android:id="@+id/myItineraryPagingFragment_ltineraryDetailEndFragment" app:destination="@id/ltineraryDetailEndFragment"
+<!--    <action android:id="@+id/myItineraryPagingFragment_itineraryDetailEndFragment" app:destination="@id/itineraryDetailEndFragment"-->
+<!--        app:popUpTo="@id/navigation"-->
+<!--        app:popUpToInclusive="true" />-->
+
+    <action android:id="@+id/myItineraryPagingFragment_itineraryDetailFragment" app:destination="@id/itineraryDetailFragment"
         app:popUpTo="@id/navigation"
         app:popUpToInclusive="true" />
 

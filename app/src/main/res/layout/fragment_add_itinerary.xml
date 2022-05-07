@@ -6,7 +6,7 @@
     <data>
             <variable
                 name="viewModel"
-                type="com.jessy.foodmap.itinerary.AddItineraryViewModel" />
+                type="com.jessy.foodmap.itinerary.add.AddItineraryViewModel" />
     </data>
 
 <androidx.constraintlayout.widget.ConstraintLayout
@@ -26,7 +26,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@drawable/shape_sheet_dialog_bg"
-    tools:context=".itinerary.AddItineraryFragment">
+    tools:context=".itinerary.add.AddItineraryFragment">
 
     <TextView
         android:id="@+id/addItinerary_title"

@@ -44,7 +44,4 @@ class AddItineraryDtailDateViewModel (position : Int,journeyArg: Journey): ViewM
             }
     }
 
-
-
-
 }

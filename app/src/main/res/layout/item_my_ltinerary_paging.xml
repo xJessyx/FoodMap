@@ -35,12 +35,12 @@
 
 
                 <ImageView
-                        android:id="@+id/recommend_img"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:scaleType="centerCrop"
-                        app:imageUrl="@{journey.image}"/>
-<!--                android:alpha="0.6"-->
+                    android:id="@+id/recommend_img"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="centerCrop"
+                    app:imageUrl="@{journey.image}"/>
+                <!--                android:alpha="0.6"-->
 
                 <FrameLayout
                     android:id="@+id/frameLayout"
@@ -125,6 +125,18 @@
                     app:layout_constraintTop_toBottomOf="@+id/recommend_itineraryStartDate"
                     tools:text="ysssssssssssa" />
 
+                <TextView
+                    android:id="@+id/recommend_status"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginBottom="16dp"
+                    android:text="@{String.valueOf(journey.status)}"
+                    android:textColor="@color/white"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    tools:text="進行中" />
 
 
             </androidx.constraintlayout.widget.ConstraintLayout>

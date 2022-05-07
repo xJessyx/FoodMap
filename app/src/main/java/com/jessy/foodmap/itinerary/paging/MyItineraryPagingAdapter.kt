@@ -1,24 +1,19 @@
 package com.jessy.foodmap.itinerary.paging
 
-import android.icu.util.Calendar
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.jessy.foodmap.data.Article
 import com.jessy.foodmap.data.Journey
-import com.jessy.foodmap.databinding.ItemRecommendPagingBinding
-import com.jessy.foodmap.home.HomeAdapter
-import java.time.LocalDate
-import java.time.format.DateTimeFormatter
+import com.jessy.foodmap.databinding.ItemMyLtineraryPagingBinding
 
-class RecommendPagingAdapter(private val onClickListener: OnClickListener) :
-    ListAdapter<Journey, RecommendPagingAdapter.RecommendPagingViewHolder>(
-        RecommendPagingAdapter.DiffCallback()) {
+class MyItineraryPagingAdapter (private val onClickListener: OnClickListener) :
+    ListAdapter<Journey, MyItineraryPagingAdapter.MyItineraryPagingViewHolder>(
+        MyItineraryPagingAdapter.DiffCallback()) {
 
-    class RecommendPagingViewHolder private constructor(var binding: ItemRecommendPagingBinding) :
+    class MyItineraryPagingViewHolder private constructor(var binding: ItemMyLtineraryPagingBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(journey: Journey) {
@@ -28,21 +23,21 @@ class RecommendPagingAdapter(private val onClickListener: OnClickListener) :
         }
 
         companion object {
-            fun from(parent: ViewGroup): RecommendPagingViewHolder {
+            fun from(parent: ViewGroup): MyItineraryPagingViewHolder {
                 val layoutInflater = LayoutInflater.from(parent.context)
-                val binding = ItemRecommendPagingBinding.inflate(layoutInflater, parent, false)
-                return RecommendPagingViewHolder(binding)
+                val binding = ItemMyLtineraryPagingBinding.inflate(layoutInflater, parent, false)
+                return MyItineraryPagingViewHolder(binding)
             }
         }
     }
 
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecommendPagingViewHolder {
-        return RecommendPagingViewHolder.from(parent)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyItineraryPagingViewHolder {
+        return MyItineraryPagingViewHolder.from(parent)
 
     }
 
-    override fun onBindViewHolder(holder: RecommendPagingViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: MyItineraryPagingViewHolder, position: Int) {
 
         val item = getItem(position)
 
@@ -51,10 +46,14 @@ class RecommendPagingAdapter(private val onClickListener: OnClickListener) :
         if (item != null) {
             holder.itemView.setOnClickListener {
                 onClickListener.onClick(item)
-                Log.v("item in ", "$item")
             }
 
-            holder.bind(item)
+           holder.bind(item)
+            when (item.status) {
+                0 -> holder.binding.recommendStatus.setText("規劃中")
+                1 -> holder.binding.recommendStatus.setText("進行中")
+                2 -> holder.binding.recommendStatus.setText("已結束")
+            }
 
         }
 
