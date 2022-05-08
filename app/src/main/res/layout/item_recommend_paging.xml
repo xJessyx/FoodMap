@@ -118,12 +118,12 @@
                     android:layout_marginTop="8dp"
                     android:background="@drawable/shape_round2"
                     android:gravity="center"
-                    android:text="@{journey.userId}"
+                    android:text="ya"
                     android:textColor="#292929"
                     android:textSize="20sp"
                     app:layout_constraintStart_toStartOf="@+id/recommend_itineraryStartDate"
                     app:layout_constraintTop_toBottomOf="@+id/recommend_itineraryStartDate"
-                    tools:text="ysssssssssssa" />
+                    tools:text="ya" />
 
 
 

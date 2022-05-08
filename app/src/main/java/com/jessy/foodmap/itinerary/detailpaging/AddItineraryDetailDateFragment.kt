@@ -94,21 +94,20 @@ class AddItineraryDetailDateFragment(position: Int, journey: Journey) : Fragment
                             Log.v("response  "," [$fromFKIP,$toMonas,mode as String]=${response}")
                             val legs = response.body()!!.routes!![0]!!.legs!!
                             var totalDuration: Long = 0
-
-                            for (leg in legs) {
-//                        Log.v("totalDuration",
-//                            "leg?.duration?.value = ${(leg?.duration?.value ?: 0)}")
-                                totalDuration += (leg?.duration?.value ?: 0)
-
-//                                leg?.steps?.let { steps ->
-//                                    for (step in steps) {
-////                                Log.v("totalDuration",
-////                                "step?.duration?.value = ${(step?.duration?.value ?: 0)}")
-//                                        totalDuration += (step?.duration?.value ?: 0)
-//                                    }
-//                                }
-
+//
+                            if(response.body()!!.routes?.size != 0){
+                                for (leg in legs) {
+                                    totalDuration += (leg?.duration?.value ?: 0)
+                                }
                             }
+                            else{
+                                totalDuration = legs.get(0)!!.duration!!.value!!.toLong()
+                            }
+
+//                            if(legs.isNotEmpty()){
+//                                totalDuration = legs[0]?.duration?.value?.toLong() ?: 0
+//                            }
+
                       AddItineraryDtailDateViewModel.places[i].trafficTime = totalDuration*1000
                    Log.v("totalDuration*1000", "places[$i]= ${totalDuration*1000}")
                    Log.v("totalDuration*1000", "AddItineraryDtailDateViewModel.places[$i]= ${AddItineraryDtailDateViewModel.places[i].trafficTime}")

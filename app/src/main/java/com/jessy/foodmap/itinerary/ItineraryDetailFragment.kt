@@ -68,7 +68,9 @@ class ItineraryDetailFragment : BottomSheetDialogFragment() {
                 binding.itineraryDetailFabBtn.visibility = View.GONE
                 binding.itineraryDetailShare.visibility = View.VISIBLE
                 binding.itineraryDetailSwitch.visibility = View.VISIBLE
-//            checkSwitchStatus()
+                db.collection("journeys").document(journeyArg.id)
+                    .update("status", 2)
+
                 binding.itineraryDetailSwitch.setOnClickListener {
                     if (binding.itineraryDetailSwitch.isChecked) {
 //                EndSwitch.setBackgroundColor(Color.DKGRAY)
@@ -89,7 +91,8 @@ class ItineraryDetailFragment : BottomSheetDialogFragment() {
             } else {
                 binding.itineraryDetailFabBtn.visibility = View.VISIBLE
                 Log.v("start <today< end", " $parseStartDate < $today <  $parseEndDate ")
-
+                db.collection("journeys").document(journeyArg.id)
+                    .update("status", 1)
             }
         }
 

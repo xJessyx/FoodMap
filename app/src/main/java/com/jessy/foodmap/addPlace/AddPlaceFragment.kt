@@ -46,10 +46,10 @@ class AddPlaceFragment : Fragment() {
         viewModel.getAllJourney()
         val storeInformationArg = AddPlaceFragmentArgs.fromBundle(requireArguments()).storeKey
 
-        binding.addPlaceTvPlaceName.text = storeInformationArg!!.storeTitle
+        binding.addPlaceTvPlaceName.text = storeInformationArg.storeTitle
         viewModel.placeName = storeInformationArg.storeTitle
-        viewModel.latitude = storeInformationArg.storeLatLng!!.latitude
-        viewModel.longitude = storeInformationArg.storeLatLng!!.longitude
+        viewModel.latitude = storeInformationArg.storeLatLng?.latitude
+        viewModel.longitude = storeInformationArg.storeLatLng?.longitude
 
         binding.addPlaceSpSelectDwellTime.setOnClickListener {
 
@@ -103,8 +103,7 @@ class AddPlaceFragment : Fragment() {
             timePickerDialog.show()
         }
         binding.addPlaceBtSubmit.setOnClickListener {
-            if ((viewModel.placeName != null) && (viewModel.daySinner != null) &&
-                (viewModel.transportationSinner != null) && (viewModel.startTime != null) && (viewModel.dwellTime != null)
+            if ((viewModel.startTime != null) && (viewModel.dwellTime != null)
             ) {
                 viewModel.addPlaceItem()
                 viewModel.addFireBasePlace()

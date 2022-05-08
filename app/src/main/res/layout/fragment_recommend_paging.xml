@@ -20,6 +20,7 @@
         android:id="@+id/recommend_recyclerView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginRight="16dp"
         android:orientation="vertical"
         android:foregroundGravity="center"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"

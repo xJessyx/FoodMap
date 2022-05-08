@@ -37,19 +37,18 @@ class LoginMainActivityViewModel:  ViewModel() {
     }
 
     fun addFireBaseUser(){
-        val userObject = addUser.value
-
-        if (userObject != null) {
-            db.collection("users").document(userDocumentId)
-                .set(userObject)
-                .addOnSuccessListener {
-                    Log.d(ContentValues.TAG, "DocumentSnapshot successfull")
-                }
-                .addOnFailureListener { e ->
-                    Log.w(ContentValues.TAG, "Error adding document", e)
-                }
-        }
-
+//        val userObject = addUser.value
+//
+//        if (userObject != null) {
+//            db.collection("users").document("32fRAA8nlkV2gAojqHB1")
+//                .set(userObject)
+//                .addOnSuccessListener {
+//                    Log.d(ContentValues.TAG, "DocumentSnapshot successfull")
+//                }
+//                .addOnFailureListener { e ->
+//                    Log.w(ContentValues.TAG, "Error adding document", e)
+//                }
+//        }
 
     }
 

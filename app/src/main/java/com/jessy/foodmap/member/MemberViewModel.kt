@@ -21,7 +21,7 @@ class MemberViewModel: ViewModel() {
 
     fun getFireBaseUser(){
         db.collection("users")
-            .whereEqualTo("id","iPRMIsnEEqDLN8e92u1H")
+            .whereEqualTo("id","32fRAA8nlkV2gAojqHB1")
             .get()
             .addOnSuccessListener { result ->
                 for (document in result) {

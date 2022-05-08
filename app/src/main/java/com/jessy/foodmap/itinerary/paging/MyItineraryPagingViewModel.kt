@@ -25,6 +25,8 @@ class MyItineraryPagingViewModel : ViewModel() {
         get() = _navigateToDetailDate
 
 
+
+
     fun getFireBaseJourney() {
 
         db.collection("journeys")

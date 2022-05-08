@@ -1,5 +1,6 @@
 package com.jessy.foodmap.itinerary.paging
 
+import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -36,9 +37,53 @@ class MyItineraryPagingFragment : Fragment() {
         binding.lifecycleOwner = viewLifecycleOwner
         binding.viewModel = viewModel
 
-        viewModel.getFireBaseJourney()
-        viewModel.getAllJourneyLiveData.observe(viewLifecycleOwner){
+//        val today = LocalDate.now()
+//        val fmt = DateTimeFormatter.ofPattern("yyyy-MM-dd")
+//
+//        val parseStartDate = LocalDate.parse(viewModel.getAllJourney.startDate, fmt)
+//        val parseEndDate = LocalDate.parse(journeyArg.endDate, fmt)
+//
+//        if(journeyArg.userId == "32fRAA8nlkV2gAojqHB1" && journeyArg.share == false) {
+//            if (today.isBefore(parseStartDate)) {
+//                binding.itineraryDetailFabBtn.visibility = View.VISIBLE
+//                Log.v("today< start", "$today <  $parseStartDate")
+//
+//            } else if (today.isAfter(parseEndDate)) {
+//                binding.itineraryDetailFabBtn.visibility = View.GONE
+//                binding.itineraryDetailShare.visibility = View.VISIBLE
+//                binding.itineraryDetailSwitch.visibility = View.VISIBLE
+//                db.collection("journeys").document(journeyArg.id)
+//                    .update("status", 2)
+//
+//                binding.itineraryDetailSwitch.setOnClickListener {
+//                    if (binding.itineraryDetailSwitch.isChecked) {
+////                EndSwitch.setBackgroundColor(Color.DKGRAY)
+//                        binding.itineraryDetailSwitch.setTextColor(Color.WHITE)
+//                        db.collection("journeys").document(journeyArg.id)
+//                            .update("share", true)
+//
+//                    } else {
+//                        binding.itineraryDetailSwitch.setBackgroundColor(Color.WHITE)
+//                        binding.itineraryDetailSwitch.setTextColor(Color.BLACK)
+//                        db.collection("journeys").document(journeyArg.id)
+//                            .update("share", false)
+//                    }
+//                }
+//
+//                Log.v("today > end", "$today >  $parseEndDate")
+//
+//            } else {
+//                binding.itineraryDetailFabBtn.visibility = View.VISIBLE
+//                Log.v("start <today< end", " $parseStartDate < $today <  $parseEndDate ")
+//                db.collection("journeys").document(journeyArg.id)
+//                    .update("status", 1)
+//            }
+//        }
+//
 
+        viewModel.getFireBaseJourney()
+
+        viewModel.getAllJourneyLiveData.observe(viewLifecycleOwner){
             (binding.myitineraryRecyclerView.adapter as MyItineraryPagingAdapter).submitList(viewModel.getAllJourney)
             (binding.myitineraryRecyclerView.adapter as MyItineraryPagingAdapter).notifyDataSetChanged()
 
@@ -86,5 +131,6 @@ class MyItineraryPagingFragment : Fragment() {
         return binding.root
 
     }
+
 
 }
