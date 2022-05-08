@@ -8,198 +8,226 @@
 
     </data>
 
-<androidx.constraintlayout.widget.ConstraintLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
 
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".member.MemberFragment">
-
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/member_toolbar"
         android:layout_width="match_parent"
-        android:layout_height="55dp"
-        android:textSize="16sp"
-        android:scaleType="centerCrop"
-        android:textAlignment="center"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_weight="1">
+        android:layout_height="match_parent"
+        tools:context=".member.MemberFragment">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/member_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:scaleType="centerCrop"
+            android:textAlignment="center"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_weight="1">
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:fontFamily="@font/smallcase"
+                android:text="Member"
+                android:textColor="#381100"
+                android:textSize="50sp"
+                android:textStyle="bold" />
+
+        </androidx.appcompat.widget.Toolbar>
+
+        <ImageView
+            android:id="@+id/member_img"
+            android:layout_width="146dp"
+            android:layout_height="143dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/shape_round3"
+            android:src="@drawable/person_man"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/member_toolbar" />
+
+        <TextView
+            android:id="@+id/member_tv_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:fontFamily="@font/smallcase"
+            android:text="name："
+            android:textColor="#333333"
+            android:textSize="20sp"
+            app:layout_constraintStart_toEndOf="@+id/member_img"
+            app:layout_constraintTop_toTopOf="@+id/member_img"
+            tools:text="name：" />
 
 
         <TextView
+            android:id="@+id/member_tv_gender"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Member"
-            android:textColor="#381100"
-            android:layout_gravity="center"
+            android:layout_marginTop="8dp"
             android:fontFamily="@font/smallcase"
-            android:textSize="50sp"
-            android:textStyle="bold"
-            />
+            android:text="gnetder:"
+            android:textColor="#333333"
+            android:textSize="20sp"
+            app:layout_constraintStart_toStartOf="@+id/member_email_name"
+            app:layout_constraintTop_toBottomOf="@+id/member_email_name"
+            tools:text="gnetder:" />
 
-    </androidx.appcompat.widget.Toolbar>
+        <TextView
+            android:id="@+id/member_tv_age"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:fontFamily="@font/smallcase"
+            android:text="age："
+            android:textColor="#333333"
+            android:textSize="20sp"
+            app:layout_constraintStart_toStartOf="@+id/member_tv_gender"
+            app:layout_constraintTop_toBottomOf="@+id/member_tv_gender"
+            tools:text="age：" />
 
-    <ImageView
-        android:id="@+id/member_img"
-        android:layout_width="146dp"
-        android:layout_height="143dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:background="@drawable/shape_round3"
-       android:src="@drawable/person_man"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/member_toolbar" />
-
-    <TextView
-        android:id="@+id/member_tv_name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="35dp"
-        android:textSize="30sp"
-        android:fontFamily="@font/smallcase"
-        android:textColor="#333333"
-        app:layout_constraintStart_toEndOf="@+id/member_img"
-        app:layout_constraintTop_toTopOf="@+id/member_img"
-        tools:text="name："
-        android:text="name："/>
-
-
-    <TextView
-        android:id="@+id/member_tv_gender"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:text="gnetder:"
-        android:textColor="#333333"
-        android:textSize="30sp"
-        android:fontFamily="@font/smallcase"
-        app:layout_constraintStart_toStartOf="@+id/member_tv_name"
-        app:layout_constraintTop_toBottomOf="@+id/member_tv_name"
-        tools:text="gnetder:" />
-
-    <TextView
-        android:id="@+id/member_tv_age"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="30sp"
-        android:fontFamily="@font/smallcase"
-        android:layout_marginTop="10dp"
-        app:layout_constraintStart_toStartOf="@+id/member_tv_gender"
-        app:layout_constraintTop_toBottomOf="@+id/member_tv_gender"
-        tools:text="age："
-        android:textColor="#333333"
-        android:text="age："
-        />
-
-    <TextView
-        android:id="@+id/member_tv_grade"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="30sp"
-        android:fontFamily="@font/smallcase"
-        android:layout_marginTop="10dp"
-        app:layout_constraintStart_toStartOf="@+id/member_tv_age"
-        app:layout_constraintTop_toBottomOf="@+id/member_tv_age"
-        android:text="level："
-        android:textColor="#333333"
-        tools:text="level：" />
+        <TextView
+            android:id="@+id/member_tv_grade"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:fontFamily="@font/smallcase"
+            android:text="level："
+            android:textColor="#333333"
+            android:textSize="20sp"
+            app:layout_constraintStart_toStartOf="@+id/member_tv_age"
+            app:layout_constraintTop_toBottomOf="@+id/member_tv_age"
+            tools:text="level：" />
 
 
-    <TextView
-        android:id="@+id/member_tv_name_person"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="12dp"
-        android:textSize="25sp"
-        android:fontFamily="@font/smallcase"
-        android:textColor="#333333"
-        app:layout_constraintBottom_toBottomOf="@+id/member_tv_name"
-        app:layout_constraintStart_toEndOf="@+id/member_tv_name"
-        app:layout_constraintTop_toTopOf="@+id/member_tv_name"
-        android:text="小纖女"
-        tools:text="小纖女" />
+        <TextView
+            android:id="@+id/member_tv_name_person"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:fontFamily="@font/smallcase"
+            android:textColor="#333333"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toBottomOf="@+id/member_tv_name"
+            app:layout_constraintStart_toEndOf="@+id/member_tv_name"
+            app:layout_constraintTop_toTopOf="@+id/member_tv_name"
+            tools:text="小纖女" />
 
-    <TextView
-        android:id="@+id/member_tv_gender_person"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="25sp"
-        android:fontFamily="@font/smallcase"
-        android:text="MAN"
-        android:textColor="#333333"
-        app:layout_constraintBottom_toBottomOf="@+id/member_tv_gender"
-        app:layout_constraintStart_toStartOf="@+id/member_tv_name_person"
-        app:layout_constraintTop_toTopOf="@+id/member_tv_gender"
-        tools:text="MAN" />
+        <TextView
+            android:id="@+id/member_tv_gender_person"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/smallcase"
+            android:text="MAN"
+            android:textColor="#333333"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toBottomOf="@+id/member_tv_gender"
+            app:layout_constraintStart_toStartOf="@+id/member_email"
+            app:layout_constraintTop_toTopOf="@+id/member_tv_gender"
+            tools:text="MAN" />
 
-    <TextView
-        android:id="@+id/member_tv_age_person"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="30sp"
-        android:fontFamily="@font/smallcase"
-        android:textColor="#333333"
-        app:layout_constraintBottom_toBottomOf="@+id/member_tv_age"
-        app:layout_constraintStart_toStartOf="@+id/member_tv_gender_person"
-        app:layout_constraintTop_toTopOf="@+id/member_tv_age"
-        android:text="20"
-        tools:text="20" />
+        <TextView
+            android:id="@+id/member_tv_age_person"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/smallcase"
+            android:text="20"
+            android:textColor="#333333"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toBottomOf="@+id/member_tv_age"
+            app:layout_constraintStart_toStartOf="@+id/member_tv_gender_person"
+            app:layout_constraintTop_toTopOf="@+id/member_tv_age"
+            tools:text="20" />
 
-    <TextView
-        android:id="@+id/member_tv_grade_person"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="30sp"
-        android:fontFamily="@font/smallcase"
-        android:textColor="#333333"
-        app:layout_constraintBottom_toBottomOf="@+id/member_tv_grade"
-        app:layout_constraintStart_toStartOf="@+id/member_tv_age_person"
-        app:layout_constraintTop_toTopOf="@+id/member_tv_grade"
-        android:text="1"
-        tools:text="1" />
-
-    <com.google.android.material.tabs.TabLayout
-        android:id="@+id/member_tabs"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="25dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/member_img"
-        android:textSize="18sp"
-        app:tabSelectedTextColor="#31404E"
-        app:tabIndicatorColor="#31404E"
-        app:tabIndicatorHeight="4dp">
-
-<!--        <com.google.android.material.tabs.TabItem-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:text="收藏" />-->
-
-<!--        <com.google.android.material.tabs.TabItem-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:text="我的迷霧地圖" />-->
-    </com.google.android.material.tabs.TabLayout>
-
-    <androidx.viewpager2.widget.ViewPager2
-        android:id="@+id/member_viewpager2"
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/member_tabs">
+        <TextView
+            android:id="@+id/member_tv_grade_person"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/smallcase"
+            android:text="1"
+            android:textColor="#333333"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toBottomOf="@+id/member_tv_grade"
+            app:layout_constraintStart_toStartOf="@+id/member_tv_age_person"
+            app:layout_constraintTop_toTopOf="@+id/member_tv_grade"
+            tools:text="1" />
 
 
-    </androidx.viewpager2.widget.ViewPager2>
+        <TextView
+            android:id="@+id/member_email_name"
+            android:layout_width="wrap_content"
+            android:fontFamily="@font/smallcase"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:textColor="#333333"
+            android:textSize="20sp"
+            android:text="email:"
+            app:layout_constraintStart_toStartOf="@+id/member_tv_name"
+            app:layout_constraintTop_toBottomOf="@+id/member_tv_name"
+            tools:text="email：" />
+
+        <TextView
+            android:id="@+id/member_email"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:fontFamily="@font/smallcase"
+            android:textColor="#333333"
+            android:textSize="20sp"
+            android:layout_marginRight="8dp"
+            app:layout_constraintBottom_toBottomOf="@+id/member_email_name"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/member_tv_name_person"
+            app:layout_constraintTop_toTopOf="@+id/member_email_name"
+            app:layout_constraintVertical_bias="0.0"
+            tools:text="aa@gmail.com" />
+
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/member_tabs"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="25dp"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/member_img"
+            app:tabIndicatorColor="#31404E"
+            app:tabIndicatorHeight="4dp"
+            app:tabSelectedTextColor="#31404E">
+
+            <!--        <com.google.android.material.tabs.TabItem-->
+            <!--            android:layout_width="wrap_content"-->
+            <!--            android:layout_height="wrap_content"-->
+            <!--            android:text="收藏" />-->
+
+            <!--        <com.google.android.material.tabs.TabItem-->
+            <!--            android:layout_width="wrap_content"-->
+            <!--            android:layout_height="wrap_content"-->
+            <!--            android:text="我的迷霧地圖" />-->
+        </com.google.android.material.tabs.TabLayout>
 
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/member_viewpager2"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/member_tabs"
+            app:layout_constraintVertical_bias="0.0">
+
+
+        </androidx.viewpager2.widget.ViewPager2>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </layout>

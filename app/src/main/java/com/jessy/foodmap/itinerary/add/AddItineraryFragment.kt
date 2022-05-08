@@ -34,7 +34,6 @@ import java.io.File
 class AddItineraryFragment : BottomSheetDialogFragment() {
     lateinit var startDate: Button
     lateinit var endDate: Button
-
     val REQUEST_EXTERNAL_STORAGE = 1
     private var imgPath: String = ""
     private var riversRef: StorageReference? = null

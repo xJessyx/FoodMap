@@ -158,5 +158,13 @@
     <action android:id="@+id/addPlaceFragment_itineraryPlanningFragment" app:destination="@id/itineraryPlanningFragment"
         app:popUpTo="@id/navigation"
         app:popUpToInclusive="true" />
+    <activity
+        android:id="@+id/loginMainActivity"
+        android:name="com.jessy.foodmap.LoginMainActivity"
+        android:label="LoginMainActivity" />
+
+    <action android:id="@+id/loginMainActivity_homeFragment" app:destination="@id/homeFragment"
+        app:popUpTo="@id/navigation"
+        app:popUpToInclusive="true" />
 
 </navigation>
