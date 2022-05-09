@@ -1,6 +1,5 @@
 package com.jessy.foodmap.itinerary.paging
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
@@ -8,6 +7,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.jessy.foodmap.data.Journey
 import com.jessy.foodmap.databinding.ItemMyLtineraryPagingBinding
+import com.jessy.foodmap.itinerary.ITHelperInterface
 import java.util.*
 
 class MyItineraryPagingAdapter (private val onClickListener: OnClickListener) :
@@ -74,13 +74,7 @@ class MyItineraryPagingAdapter (private val onClickListener: OnClickListener) :
     class OnClickListener(val clickListener: (journey: Journey) -> Unit) {
         fun onClick(journey: Journey) = clickListener(journey)
     }
-    override fun onItemDissmiss(position: Int) {
-        unAssignList.removeAt(position)
-        notifyItemRemoved(position)
-    }
 
-    override fun onItemMove(fromPosition: Int, toPosition: Int) {
-        Collections.swap(unAssignList,fromPosition,toPosition)
-        notifyItemMoved(fromPosition,toPosition)
-    }
+
+
 }

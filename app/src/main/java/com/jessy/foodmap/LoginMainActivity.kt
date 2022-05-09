@@ -1,5 +1,7 @@
 package com.jessy.foodmap
 
+import android.animation.Animator
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -7,6 +9,8 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
+import com.airbnb.lottie.LottieAnimationView
+import com.airbnb.lottie.LottieDrawable
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
@@ -28,6 +32,38 @@ class LoginMainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_login_main)
         binding.lifecycleOwner = this
+
+
+
+        //播放
+        binding.lottieDinosaur.playAnimation()
+//暫停
+        binding.lottieDinosaur.pauseAnimation()
+//取消
+        binding.lottieDinosaur.cancelAnimation()
+//獲取動畫時長
+        binding.lottieDinosaur.getDuration()
+//監聽
+        binding.lottieDinosaur.addAnimatorListener(object : Animator.AnimatorListener {
+            override fun onAnimationRepeat(animation: Animator?) {
+            }
+
+            override fun onAnimationEnd(animation: Animator?) {
+
+            }
+
+            override fun onAnimationCancel(animation: Animator?) {
+
+            }
+
+            override fun onAnimationStart(animation: Animator?) {
+
+            }
+        })
+//        val animationView: LottieAnimationView = binding.loginAnimationView
+//        animationView.setAnimation("enjoying_the_walk.json")
+//        animationView.loop(true)
+//        animationView.playAnimation()
 
    binding.buttonSignIn.setOnClickListener {
         signIn()
@@ -92,7 +128,6 @@ class LoginMainActivity : AppCompatActivity() {
     companion object {
         const val RC_SIGN_IN = 100
     }
-
 
 
 }

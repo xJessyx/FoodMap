@@ -77,6 +77,13 @@ android {
             enabled true
         }
     }
+    sourceSets {
+        main {
+            assets {
+                srcDirs 'src\\main\\assets'
+            }
+        }
+    }
 }
 
 dependencies {
@@ -173,9 +180,16 @@ dependencies {
     implementation 'com.google.firebase:firebase-storage:x.y.z'
 
     // ImagePicker
-  //  implementation 'com.github.dhaval2404:imagepicker-support:1.7.1'
+    //  implementation 'com.github.dhaval2404:imagepicker-support:1.7.1'
     implementation 'com.github.dhaval2404:imagepicker:2.1'
 
     implementation 'com.akexorcist:google-direction-library:1.2.0'
+
+    //swipedecorator
+    implementation 'it.xabaras.android:recyclerview-swipedecorator:1.2.2'
+
+
+    //Lottie Animation
+    implementation 'com.airbnb.android:lottie:3.6.1'
 
 }

@@ -3,7 +3,7 @@ package com.jessy.foodmap.itinerary
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
 
-class ItemTouchHelperCallback(var mAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>?): ItemTouchHelper.Callback() {
+class ItemTouchHelperCallback(var mAdapter: ITHelperInterface?): ItemTouchHelper.Callback() {
 
     override fun getMovementFlags(recyclerView: RecyclerView, viewHolder: RecyclerView.ViewHolder): Int {
 

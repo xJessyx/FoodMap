@@ -9,14 +9,14 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.jessy.foodmap.R
-import com.jessy.foodmap.data.Journey
 import com.jessy.foodmap.data.Place
 import com.jessy.foodmap.databinding.ItemAddItineraryDetailDateBinding
+import com.jessy.foodmap.itinerary.ITHelperInterface
 import java.util.*
 
-class AddItineraryDtailDateAdapter(val onClickListener: AddItineraryDtailDateAdapter.OnClickListener) :
+class AddItineraryDtailDateAdapter(val onClickListener: AddItineraryDtailDateAdapter.OnClickListener,val viewModel: AddItineraryDtailDateViewModel) :
     ListAdapter<Place, AddItineraryDtailDateAdapter.AddItineraryDtailDateViewHolder>(
-        AddItineraryDtailDateAdapter.DiffCallback()) {
+        AddItineraryDtailDateAdapter.DiffCallback()), ITHelperInterface {
 
     class DiffCallback : DiffUtil.ItemCallback<Place>() {
 
@@ -33,7 +33,7 @@ class AddItineraryDtailDateAdapter(val onClickListener: AddItineraryDtailDateAda
     class AddItineraryDtailDateViewHolder private constructor(var binding: ItemAddItineraryDetailDateBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(place: Place) {
+        fun bind(place: Place,viewModel: AddItineraryDtailDateViewModel) {
 
             binding.itineraryDetailDateTvStartTime.setText(place.startTime?.let {
                 TimeUtil.StampToTime(it, Locale.TAIWAN).toString()
@@ -88,7 +88,7 @@ class AddItineraryDtailDateAdapter(val onClickListener: AddItineraryDtailDateAda
             onClickListener.onClick(item)
         }
 
-        holder.bind(item)
+        holder.bind(item,viewModel)
 
 
         //  val nextItem = getItem(position + 1).transportation
@@ -149,5 +149,25 @@ class AddItineraryDtailDateAdapter(val onClickListener: AddItineraryDtailDateAda
         }
 
 
+    }
+
+
+    override fun onItemDissmiss(position: Int) {
+        val list = currentList.toMutableList()
+        viewModel.delectFireBaseItem(list,position)
+
+        list.removeAt(position)
+
+        submitList(list)
+//        notifyItemRemoved(position)
+    }
+
+    override fun onItemMove(fromPosition: Int, toPosition: Int) {
+        val list = currentList.toMutableList()
+        Collections.swap(list,fromPosition,toPosition)
+        submitList(list)
+        viewModel.updateList(list,fromPosition,toPosition)
+
+//        notifyItemMoved(fromPosition,toPosition)
     }
 }
