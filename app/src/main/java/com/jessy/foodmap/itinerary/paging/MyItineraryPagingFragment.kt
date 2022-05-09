@@ -1,8 +1,6 @@
 package com.jessy.foodmap.itinerary.paging
 
-import android.graphics.Color
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -10,13 +8,11 @@ import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.ItemTouchHelper
 import com.jessy.foodmap.NavigationDirections
-import com.jessy.foodmap.R
-import com.jessy.foodmap.data.Journey
 import com.jessy.foodmap.databinding.FragmentMyItineraryPagingBinding
-import com.jessy.foodmap.itinerary.ItineraryDetailViewModel
-import java.time.LocalDate
-import java.time.format.DateTimeFormatter
+import com.jessy.foodmap.itinerary.ItemTouchHelperCallback
+import com.jessy.foodmap.itinerary.paging.MyItineraryPagingAdapter as MyItineraryPagingAdapter1
 
 class MyItineraryPagingFragment : Fragment() {
 
@@ -28,15 +24,21 @@ class MyItineraryPagingFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View? {
-
         val binding = FragmentMyItineraryPagingBinding.inflate(inflater, container, false)
-        binding.myitineraryRecyclerView.adapter = MyItineraryPagingAdapter(MyItineraryPagingAdapter.OnClickListener{
+
+        binding.myitineraryRecyclerView.adapter = MyItineraryPagingAdapter1(MyItineraryPagingAdapter1.OnClickListener{
             viewModel.navigateToDetailDate(it)
         }
         )
+        var MyItineraryPagingAdapter1 = binding.myitineraryRecyclerView.adapter
+
         binding.lifecycleOwner = viewLifecycleOwner
         binding.viewModel = viewModel
 
+
+        val callback = ItemTouchHelperCallback(MyItineraryPagingAdapter1)
+        val touchHelper = ItemTouchHelper(callback)
+        touchHelper.attachToRecyclerView( binding.myitineraryRecyclerView)
 //        val today = LocalDate.now()
 //        val fmt = DateTimeFormatter.ofPattern("yyyy-MM-dd")
 //
@@ -84,8 +86,8 @@ class MyItineraryPagingFragment : Fragment() {
         viewModel.getFireBaseJourney()
 
         viewModel.getAllJourneyLiveData.observe(viewLifecycleOwner){
-            (binding.myitineraryRecyclerView.adapter as MyItineraryPagingAdapter).submitList(viewModel.getAllJourney)
-            (binding.myitineraryRecyclerView.adapter as MyItineraryPagingAdapter).notifyDataSetChanged()
+            (binding.myitineraryRecyclerView.adapter as MyItineraryPagingAdapter1).submitList(viewModel.getAllJourney)
+            (binding.myitineraryRecyclerView.adapter as MyItineraryPagingAdapter1).notifyDataSetChanged()
 
         }
 
