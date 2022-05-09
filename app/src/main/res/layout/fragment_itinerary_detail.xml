@@ -111,7 +111,7 @@
             <androidx.viewpager2.widget.ViewPager2
                 android:id="@+id/itineraryDeatail_viewPager2"
                 android:layout_width="match_parent"
-                android:layout_height="500dp"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
                 android:layout_marginBottom="32dp"
                 android:paddingBottom="8dp"
@@ -134,11 +134,13 @@
                 android:backgroundTint="#DFEAFF"
                 android:contentDescription="submit"
                 android:src="@drawable/add2"
-                android:visibility="gone"
+                android:visibility="visible"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="@+id/itineraryDeatail_viewPager2"
                 app:layout_constraintHorizontal_bias="0.498"
-                app:layout_constraintStart_toStartOf="parent"></com.google.android.material.floatingactionbutton.FloatingActionButton>
+                app:layout_constraintStart_toStartOf="parent">
+
+            </com.google.android.material.floatingactionbutton.FloatingActionButton>
 
             <TextView
                 android:id="@+id/itineraryDetail_share"

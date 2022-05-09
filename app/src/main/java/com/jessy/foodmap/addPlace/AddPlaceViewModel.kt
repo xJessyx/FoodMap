@@ -46,11 +46,9 @@ class AddPlaceViewModel : ViewModel() {
                 Log.d(TAG, "${document.id} => ${document.data}")
                 val data = document.toObject(Journey::class.java)
                 getAllJourney.add(data)
-                Log.v("getAllJourney","$getAllJourney")
 
             }
             _addAllJourney.value = getAllJourney
-            Log.v("getAllJourney2","$getAllJourney")
         }
         .addOnFailureListener { exception ->
             Log.d(TAG, "Error getting documents: ", exception)
@@ -60,7 +58,6 @@ class AddPlaceViewModel : ViewModel() {
     fun addFireBasePlace() {
 
         val placeObject = addPlace.value
-        Log.v("placeObject.id","${placeObject!!.id}")
 
         if (placeObject != null ) {
             db.collection("journeys").document(journeyId)
@@ -68,7 +65,6 @@ class AddPlaceViewModel : ViewModel() {
                     .set(placeObject)
                     .addOnSuccessListener {
                         Log.d(ContentValues.TAG, "success")
-                        Log.v("placeId","${placeId}")
 
                     }
                     .addOnFailureListener {

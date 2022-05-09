@@ -192,4 +192,7 @@ dependencies {
     //Lottie Animation
     implementation 'com.airbnb.android:lottie:3.6.1'
 
+    //  P.S: For Android Studio versions below 3.0, use compile keyword
+    implementation 'com.shobhitpuri.custombuttons:google-signin:1.0.0'
+
 }

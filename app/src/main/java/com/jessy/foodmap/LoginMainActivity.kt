@@ -35,29 +35,40 @@ class LoginMainActivity : AppCompatActivity() {
 
 
 
-        //播放
+//播放
         binding.lottieDinosaur.playAnimation()
+      //  Log.v("playAnimation","${binding.lottieDinosaur.playAnimation()}")
+
 //暫停
         binding.lottieDinosaur.pauseAnimation()
+       // Log.v("pauseAnimation","${binding.lottieDinosaur.pauseAnimation()}")
+
 //取消
         binding.lottieDinosaur.cancelAnimation()
+//        Log.v("cancelAnimation","${binding.lottieDinosaur.cancelAnimation()}")
+
 //獲取動畫時長
         binding.lottieDinosaur.getDuration()
+
+         //   Log.v("binding.lottieDinosaur.getDuration()","${binding.lottieDinosaur.getDuration()}")
 //監聽
         binding.lottieDinosaur.addAnimatorListener(object : Animator.AnimatorListener {
             override fun onAnimationRepeat(animation: Animator?) {
+                //Log.v("onAnimationRepeat","onAnimationRepeat")
             }
 
             override fun onAnimationEnd(animation: Animator?) {
+                //Log.v("onAnimationEnd","onAnimationEnd")
 
             }
 
             override fun onAnimationCancel(animation: Animator?) {
+                Log.v("onAnimationCancel","onAnimationCancel")
 
             }
 
             override fun onAnimationStart(animation: Animator?) {
-
+                Log.v("onAnimationStart","onAnimationStart")
             }
         })
 //        val animationView: LottieAnimationView = binding.loginAnimationView

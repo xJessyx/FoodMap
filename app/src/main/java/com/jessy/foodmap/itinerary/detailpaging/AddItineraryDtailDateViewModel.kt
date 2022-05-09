@@ -46,6 +46,20 @@ class AddItineraryDtailDateViewModel (position : Int,journeyArg: Journey): ViewM
                 Log.d(ContentValues.TAG, "Error getting documents: ", exception)
             }
     }
+//
+//    fun  updateTrafficTime(){
+//        db.collection("journeys").document(journeyItemId)
+//            .collection("places").document()
+//            .update("trafficTime",)
+//            .addOnSuccessListener {
+//                Log.d(ContentValues.TAG, "success")
+//
+//            }
+//            .addOnFailureListener {
+//                Log.w(ContentValues.TAG, "Error adding document")
+//            }
+//    }
+
 
 
     fun updateList(list: MutableList<Place>,fromPosition: Int, toPosition: Int){

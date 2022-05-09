@@ -97,10 +97,7 @@ class ItineraryDetailFragment : BottomSheetDialogFragment() {
         }
 
         binding.itineraryDetailFabBtn.setOnClickListener {
-                view ->
-            Snackbar.make(view, "Here's a Snackbar", Snackbar.LENGTH_LONG)
-                .setAction("Action", null)
-                .show()
+
             findNavController().navigate(NavigationDirections.addItineraryDetailDateFragmentFoodMapSearchFragment())
         }
         return binding.root

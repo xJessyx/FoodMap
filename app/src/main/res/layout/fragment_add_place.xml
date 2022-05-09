@@ -51,7 +51,7 @@
             android:id="@+id/addPlace_sp_selectJourney"
             android:layout_width="300dp"
             android:layout_height="50dp"
-            android:layout_marginTop="32dp"
+            android:layout_marginTop="48dp"
             android:autoSizeTextType="uniform"
             android:background="@drawable/shape_round2"
             app:layout_constraintEnd_toEndOf="@+id/addPlace_view"
@@ -62,7 +62,7 @@
             android:id="@+id/addPlace_sp_selectDay"
             android:layout_width="300dp"
             android:layout_height="50dp"
-            android:layout_marginTop="32dp"
+            android:layout_marginTop="48dp"
             android:autoSizeTextType="uniform"
             android:background="@drawable/shape_round2"
             app:layout_constraintEnd_toEndOf="@+id/addPlace_sp_selectJourney"
@@ -74,7 +74,7 @@
             android:id="@+id/addPlace_sp_selectTransportation"
             android:layout_width="300dp"
             android:layout_height="50dp"
-            android:layout_marginTop="32dp"
+            android:layout_marginTop="48dp"
             android:autoSizeTextType="uniform"
             android:background="@drawable/shape_round2"
             app:layout_constraintEnd_toEndOf="@+id/addPlace_sp_selectDay"
@@ -86,7 +86,7 @@
             android:id="@+id/addPlace_sp_selectDwellTime"
             android:layout_width="300dp"
             android:layout_height="50dp"
-            android:layout_marginTop="32dp"
+            android:layout_marginTop="48dp"
             android:background="@drawable/shape_round2"
             android:autoSizeTextType="uniform"
             android:hint="請輸入停留時間"
@@ -101,36 +101,36 @@
         <!--
 android:inputType="time"-->
 
-        <EditText
-            android:id="@+id/addPlace_sp_selectStartTime"
-            android:layout_width="300dp"
-            android:layout_height="50dp"
-            android:layout_marginTop="32dp"
-            android:autoSizeTextType="uniform"
-            android:background="@drawable/shape_round2"
-            android:hint="請輸入開始時間"
-            android:gravity="center"
-            android:paddingLeft="8dp"
-            android:textColor="@color/black"
-            android:textSize="16sp"
-            app:layout_constraintEnd_toEndOf="@+id/addPlace_sp_selectDwellTime"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="@+id/addPlace_sp_selectDwellTime"
-            app:layout_constraintTop_toBottomOf="@+id/addPlace_sp_selectDwellTime" />
+<!--        <EditText-->
+<!--            android:id="@+id/addPlace_sp_selectStartTime"-->
+<!--            android:layout_width="300dp"-->
+<!--            android:layout_height="50dp"-->
+<!--            android:layout_marginTop="32dp"-->
+<!--            android:autoSizeTextType="uniform"-->
+<!--            android:background="@drawable/shape_round2"-->
+<!--            android:hint="請輸入開始時間"-->
+<!--            android:gravity="center"-->
+<!--            android:paddingLeft="8dp"-->
+<!--            android:textColor="@color/black"-->
+<!--            android:textSize="16sp"-->
+<!--            app:layout_constraintEnd_toEndOf="@+id/addPlace_sp_selectDwellTime"-->
+<!--            app:layout_constraintHorizontal_bias="0.0"-->
+<!--            app:layout_constraintStart_toStartOf="@+id/addPlace_sp_selectDwellTime"-->
+<!--            app:layout_constraintTop_toBottomOf="@+id/addPlace_sp_selectDwellTime" />-->
 
         <Button
             android:id="@+id/addPlace_bt_submit"
             android:layout_width="150dp"
             android:layout_height="50dp"
-            android:layout_marginTop="48dp"
+            android:layout_marginTop="60dp"
             android:background="@drawable/shape_round"
             android:text="送出"
             android:textColor="@color/white"
             android:textSize="18sp"
-            app:layout_constraintEnd_toEndOf="@+id/addPlace_sp_selectStartTime"
+            app:layout_constraintEnd_toEndOf="@+id/addPlace_sp_selectDwellTime"
             app:layout_constraintHorizontal_bias="0.504"
-            app:layout_constraintStart_toStartOf="@+id/addPlace_sp_selectStartTime"
-            app:layout_constraintTop_toBottomOf="@+id/addPlace_sp_selectStartTime" />
+            app:layout_constraintStart_toStartOf="@+id/addPlace_sp_selectDwellTime"
+            app:layout_constraintTop_toBottomOf="@+id/addPlace_sp_selectDwellTime" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

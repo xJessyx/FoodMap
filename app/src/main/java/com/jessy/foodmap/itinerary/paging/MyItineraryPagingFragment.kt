@@ -50,30 +50,6 @@ class MyItineraryPagingFragment : Fragment(){
 
                     findNavController().navigate(NavigationDirections.myItineraryPagingFragmentItineraryDetailFragment(it))
 
-//                    val today = LocalDate.now()
-//                    val fmt = DateTimeFormatter.ofPattern("yyyy-MM-dd")
-//                    val startDate= it.startDate
-//                    val endDate= it.endDate
-//                    val parseStartDate = LocalDate.parse(startDate, fmt)
-//                    val parseEndDate = LocalDate.parse(endDate, fmt)
-
-//                    if(today.isBefore(parseStartDate)) {
-//
-//                        findNavController().navigate(NavigationDirections.myItineraryPagingFragmentItineraryDetailFragment(it))
-//
-//                        Log.v("today< start","$today <  $parseStartDate")
-//                    }else if(today.isAfter(parseEndDate)){
-//                        findNavController().navigate(NavigationDirections.myItineraryPagingFragmentItineraryDetailEndFragment(it))
-//
-//                        Log.v("today > end","$today >  $parseEndDate")
-//
-//                    }else{
-//                        findNavController().navigate(NavigationDirections.myItineraryPagingFragmentItineraryDetailFragment(it))
-//
-//                        Log.v("start <today< end"," $parseStartDate < $today <  $parseEndDate ")
-//
-//                    }
-
 
                     viewModel.onDetailNavigated()
                 }

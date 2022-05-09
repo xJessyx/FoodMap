@@ -1,6 +1,7 @@
 package com.jessy.foodmap.itinerary.detailpaging
 
 import android.annotation.SuppressLint
+import android.content.ContentValues
 import android.content.pm.PackageManager
 import android.os.Bundle
 import android.util.Log
@@ -39,10 +40,8 @@ class AddItineraryDetailDateFragment(position: Int, journey: Journey) : Fragment
     val AddItineraryDtailDateViewModel = AddItineraryDtailDateViewModel(index, journeyArg)
     val adapter = AddItineraryDtailDateAdapter(AddItineraryDtailDateAdapter.OnClickListener {
     },AddItineraryDtailDateViewModel)
-//
-//    private val viewModel: AddItineraryDtailDateViewModel by lazy {
-//        ViewModelProvider(this).get(AddItineraryDtailDateViewModel::class.java)
-//    }
+
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -60,79 +59,7 @@ class AddItineraryDetailDateFragment(position: Int, journey: Journey) : Fragment
 
         AddItineraryDtailDateViewModel.placeLiveData.observe(viewLifecycleOwner) {
 
-//            for( i in 0 until AddItineraryDtailDateViewModel.places.size-1){
-//                fromFKIP = it[i].latitude.toString() + ","+it[i].longitude.toString()
-//                toMonas = it[i+1].latitude.toString() + ","+ it[i+1].longitude.toString()
-//                Log.v("i","a:$i")
-//
-//                Log.v("position","fromFKIP[$i] =$fromFKIP")
-//                Log.v("position","toMonas[${i+1}] =$toMonas")
-//
-//                val mode = when(AddItineraryDtailDateViewModel.places[i+1].transportation){
-//                    1->"walking"
-//                    2->"driving"
-//                    3->"bicycling"
-//                    4->"transit"
-//                    else -> {
-//                            Log.v("error","選擇錯誤")
-//                    }
-//                }
-//                Log.v("transportation","transportation  [${i+1}]=  ${AddItineraryDtailDateViewModel.places[i+1].transportation}")
-//                val info = (activity as MainActivity).applicationContext.packageManager
-//                    .getApplicationInfo(
-//                        (activity as MainActivity).packageName,
-//                        PackageManager.GET_META_DATA
-//                    )
-//                val key = info.metaData[resources.getString(R.string.map_api_key_name)].toString()
-//                Places.initialize(requireContext(), key)
-//
-//                val apiServices = RetrofitClient.apiServices(this)
-//                apiServices.getDirection(mode as String, fromFKIP, toMonas, key)
-//                    .enqueue(object : Callback<DirectionResponses> {
-//                        @SuppressLint("NotifyDataSetChanged")
-//                        override fun onResponse(
-//                            call: Call<DirectionResponses>,
-//                            response: Response<DirectionResponses>,
-//                        ) {
-//                            Log.v("response  "," [$fromFKIP,$toMonas,mode as String]=${response}")
-//                            val legs = response.body()!!.routes!![0]!!.legs!!
-//                            var totalDuration: Long = 0
-////
-//                            if(response.body()!!.routes?.size != 0){
-//                                for (leg in legs) {
-//                                    totalDuration += (leg?.duration?.value ?: 0)
-//                                }
-//                            }
-//                            else{
-//                                totalDuration = legs.get(0)!!.duration!!.value!!.toLong()
-//                            }
-//
-////                            if(legs.isNotEmpty()){
-////                                totalDuration = legs[0]?.duration?.value?.toLong() ?: 0
-////                            }
-//
-//                      AddItineraryDtailDateViewModel.places[i].trafficTime = totalDuration*1000
-//                   Log.v("totalDuration*1000", "places[$i]= ${totalDuration*1000}")
-//                   Log.v("totalDuration*1000", "AddItineraryDtailDateViewModel.places[$i]= ${AddItineraryDtailDateViewModel.places[i].trafficTime}")
-//
-//                            Log.v("totalDuration*1000", "AddItineraryDtailDateViewModel.places= ${AddItineraryDtailDateViewModel.places}")
-////                            db.collection("journeys").document(AddItineraryDtailDateViewModel.journeyItemId)
-////                                .collection("places")
-////                                .update("trafficTime", totalDuration*1000)
-//                            Log.v("AddItineraryDtailDateViewModel.places","${AddItineraryDtailDateViewModel.places}")
-//                            adapter.submitList(AddItineraryDtailDateViewModel.places)
-//                            adapter.notifyDataSetChanged()
-//
-//
-//                            Log.v("totalDuration", "$totalDuration")
-//                        }
-//
-//                        override fun onFailure(call: Call<DirectionResponses>, t: Throwable) {
-//                            Log.e("error", t.localizedMessage)
-//                        }
-//
-//                    })
-  //          }
+
             CalculateTravelTime()
            adapter.submitList(AddItineraryDtailDateViewModel.places)
 
@@ -146,10 +73,6 @@ class AddItineraryDetailDateFragment(position: Int, journey: Journey) : Fragment
         for( i in 0 until AddItineraryDtailDateViewModel.places.size-1){
             fromFKIP = AddItineraryDtailDateViewModel.places[i].latitude.toString() + ","+AddItineraryDtailDateViewModel.places[i].longitude.toString()
             toMonas = AddItineraryDtailDateViewModel.places[i+1].latitude.toString() + ","+ AddItineraryDtailDateViewModel.places[i+1].longitude.toString()
-            Log.v("i","a:$i")
-
-            Log.v("position","fromFKIP[$i] =$fromFKIP")
-            Log.v("position","toMonas[${i+1}] =$toMonas")
 
             val mode = when(AddItineraryDtailDateViewModel.places[i+1].transportation){
                 1->"walking"
@@ -160,7 +83,6 @@ class AddItineraryDetailDateFragment(position: Int, journey: Journey) : Fragment
                     Log.v("error","選擇錯誤")
                 }
             }
-            Log.v("transportation","transportation  [${i+1}]=  ${AddItineraryDtailDateViewModel.places[i+1].transportation}")
             val info = (activity as MainActivity).applicationContext.packageManager
                 .getApplicationInfo(
                     (activity as MainActivity).packageName,
@@ -177,7 +99,6 @@ class AddItineraryDetailDateFragment(position: Int, journey: Journey) : Fragment
                         call: Call<DirectionResponses>,
                         response: Response<DirectionResponses>,
                     ) {
-                        Log.v("response  "," [$fromFKIP,$toMonas,mode as String]=${response}")
                         val legs = response.body()!!.routes!![0]!!.legs!!
                         var totalDuration: Long = 0
 //
@@ -190,24 +111,37 @@ class AddItineraryDetailDateFragment(position: Int, journey: Journey) : Fragment
                             totalDuration = legs.get(0)!!.duration!!.value!!.toLong()
                         }
 
-//                            if(legs.isNotEmpty()){
-//                                totalDuration = legs[0]?.duration?.value?.toLong() ?: 0
-//                            }
-
                         AddItineraryDtailDateViewModel.places[i].trafficTime = totalDuration*1000
-                        Log.v("totalDuration*1000", "places[$i]= ${totalDuration*1000}")
-                        Log.v("totalDuration*1000", "AddItineraryDtailDateViewModel.places[$i]= ${AddItineraryDtailDateViewModel.places[i].trafficTime}")
+                        AddItineraryDtailDateViewModel.places[i+1].startTime = 28800000 + totalDuration*1000 + AddItineraryDtailDateViewModel.places[i].dwellTime!!
 
-                        Log.v("totalDuration*1000", "AddItineraryDtailDateViewModel.places= ${AddItineraryDtailDateViewModel.places}")
-//                            db.collection("journeys").document(AddItineraryDtailDateViewModel.journeyItemId)
-//                                .collection("places")
-//                                .update("trafficTime", totalDuration*1000)
-                        Log.v("AddItineraryDtailDateViewModel.places","${AddItineraryDtailDateViewModel.places}")
+
+
+                        db.collection("journeys").document(AddItineraryDtailDateViewModel.journeyItemId)
+                            .collection("places").document(AddItineraryDtailDateViewModel.places[i].id)
+                            .update("trafficTime",AddItineraryDtailDateViewModel.places[i].trafficTime)
+                            .addOnSuccessListener {
+                                Log.d(ContentValues.TAG, "success")
+                                Log.v("trafficTime","${AddItineraryDtailDateViewModel.places[i].trafficTime}")
+
+                            }
+                            .addOnFailureListener {
+                                Log.w(ContentValues.TAG, "Error adding document")
+                            }
+
+                        db.collection("journeys").document(AddItineraryDtailDateViewModel.journeyItemId)
+                            .collection("places").document(AddItineraryDtailDateViewModel.places[i].id)
+                            .update("startTime",AddItineraryDtailDateViewModel.places[i].startTime)
+                            .addOnSuccessListener {
+                                Log.d(ContentValues.TAG, "success")
+                                Log.v("trafficTime","${AddItineraryDtailDateViewModel.places[i].trafficTime}")
+
+                            }
+                            .addOnFailureListener {
+                                Log.w(ContentValues.TAG, "Error adding document")
+                            }
+
                         adapter.submitList(AddItineraryDtailDateViewModel.places)
                         adapter.notifyDataSetChanged()
-
-
-                        Log.v("totalDuration", "$totalDuration")
                     }
 
                     override fun onFailure(call: Call<DirectionResponses>, t: Throwable) {
@@ -216,6 +150,7 @@ class AddItineraryDetailDateFragment(position: Int, journey: Journey) : Fragment
 
                 })
         }
+        AddItineraryDtailDateViewModel.places[0].startTime = 28800000
         adapter.submitList(AddItineraryDtailDateViewModel.places)
 
     }

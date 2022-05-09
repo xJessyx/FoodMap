@@ -76,35 +76,33 @@ class AddPlaceFragment : Fragment() {
         }
 
 
-        binding.addPlaceSpSelectStartTime.setOnClickListener {
+//        binding.addPlaceSpSelectStartTime.setOnClickListener {
+//
+//            val ca = Calendar.getInstance()
+//            var mStartHour = ca[Calendar.HOUR_OF_DAY]
+//            var mStartMinute = ca[Calendar.MINUTE]
+//
+//            val timePickerDialog = TimePickerDialog(
+//                activity as Activity, TimePickerDialog.OnTimeSetListener { _, hourofDay, minute ->
+//                    mStartHour = hourofDay
+//                    mStartMinute = minute
+//                    val mHourStartString = String.format("%02d", mStartHour)
+//                    val mMinuteStartString = String.format("%02d", mStartMinute)
+//                    val mStartTime = "${mHourStartString}:${mMinuteStartString}"
+//                    val totalMillis = TimeUtil.DateToStamp(mStartTime, Locale.TAIWAN)
+//                    binding.addPlaceSpSelectStartTime.setText(mStartTime)
+//                    viewModel.startTime = totalMillis
+//
+//
+//                },
+//                mStartHour, mStartMinute, true
+//            )
+//            timePickerDialog.show()
+//        }
 
-            val ca = Calendar.getInstance()
-            var mStartHour = ca[Calendar.HOUR_OF_DAY]
-            var mStartMinute = ca[Calendar.MINUTE]
 
-            val timePickerDialog = TimePickerDialog(
-                activity as Activity, TimePickerDialog.OnTimeSetListener { _, hourofDay, minute ->
-                    mStartHour = hourofDay
-                    mStartMinute = minute
-                    val mHourStartString = String.format("%02d", mStartHour)
-                    val mMinuteStartString = String.format("%02d", mStartMinute)
-                    val mStartTime = "${mHourStartString}:${mMinuteStartString}"
-                    val totalMillis = TimeUtil.DateToStamp(mStartTime, Locale.TAIWAN)
-                    Log.v("totalMillis1","$totalMillis")
-                    binding.addPlaceSpSelectStartTime.setText(mStartTime)
-                    Log.v("totalMillis2","$totalMillis")
-                    viewModel.startTime = totalMillis
-                    Log.v("totalMillis3","$totalMillis")
-
-
-                },
-                mStartHour, mStartMinute, true
-            )
-            timePickerDialog.show()
-        }
         binding.addPlaceBtSubmit.setOnClickListener {
-            if ((viewModel.startTime != null) && (viewModel.dwellTime != null)
-            ) {
+            if (viewModel.dwellTime != null) {
                 viewModel.addPlaceItem()
                 viewModel.addFireBasePlace()
 
@@ -166,9 +164,7 @@ class AddPlaceFragment : Fragment() {
                         for (i in 1..selectTotalDay) {
                             lunchDay.add("第 $i 天")
                         }
-                        Log.v("lunch3", "$lunchDay")
                         viewModel.journeyId = item.id
-                        Log.v("selectTotalDay", "$selectTotalDay")
                     }
                 }
                 setDaySinner()

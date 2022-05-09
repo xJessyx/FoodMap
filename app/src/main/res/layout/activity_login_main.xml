@@ -15,8 +15,10 @@
 
     <com.google.android.gms.common.SignInButton
         android:id="@+id/button_SignIn"
-        android:layout_width="320dp"
-        android:layout_height="69dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/google_sign_in"
+        app:isDarkTheme="true"
         android:layout_marginBottom="268dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -57,18 +59,6 @@
         app:lottie_autoPlay="true"
         app:lottie_fileName="walk.json"
         app:lottie_loop="true" />
-    <!--    <TextView-->
-<!--        android:id="@+id/textView_Result"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:text="未登入"-->
-<!--        android:textAlignment="center"-->
-<!--        android:textAppearance="@style/TextAppearance.AppCompat.Display1"-->
-<!--        android:textStyle="bold"-->
-<!--        app:layout_constraintBottom_toBottomOf="parent"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintTop_toBottomOf="@+id/button_SignIn" />-->
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 
