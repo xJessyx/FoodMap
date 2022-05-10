@@ -27,7 +27,7 @@ class LoginFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View? {
-        (activity as MainActivity).hidbottomNavigation()
+        (activity as MainActivity).hidBottomNavigation()
 
         binding = DataBindingUtil.inflate(
             inflater, R.layout.fragment_login, container, false)

@@ -1,7 +1,6 @@
 package com.jessy.foodmap
 
 import android.animation.Animator
-import android.app.Activity
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -18,7 +17,7 @@ class WelcomeFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View? {
-        (activity as MainActivity).hidbottomNavigation()
+        (activity as MainActivity).hidBottomNavigation()
         binding = DataBindingUtil.inflate(
             inflater, R.layout.fragment_welcome, container, false)
 //        //  binding = DataBindingUtil.setContentView(activity as Activity, R.layout.fragment_login)

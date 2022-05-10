@@ -69,8 +69,11 @@ class MainActivity : AppCompatActivity() {
         binding.toolbar.visibility = View.VISIBLE
     }
 
-    fun hidbottomNavigation(){
+    fun hidBottomNavigation(){
         binding.myBottomNavigationView.visibility = View.GONE
+    }
 
+    fun showBottomNavigation(){
+        binding.myBottomNavigationView.visibility = View.VISIBLE
     }
 }

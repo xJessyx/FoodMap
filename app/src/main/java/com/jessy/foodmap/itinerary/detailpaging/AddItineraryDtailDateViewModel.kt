@@ -2,7 +2,6 @@ package com.jessy.foodmap.itinerary.detailpaging
 
 import android.content.ContentValues
 import android.util.Log
-import android.widget.Toast
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -11,21 +10,21 @@ import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.jessy.foodmap.data.Journey
 import com.jessy.foodmap.data.Place
-import kotlin.reflect.jvm.internal.impl.load.kotlin.JvmType
 
 class AddItineraryDtailDateViewModel (position : Int,journeyArg: Journey): ViewModel(){
 
     val db = Firebase.firestore
 
-    val _placeLiveData = MutableLiveData<List<Place>>()
-    val placeLiveData: LiveData<List<Place>>
-        get() = _placeLiveData
-    var places = mutableListOf<Place>()
+    val _places = MutableLiveData<List<Place>>()
+    val places: LiveData<List<Place>>
+        get() = _places
     var position =position
     var journeyItemId = journeyArg.id
 
 
     fun getPlaces(){
+
+        var newList = mutableListOf<Place>()
 
         db.collection("journeys").document(journeyItemId)
             .collection("places")
@@ -36,10 +35,10 @@ class AddItineraryDtailDateViewModel (position : Int,journeyArg: Journey): ViewM
                 for (document in result) {
                     Log.d(ContentValues.TAG, "${document.id} => ${document.data}")
                     val data = document.toObject(Place::class.java)
-                    places.add(data)
+                    newList.add(data)
 
                 }
-                _placeLiveData.value = places
+                _places.value = newList
 
             }
             .addOnFailureListener { exception ->
@@ -47,21 +46,65 @@ class AddItineraryDtailDateViewModel (position : Int,journeyArg: Journey): ViewM
             }
     }
 
+    var isUpdating = false
 
     fun updateMoveList(list: MutableList<Place>,fromPosition: Int, toPosition: Int){
 
-//        val lists:List<Place> =list
 
-        db.collection("journeys").document(journeyItemId)
-            .collection("places").document(list[fromPosition].id)
-            .update("startTime",list[toPosition].startTime)
-            .addOnSuccessListener {
-                Log.d(ContentValues.TAG, "success")
 
-            }
-            .addOnFailureListener {
-                Log.w(ContentValues.TAG, "Error adding document")
-            }
+//        db.collection("journeys").document(journeyItemId)
+//            .collection("places").document(list[fromPosition].id)
+//            .update("startTime",list[toPosition].startTime)
+//            .addOnSuccessListener {
+//                Log.d(ContentValues.TAG, "startTime success")
+//
+//            }
+//            .addOnFailureListener {
+//                Log.w(ContentValues.TAG, "Error adding document")
+//            }
+//        db.collection("journeys").document(journeyItemId)
+//            .collection("places").document(list[fromPosition].id)
+//            .update("name",list[toPosition].name)
+//            .addOnSuccessListener {
+//                Log.d(ContentValues.TAG, "name success")
+//
+//            }
+//            .addOnFailureListener {
+//                Log.w(ContentValues.TAG, "Error adding document")
+//            }
+//        db.collection("journeys").document(journeyItemId)
+//            .collection("places").document(list[fromPosition].id)
+//            .update("dwellTime",list[toPosition].dwellTime)
+//            .addOnSuccessListener {
+//                Log.d(ContentValues.TAG, "dwellTime success")
+//
+//            }
+//            .addOnFailureListener {
+//                Log.w(ContentValues.TAG, "Error adding document")
+//            }
+
+
+        if (!isUpdating) {
+            isUpdating = true
+            val updateMap = mapOf(
+                "startTime" to (list[toPosition].startTime?.minus(1) ?: 0)
+            )
+
+            db.collection("journeys").document(journeyItemId)
+                .collection("places").document(list[fromPosition].id)
+                .update(updateMap)
+                .addOnSuccessListener {
+                    Log.d(ContentValues.TAG, "startTime success")
+                    isUpdating = false
+                    getPlaces()
+                }
+                .addOnFailureListener {
+                    isUpdating = false
+                    Log.w(ContentValues.TAG, "Error adding document")
+                }
+        }
+
+
     }
 
 
