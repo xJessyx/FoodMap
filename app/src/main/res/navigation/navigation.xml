@@ -4,8 +4,11 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/navigation"
-    app:startDestination="@id/homeFragment">
-
+    app:startDestination="@id/welcomeFragment">
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.jessy.foodmap.LoginFragment"
+        android:label="LoginFragment" />
     <fragment
         android:id="@+id/homeFragment"
         android:name="com.jessy.foodmap.home.homeFragment"
@@ -80,6 +83,10 @@
         android:name="com.jessy.foodmap.home.addArticles.AddArticleFragment"
         android:label="AddArticleFragment" />
 
+    <fragment
+        android:id="@+id/welcomeFragment"
+        android:name="com.jessy.foodmap.WelcomeFragment"
+        android:label="WelcomeFragment" />
 <!--    <fragment-->
 <!--        android:id="@+id/itineraryDetailEndFragment"-->
 <!--        android:name="com.jessy.foodmap.itinerary.end.ItineraryDetailEndFragment"-->
@@ -158,12 +165,14 @@
     <action android:id="@+id/addPlaceFragment_itineraryPlanningFragment" app:destination="@id/itineraryPlanningFragment"
         app:popUpTo="@id/navigation"
         app:popUpToInclusive="true" />
-    <activity
-        android:id="@+id/loginMainActivity"
-        android:name="com.jessy.foodmap.LoginMainActivity"
-        android:label="LoginMainActivity" />
 
-    <action android:id="@+id/loginMainActivity_homeFragment" app:destination="@id/homeFragment"
+
+
+    <action android:id="@+id/loginFragment_homeFragment" app:destination="@id/homeFragment"
+        app:popUpTo="@id/navigation"
+        app:popUpToInclusive="true" />
+
+        <action android:id="@+id/welcomeFragment_loginFragment" app:destination="@id/loginFragment"
         app:popUpTo="@id/navigation"
         app:popUpToInclusive="true" />
 

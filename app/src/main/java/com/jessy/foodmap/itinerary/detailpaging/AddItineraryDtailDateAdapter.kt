@@ -158,7 +158,6 @@ class AddItineraryDtailDateAdapter(val onClickListener: AddItineraryDtailDateAda
         viewModel.delectFireBaseItem(list,position)
 
         list.removeAt(position)
-
         submitList(list)
 //        notifyItemRemoved(position)
     }
@@ -167,7 +166,7 @@ class AddItineraryDtailDateAdapter(val onClickListener: AddItineraryDtailDateAda
         val list = currentList.toMutableList()
         Collections.swap(list,fromPosition,toPosition)
         submitList(list)
-        viewModel.updateList(list,fromPosition,toPosition)
+        viewModel.updateMoveList(list,fromPosition,toPosition)
 
 //        notifyItemMoved(fromPosition,toPosition)
     }

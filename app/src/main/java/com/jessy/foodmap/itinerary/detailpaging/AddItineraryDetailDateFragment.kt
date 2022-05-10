@@ -69,7 +69,7 @@ class AddItineraryDetailDateFragment(position: Int, journey: Journey) : Fragment
 
     }
 
-    fun CalculateTravelTime(){
+    private fun CalculateTravelTime(){
         for( i in 0 until AddItineraryDtailDateViewModel.places.size-1){
             fromFKIP = AddItineraryDtailDateViewModel.places[i].latitude.toString() + ","+AddItineraryDtailDateViewModel.places[i].longitude.toString()
             toMonas = AddItineraryDtailDateViewModel.places[i+1].latitude.toString() + ","+ AddItineraryDtailDateViewModel.places[i+1].longitude.toString()
