@@ -15,6 +15,10 @@ import com.google.android.material.tabs.TabLayoutMediator
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.jessy.foodmap.NavigationDirections
+import com.jessy.foodmap.data.Journey
+import com.jessy.foodmap.data.Place
+import com.jessy.foodmap.data.PlaceSelectData
+import com.jessy.foodmap.data.StoreInformation
 import com.jessy.foodmap.itinerary.detailpaging.ItineraryDetailPagingAdapter
 import com.jessy.foodmap.databinding.FragmentItineraryDetailBinding
 import java.time.LocalDate
@@ -26,7 +30,6 @@ class ItineraryDetailFragment : BottomSheetDialogFragment() {
     private val viewModel: ItineraryDetailViewModel by lazy {
         ViewModelProvider(this).get(ItineraryDetailViewModel::class.java)
     }
-//     var endSwitch: Switch? =null
     val db = Firebase.firestore
 
     override fun onCreateView(
@@ -61,11 +64,11 @@ class ItineraryDetailFragment : BottomSheetDialogFragment() {
 
         if(journeyArg.userId == "32fRAA8nlkV2gAojqHB1" && journeyArg.share == false) {
             if (today.isBefore(parseStartDate)) {
-                binding.itineraryDetailFabBtn.visibility = View.VISIBLE
+                //binding.itineraryDetailFabBtn.visibility = View.VISIBLE
                 Log.v("today< start", "$today <  $parseStartDate")
 
             } else if (today.isAfter(parseEndDate)) {
-                binding.itineraryDetailFabBtn.visibility = View.GONE
+               // binding.itineraryDetailFabBtn.visibility = View.GONE
                 binding.itineraryDetailShare.visibility = View.VISIBLE
                 binding.itineraryDetailSwitch.visibility = View.VISIBLE
                 db.collection("journeys").document(journeyArg.id)
@@ -89,17 +92,14 @@ class ItineraryDetailFragment : BottomSheetDialogFragment() {
                 Log.v("today > end", "$today >  $parseEndDate")
 
             } else {
-                binding.itineraryDetailFabBtn.visibility = View.VISIBLE
+              //  binding.itineraryDetailFabBtn.visibility = View.VISIBLE
                 Log.v("start <today< end", " $parseStartDate < $today <  $parseEndDate ")
                 db.collection("journeys").document(journeyArg.id)
                     .update("status", 1)
             }
         }
 
-        binding.itineraryDetailFabBtn.setOnClickListener {
 
-            findNavController().navigate(NavigationDirections.addItineraryDetailDateFragmentFoodMapSearchFragment())
-        }
         return binding.root
     }
 

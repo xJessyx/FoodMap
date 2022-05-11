@@ -28,6 +28,7 @@ class LoginFragment : Fragment() {
         savedInstanceState: Bundle?,
     ): View? {
         (activity as MainActivity).hidBottomNavigation()
+        (activity as MainActivity).hideToolBar()
 
         binding = DataBindingUtil.inflate(
             inflater, R.layout.fragment_login, container, false)

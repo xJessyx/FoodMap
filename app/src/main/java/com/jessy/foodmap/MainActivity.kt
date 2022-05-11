@@ -8,6 +8,10 @@ import android.view.View
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.findNavController
+import com.jessy.foodmap.data.Journey
+import com.jessy.foodmap.data.Place
+import com.jessy.foodmap.data.PlaceSelectData
+import com.jessy.foodmap.data.StoreInformation
 import com.jessy.foodmap.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
@@ -35,8 +39,8 @@ class MainActivity : AppCompatActivity() {
                     return@setOnItemSelectedListener true
                 }
                 R.id.foodMapSearchFragment -> {
-
-                    findNavController(R.id.myNavHostFragment).navigate(NavigationDirections.navigateToFoodMapSearchFragment())
+                        val data = PlaceSelectData(StoreInformation(), Place(),Journey())
+                    findNavController(R.id.myNavHostFragment).navigate(NavigationDirections.navigateToFoodMapSearchFragment(data))
                     return@setOnItemSelectedListener true
                 }
                 R.id.memberFragment -> {

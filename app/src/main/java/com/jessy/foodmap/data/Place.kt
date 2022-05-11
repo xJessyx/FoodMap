@@ -14,5 +14,5 @@ data class Place(
         var startTime: Long? = null,
         var trafficTime: Long? = null,
         var latitude:Double? =null,
-        var longitude:Double? =null,
+        var longitude:Double? =null
         ): Parcelable

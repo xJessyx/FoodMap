@@ -23,7 +23,9 @@ class AddArticleViewModel :ViewModel(){
     val articleTitle = MutableLiveData<String>()
     val articleConent = MutableLiveData<String>()
     var articleImage :String? = null
-    var articlePlaceName :String =""
+    var articlePlaceName :String? =""
+    var articleLatitude :Double? =null
+    var articleLongitude :Double? =null
 
     // Create a storage reference from our app
 
@@ -54,9 +56,11 @@ class AddArticleViewModel :ViewModel(){
             userId = "32fRAA8nlkV2gAojqHB1",
             title = articleTitle.value!!,
             content = articleConent.value!!,
-            placeName = articlePlaceName,
+            placeName = articlePlaceName!!,
             createdTime =  Calendar.getInstance().timeInMillis,
-            favoriteUsers = mutableListOf()
+            favoriteUsers = mutableListOf(),
+            latitude = articleLatitude,
+            longitude = articleLongitude
 
         )
 

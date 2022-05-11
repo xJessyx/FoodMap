@@ -37,19 +37,28 @@ class AddPlaceFragment : Fragment() {
         savedInstanceState: Bundle?,
     ): View? {
         (activity as MainActivity).hideToolBar()
+
         val binding = FragmentAddPlaceBinding.inflate(inflater, container, false)
         binding.lifecycleOwner = this
         binding.viewModel = viewModel
         selectJourney = binding.addPlaceSpSelectJourney
         selectDay = binding.addPlaceSpSelectDay
         selectTransportation = binding.addPlaceSpSelectTransportation
-        viewModel.getAllJourney()
-        val storeInformationArg = AddPlaceFragmentArgs.fromBundle(requireArguments()).storeKey
 
-        binding.addPlaceTvPlaceName.text = storeInformationArg.storeTitle
-        viewModel.placeName = storeInformationArg.storeTitle
-        viewModel.latitude = storeInformationArg.storeLatLng?.latitude
-        viewModel.longitude = storeInformationArg.storeLatLng?.longitude
+//        val storeInformationArg = AddPlaceFragmentArgs.fromBundle(requireArguments()).storeKey
+        val placeSelectDataArg =
+            AddPlaceFragmentArgs.fromBundle(requireArguments()).placeSelectDataKey
+
+        Log.v("placeSelectDataArg", "$placeSelectDataArg")
+
+        if (placeSelectDataArg != null) {
+            if (placeSelectDataArg.storelnformation.storeTitle.isNotEmpty()) {
+                binding.addPlaceTvPlaceName.text = placeSelectDataArg.storelnformation.storeTitle
+            }
+        }
+        viewModel.placeName = placeSelectDataArg!!.storelnformation.storeTitle
+        viewModel.latitude = placeSelectDataArg.storelnformation.latitude
+        viewModel.longitude = placeSelectDataArg.storelnformation.longitude
 
         binding.addPlaceSpSelectDwellTime.setOnClickListener {
 
@@ -74,33 +83,6 @@ class AddPlaceFragment : Fragment() {
             )
             timePickerDialog.show()
         }
-
-
-//        binding.addPlaceSpSelectStartTime.setOnClickListener {
-//
-//            val ca = Calendar.getInstance()
-//            var mStartHour = ca[Calendar.HOUR_OF_DAY]
-//            var mStartMinute = ca[Calendar.MINUTE]
-//
-//            val timePickerDialog = TimePickerDialog(
-//                activity as Activity, TimePickerDialog.OnTimeSetListener { _, hourofDay, minute ->
-//                    mStartHour = hourofDay
-//                    mStartMinute = minute
-//                    val mHourStartString = String.format("%02d", mStartHour)
-//                    val mMinuteStartString = String.format("%02d", mStartMinute)
-//                    val mStartTime = "${mHourStartString}:${mMinuteStartString}"
-//                    val totalMillis = TimeUtil.DateToStamp(mStartTime, Locale.TAIWAN)
-//                    binding.addPlaceSpSelectStartTime.setText(mStartTime)
-//                    viewModel.startTime = totalMillis
-//
-//
-//                },
-//                mStartHour, mStartMinute, true
-//            )
-//            timePickerDialog.show()
-//        }
-
-
         binding.addPlaceBtSubmit.setOnClickListener {
             if (viewModel.dwellTime != null) {
                 viewModel.addPlaceItem()
@@ -110,7 +92,7 @@ class AddPlaceFragment : Fragment() {
                 findNavController().navigate(NavigationDirections.addPlaceFragmentItineraryPlanningFragment())
 
 
-            }else{
+            } else {
 
                 Toast.makeText(activity as Activity, "有資料尚未填寫!!!", Toast.LENGTH_SHORT).show()
 
@@ -118,11 +100,47 @@ class AddPlaceFragment : Fragment() {
 
         }
 
-        viewModel.addAllJourney.observe(viewLifecycleOwner) {
-            setJourneySpinner()
-            //setDaySinner()
+
+
+        if (!placeSelectDataArg.journey.name.isEmpty() && !placeSelectDataArg.storelnformation.storeTitle.isEmpty()) {
+            val lunch = mutableListOf<String>()
+
+            lunch.clear()
+            lunch.add(placeSelectDataArg.journey.name)
+            Log.v("placeSelectDataArg.journey.name", "${placeSelectDataArg.journey.name}")
+            setJourneySpinner(lunch)
+            viewModel.journeyId = placeSelectDataArg.journey.id
+
+            lunchDay.add("第" + placeSelectDataArg.place.day.toString() + "天")
+            Log.v("placeSelectDataArg.place.day.toString()",
+                "${placeSelectDataArg.place.day.toString()}")
+            setDaySinner(lunchDay)
             setTransportationSinner()
+
+
+        } else {
+            val lunch = mutableListOf<String>()
+
+            lunch.clear()
+            viewModel.getAllJourney()
+            lunch.add("請選擇行程")
+            viewModel.addAllJourney.observe(viewLifecycleOwner) {
+                for (item in viewModel.getAllJourney) {
+                    lunch.add(item.name)
+                }
+                lunchDay.clear()
+                Log.v("lunchDay1","$lunchDay")
+
+                setJourneySpinner(lunch)
+
+                setTransportationSinner()
+            }
+
+
+
+
         }
+
 
         return binding.root
     }
@@ -137,37 +155,43 @@ class AddPlaceFragment : Fragment() {
         }
     }
 
-    fun setJourneySpinner() {
-        var lunch = mutableListOf<String>("請選擇旅程")
-        for (item in viewModel.getAllJourney) {
-            lunch.add(item.name)
-        }
+    fun setJourneySpinner(lunch: MutableList<String>) {
+
+
         val adapter =
             ArrayAdapter(activity as Activity, android.R.layout.simple_spinner_dropdown_item, lunch)
         selectJourney?.adapter = adapter
         selectJourney?.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+
             override fun onItemSelected(
                 parent: AdapterView<*>?,
                 view: View?,
                 position: Int,
                 id: Long,
             ) {
-
                 view!!.textAlignment = View.TEXT_ALIGNMENT_CENTER
                 viewModel.journeySinner = selectJourney?.selectedItem.toString()
                 lunchDay.clear()
-                lunchDay.add("請選擇哪天")
+                Log.v("lunchDay2","$lunchDay")
 
-                for (item in viewModel.getAllJourney) {
-                    if (item.name == selectJourney?.selectedItem.toString()) {
-                        selectTotalDay = item.totalDay
-                        for (i in 1..selectTotalDay) {
-                            lunchDay.add("第 $i 天")
+                if(lunch.size >1  ){
+
+                    for (item in viewModel.getAllJourney) {
+                        if (item.name == selectJourney?.selectedItem.toString()) {
+                            lunchDay.add("請選擇哪天")
+                            selectTotalDay = item.totalDay
+                            for (i in 1..selectTotalDay) {
+                                lunchDay.add("第 $i 天")
+                            }
+                            viewModel.journeyId = item.id
                         }
-                        viewModel.journeyId = item.id
                     }
+                    setDaySinner(lunchDay)
+
+                    Log.v("lunchDay3","$lunchDay")
+
                 }
-                setDaySinner()
+
             }
 
             override fun onNothingSelected(parent: AdapterView<*>?) {
@@ -175,11 +199,9 @@ class AddPlaceFragment : Fragment() {
             }
 
         }
-
-
     }
 
-    fun setDaySinner() {
+    fun setDaySinner(lunchDay: MutableList<String>) {
         val adapter2 =
             ArrayAdapter(activity as Activity,
                 android.R.layout.simple_spinner_dropdown_item,

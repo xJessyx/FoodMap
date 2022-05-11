@@ -71,7 +71,7 @@ class AddArticleFragment : Fragment() {
         initData()
         initPlaces()
         // Specify the types of place data to return.
-        autocompleteFragment.setPlaceFields(listOf(Place.Field.ID, Place.Field.NAME))
+        autocompleteFragment.setPlaceFields(listOf(Place.Field.ID, Place.Field.NAME, Place.Field.LAT_LNG))
 
         // Set up a PlaceSelectionListener to handle the response.
         autocompleteFragment.setOnPlaceSelectedListener(object : PlaceSelectionListener {
@@ -79,6 +79,9 @@ class AddArticleFragment : Fragment() {
                 // TODO: Get info about the selected place.
                 Log.i(TAG, "Place: ${place.name}, ${place.id}")
                 viewModel.articlePlaceName =  place.name
+                viewModel.articleLatitude = place.latLng?.latitude
+                viewModel.articleLongitude = place.latLng?.longitude
+
             }
 
             override fun onError(status: Status) {

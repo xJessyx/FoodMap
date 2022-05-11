@@ -12,6 +12,7 @@ data class StoreInformation(
     var storeTitle:String ="",
     var storeAddress:String ="",
     var storeScore:String="",
-    var storeLatLng: LatLng? = null
-
+//    var storeLatLng: LatLng? = null
+    var latitude:Double? =null,
+    var longitude:Double? =null,
 ): Parcelable

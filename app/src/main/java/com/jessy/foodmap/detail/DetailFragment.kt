@@ -1,6 +1,7 @@
 package com.jessy.foodmap.detail
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -12,6 +13,9 @@ import com.google.firebase.ktx.Firebase
 import com.jessy.foodmap.MainActivity
 import com.jessy.foodmap.NavigationDirections
 import com.jessy.foodmap.R
+import com.jessy.foodmap.data.Journey
+import com.jessy.foodmap.data.Place
+import com.jessy.foodmap.data.PlaceSelectData
 import com.jessy.foodmap.data.StoreInformation
 import com.jessy.foodmap.databinding.FragmentDetailBinding
 
@@ -49,12 +53,12 @@ class DetailFragment : Fragment() {
 
        viewModel.article.observe(viewLifecycleOwner) {
 
-
-
-           val data = StoreInformation(null, it.placeName,"","",null)
+           val data = PlaceSelectData(StoreInformation(null, it.placeName,"","",it.latitude,it.longitude), Place(),
+               Journey())
 
            binding.detailAddStore.setOnClickListener {
                findNavController().navigate(NavigationDirections.detailFragmentAddPlaceFragment(data))
+               Log.v("placeSelectDataArgs:detailArg","$data")
            }
 
        }

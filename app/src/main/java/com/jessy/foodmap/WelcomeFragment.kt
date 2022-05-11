@@ -18,6 +18,8 @@ class WelcomeFragment : Fragment() {
         savedInstanceState: Bundle?,
     ): View? {
         (activity as MainActivity).hidBottomNavigation()
+        (activity as MainActivity).hideToolBar()
+
         binding = DataBindingUtil.inflate(
             inflater, R.layout.fragment_welcome, container, false)
 //        //  binding = DataBindingUtil.setContentView(activity as Activity, R.layout.fragment_login)

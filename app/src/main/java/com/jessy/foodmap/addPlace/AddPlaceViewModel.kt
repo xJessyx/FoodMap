@@ -7,7 +7,6 @@ import androidx.lifecycle.LiveData
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.google.android.gms.maps.model.LatLng
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.jessy.foodmap.data.Journey
@@ -40,6 +39,7 @@ class AddPlaceViewModel : ViewModel() {
 
     fun getAllJourney() {
     db.collection("journeys")
+        .whereNotEqualTo("status",2)
         .get()
         .addOnSuccessListener { result ->
             for (document in result) {

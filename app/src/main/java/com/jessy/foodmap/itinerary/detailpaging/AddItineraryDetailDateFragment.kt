@@ -3,20 +3,25 @@ package com.jessy.foodmap.itinerary.detailpaging
 import android.annotation.SuppressLint
 import android.content.ContentValues
 import android.content.pm.PackageManager
+import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.ItemTouchHelper
 import com.google.android.libraries.places.api.Places
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.jessy.foodmap.MainActivity
+import com.jessy.foodmap.NavigationDirections
 import com.jessy.foodmap.R
 import com.jessy.foodmap.data.Journey
 import com.jessy.foodmap.data.Place
+import com.jessy.foodmap.data.PlaceSelectData
+import com.jessy.foodmap.data.StoreInformation
 import com.jessy.foodmap.databinding.FragmentAddItineraryDetailDateBinding
 import com.jessy.foodmap.itinerary.ItemTouchHelperCallback
 import com.utsman.samplegooglemapsdirection.kotlin.model.DirectionResponses
@@ -27,6 +32,8 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET
 import retrofit2.http.Query
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter
 
 
 class AddItineraryDetailDateFragment(position: Int, journey: Journey) : Fragment() {
@@ -58,6 +65,43 @@ class AddItineraryDetailDateFragment(position: Int, journey: Journey) : Fragment
             it?.let {
                 calculateTravelTime(it)
             }
+        }
+
+
+        val today = LocalDate.now()
+        val fmt = DateTimeFormatter.ofPattern("yyyy-MM-dd")
+
+        val parseStartDate = LocalDate.parse(journeyArg.startDate, fmt)
+        val parseEndDate = LocalDate.parse(journeyArg.endDate, fmt)
+
+
+        if(journeyArg.userId == "32fRAA8nlkV2gAojqHB1" && journeyArg.share == false) {
+
+            if (today.isBefore(parseStartDate)) {
+                binding.itineraryDetailFabBtn.visibility = View.VISIBLE
+                Log.v("today< start", "$today <  $parseStartDate")
+
+            } else if (today.isAfter(parseEndDate)) {
+                binding.itineraryDetailFabBtn.visibility = View.GONE
+
+                Log.v("today > end", "$today >  $parseEndDate")
+
+            } else {
+                binding.itineraryDetailFabBtn.visibility = View.VISIBLE
+                Log.v("start <today< end", " $parseStartDate < $today <  $parseEndDate ")
+            }
+        }
+
+        binding.itineraryDetailFabBtn.setOnClickListener {
+
+
+                val selectItem = PlaceSelectData(StoreInformation(),
+                    Place("","",index+1,0,0,0,0,null,null), Journey(journeyArg.id,journeyArg.image,journeyArg.name,journeyArg.startDate,journeyArg.endDate,journeyArg.totalDay,journeyArg.status,journeyArg.userId,journeyArg.share))
+
+                findNavController().navigate(NavigationDirections.addItineraryDetailDateFragmentFoodMapSearchFragment(selectItem))
+                Log.v("selectItem","${selectItem.place},${selectItem.journey}")
+
+
         }
 
         return binding.root

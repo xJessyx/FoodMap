@@ -20,7 +20,14 @@
         android:id="@+id/foodMapSearchFragment"
         android:name="com.jessy.foodmap.foodMapSearch.FoodMapSearchFragment"
         android:label="fragment_food_map_search"
-        tools:layout="@layout/fragment_food_map_search" />
+        tools:layout="@layout/fragment_food_map_search" >
+
+        <argument android:name="placeSelectDataKey"
+            app:argType="com.jessy.foodmap.data.PlaceSelectData"
+            app:nullable="true"/>
+
+    </fragment>
+
     <fragment
         android:id="@+id/itineraryPlanningFragment"
         android:name="com.jessy.foodmap.itinerary.ItineraryPlanningFragment"
@@ -68,9 +75,14 @@
         android:id="@+id/addPlaceFragment"
         android:name="com.jessy.foodmap.addPlace.AddPlaceFragment"
         android:label="AddPlaceFragment">
-         <argument android:name="storeKey"
-            app:argType="com.jessy.foodmap.data.StoreInformation"
-            app:nullable="false"/>
+<!--         <argument android:name="storeKey"-->
+<!--            app:argType="com.jessy.foodmap.data.StoreInformation"-->
+<!--            app:nullable="false"/>-->
+
+        <argument android:name="placeSelectDataKey"
+            app:argType="com.jessy.foodmap.data.PlaceSelectData"
+            app:nullable="true"/>
+
     </fragment>
 
     <fragment
