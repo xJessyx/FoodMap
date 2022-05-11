@@ -61,7 +61,6 @@ class FoodMapSearchFragment : Fragment(), OnMapReadyCallback,
     private lateinit var placesClient: PlacesClient
     lateinit var autocompleteSessionToken: AutocompleteSessionToken
     var predictionList = mutableListOf<AutocompletePrediction>()
-   // var getStoreLatLng: LatLng? = null
 
     var oriLocation: Location? = null
 
@@ -76,7 +75,6 @@ class FoodMapSearchFragment : Fragment(), OnMapReadyCallback,
         binding.lifecycleOwner = viewLifecycleOwner
 
         var placeSelectDataArgs = FoodMapSearchFragmentArgs.fromBundle(requireArguments()).placeSelectDataKey
-            Log.v("placeSelectDataArgs","${placeSelectDataArgs}")
         val adapter =
 
             FoodMapSearchAdapter(FoodMapSearchAdapter.OnClickListener {
@@ -85,7 +83,6 @@ class FoodMapSearchFragment : Fragment(), OnMapReadyCallback,
                     it.longitude!!), 12.0f))
 
             }, placeSelectDataArgs)
-        Log.v ("placeSelectDataArgs:foodmapsearchArg","$placeSelectDataArgs")
 
         binding.searchRecyclerView.adapter = adapter
         binding.viewModel = viewModel
@@ -131,7 +128,6 @@ class FoodMapSearchFragment : Fragment(), OnMapReadyCallback,
         viewModel.getSuggestionsList.observe(viewLifecycleOwner){
             adapter.submitList(it)
             adapter.notifyDataSetChanged()
-                Log.v("it","$it")
         }
         return binding.root
     }
