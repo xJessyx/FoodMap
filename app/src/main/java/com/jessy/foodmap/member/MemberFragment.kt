@@ -11,6 +11,7 @@ import com.google.android.material.tabs.TabLayoutMediator
 import com.jessy.foodmap.MainActivity
 import com.jessy.foodmap.databinding.FragmentMemberBinding
 import com.jessy.foodmap.itinerary.paging.MyItineraryPagingViewModel
+import com.jessy.foodmap.login.UserManager.Companion.user
 
 
 class MemberFragment : Fragment() {
@@ -29,6 +30,9 @@ class MemberFragment : Fragment() {
         val pageAdapter = MemberPagingAdapter(requireActivity().supportFragmentManager, lifecycle)
         binding.memberViewpager2.adapter = pageAdapter
         binding.lifecycleOwner = viewLifecycleOwner
+        binding.viewModel =viewModel
+
+        viewModel.memberImg.value = user!!.image
 
         viewModel.getFireBaseUser()
         viewModel.getUserLiveData.observe(viewLifecycleOwner){

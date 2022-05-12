@@ -29,31 +29,31 @@ class InviteViewModel(journeyArg: Journey) : ViewModel() {
 
    fun  addFireBaseInvitations(){
 
-      db.collection("invitations").document(inviteId)
-         .set()
-         .addOnSuccessListener {
-            Log.d(ContentValues.TAG, "DocumentSnapshot successfull")
-         }
-         .addOnFailureListener { e ->
-            Log.w(ContentValues.TAG, "Error adding document", e)
-         }
+//      db.collection("invitations").document(inviteId)
+//         .set()
+//         .addOnSuccessListener {
+//            Log.d(ContentValues.TAG, "DocumentSnapshot successfull")
+//         }
+//         .addOnFailureListener { e ->
+//            Log.w(ContentValues.TAG, "Error adding document", e)
+//         }
    }
 
 
    fun addInvitationsItem(){
 
-         val data = Invite(
-
-            invite_status = 0,
-            journey_id = ,
-            journey_name = ,
-            receive_id = ,
-            receive_name = ,
-            sender_id = ,
-            sender_name =
-
-         )
-      _addInvite.value = data
+//         val data = Invite(
+//
+//            invite_status = 0,
+//            journey_id = ,
+//            journey_name = ,
+//            receive_id = ,
+//            receive_name = ,
+//            sender_id = ,
+//            sender_name =
+//
+//         )
+//      _addInvite.value = data
 
    }
 

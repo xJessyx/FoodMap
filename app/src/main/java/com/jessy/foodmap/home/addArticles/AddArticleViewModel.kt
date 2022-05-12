@@ -10,6 +10,7 @@ import androidx.lifecycle.ViewModel
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.jessy.foodmap.data.Article
+import com.jessy.foodmap.login.UserManager
 
 class AddArticleViewModel :ViewModel(){
     val db = Firebase.firestore
@@ -53,7 +54,7 @@ class AddArticleViewModel :ViewModel(){
             author = "jessy",
             authorImage = "https://images.unsplash.com/photo-1504203772830-87fba72385ee?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8Ym95fGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60",
             totalLike = 0,
-            userId = "32fRAA8nlkV2gAojqHB1",
+            userId = UserManager.user!!.id,
             title = articleTitle.value!!,
             content = articleConent.value!!,
             placeName = articlePlaceName!!,

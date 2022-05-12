@@ -7,7 +7,7 @@
     app:startDestination="@id/welcomeFragment">
     <fragment
         android:id="@+id/loginFragment"
-        android:name="com.jessy.foodmap.LoginFragment"
+        android:name="com.jessy.foodmap.login.LoginFragment"
         android:label="LoginFragment" />
     <fragment
         android:id="@+id/homeFragment"

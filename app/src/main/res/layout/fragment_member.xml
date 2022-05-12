@@ -5,7 +5,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
     <data>
-
+        <variable
+            name="viewModel"
+            type="com.jessy.foodmap.member.MemberViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -40,16 +42,28 @@
 
         </androidx.appcompat.widget.Toolbar>
 
-        <ImageView
-            android:id="@+id/member_img"
-            android:layout_width="146dp"
-            android:layout_height="143dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
-            android:background="@drawable/shape_round3"
-            android:src="@drawable/person_man"
+        <androidx.cardview.widget.CardView
+            android:id="@+id/member_card"
+            android:layout_width="145dp"
+            android:layout_height="145dp"
+            app:cardCornerRadius="360dp"
+            android:layout_marginLeft="16dp"
+            android:scaleType="centerCrop"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/member_toolbar" />
+            app:layout_constraintTop_toBottomOf="@+id/member_toolbar">
+
+
+
+        <ImageView
+
+            android:id="@+id/member_img"
+            android:layout_width="145dp"
+            android:layout_height="145dp"
+            android:layout_gravity="center"
+            imageUrl="@{viewModel.memberImg}"
+       />
+
+        </androidx.cardview.widget.CardView>
 
         <TextView
             android:id="@+id/member_tv_name"
@@ -60,8 +74,8 @@
             android:text="name："
             android:textColor="#333333"
             android:textSize="20sp"
-            app:layout_constraintStart_toEndOf="@+id/member_img"
-            app:layout_constraintTop_toTopOf="@+id/member_img"
+            app:layout_constraintStart_toEndOf="@+id/member_card"
+            app:layout_constraintTop_toTopOf="@+id/member_card"
             tools:text="name：" />
 
 
@@ -197,20 +211,11 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/member_img"
+            app:layout_constraintTop_toBottomOf="@+id/member_card"
             app:tabIndicatorColor="#31404E"
             app:tabIndicatorHeight="4dp"
             app:tabSelectedTextColor="#31404E">
 
-            <!--        <com.google.android.material.tabs.TabItem-->
-            <!--            android:layout_width="wrap_content"-->
-            <!--            android:layout_height="wrap_content"-->
-            <!--            android:text="收藏" />-->
-
-            <!--        <com.google.android.material.tabs.TabItem-->
-            <!--            android:layout_width="wrap_content"-->
-            <!--            android:layout_height="wrap_content"-->
-            <!--            android:text="我的迷霧地圖" />-->
         </com.google.android.material.tabs.TabLayout>
 
 

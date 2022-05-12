@@ -18,6 +18,7 @@ import com.jessy.foodmap.data.Place
 import com.jessy.foodmap.data.PlaceSelectData
 import com.jessy.foodmap.data.StoreInformation
 import com.jessy.foodmap.databinding.FragmentDetailBinding
+import com.jessy.foodmap.login.UserManager
 
 class DetailFragment : Fragment() {
     //    private val viewModel: DetailViewModel by lazy {
@@ -86,7 +87,7 @@ class DetailFragment : Fragment() {
             if(collectSum % 2 != 0) {
                 binding.detailCollect.setBackgroundResource(R.drawable.star2)
 
-                favoriteUsersItem.add(0, "32fRAA8nlkV2gAojqHB1")
+                favoriteUsersItem.add(0, UserManager.user!!.id)
                 db.collection("articles").document(articleKey.id)
                     .update("favoriteUsers", favoriteUsersItem)
             }else{

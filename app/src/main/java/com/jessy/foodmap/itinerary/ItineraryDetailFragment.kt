@@ -21,6 +21,7 @@ import com.jessy.foodmap.data.PlaceSelectData
 import com.jessy.foodmap.data.StoreInformation
 import com.jessy.foodmap.itinerary.detailpaging.ItineraryDetailPagingAdapter
 import com.jessy.foodmap.databinding.FragmentItineraryDetailBinding
+import com.jessy.foodmap.login.UserManager
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 import java.time.temporal.ChronoUnit
@@ -62,7 +63,7 @@ class ItineraryDetailFragment : BottomSheetDialogFragment() {
         val parseStartDate = LocalDate.parse(journeyArg.startDate, fmt)
         val parseEndDate = LocalDate.parse(journeyArg.endDate, fmt)
 
-        if(journeyArg.userId == "32fRAA8nlkV2gAojqHB1" && journeyArg.share == false) {
+        if(journeyArg.userId == UserManager.user!!.id && journeyArg.share == false) {
             if (today.isBefore(parseStartDate)) {
                 //binding.itineraryDetailFabBtn.visibility = View.VISIBLE
                 Log.v("today< start", "$today <  $parseStartDate")

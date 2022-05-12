@@ -1,6 +1,7 @@
 package com.jessy.foodmap.member
 
 import android.content.ContentValues
+import android.os.UserManager
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -9,6 +10,7 @@ import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.jessy.foodmap.data.Journey
 import com.jessy.foodmap.data.User
+import com.jessy.foodmap.login.UserManager.Companion.user
 
 class MemberViewModel: ViewModel() {
 
@@ -19,9 +21,11 @@ class MemberViewModel: ViewModel() {
     val getUserLiveData: LiveData<List<User>>
         get() = _getUserLiveData
 
+    var memberImg = MutableLiveData<String>()
+
     fun getFireBaseUser(){
-        db.collection("users")
-            .whereEqualTo("id","32fRAA8nlkV2gAojqHB1")
+        db.collection("users",)
+            .whereEqualTo("id", user?.id)
             .get()
             .addOnSuccessListener { result ->
                 for (document in result) {

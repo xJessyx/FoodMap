@@ -9,6 +9,7 @@ import com.google.firebase.firestore.Query
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.jessy.foodmap.data.Journey
+import com.jessy.foodmap.login.UserManager.Companion.user
 
 class MyItineraryPagingViewModel : ViewModel() {
 
@@ -30,7 +31,7 @@ class MyItineraryPagingViewModel : ViewModel() {
     fun getFireBaseJourney() {
 
         db.collection("journeys")
-            .whereEqualTo("userId","32fRAA8nlkV2gAojqHB1")
+            .whereEqualTo("userId", user?.id)
             .whereEqualTo("share",false)
             .orderBy("startDate", Query.Direction.DESCENDING)
             .get()

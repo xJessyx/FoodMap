@@ -24,6 +24,7 @@ import com.jessy.foodmap.data.PlaceSelectData
 import com.jessy.foodmap.data.StoreInformation
 import com.jessy.foodmap.databinding.FragmentAddItineraryDetailDateBinding
 import com.jessy.foodmap.itinerary.ItemTouchHelperCallback
+import com.jessy.foodmap.login.UserManager
 import com.utsman.samplegooglemapsdirection.kotlin.model.DirectionResponses
 import retrofit2.Call
 import retrofit2.Callback
@@ -75,7 +76,7 @@ class AddItineraryDetailDateFragment(position: Int, journey: Journey) : Fragment
         val parseEndDate = LocalDate.parse(journeyArg.endDate, fmt)
 
 
-        if(journeyArg.userId == "32fRAA8nlkV2gAojqHB1" && journeyArg.share == false) {
+        if(journeyArg.userId == UserManager.user!!.id && journeyArg.share == false) {
 
             if (today.isBefore(parseStartDate)) {
                 binding.itineraryDetailFabBtn.visibility = View.VISIBLE

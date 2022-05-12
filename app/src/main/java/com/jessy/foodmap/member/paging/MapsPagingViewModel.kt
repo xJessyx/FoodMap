@@ -9,6 +9,7 @@ import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.jessy.foodmap.data.Journey
 import com.jessy.foodmap.data.Place
+import com.jessy.foodmap.login.UserManager
 
 class MapsPagingViewModel :ViewModel() {
 
@@ -28,7 +29,7 @@ class MapsPagingViewModel :ViewModel() {
     fun getMyAllJourney(){
 
         db.collection("journeys")
-            .whereEqualTo("userId","32fRAA8nlkV2gAojqHB1")
+            .whereEqualTo("userId", UserManager.user!!.id)
             .whereEqualTo("status",2)
             .get()
             .addOnSuccessListener { result ->
