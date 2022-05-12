@@ -2,9 +2,11 @@ package com.jessy.foodmap.itinerary.paging
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.jessy.foodmap.NavigationDirections
 import com.jessy.foodmap.data.Journey
 import com.jessy.foodmap.databinding.ItemMyLtineraryPagingBinding
 import com.jessy.foodmap.itinerary.ITHelperInterface
@@ -20,6 +22,10 @@ class MyItineraryPagingAdapter (private val onClickListener: OnClickListener) :
         fun bind(journey: Journey) {
             binding.journey = journey
             binding.executePendingBindings()
+            binding.myitineraryCoeditName.setOnClickListener {
+                it.findNavController()
+                    .navigate(NavigationDirections.myItineraryPagingFragmentInviteFragment(journey))
+            }
 
         }
 
@@ -51,9 +57,9 @@ class MyItineraryPagingAdapter (private val onClickListener: OnClickListener) :
 
            holder.bind(item)
             when (item.status) {
-                0 -> holder.binding.recommendStatus.setText("規劃中")
-                1 -> holder.binding.recommendStatus.setText("進行中")
-                2 -> holder.binding.recommendStatus.setText("已結束")
+                0 -> holder.binding.myitineraryStatus.setText("規劃中")
+                1 -> holder.binding.myitineraryStatus.setText("進行中")
+                2 -> holder.binding.myitineraryStatus.setText("已結束")
             }
 
         }

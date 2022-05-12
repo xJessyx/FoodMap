@@ -26,13 +26,11 @@ class MyItineraryPagingFragment : Fragment(){
         savedInstanceState: Bundle?,
     ): View? {
         val binding = FragmentMyItineraryPagingBinding.inflate(inflater, container, false)
-
+        binding.lifecycleOwner = viewLifecycleOwner
         binding.myitineraryRecyclerView.adapter = MyItineraryPagingAdapter1(MyItineraryPagingAdapter1.OnClickListener{
             viewModel.navigateToDetailDate(it)
         }
         )
-
-        binding.lifecycleOwner = viewLifecycleOwner
         binding.viewModel = viewModel
         viewModel.getFireBaseJourney()
 

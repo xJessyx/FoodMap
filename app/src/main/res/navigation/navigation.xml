@@ -99,6 +99,15 @@
         android:id="@+id/welcomeFragment"
         android:name="com.jessy.foodmap.WelcomeFragment"
         android:label="WelcomeFragment" />
+
+    <fragment
+        android:id="@+id/inviteFragment"
+        android:name="com.jessy.foodmap.itinerary.invite.InviteFragment"
+        android:label="InviteFragment">
+        <argument android:name="journeyKey"
+            app:argType="com.jessy.foodmap.data.Journey"
+            app:nullable="false"/>
+    </fragment>
 <!--    <fragment-->
 <!--        android:id="@+id/itineraryDetailEndFragment"-->
 <!--        android:name="com.jessy.foodmap.itinerary.end.ItineraryDetailEndFragment"-->
@@ -185,6 +194,10 @@
         app:popUpToInclusive="true" />
 
         <action android:id="@+id/welcomeFragment_loginFragment" app:destination="@id/loginFragment"
+        app:popUpTo="@id/navigation"
+        app:popUpToInclusive="true" />
+
+    <action android:id="@+id/myItineraryPagingFragment_inviteFragment" app:destination="@id/inviteFragment"
         app:popUpTo="@id/navigation"
         app:popUpToInclusive="true" />
 

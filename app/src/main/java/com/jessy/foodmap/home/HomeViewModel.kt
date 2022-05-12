@@ -46,7 +46,6 @@ class HomeViewModel : ViewModel(){
                     getAllArticles.add(data)
                 }
                 _getAllArticlesLiveData.value = getAllArticles
-
             }
             .addOnFailureListener { exception ->
                 Log.d(ContentValues.TAG, "Error getting documents: ", exception)
