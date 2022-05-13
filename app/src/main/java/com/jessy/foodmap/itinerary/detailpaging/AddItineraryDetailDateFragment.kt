@@ -76,7 +76,7 @@ class AddItineraryDetailDateFragment(position: Int, journey: Journey) : Fragment
         val parseEndDate = LocalDate.parse(journeyArg.endDate, fmt)
 
 
-        if(journeyArg.userId == UserManager.user!!.id && journeyArg.share == false) {
+        if(journeyArg.userId == UserManager.user?.id && !journeyArg.share) {
 
             if (today.isBefore(parseStartDate)) {
                 binding.itineraryDetailFabBtn.visibility = View.VISIBLE

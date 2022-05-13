@@ -10,16 +10,22 @@
             type="com.jessy.foodmap.itinerary.invite.InviteViewModel" />
     </data>
 
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
     <ScrollView
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_height="match_parent">
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:context=".itinerary.invite.InviteFragment">
+        android:layout_height="0dp">
 
 
         <ImageView
@@ -99,8 +105,8 @@
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/invite_tabs"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="32dp"
+            android:layout_height="56dp"
+            android:layout_marginTop="16dp"
             android:textSize="18sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -112,20 +118,24 @@
 
         </com.google.android.material.tabs.TabLayout>
 
-        <androidx.viewpager2.widget.ViewPager2
-            android:id="@+id/invite_viewpager2"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:orientation="horizontal"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/invite_tabs">
+            <androidx.viewpager2.widget.ViewPager2
+                android:id="@+id/invite_viewpager2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                app:layout_constraintTop_toBottomOf="@id/invite_tabs"
+                app:layout_constraintBottom_toBottomOf="parent"
+          >
+
+            </androidx.viewpager2.widget.ViewPager2>
 
 
-        </androidx.viewpager2.widget.ViewPager2>
+
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 
     </ScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>
+
 </layout>

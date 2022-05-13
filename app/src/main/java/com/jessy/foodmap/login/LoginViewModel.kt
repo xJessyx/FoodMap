@@ -15,31 +15,37 @@ class LoginViewModel : ViewModel() {
     val db = Firebase.firestore
     var userName: String = ""
     var email: String = ""
+    var image: String = ""
     val _addUser = MutableLiveData<User>()
     val addUser: LiveData<User>
         get() = _addUser
     var userDocumentId = db.collection("users").document().id
     var getUser = mutableListOf<User>()
 
+    val _newUser = MutableLiveData<String>()
+    val newUser: LiveData<String>
+        get() = _newUser
+
     val _getUserLiveData = MutableLiveData<List<User>>()
     val getUserLiveData: LiveData<List<User>>
         get() = _getUserLiveData
 
     fun addUser() {
-    Log.v("Data","data")
+        Log.v("Data1", "data")
         val data = User(
-            age = 0,
+            age = 18,
             email = email,
-            gender = "",
+            gender = "M",
             id = userDocumentId,
-            image = "",
-            level = 0,
+            image = image,
+            level = 1,
             name = userName
         )
-        Log.v("Data","$data")
+        Log.v("Data2", "$data")
 
         _addUser.value = data
-
+        UserManager.user = data
+        Log.v("user add ", "${UserManager.user}")
     }
 
     fun addFireBaseUser() {
@@ -68,15 +74,21 @@ class LoginViewModel : ViewModel() {
                     val data = document.toObject(User::class.java)
                     getUser.add(data)
                     UserManager.user = data
-                    Log.v("user","${UserManager.user}")
+                    Log.v("user get", "${UserManager.user}")
                 }
-                _getUserLiveData.value = getUser
+                if (result.isEmpty()) {
+                    Log.v("_newUser.value", "${_newUser.value}")
+                    _newUser.value = "true"
+                    Log.v("_newUser.value", "${_newUser.value}")
+                    Log.v("result.isEmpty()", "${result.isEmpty()}")
+                } else {
+                    _getUserLiveData.value = getUser
+                    Log.v("getUser", "${getUser}")
+                }
 
             }
             .addOnFailureListener { exception ->
                 Log.d(ContentValues.TAG, "Error getting documents: ", exception)
-                Log.v("Data","data")
-                addUser()
 
             }
 

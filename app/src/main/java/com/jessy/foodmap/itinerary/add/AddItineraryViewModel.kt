@@ -8,6 +8,7 @@ import androidx.lifecycle.ViewModel
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.jessy.foodmap.data.Journey
+import com.jessy.foodmap.login.UserManager.Companion.user
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 import java.time.temporal.ChronoUnit
@@ -59,7 +60,8 @@ class AddItineraryViewModel : ViewModel() {
             endDate =  itineraryEndDate.value!!,
             image = itineraryImage ?: "",
             totalDay = itineraryTotalDay,
-            share = false
+            share = false,
+            userId = user!!.id
         )
         _addItinerary.value = data
 

@@ -12,6 +12,7 @@ import com.jessy.foodmap.R
 import com.jessy.foodmap.data.Article
 import com.jessy.foodmap.data.Journey
 import com.jessy.foodmap.login.UserManager
+import com.jessy.foodmap.login.UserManager.Companion.user
 
 class HomeViewModel : ViewModel(){
 
@@ -55,7 +56,7 @@ class HomeViewModel : ViewModel(){
 
     fun getFireBaseArticleCollect(){
         db.collection("articles")
-            .whereArrayContains("favoriteUsers", UserManager.user!!.id)
+            .whereArrayContains("favoriteUsers", user!!.id)
            // .orderBy("createdTime", Query.Direction.DESCENDING)
             .get()
             .addOnSuccessListener { result ->

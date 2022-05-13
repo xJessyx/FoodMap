@@ -32,7 +32,7 @@ class MemberFragment : Fragment() {
         binding.lifecycleOwner = viewLifecycleOwner
         binding.viewModel =viewModel
 
-        viewModel.memberImg.value = user!!.image
+        viewModel.memberImg.value = user?.image
 
         viewModel.getFireBaseUser()
         viewModel.getUserLiveData.observe(viewLifecycleOwner){

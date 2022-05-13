@@ -9,12 +9,16 @@ import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.jessy.foodmap.data.Invite
 import com.jessy.foodmap.data.Journey
+import com.jessy.foodmap.login.UserManager
+import com.jessy.foodmap.login.UserManager.Companion.user
 
 class InviteViewModel(journeyArg: Journey) : ViewModel() {
 
    val db = Firebase.firestore
    var inviteImg=MutableLiveData<String>()
    var inviteId = db.collection("invitations").document().id
+   val shareJourney = journeyArg
+
 
 
    val _addInvite = MutableLiveData<Invite>()
@@ -29,32 +33,42 @@ class InviteViewModel(journeyArg: Journey) : ViewModel() {
 
    fun  addFireBaseInvitations(){
 
-//      db.collection("invitations").document(inviteId)
-//         .set()
-//         .addOnSuccessListener {
-//            Log.d(ContentValues.TAG, "DocumentSnapshot successfull")
-//         }
-//         .addOnFailureListener { e ->
-//            Log.w(ContentValues.TAG, "Error adding document", e)
-//         }
+      val dataObject = addInvite.value
+      if (dataObject != null) {
+         db.collection("invitations").document(inviteId)
+            .set(dataObject)
+            .addOnSuccessListener {
+               Log.d(ContentValues.TAG, "DocumentSnapshot successfull")
+            }
+            .addOnFailureListener { e ->
+               Log.w(ContentValues.TAG, "Error adding document", e)
+            }
+      }
    }
 
 
-   fun addInvitationsItem(){
-
-//         val data = Invite(
-//
-//            invite_status = 0,
-//            journey_id = ,
-//            journey_name = ,
-//            receive_id = ,
-//            receive_name = ,
-//            sender_id = ,
-//            sender_name =
-//
-//         )
-//      _addInvite.value = data
+   fun addInvitationsItem(email: String) {
+         val data = Invite(
+            id = inviteId,
+            inviteStatus = 0,
+            journeyId = shareJourney.id,
+            journeyName = shareJourney.name,
+            receiveEmail=user!!.email,
+            receiveId = user!!.id,
+            receiveName = user!!.name,
+            senderEmail = email,
+            senderId = "",
+            senderName ="",
+            senderImage = ""
+         )
+      _addInvite.value = data
 
    }
+
+
+
+
+
+
 
 }

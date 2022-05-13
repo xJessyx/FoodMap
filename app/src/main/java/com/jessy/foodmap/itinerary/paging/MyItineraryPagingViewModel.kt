@@ -8,12 +8,15 @@ import androidx.lifecycle.ViewModel
 import com.google.firebase.firestore.Query
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
+import com.jessy.foodmap.data.Invite
 import com.jessy.foodmap.data.Journey
+import com.jessy.foodmap.login.UserManager
 import com.jessy.foodmap.login.UserManager.Companion.user
 
 class MyItineraryPagingViewModel : ViewModel() {
 
-
+//    val ownerImage=MutableLiveData<String>()
+  //  val coeditImage:String? =null
     val db = Firebase.firestore
     var getAllJourney = mutableListOf<Journey>()
 
@@ -25,7 +28,11 @@ class MyItineraryPagingViewModel : ViewModel() {
     val navigateToDetailDate: LiveData<Journey>
         get() = _navigateToDetailDate
 
+    var checkInviteList = mutableListOf<Invite>()
 
+    val _checkInvite = MutableLiveData<List<Invite>>()
+    val checkInvite: LiveData<List<Invite>>
+        get() = _checkInvite
 
 
     fun getFireBaseJourney() {
@@ -33,7 +40,9 @@ class MyItineraryPagingViewModel : ViewModel() {
         db.collection("journeys")
             .whereEqualTo("userId", user?.id)
             .whereEqualTo("share",false)
-            .orderBy("startDate", Query.Direction.DESCENDING)
+            .whereArrayContains("coEditUser", user!!.id)
+
+        .orderBy("startDate", Query.Direction.DESCENDING)
             .get()
                 .addOnSuccessListener { result ->
                 for (document in result) {
@@ -55,5 +64,53 @@ class MyItineraryPagingViewModel : ViewModel() {
 
     fun onDetailNavigated() {
         _navigateToDetailDate.value = null
+    }
+
+    fun checkInviteItem(){
+        db.collection("invitations")
+            .whereEqualTo("senderEmail", user?.email)
+            .whereEqualTo("inviteStatus",0)
+            .get()
+            .addOnSuccessListener { result ->
+                for (document in result) {
+                    Log.d(ContentValues.TAG, "${document.id} => ${document.data}")
+                    val data = document.toObject(Invite::class.java)
+                    checkInviteList.add(data)
+                }
+                _checkInvite.value = checkInviteList
+
+            }
+            .addOnFailureListener { exception ->
+                Log.d(ContentValues.TAG, "Error getting documents: ", exception)
+            }
+    }
+
+    fun updateInviteStatusTrue(id: String) {
+        db.collection("invitations").document(id)
+            .update("inviteStatus", 1)
+    }
+
+    fun updateInviteStatusFalse(id: String){
+        db.collection("invitations").document(id)
+            .update("inviteStatus", 2)
+    }
+
+    fun updateCoEdit(journeyId: String){
+        var coEditUser= mutableListOf<String>()
+        coEditUser.add(user!!.id)
+
+        db.collection("journeys").document(journeyId)
+            .update("coEditUser", coEditUser)
+    }
+
+    fun updateSenderData(id: String, senderId: String, senderImage: String, senderName: String,) {
+
+        val SenderData = mapOf(
+            senderId to senderId,
+            senderImage to senderImage,
+            senderName to senderName
+        )
+        db.collection("invitations").document(id)
+            .update(SenderData)
     }
 }

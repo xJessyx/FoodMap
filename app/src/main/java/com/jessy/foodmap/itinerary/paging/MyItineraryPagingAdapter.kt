@@ -10,6 +10,7 @@ import com.jessy.foodmap.NavigationDirections
 import com.jessy.foodmap.data.Journey
 import com.jessy.foodmap.databinding.ItemMyLtineraryPagingBinding
 import com.jessy.foodmap.itinerary.ITHelperInterface
+import com.jessy.foodmap.login.UserManager
 import java.util.*
 
 class MyItineraryPagingAdapter (private val onClickListener: OnClickListener) :
@@ -22,7 +23,7 @@ class MyItineraryPagingAdapter (private val onClickListener: OnClickListener) :
         fun bind(journey: Journey) {
             binding.journey = journey
             binding.executePendingBindings()
-            binding.myitineraryCoeditName.setOnClickListener {
+            binding.myitineraryCoeditImage.setOnClickListener {
                 it.findNavController()
                     .navigate(NavigationDirections.myItineraryPagingFragmentInviteFragment(journey))
             }

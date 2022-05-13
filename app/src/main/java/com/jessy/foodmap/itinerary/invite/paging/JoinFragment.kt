@@ -1,32 +1,49 @@
 package com.jessy.foodmap.itinerary.invite.paging
 
-import androidx.lifecycle.ViewModelProvider
+import android.app.Activity
 import android.os.Bundle
-import androidx.fragment.app.Fragment
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.jessy.foodmap.R
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.DividerItemDecoration
+import com.jessy.foodmap.databinding.FragmentJoinBinding
+
 
 class JoinFragment : Fragment() {
 
-    companion object {
-        fun newInstance() = JoinFragment()
-    }
-
-    private lateinit var viewModel: JoinViewModel
-
+private val viewModel: JoinViewModel by lazy {
+    ViewModelProvider(this).get(JoinViewModel::class.java)
+}
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View? {
-        return inflater.inflate(R.layout.fragment_join, container, false)
+
+        val binding = FragmentJoinBinding.inflate(inflater, container, false)
+        binding.lifecycleOwner = this
+
+        viewModel.getJoinInviteItem()
+
+       val adapter =JoinAdapter()
+        binding.joinRecyclerView.adapter = adapter
+        binding.viewModel = viewModel
+        binding.joinRecyclerView.addItemDecoration(DividerItemDecoration(activity as Activity, DividerItemDecoration.VERTICAL))
+
+        viewModel.getJoinInvite.observe(viewLifecycleOwner) {
+            it?.let {
+                adapter.submitList(it)
+                adapter.notifyDataSetChanged()
+
+                Log.v("it join", "$it")
+            }
+
+        }
+
+        return binding.root
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(JoinViewModel::class.java)
-        // TODO: Use the ViewModel
-    }
 
 }

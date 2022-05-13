@@ -3,7 +3,11 @@
 xmlns:android="http://schemas.android.com/apk/res/android"
 xmlns:app="http://schemas.android.com/apk/res-auto"
 xmlns:tools="http://schemas.android.com/tools">
-
+<data>
+    <variable
+        name="viewModel"
+        type="com.jessy.foodmap.itinerary.invite.paging.JoinViewModel" />
+</data>
 
 <androidx.constraintlayout.widget.ConstraintLayout
 
@@ -11,14 +15,7 @@ xmlns:tools="http://schemas.android.com/tools">
     android:layout_height="match_parent"
     tools:context=".itinerary.invite.paging.WaitingJoinFragment">
 
-    <TextView
-        android:layout_width="244dp"
-        android:layout_height="367dp"
-        android:text="join"
-        android:textSize="50dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="198dp" />
+
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/waitingJoin_recyclerView"
@@ -29,8 +26,10 @@ xmlns:tools="http://schemas.android.com/tools">
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 

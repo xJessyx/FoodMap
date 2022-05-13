@@ -4,6 +4,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.Lifecycle
 import androidx.viewpager2.adapter.FragmentStateAdapter
+import com.jessy.foodmap.data.Invite
 import com.jessy.foodmap.member.paging.CollectPagingFragment
 import com.jessy.foodmap.member.paging.MapsPagingFragment
 
@@ -12,14 +13,15 @@ class InvitePagingAdapter (fragmentManager: FragmentManager, lifecycle: Lifecycl
 
 
     var fragments: ArrayList<Fragment> = arrayListOf(
-        JoinFragment(),
-        WaitingJoinFragment()
+
+        WaitingJoinFragment(),
+        JoinFragment()
     )
     override fun getItemCount(): Int {
         return fragments.size
     }
 
-    override fun createFragment(position: Int): Fragment {
+    override fun createFragment( position: Int): Fragment {
         return fragments[position]
     }
 

@@ -36,6 +36,7 @@ import com.jessy.foodmap.MainActivity
 import com.jessy.foodmap.NavigationDirections
 import com.jessy.foodmap.R
 import com.jessy.foodmap.databinding.FragmentAddArticleBinding
+import com.jessy.foodmap.login.UserManager
 import java.io.File
 
 
@@ -76,7 +77,6 @@ class AddArticleFragment : Fragment() {
         // Set up a PlaceSelectionListener to handle the response.
         autocompleteFragment.setOnPlaceSelectedListener(object : PlaceSelectionListener {
             override fun onPlaceSelected(place: Place) {
-                // TODO: Get info about the selected place.
                 Log.i(TAG, "Place: ${place.name}, ${place.id}")
                 viewModel.articlePlaceName =  place.name
                 viewModel.articleLatitude = place.latLng?.latitude

@@ -5,11 +5,15 @@ import kotlinx.parcelize.Parcelize
 
 @Parcelize
 data class Invite (
-    var invite_status: Int = 0,
-    var journey_id: String ="",
-    var journey_name: String ="",
-    var receive_id: String ="",
-    var receive_name: String ="",
-    var sender_id: String ="",
-    var sender_name: String =""
+    var id:String ="",
+    var inviteStatus: Int = 0,
+    var journeyId: String ="",
+    var journeyName: String ="",
+    var receiveEmail:String="",
+    var receiveId: String ="",
+    var receiveName: String ="",
+    var senderEmail: String="",
+    var senderId: String ="",
+    var senderName: String ="",
+    var senderImage: String = ""
 ): Parcelable
