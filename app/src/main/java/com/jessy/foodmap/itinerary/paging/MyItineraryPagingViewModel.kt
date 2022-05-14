@@ -10,6 +10,7 @@ import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.jessy.foodmap.data.Invite
 import com.jessy.foodmap.data.Journey
+import com.jessy.foodmap.data.User
 import com.jessy.foodmap.login.UserManager
 import com.jessy.foodmap.login.UserManager.Companion.user
 
@@ -24,6 +25,10 @@ class MyItineraryPagingViewModel : ViewModel() {
     val getAllJourneyLiveData: LiveData<List<Journey>>
         get() = _getAllJourneyLiveData
 
+    val _coEditUserInfos = MutableLiveData<List<User>>()
+    val coEditUserInfos: LiveData<List<User>>
+        get() = _coEditUserInfos
+
     private val _navigateToDetailDate = MutableLiveData<Journey>()
     val navigateToDetailDate: LiveData<Journey>
         get() = _navigateToDetailDate
@@ -35,16 +40,37 @@ class MyItineraryPagingViewModel : ViewModel() {
         get() = _checkInvite
 
 
-    fun getFireBaseJourney() {
+//    fun getFireBaseJourney() {
+//        Log.v("userId","${user?.id}")
+//        db.collection("journeys")
+//           .whereEqualTo("userId", user?.id)
+//            .whereEqualTo("share",false)
+//        .orderBy("startDate", Query.Direction.DESCENDING)
+//            .get()
+//                .addOnSuccessListener { result ->
+//                for (document in result) {
+//                    Log.d(ContentValues.TAG, "${document.id} => ${document.data}")
+//                    val data = document.toObject(Journey::class.java)
+//                    getAllJourney.add(data)
+//                }
+//                _getAllJourneyLiveData.value = getAllJourney
+//
+//            }
+//            .addOnFailureListener { exception ->
+//                Log.d(ContentValues.TAG, "Error getting documents: ", exception)
+//            }
+//        }
 
+
+
+    fun getFireBaseCoEditJourney() {
+        Log.v("coEditUser","${user?.id}")
         db.collection("journeys")
-            .whereEqualTo("userId", user?.id)
-            .whereEqualTo("share",false)
             .whereArrayContains("coEditUser", user!!.id)
-
-        .orderBy("startDate", Query.Direction.DESCENDING)
+            .whereEqualTo("share",false)
+            .orderBy("startDate", Query.Direction.DESCENDING)
             .get()
-                .addOnSuccessListener { result ->
+            .addOnSuccessListener { result ->
                 for (document in result) {
                     Log.d(ContentValues.TAG, "${document.id} => ${document.data}")
                     val data = document.toObject(Journey::class.java)
@@ -56,7 +82,7 @@ class MyItineraryPagingViewModel : ViewModel() {
             .addOnFailureListener { exception ->
                 Log.d(ContentValues.TAG, "Error getting documents: ", exception)
             }
-        }
+    }
 
     fun navigateToDetailDate(journey: Journey) {
         _navigateToDetailDate.value = journey
@@ -95,15 +121,22 @@ class MyItineraryPagingViewModel : ViewModel() {
             .update("inviteStatus", 2)
     }
 
-    fun updateCoEdit(journeyId: String){
+    fun updateCoEdit(journeyId: String,
+                     receiveId: String){
         var coEditUser= mutableListOf<String>()
         coEditUser.add(user!!.id)
+        //coEditUser.add(receiveId)
+     
 
         db.collection("journeys").document(journeyId)
             .update("coEditUser", coEditUser)
     }
 
-    fun updateSenderData(id: String, senderId: String, senderImage: String, senderName: String,) {
+    fun updateSenderData(
+        id: String,
+        senderId: String,
+        senderImage: String,
+        senderName: String) {
 
         val SenderData = mapOf(
             senderId to senderId,
@@ -112,5 +145,29 @@ class MyItineraryPagingViewModel : ViewModel() {
         )
         db.collection("invitations").document(id)
             .update(SenderData)
+    }
+
+    fun queryAllUsers(ids: List<String>) {
+        Log.d("yaya", "queryAllUsers ids=$ids")
+        db.collection("users")
+            .whereIn("id", ids)
+            .get()
+            .addOnSuccessListener { result ->
+
+                Log.d("yaya", "queryAllUsers success")
+                val users = mutableListOf<User>()
+                for (document in result) {
+                    Log.d(ContentValues.TAG, "${document.id} => ${document.data}")
+                    val user = document.toObject(User::class.java)
+                    Log.d("yaya", "user=$user")
+                    users.add(user)
+                }
+
+                _coEditUserInfos.value = users
+
+            }
+            .addOnFailureListener { exception ->
+                Log.d(ContentValues.TAG, "Error getting documents: ", exception)
+            }
     }
 }

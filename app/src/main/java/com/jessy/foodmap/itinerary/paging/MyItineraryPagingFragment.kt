@@ -12,12 +12,9 @@ import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.ItemTouchHelper
 import com.jessy.foodmap.NavigationDirections
 import com.jessy.foodmap.databinding.FragmentMyItineraryPagingBinding
-import com.jessy.foodmap.itinerary.ITHelperInterface
-import com.jessy.foodmap.itinerary.ItemTouchHelperCallback
-import com.jessy.foodmap.login.UserManager.Companion.user
+import com.jessy.foodmap.login.UserManager
 import com.jessy.foodmap.itinerary.paging.MyItineraryPagingAdapter as MyItineraryPagingAdapter1
 
 class MyItineraryPagingFragment : Fragment(){
@@ -32,22 +29,51 @@ class MyItineraryPagingFragment : Fragment(){
     ): View? {
         val binding = FragmentMyItineraryPagingBinding.inflate(inflater, container, false)
         binding.lifecycleOwner = viewLifecycleOwner
-        binding.myitineraryRecyclerView.adapter = MyItineraryPagingAdapter1(MyItineraryPagingAdapter1.OnClickListener{
-            viewModel.navigateToDetailDate(it)
-        }
-        )
-        binding.viewModel = viewModel
-        viewModel.getFireBaseJourney()
-        viewModel.getAllJourneyLiveData.observe(viewLifecycleOwner){
-            (binding.myitineraryRecyclerView.adapter as MyItineraryPagingAdapter1).submitList(it)
-            (binding.myitineraryRecyclerView.adapter as MyItineraryPagingAdapter1).notifyDataSetChanged()
 
+        val adapter = MyItineraryPagingAdapter1(MyItineraryPagingAdapter1.OnClickListener{
+            viewModel.navigateToDetailDate(it)
+        })
+
+        binding.myitineraryRecyclerView.adapter = adapter
+
+        binding.viewModel = viewModel
+
+//        viewModel.getFireBaseJourney()
+        viewModel.getAllJourneyLiveData.observe(viewLifecycleOwner){
+            it?.let {
+
+                Log.d("yaya", "viewModel.getAllJourneyLiveData.observe, it=$it")
+                // query all user's info
+                val allCoworkUsers = mutableListOf<String>()
+                it.forEach { journey ->
+
+                    journey.coEditUser.forEach {
+                        allCoworkUsers.add(it)
+                    }
+                }
+                viewModel.queryAllUsers(allCoworkUsers)
+
+            }
         }
+
+        viewModel.coEditUserInfos.observe(viewLifecycleOwner) {
+            it?.let {
+                adapter.setUsers(it)
+
+                viewModel.getAllJourneyLiveData.value?.let {
+                    adapter.submitList(it)
+                    adapter.notifyDataSetChanged()
+                }
+            }
+        }
+
+        viewModel.getFireBaseCoEditJourney()
+
         viewModel.checkInviteItem()
 
         viewModel.checkInvite.observe(viewLifecycleOwner){
             for (i in 0..it.lastIndex){
-                checkAlertDialog(it[i].journeyName,it[i].receiveName,it[i].journeyId,it[i].id,it[i].senderId,it[i].senderImage,it[i].senderName)
+                checkAlertDialog(it[i].journeyName,it[i].receiveName,it[i].journeyId,it[i].id,it[i].senderId,it[i].senderImage,it[i].senderName,it[i].receiveId)
             Log.v("it","$it")
              }
         }
@@ -71,7 +97,8 @@ class MyItineraryPagingFragment : Fragment(){
         id: String,
         senderId: String,
         senderImage: String,
-        senderName: String
+        senderName: String,
+        receiveId: String
     ) {
         AlertDialog.Builder(activity as Activity)
             .setTitle("旅程邀請")
@@ -79,7 +106,7 @@ class MyItineraryPagingFragment : Fragment(){
             .setPositiveButton("加入") {
                     _, _ -> Toast.makeText(activity as Activity,"已加入行程", Toast.LENGTH_SHORT).show()
                 viewModel.updateInviteStatusTrue(id)
-                viewModel.updateCoEdit(journeyId)
+                viewModel.updateCoEdit(journeyId,receiveId)
             }
             .setNeutralButton("拒絕") { _, _ -> Toast.makeText(activity as Activity, "已拒絕行程", Toast.LENGTH_SHORT).show()
                 viewModel.updateInviteStatusFalse(id)

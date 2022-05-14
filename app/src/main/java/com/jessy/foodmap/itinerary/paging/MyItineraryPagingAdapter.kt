@@ -2,31 +2,82 @@ package com.jessy.foodmap.itinerary.paging
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.ImageView
+import android.widget.TextView
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.jessy.foodmap.NavigationDirections
+import com.jessy.foodmap.R
 import com.jessy.foodmap.data.Journey
+import com.jessy.foodmap.data.User
+import com.jessy.foodmap.databinding.ItemAvatarBinding
 import com.jessy.foodmap.databinding.ItemMyLtineraryPagingBinding
-import com.jessy.foodmap.itinerary.ITHelperInterface
-import com.jessy.foodmap.login.UserManager
-import java.util.*
 
 class MyItineraryPagingAdapter (private val onClickListener: OnClickListener) :
     ListAdapter<Journey, MyItineraryPagingAdapter.MyItineraryPagingViewHolder>(
         MyItineraryPagingAdapter.DiffCallback()) {
 
+
     class MyItineraryPagingViewHolder private constructor(var binding: ItemMyLtineraryPagingBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(journey: Journey) {
+        fun bind(journey: Journey, coEditUsers: List<User>) {
             binding.journey = journey
             binding.executePendingBindings()
-            binding.myitineraryCoeditImage.setOnClickListener {
-                it.findNavController()
-                    .navigate(NavigationDirections.myItineraryPagingFragmentInviteFragment(journey))
+//            binding.myitineraryCoeditImage.setOnClickListener {
+//                it.findNavController()
+//                    .navigate(NavigationDirections.myItineraryPagingFragmentInviteFragment(journey))
+//            }
+
+//            binding.myitineraryCoEditIamge.setOnClickListener {
+//                it.findNavController()
+//                    .navigate(NavigationDirections.myItineraryPagingFragmentInviteFragment(journey))
+//            }
+
+//            for ((index, userId) in journey.coEditUser.withIndex()){
+                for (i in 0..journey.coEditUser.size){
+
+                    if (i == journey.coEditUser.size){
+                        val bindingAvatar = ItemAvatarBinding.inflate(
+                            LayoutInflater.from(binding.root.context),
+                            binding.myitineraryLinearLayout,
+                            false
+                        )
+                       bindingAvatar.imageAvatar.setImageResource(R.drawable.add7)
+
+//                      val addUserImage = "https://cdn-icons-png.flaticon.com/512/3336/3336302.png"
+//                        bindingAvatar.imageUrl = addUserImage
+                       binding.myitineraryLinearLayout.addView(bindingAvatar.root)
+
+
+                        bindingAvatar.imageAvatar.setOnClickListener {
+                            it.findNavController()
+                                .navigate(NavigationDirections.myItineraryPagingFragmentInviteFragment(journey))
+                        }
+
+                    }else{
+                        //val user = coEditUsers.find { it.id == userId }
+                        val user = coEditUsers.find { it.id ==  coEditUsers[i].id}
+
+//                val itemLayout = LayoutInflater.from(binding.root.context).inflate(
+//                    R.layout.item_avatar,
+//                    binding.myitineraryLinearLayout,
+//                    false
+//                )
+                        val bindingAvatar = ItemAvatarBinding.inflate(
+                            LayoutInflater.from(binding.root.context),
+                            binding.myitineraryLinearLayout,
+                            false
+                        )
+                        bindingAvatar.imageUrl = user?.image
+                        binding.myitineraryLinearLayout.addView(bindingAvatar.root)
+                    }
+
             }
+
+
 
         }
 
@@ -39,10 +90,15 @@ class MyItineraryPagingAdapter (private val onClickListener: OnClickListener) :
         }
     }
 
+    var coEditUsers: List<User> = emptyList()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyItineraryPagingViewHolder {
         return MyItineraryPagingViewHolder.from(parent)
 
+    }
+
+    fun setUsers(users: List<User>) {
+        coEditUsers = users
     }
 
     override fun onBindViewHolder(holder: MyItineraryPagingViewHolder, position: Int) {
@@ -56,7 +112,7 @@ class MyItineraryPagingAdapter (private val onClickListener: OnClickListener) :
                 onClickListener.onClick(item)
             }
 
-           holder.bind(item)
+           holder.bind(item, coEditUsers)
             when (item.status) {
                 0 -> holder.binding.myitineraryStatus.setText("規劃中")
                 1 -> holder.binding.myitineraryStatus.setText("進行中")
@@ -64,8 +120,8 @@ class MyItineraryPagingAdapter (private val onClickListener: OnClickListener) :
             }
 
         }
-
     }
+
 
     class DiffCallback : DiffUtil.ItemCallback<Journey>() {
 

@@ -19,16 +19,23 @@ class LoginViewModel : ViewModel() {
     val _addUser = MutableLiveData<User>()
     val addUser: LiveData<User>
         get() = _addUser
+
     var userDocumentId = db.collection("users").document().id
     var getUser = mutableListOf<User>()
-
-    val _newUser = MutableLiveData<String>()
-    val newUser: LiveData<String>
-        get() = _newUser
+//
+//    val _newUser = MutableLiveData<String>()
+//    val newUser: LiveData<String>
+//        get() = _newUser
 
     val _getUserLiveData = MutableLiveData<List<User>>()
     val getUserLiveData: LiveData<List<User>>
         get() = _getUserLiveData
+
+    val _navigateToHome = MutableLiveData<Boolean>()
+    val navigateToHome: LiveData<Boolean>
+        get() = _navigateToHome
+
+
 
     fun addUser() {
         Log.v("Data1", "data")
@@ -45,22 +52,22 @@ class LoginViewModel : ViewModel() {
 
         _addUser.value = data
         UserManager.user = data
-        Log.v("user add ", "${UserManager.user}")
+        Log.v("_addUser.value","${_addUser.value}")
+        Log.v("2 add ", "${UserManager.user}")
     }
 
-    fun addFireBaseUser() {
+    fun addFireBaseUser(user: User) {
 
-        val userObject = addUser.value
-        if (userObject != null) {
-            db.collection("users").document(userDocumentId)
-                .set(userObject)
-                .addOnSuccessListener {
-                    Log.d(ContentValues.TAG, "DocumentSnapshot successfull")
-                }
-                .addOnFailureListener { e ->
-                    Log.w(ContentValues.TAG, "Error adding document", e)
-                }
-        }
+        val userObject = user
+        db.collection("users").document(userDocumentId)
+            .set(userObject)
+            .addOnSuccessListener {
+                Log.d(ContentValues.TAG, "DocumentSnapshot successfull")
+                _navigateToHome.value = true
+            }
+            .addOnFailureListener { e ->
+                Log.w(ContentValues.TAG, "Error adding document", e)
+            }
     }
 
     fun getFireBaseUser() {
@@ -77,12 +84,13 @@ class LoginViewModel : ViewModel() {
                     Log.v("user get", "${UserManager.user}")
                 }
                 if (result.isEmpty()) {
-                    Log.v("_newUser.value", "${_newUser.value}")
-                    _newUser.value = "true"
-                    Log.v("_newUser.value", "${_newUser.value}")
+//                    _newUser.value = "true"
+                    addUser()
+
                     Log.v("result.isEmpty()", "${result.isEmpty()}")
                 } else {
                     _getUserLiveData.value = getUser
+                    _navigateToHome.value = true
                     Log.v("getUser", "${getUser}")
                 }
 
@@ -93,5 +101,9 @@ class LoginViewModel : ViewModel() {
             }
 
 
+    }
+
+    fun onHomeNavigated() {
+        _navigateToHome.value = null
     }
 }

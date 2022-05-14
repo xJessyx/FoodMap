@@ -52,7 +52,8 @@ class AddItineraryViewModel : ViewModel() {
     }
 
     fun addItineraryItem() {
-
+        var coEditUser= mutableListOf<String>()
+        coEditUser.add(user!!.id)
         val data = Journey(
             id = journeyId,
             name =itineraryName.value!!,
@@ -61,7 +62,8 @@ class AddItineraryViewModel : ViewModel() {
             image = itineraryImage ?: "",
             totalDay = itineraryTotalDay,
             share = false,
-            userId = user!!.id
+            userId = user!!.id,
+            coEditUser = coEditUser
         )
         _addItinerary.value = data
 

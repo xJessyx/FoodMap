@@ -15,7 +15,6 @@ import androidx.navigation.fragment.findNavController
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
-import com.google.firebase.firestore.auth.User
 import com.jessy.foodmap.MainActivity
 import com.jessy.foodmap.NavigationDirections
 import com.jessy.foodmap.R
@@ -41,27 +40,30 @@ class LoginFragment : Fragment() {
         binding.lifecycleOwner = viewLifecycleOwner
 
 
-//        viewModel.getUserLiveData.observe(viewLifecycleOwner){
-//            val userManager = UserManager.user
-//            userManager!!.id = viewModel.getUserLiveData.value!![0].id
-//            userManager.name = viewModel.getUserLiveData.value!![0].name
-//            userManager.email =viewModel.getUserLiveData.value!![0].email
-//            userManager.image = viewModel.getUserLiveData.value!![0].image
-        //  }
-        viewModel.newUser.observe(viewLifecycleOwner) {
-            Log.v("1", "1")
-            viewModel.addUser()
-            Log.v("1", "2")
-
-        }
+//        viewModel.newUser.observe(viewLifecycleOwner) {
+//            Log.v("1", "1")
+//            viewModel.addUser()
+//            Log.v("1", "2")
+//
+//        }
 
         viewModel.addUser.observe(viewLifecycleOwner) {
+            Log.v("yaya","viewModel.addUser.observe, it=$it")
             Log.v("2", "111")
-            viewModel.addFireBaseUser()
+            viewModel.addFireBaseUser(it)
             Log.v("2", "1222")
 
         }
 
+        viewModel.navigateToHome.observe(viewLifecycleOwner) {
+
+            it?.let {
+                Toast.makeText(activity as Activity, "login_success", Toast.LENGTH_SHORT).show()
+                findNavController().navigate(NavigationDirections.loginFragmentHomeFragment())
+                viewModel.onHomeNavigated()
+            }
+
+        }
         binding.buttonSignIn.setOnClickListener {
             signIn()
         }
@@ -92,9 +94,6 @@ class LoginFragment : Fragment() {
 
                 viewModel.getFireBaseUser()
 
-
-                Toast.makeText(activity as Activity, "login_success", Toast.LENGTH_SHORT).show()
-                findNavController().navigate(NavigationDirections.loginFragmentHomeFragment())
 
             } catch (e: ApiException) {
                 Log.i("givemepass", "signInResult:failed code=" + e.statusCode)

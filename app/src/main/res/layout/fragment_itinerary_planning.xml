@@ -54,7 +54,7 @@
 
     <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/itineraryPlanning_viewPager2"
-        android:layout_width="410dp"
+        android:layout_width="match_parent"
         android:layout_height="0dp"
         android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"

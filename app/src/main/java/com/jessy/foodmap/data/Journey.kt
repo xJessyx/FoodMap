@@ -14,5 +14,6 @@ data class Journey(
     var totalDay: Int =0,
     var status:Int =0,
     var userId: String = "",
-    var share: Boolean = false
+    var share: Boolean = false,
+    var coEditUser : MutableList<String> = mutableListOf()
 ): Parcelable
