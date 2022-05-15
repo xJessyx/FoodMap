@@ -33,7 +33,7 @@ class InviteFragment : Fragment() {
         val journeyArg = InviteFragmentArgs.fromBundle(requireArguments()).journeyKey
         val viewModel = InviteViewModel(journeyArg)
         binding.viewModel =viewModel
-        val pageAdapter = InvitePagingAdapter(requireActivity().supportFragmentManager, lifecycle)
+        val pageAdapter = InvitePagingAdapter(journeyArg.id,requireActivity().supportFragmentManager, lifecycle)
         binding.inviteViewpager2.adapter = pageAdapter
 
         binding.inviteItineraryName.text = journeyArg.name

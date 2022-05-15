@@ -8,6 +8,7 @@ import androidx.lifecycle.ViewModel
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.jessy.foodmap.data.Invite
+import com.jessy.foodmap.data.Journey
 import com.jessy.foodmap.login.UserManager
 
 class JoinViewModel : ViewModel() {
@@ -26,8 +27,9 @@ class JoinViewModel : ViewModel() {
     val getJoinInvite: LiveData<List<Invite>>
         get() = _getJoinInvite
 
-    fun getWaitJoinInviteItem() {
+    fun getWaitJoinInviteItem(journeyIdArg:String) {
         db.collection("invitations")
+            .whereEqualTo("journeyId",journeyIdArg)
             .whereEqualTo("receiveId", UserManager.user?.id)
             .whereEqualTo("inviteStatus",0)
             .get()
@@ -37,7 +39,7 @@ class JoinViewModel : ViewModel() {
                     val data = document.toObject(Invite::class.java)
                     getWaitJoinInviteList.add(data)
                 }
-                Log.v("getWaitJoinInviteList","$getWaitJoinInviteList")
+                Log.v("FieldValue.arrayUnion","$getWaitJoinInviteList")
                 _getWaitJoinInvite.value = getWaitJoinInviteList
 
             }
@@ -46,9 +48,10 @@ class JoinViewModel : ViewModel() {
             }
     }
 
-    fun getJoinInviteItem() {
+    fun getJoinInviteItem(journeyIdArg:String) {
         db.collection("invitations")
-            .whereEqualTo("receiveName", UserManager.user?.id)
+            .whereEqualTo("journeyId",journeyIdArg)
+            .whereEqualTo("receiveId", UserManager.user?.id)
             .whereEqualTo("inviteStatus",1)
             .get()
             .addOnSuccessListener { result ->

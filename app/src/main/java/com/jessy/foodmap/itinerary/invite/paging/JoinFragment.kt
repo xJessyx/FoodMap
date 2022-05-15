@@ -21,11 +21,12 @@ private val viewModel: JoinViewModel by lazy {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View? {
-
+        val journeyIdArg = requireArguments()["journeyId"]
+        Log.v("journeyIdArg join ","$journeyIdArg")
         val binding = FragmentJoinBinding.inflate(inflater, container, false)
         binding.lifecycleOwner = this
 
-        viewModel.getJoinInviteItem()
+        viewModel.getJoinInviteItem(journeyIdArg as String)
 
        val adapter =JoinAdapter()
         binding.joinRecyclerView.adapter = adapter
@@ -45,5 +46,16 @@ private val viewModel: JoinViewModel by lazy {
         return binding.root
     }
 
+    companion object{
+        fun newInstance(jId: String):Fragment{
+            val fragment = JoinFragment()
+            val bundle = Bundle()
+
+            bundle.putString("journeyId",jId)
+            fragment.arguments = bundle
+            return fragment
+
+        }
+    }
 
 }

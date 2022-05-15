@@ -13,6 +13,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.jessy.foodmap.R
 import com.jessy.foodmap.databinding.FragmentJoinBinding
 import com.jessy.foodmap.databinding.FragmentWaitingJoinBinding
+import com.jessy.foodmap.itinerary.ItineraryDetailFragmentArgs
+import com.jessy.foodmap.itinerary.invite.InviteFragmentArgs
 
 class WaitingJoinFragment : Fragment() {
 
@@ -23,11 +25,13 @@ class WaitingJoinFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View? {
+        val journeyIdArg = requireArguments()["journeyId"]
+        Log.v("journeyIdArg wait","$journeyIdArg")
 
         val binding = FragmentWaitingJoinBinding.inflate(inflater, container, false)
         binding.lifecycleOwner = this
         binding.viewModel = viewModel
-        viewModel.getWaitJoinInviteItem()
+        viewModel.getWaitJoinInviteItem(journeyIdArg as String)
         val adapter =JoinAdapter()
         binding.waitingJoinRecyclerView.adapter = adapter
         binding.waitingJoinRecyclerView.addItemDecoration(DividerItemDecoration(activity as Activity, DividerItemDecoration.VERTICAL))
@@ -42,5 +46,15 @@ class WaitingJoinFragment : Fragment() {
         }
 
         return binding.root    }
+
+    companion object{
+        fun newInstance(jId: String): Fragment{
+            val fragment = WaitingJoinFragment()
+            val bundle = Bundle()
+            bundle.putString("journeyId", jId)
+            fragment.arguments = bundle
+            return fragment
+        }
+    }
 
 }

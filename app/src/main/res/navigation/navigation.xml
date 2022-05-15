@@ -108,7 +108,27 @@
             app:argType="com.jessy.foodmap.data.Journey"
             app:nullable="false"/>
     </fragment>
+
+
 <!--    <fragment-->
+<!--        android:id="@+id/joinFragment"-->
+<!--        android:name="com.jessy.foodmap.itinerary.invite.paging.JoinFragment"-->
+<!--        android:label="JoinFragment" />-->
+
+<!--    <argument android:name="journeyIdKey"-->
+<!--        app:argType="String"-->
+<!--        app:nullable="false"/>-->
+
+<!--    <fragment-->
+<!--        android:id="@+id/waitingJoinFragment"-->
+<!--        android:name="com.jessy.foodmap.itinerary.invite.paging.WaitingJoinFragment"-->
+<!--        android:label="WaitingJoinFragment" />-->
+
+<!--    <argument android:name="journeyIdKey"-->
+<!--        app:argType="String"-->
+<!--        app:nullable="false"/>-->
+
+    <!--    <fragment-->
 <!--        android:id="@+id/itineraryDetailEndFragment"-->
 <!--        android:name="com.jessy.foodmap.itinerary.end.ItineraryDetailEndFragment"-->
 <!--        android:label="itineraryDetailEndFragment" >-->
@@ -188,6 +208,12 @@
         app:popUpToInclusive="true" />
 
 
+<!--    <action android:id="@+id/inviteFragment_joinFragment" app:destination="@id/joinFragment"-->
+<!--        app:popUpTo="@id/navigation"-->
+<!--        app:popUpToInclusive="true" />-->
+<!--    <action android:id="@+id/inviteFragment_waitingJoinFragment" app:destination="@id/waitingJoinFragment"-->
+<!--        app:popUpTo="@id/navigation"-->
+<!--        app:popUpToInclusive="true" />-->
 
     <action android:id="@+id/loginFragment_homeFragment" app:destination="@id/homeFragment"
         app:popUpTo="@id/navigation"

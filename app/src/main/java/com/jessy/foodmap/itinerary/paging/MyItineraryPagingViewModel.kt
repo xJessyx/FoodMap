@@ -5,6 +5,7 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.Query
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
@@ -123,13 +124,13 @@ class MyItineraryPagingViewModel : ViewModel() {
 
     fun updateCoEdit(journeyId: String,
                      receiveId: String){
-        var coEditUser= mutableListOf<String>()
-        coEditUser.add(user!!.id)
+//        var coEditUser= mutableListOf<String>()
+//        coEditUser.add(user!!.id)
         //coEditUser.add(receiveId)
-     
 
         db.collection("journeys").document(journeyId)
-            .update("coEditUser", coEditUser)
+            .update("coEditUser", FieldValue.arrayUnion(user!!.id))
+        //FieldValue.arrayUnion直接增加list的item
     }
 
     fun updateSenderData(
