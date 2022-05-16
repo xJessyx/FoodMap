@@ -40,6 +40,8 @@ import com.google.android.libraries.places.widget.AutocompleteSupportFragment
 import com.google.android.libraries.places.widget.listener.PlaceSelectionListener
 import com.jessy.foodmap.MainActivity
 import com.jessy.foodmap.R
+import com.jessy.foodmap.data.Journey
+import com.jessy.foodmap.data.PlaceSelectData
 import com.jessy.foodmap.data.StoreInformation
 import com.jessy.foodmap.databinding.FragmentFoodMapSearchBinding
 import com.jessy.foodmap.foodMapSearch.FoodMapSearchFragment.ImgUtil.getBitmapDescriptor
@@ -51,21 +53,15 @@ class FoodMapSearchFragment : Fragment(), OnMapReadyCallback,
     private val viewModel: FoodMapSearchViewModel by lazy {
         ViewModelProvider(this).get(FoodMapSearchViewModel::class.java)
     }
-    val dataList = mutableListOf<StoreInformation>()
+  var dataAllList =  mutableListOf<StoreInformation>()
+
     val MY_PERMISSIONS_REQUEST_LOCATION = 100
     private lateinit var mMap: GoogleMap
     private var locationManager: LocationManager? = null
     private lateinit var placesClient: PlacesClient
     lateinit var autocompleteSessionToken: AutocompleteSessionToken
     var predictionList = mutableListOf<AutocompletePrediction>()
-    var getStoreLatLng: LatLng? = null
-    val adapter = FoodMapSearchAdapter(FoodMapSearchAdapter.OnClickListener {
 
-        getStoreLatLng = it.storeLatLng
-        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(LatLng(getStoreLatLng!!.latitude,
-            getStoreLatLng!!.longitude), 12.0f))
-
-    })
     var oriLocation: Location? = null
 
     override fun onCreateView(
@@ -77,11 +73,22 @@ class FoodMapSearchFragment : Fragment(), OnMapReadyCallback,
 
         val binding = FragmentFoodMapSearchBinding.inflate(inflater, container, false)
         binding.lifecycleOwner = viewLifecycleOwner
+
+        var placeSelectDataArgs = FoodMapSearchFragmentArgs.fromBundle(requireArguments()).placeSelectDataKey
+        val adapter =
+
+            FoodMapSearchAdapter(FoodMapSearchAdapter.OnClickListener {
+
+                mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(LatLng(it.latitude!!,
+                    it.longitude!!), 12.0f))
+
+            }, placeSelectDataArgs)
+
         binding.searchRecyclerView.adapter = adapter
         binding.viewModel = viewModel
 
 
-        //   Initialize.
+        //   Initialize
         val autocompleteFragment =
             childFragmentManager.findFragmentById(R.id.search_autocomplete)
                     as AutocompleteSupportFragment
@@ -110,7 +117,18 @@ class FoodMapSearchFragment : Fragment(), OnMapReadyCallback,
                 Log.i(TAG, "An error occurred: $status")
             }
         })
+//
+//        if (dataAllList.isNotEmpty()){
+//            adapter?.submitList(dataAllList)
+//            Log.v("dataAllList","$dataAllList")
+//            adapter?.notifyDataSetChanged()
+//
+//        }
 
+        viewModel.getSuggestionsList.observe(viewLifecycleOwner){
+            adapter.submitList(it)
+            adapter.notifyDataSetChanged()
+        }
         return binding.root
     }
 
@@ -251,6 +269,8 @@ class FoodMapSearchFragment : Fragment(), OnMapReadyCallback,
 
     //剖析預測相關列表，並加入adapter
     private fun createList() {
+        val dataList = mutableListOf<StoreInformation>()
+
         dataList.clear()
         mMap.clear()
         var totalCount = 0
@@ -288,7 +308,7 @@ class FoodMapSearchFragment : Fragment(), OnMapReadyCallback,
                                 response.place.name,
                                 response.place.address,
                                 response.place.rating.toString(),
-                                response.place.latLng)
+                                response.place.latLng.latitude,response.place.latLng.longitude)
                             dataList.add(place)
                             mMap.addMarker(MarkerOptions()
                                 .position(response.place.latLng)
@@ -304,9 +324,9 @@ class FoodMapSearchFragment : Fragment(), OnMapReadyCallback,
                                 )
                                 .title(response.place.name)
                             )
-
-                            adapter.submitList(dataList)
-                            adapter.notifyDataSetChanged()
+                            viewModel.getSuggestionsList.value = dataList
+//                            adapter?.submitList(dataList)
+//                            adapter?.notifyDataSetChanged()
                         }.addOnFailureListener { exception: Exception ->
                             if (exception is ApiException) {
                                 Log.e(TAG, "Place not found: " + exception.message)

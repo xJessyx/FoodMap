@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.jessy.foodmap.itinerary.invite.InviteViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <ImageView
+            android:id="@+id/invite_img"
+            imageUrl="@{viewModel.inviteImg}"
+            android:scaleType="centerCrop"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+        <TextView
+            android:id="@+id/invite_itineraryName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="16dp"
+            android:textColor="@color/black"
+            android:textSize="25sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/invite_img"
+            tools:text="甜點之旅" />
+
+        <TextView
+            android:id="@+id/invite_startDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:textColor="#43541E"
+            android:textSize="20sp"
+            app:layout_constraintStart_toStartOf="@+id/invite_itineraryName"
+            app:layout_constraintTop_toBottomOf="@+id/invite_itineraryName"
+            tools:text="2022/6/17" />
+
+
+        <TextView
+            android:id="@+id/invite_endDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:textColor="#43541E"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toBottomOf="@+id/textView4"
+            app:layout_constraintStart_toEndOf="@+id/textView4"
+            app:layout_constraintTop_toTopOf="@+id/textView4"
+            tools:text="2022/6/20" />
+
+        <TextView
+            android:id="@+id/textView4"
+            android:layout_width="23dp"
+            android:layout_height="23dp"
+            android:layout_marginLeft="8dp"
+            android:gravity="center"
+            android:text="～"
+            android:textColor="#43541E"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/invite_startDate"
+            app:layout_constraintStart_toEndOf="@+id/invite_startDate"
+            app:layout_constraintTop_toTopOf="@+id/invite_startDate" />
+
+
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/invite_tabs"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:layout_marginTop="16dp"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView4"
+            app:tabIndicatorColor="#31404E"
+            app:tabIndicatorHeight="4dp"
+            app:tabSelectedTextColor="#31404E">
+
+
+        </com.google.android.material.tabs.TabLayout>
+
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/invite_viewpager2"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginBottom="8dp"
+            app:layout_constraintStart_toStartOf="parent"
+
+            app:layout_constraintTop_toBottomOf="@id/invite_tabs"
+            app:layout_constraintBottom_toTopOf="@id/invite_btn"
+
+            >
+
+
+        </androidx.viewpager2.widget.ViewPager2>
+
+
+        <Button
+            android:id="@+id/invite_btn"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginVertical="8dp"
+            android:background="@drawable/shape_round"
+            android:text="邀請"
+            android:textColor="@color/white"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

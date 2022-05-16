@@ -7,7 +7,6 @@ import androidx.lifecycle.LiveData
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.google.android.gms.maps.model.LatLng
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.jessy.foodmap.data.Journey
@@ -31,7 +30,7 @@ class AddPlaceViewModel : ViewModel() {
     var dwellTime : Long? = null
     var placeName :String = ""
     var startTime : Long? = null
-    var trafficTime :Long? =3600000
+    var trafficTime :Long? =null
     var getAllJourney = mutableListOf<Journey>()
     var placeId = db.collection("places").document().id
     var journeyId :String = ""
@@ -40,17 +39,16 @@ class AddPlaceViewModel : ViewModel() {
 
     fun getAllJourney() {
     db.collection("journeys")
+        .whereNotEqualTo("status",2)
         .get()
         .addOnSuccessListener { result ->
             for (document in result) {
                 Log.d(TAG, "${document.id} => ${document.data}")
                 val data = document.toObject(Journey::class.java)
                 getAllJourney.add(data)
-                Log.v("getAllJourney","$getAllJourney")
 
             }
             _addAllJourney.value = getAllJourney
-            Log.v("getAllJourney2","$getAllJourney")
         }
         .addOnFailureListener { exception ->
             Log.d(TAG, "Error getting documents: ", exception)
@@ -60,15 +58,13 @@ class AddPlaceViewModel : ViewModel() {
     fun addFireBasePlace() {
 
         val placeObject = addPlace.value
-        Log.v("placeObject.id","${placeObject!!.id}")
-
+        Log.v("placeObject","$placeObject")
         if (placeObject != null ) {
             db.collection("journeys").document(journeyId)
                 .collection("places").document(placeId)
                     .set(placeObject)
                     .addOnSuccessListener {
                         Log.d(ContentValues.TAG, "success")
-                        Log.v("placeId","${placeId}")
 
                     }
                     .addOnFailureListener {

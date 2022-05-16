@@ -15,7 +15,7 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -24,11 +24,11 @@
 
             <ImageView
                 android:id="@+id/itineraryDeatail_img"
+                imageUrl="@{viewModel.itineraryDeatailImg}"
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
                 android:scaleType="centerCrop"
                 android:src="@drawable/cake_pops"
-                imageUrl="@{viewModel.itineraryDeatailImg}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
@@ -52,9 +52,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="12dp"
-                android:textColor="@color/white"
-                android:textAlignment="center"
                 android:gravity="center"
+                android:textAlignment="center"
+                android:textColor="@color/white"
                 android:textSize="16sp"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="@+id/itineraryDeatail_Name"
@@ -99,21 +99,24 @@
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/itineraryDeatail_img"
-                app:tabIndicatorColor="#389DC3"
-                app:tabIndicatorHeight="5dp"
+                android:textSize="18sp"
+                app:tabSelectedTextColor="#31404E"
+                app:tabIndicatorColor="#31404E"
+                app:tabIndicatorHeight="4dp"
                 app:tabMode="scrollable"
-                app:tabSelectedTextColor="#389DC3">
+                >
 
             </com.google.android.material.tabs.TabLayout>
 
             <androidx.viewpager2.widget.ViewPager2
                 android:id="@+id/itineraryDeatail_viewPager2"
                 android:layout_width="match_parent"
-                android:layout_height="500dp"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
-                android:paddingBottom="8dp"
                 android:layout_marginBottom="32dp"
-                app:layout_constraintBottom_toTopOf="@+id/itineraryDetail_fabBtn"
+                android:paddingBottom="8dp"
+                android:paddingTop="8dp"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
@@ -122,19 +125,33 @@
 
             </androidx.viewpager2.widget.ViewPager2>
 
-            <com.google.android.material.floatingactionbutton.FloatingActionButton
-                android:id="@+id/itineraryDetail_fabBtn"
+
+            <TextView
+                android:id="@+id/itineraryDetail_share"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="end|bottom"
-                android:layout_marginBottom="272dp"
-                android:backgroundTint="#DFEAFF"
-                android:contentDescription="submit"
-                android:src="@drawable/add2"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="@+id/itineraryDeatail_viewPager2"
-                app:layout_constraintHorizontal_bias="0.498"
-                app:layout_constraintStart_toStartOf="parent"></com.google.android.material.floatingactionbutton.FloatingActionButton>
+                android:layout_marginEnd="8dp"
+                android:gravity="center"
+                android:text="分享"
+                android:visibility="gone"
+                android:textSize="18sp"
+                android:textColor="@color/white"
+                app:layout_constraintBottom_toBottomOf="@+id/itineraryDetail_switch"
+                app:layout_constraintEnd_toStartOf="@+id/itineraryDetail_switch"
+                app:layout_constraintTop_toTopOf="@+id/itineraryDetail_switch"
+                app:layout_constraintVertical_bias="1.0" />
+
+            <Switch
+                android:id="@+id/itineraryDetail_switch"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="16dp"
+                android:textOff="Dark"
+                android:textOn="Light"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="@+id/itineraryDeatail_img"
+                app:layout_constraintEnd_toEndOf="parent" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>

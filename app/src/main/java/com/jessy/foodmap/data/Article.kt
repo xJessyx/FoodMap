@@ -18,6 +18,8 @@ data class Article(
     var placeName:String = "",
     var createdTime: Long = -1,
 //    var favoriteUsers: List<String>? = null
-    var favoriteUsers: MutableList<String> = mutableListOf()
+    var favoriteUsers: MutableList<String> = mutableListOf(),
+    var latitude:Double? =null,
+    var longitude:Double? =null
 
     ): Parcelable

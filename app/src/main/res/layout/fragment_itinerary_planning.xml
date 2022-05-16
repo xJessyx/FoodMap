@@ -28,7 +28,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Itinerary"
-            android:textColor="#381100"
+            android:textColor="#E45D0F"
             android:layout_gravity="center"
             android:fontFamily="@font/smallcase"
             android:textSize="50sp"
@@ -39,13 +39,14 @@
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/itineraryPlanning_tabs"
         android:layout_width="match_parent"
-        android:layout_height="48dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
+        android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/itineraryPlanning_toolbar"
-        app:tabSelectedTextColor="#31404E"
-        app:tabIndicatorColor="#31404E"
+        app:tabSelectedTextColor="#140A01"
+        app:tabIndicatorColor="#140A01"
         app:tabIndicatorHeight="4dp"
         tools:ignore="MissingConstraints">
 
@@ -53,16 +54,16 @@
 
     <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/itineraryPlanning_viewPager2"
-        android:layout_width="410dp"
+        android:layout_width="match_parent"
         android:layout_height="0dp"
         android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/itineraryPlanning_tabs"
         app:layout_constraintVertical_bias="0.0"
-        tools:ignore="MissingConstraints">
-    </androidx.viewpager2.widget.ViewPager2>
+        tools:ignore="MissingConstraints"></androidx.viewpager2.widget.ViewPager2>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/itineraryPlanning_fabBtn"
@@ -71,9 +72,11 @@
         android:layout_gravity="end|bottom"
         android:contentDescription="submit"
         android:src="@drawable/add2"
-        android:backgroundTint="#DFEAFF"
-        android:layout_marginBottom="8dp"
-        android:layout_marginRight="8dp"
+        android:backgroundTint="#FBE6DA"
+        android:layout_marginBottom="16dp"
+        android:layout_marginRight="16dp"
+        android:elevation="16dp"
+        app:rippleColor="#fafcff"
         app:layout_constraintBottom_toBottomOf="@+id/itineraryPlanning_viewPager2"
         app:layout_constraintEnd_toEndOf="parent" />
   </androidx.constraintlayout.widget.ConstraintLayout>

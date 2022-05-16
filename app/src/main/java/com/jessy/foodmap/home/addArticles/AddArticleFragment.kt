@@ -1,11 +1,14 @@
 package com.jessy.foodmap.home.addArticles
 
 import android.app.Activity
+import android.content.ContentResolver
 import android.content.ContentValues.TAG
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.database.Cursor
 import android.net.Uri
 import android.os.Bundle
+import android.provider.MediaStore.MediaColumns
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -33,6 +36,7 @@ import com.jessy.foodmap.MainActivity
 import com.jessy.foodmap.NavigationDirections
 import com.jessy.foodmap.R
 import com.jessy.foodmap.databinding.FragmentAddArticleBinding
+import com.jessy.foodmap.login.UserManager
 import java.io.File
 
 
@@ -68,14 +72,16 @@ class AddArticleFragment : Fragment() {
         initData()
         initPlaces()
         // Specify the types of place data to return.
-        autocompleteFragment.setPlaceFields(listOf(Place.Field.ID, Place.Field.NAME))
+        autocompleteFragment.setPlaceFields(listOf(Place.Field.ID, Place.Field.NAME, Place.Field.LAT_LNG))
 
         // Set up a PlaceSelectionListener to handle the response.
         autocompleteFragment.setOnPlaceSelectedListener(object : PlaceSelectionListener {
             override fun onPlaceSelected(place: Place) {
-                // TODO: Get info about the selected place.
                 Log.i(TAG, "Place: ${place.name}, ${place.id}")
                 viewModel.articlePlaceName =  place.name
+                viewModel.articleLatitude = place.latLng?.latitude
+                viewModel.articleLongitude = place.latLng?.longitude
+
             }
 
             override fun onError(status: Status) {
@@ -96,6 +102,7 @@ class AddArticleFragment : Fragment() {
                 viewModel.addFireBaseArticle()
                 viewModel.addArticle.observe(viewLifecycleOwner){
                     it?.let {
+                        Toast.makeText(activity as Activity, "已新增成功!!!", Toast.LENGTH_SHORT).show()
                         findNavController().navigate(NavigationDirections.addArticleFragmentHomeFragment())
 
                     }
@@ -208,21 +215,28 @@ class AddArticleFragment : Fragment() {
         super.onActivityResult(requestCode, resultCode, data)
         when (resultCode) {
             Activity.RESULT_OK -> {
-                val filePath: String = ImagePicker.getFilePath(data) ?: ""
-                if (filePath.isNotEmpty()) {
-                    var imgPath = filePath
-                   // Toast.makeText(activity as Activity , imgPath, Toast.LENGTH_SHORT).show()
-                    Log.v("imgPath","imgPath =$imgPath")
-                    pick_img?.let { Glide.with(activity as Activity).load(filePath).into(it) }
 
-                    if (imgPath.isNotEmpty()) {
-                        addArticle_upload_progress!!.visibility = View.VISIBLE
-                        uploadImg(imgPath)
+                data?.data?.let { uri ->
+
+                    Log.d("Wayne", "uri = $uri")
+
+                    val filePath = uri.path ?: ""
+                    Log.d("Wayne", "filePath = $filePath")
+                    if (filePath.isNotEmpty()) {
+                        var imgPath = filePath
+                        // Toast.makeText(activity as Activity , imgPath, Toast.LENGTH_SHORT).show()
+                        Log.v("imgPath","imgPath =$imgPath")
+                        pick_img?.let { Glide.with(activity as Activity).load(filePath).into(it) }
+
+                        if (imgPath.isNotEmpty()) {
+                            addArticle_upload_progress!!.visibility = View.VISIBLE
+                            uploadImg(imgPath)
+                        } else {
+                            Toast.makeText(activity as Activity, "請選取照片", Toast.LENGTH_SHORT).show()
+                        }
                     } else {
-                        Toast.makeText(activity as Activity, "請選取照片", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(activity as Activity,"讀取圖片失敗", Toast.LENGTH_SHORT).show()
                     }
-                } else {
-                    Toast.makeText(activity as Activity,"讀取圖片失敗", Toast.LENGTH_SHORT).show()
                 }
             }
             ImagePicker.RESULT_ERROR -> Toast.makeText(activity as Activity, ImagePicker.getError(data), Toast.LENGTH_SHORT).show()
@@ -231,4 +245,22 @@ class AddArticleFragment : Fragment() {
     }
 
 
+
+}
+
+fun Fragment.getFilePathFromContentUri(
+    selectedVideoUri: Uri
+): String {
+    var filePath = ""
+    val filePathColumn = arrayOf(MediaColumns.DATA)
+    val cursor: Cursor? =
+        requireContext().contentResolver.query(selectedVideoUri, filePathColumn, null, null, null)
+    cursor?.let {
+
+        cursor.moveToFirst()
+        val columnIndex: Int = cursor.getColumnIndex(filePathColumn[0])
+        filePath = cursor.getString(columnIndex)
+        cursor.close()
+    }
+    return filePath
 }

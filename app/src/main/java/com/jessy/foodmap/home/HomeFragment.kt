@@ -24,6 +24,8 @@ class homeFragment : Fragment() {
     ): View? {
 
         (activity as MainActivity).showToolBar()
+        (activity as MainActivity).showBottomNavigation()
+
         val binding = FragmentHomeBinding.inflate(inflater, container, false)
         var manager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
         binding.homeRecyclerView.layoutManager = manager  //佈局管理

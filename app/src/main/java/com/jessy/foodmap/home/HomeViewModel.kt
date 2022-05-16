@@ -11,6 +11,8 @@ import com.google.firebase.ktx.Firebase
 import com.jessy.foodmap.R
 import com.jessy.foodmap.data.Article
 import com.jessy.foodmap.data.Journey
+import com.jessy.foodmap.login.UserManager
+import com.jessy.foodmap.login.UserManager.Companion.user
 
 class HomeViewModel : ViewModel(){
 
@@ -46,7 +48,6 @@ class HomeViewModel : ViewModel(){
                     getAllArticles.add(data)
                 }
                 _getAllArticlesLiveData.value = getAllArticles
-
             }
             .addOnFailureListener { exception ->
                 Log.d(ContentValues.TAG, "Error getting documents: ", exception)
@@ -55,7 +56,7 @@ class HomeViewModel : ViewModel(){
 
     fun getFireBaseArticleCollect(){
         db.collection("articles")
-            .whereArrayContains("favoriteUsers","32fRAA8nlkV2gAojqHB1")
+            .whereArrayContains("favoriteUsers", user!!.id)
            // .orderBy("createdTime", Query.Direction.DESCENDING)
             .get()
             .addOnSuccessListener { result ->

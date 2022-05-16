@@ -7,7 +7,8 @@ plugins {
     id 'kotlin-android'
     id "kotlin-kapt"
     id 'com.google.android.libraries.mapsplatform.secrets-gradle-plugin'
-  // id 'com.google.secrets_gradle_plugin' version '0.4'
+    id 'com.google.firebase.crashlytics'
+    // id 'com.google.secrets_gradle_plugin' version '0.4'
 
 }
 
@@ -18,8 +19,8 @@ android {
         applicationId "com.jessy.foodmap"
         minSdk 30
         targetSdk 32
-        versionCode 4
-        versionName "2.0.2"
+        versionCode 6
+        versionName "2.0.4"
 
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
@@ -77,6 +78,13 @@ android {
             enabled true
         }
     }
+    sourceSets {
+        main {
+            assets {
+                srcDirs 'src\\main\\assets'
+            }
+        }
+    }
 }
 
 dependencies {
@@ -113,6 +121,11 @@ dependencies {
     implementation 'androidx.work:work-runtime-ktx:2.7.0'
     implementation 'androidx.leanback:leanback:1.0.0'
     implementation 'com.google.firebase:firebase-storage-ktx:20.0.1'
+    implementation 'com.google.android.gms:play-services-auth:20.2.0'
+    implementation 'com.google.firebase:firebase-auth-ktx:21.0.3'
+    implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.4.1'
+    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.1'
+    implementation 'com.google.firebase:firebase-crashlytics-ktx:18.2.10'
 
     //navigation
     def nav_version = "2.4.0-alpha02"
@@ -171,9 +184,26 @@ dependencies {
     implementation 'com.google.firebase:firebase-storage:x.y.z'
 
     // ImagePicker
-    implementation 'com.github.dhaval2404:imagepicker-support:1.7.1'
-   // implementation 'com.github.dhaval2404:imagepicker:2.1'
+    //  implementation 'com.github.dhaval2404:imagepicker-support:1.7.1'
+    implementation 'com.github.dhaval2404:imagepicker:2.1'
 
     implementation 'com.akexorcist:google-direction-library:1.2.0'
 
-}
+    //swipedecorator
+    implementation 'it.xabaras.android:recyclerview-swipedecorator:1.2.2'
+
+
+    //Lottie Animation
+    implementation 'com.airbnb.android:lottie:3.6.1'
+
+    //  P.S: For Android Studio versions below 3.0, use compile keyword
+    implementation 'com.shobhitpuri.custombuttons:google-signin:1.0.0'
+
+    // Import the BoM for the Firebase platform
+    implementation platform('com.google.firebase:firebase-bom:29.3.1')
+    implementation 'com.google.firebase:firebase-analytics-ktx:21.0.0'
+
+    // Declare the dependencies for the Crashlytics and Analytics libraries
+    // When using the BoM, you don't specify versions in Firebase library dependencies
+    implementation 'com.google.firebase:firebase-crashlytics-ktx'
+    implementation 'com.google.firebase:firebase-analytics-ktx'}

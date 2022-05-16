@@ -28,6 +28,25 @@ fun bindImage(imgView: ImageView, imgUrl: String?) {
     }
 
 }
+
+@BindingAdapter("imageUrlCircle")
+fun bindCircleImage(imgView: ImageView, imgUrl: String?) {
+    imgUrl?.let {
+        val imgUri = it.toUri().buildUpon().build()
+        Glide.with(imgView.context)
+            .load(imgUri)
+           .centerCrop()
+            .disallowHardwareConfig()
+
+            .apply(
+                RequestOptions().optionalCircleCrop()
+                    .placeholder(R.drawable.load)
+                    .error(R.drawable.ic_broken_image)
+            )
+            .into(imgView)
+    }
+
+}
 @BindingAdapter("timeToDisplayFormat")
 fun bindDisplayFormatTime(textView: TextView, time: Long?) {
     Log.v("time","$time")

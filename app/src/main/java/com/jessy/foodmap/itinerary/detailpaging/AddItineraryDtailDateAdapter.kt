@@ -1,21 +1,21 @@
 package com.jessy.foodmap.itinerary.detailpaging
 
 import android.icu.text.SimpleDateFormat
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.jessy.foodmap.data.Journey
+import com.jessy.foodmap.R
 import com.jessy.foodmap.data.Place
 import com.jessy.foodmap.databinding.ItemAddItineraryDetailDateBinding
+import com.jessy.foodmap.itinerary.ITHelperInterface
 import java.util.*
 
-class AddItineraryDtailDateAdapter(val onClickListener: AddItineraryDtailDateAdapter.OnClickListener) :
+class AddItineraryDtailDateAdapter(val onClickListener: AddItineraryDtailDateAdapter.OnClickListener,val viewModel: AddItineraryDtailDateViewModel) :
     ListAdapter<Place, AddItineraryDtailDateAdapter.AddItineraryDtailDateViewHolder>(
-        AddItineraryDtailDateAdapter.DiffCallback()) {
+        AddItineraryDtailDateAdapter.DiffCallback()), ITHelperInterface {
 
     class DiffCallback : DiffUtil.ItemCallback<Place>() {
 
@@ -32,13 +32,21 @@ class AddItineraryDtailDateAdapter(val onClickListener: AddItineraryDtailDateAda
     class AddItineraryDtailDateViewHolder private constructor(var binding: ItemAddItineraryDetailDateBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(place: Place) {
+        fun bind(place: Place,viewModel: AddItineraryDtailDateViewModel) {
+//            val startTime = place.dwellTime!!.plus(place.trafficTime!!).let { it ->
+//                28800000.plus(it)
+//                    .let { TimeUtil.StampToTime(it, Locale.TAIWAN) }
+//            }
 
-//            binding.place = place
+       //    val startTime = 28800000 + place.dwellTime!! + place.trafficTime!!
+
+         //   Log.v("startTime","$startTime")
 
             binding.itineraryDetailDateTvStartTime.setText(place.startTime?.let {
-                TimeUtil.StampToTime(it, Locale.TAIWAN).toString()
+                TimeUtil.StampToTime(it,Locale.TAIWAN)
             })
+
+
 
             binding.itineraryDetailDateTvDwellTime.setText(place.dwellTime?.let {
                 TimeUtil.StampToTimeText(it, Locale.TAIWAN).toString()
@@ -49,6 +57,14 @@ class AddItineraryDtailDateAdapter(val onClickListener: AddItineraryDtailDateAda
             })
 
             binding.itineraryDetailDateTvStoreName.setText(place.name)
+
+            when (place.transportation) {
+                1 -> binding.itineraryDetailDateImgTransportation.setImageResource(R.drawable.walking)
+                2 -> binding.itineraryDetailDateImgTransportation.setImageResource(R.drawable.sedan)
+                3 -> binding.itineraryDetailDateImgTransportation.setImageResource(R.drawable.bicycle)
+                4 -> binding.itineraryDetailDateImgTransportation.setImageResource(R.drawable.train)
+            }
+
 
         }
 
@@ -71,23 +87,40 @@ class AddItineraryDtailDateAdapter(val onClickListener: AddItineraryDtailDateAda
 
     override fun onBindViewHolder(
         holder: AddItineraryDtailDateViewHolder,
-        position: Int
+        position: Int,
     ) {
-        if(position == currentList.size-1){
-
-            holder.binding.itineraryDetailDateLine.visibility = View.GONE
-
-        }else{
-
-            holder.binding.itineraryDetailDateLine.visibility = View.VISIBLE
-
-        }
 
         val item = getItem(position)
         holder.itemView.setOnClickListener {
             onClickListener.onClick(item)
         }
-        holder.bind(item)
+
+        holder.bind(item,viewModel)
+
+        if (position == currentList.size - 1) {
+            holder.binding.itineraryDetailDateLine.visibility = View.GONE
+            holder.binding.itineraryDetailDateImgTransportation.visibility = View.GONE
+            holder.binding.itineraryDetailDateTvTrafficTime.visibility = View.GONE
+
+        } else {
+
+            holder.binding.itineraryDetailDateLine.visibility = View.VISIBLE
+            val nextItem = getItem(position + 1).transportation
+
+            when (nextItem) {
+
+                1 -> holder.binding.itineraryDetailDateImgTransportation.setImageResource(R.drawable.walking)
+                2 -> holder.binding.itineraryDetailDateImgTransportation.setImageResource(R.drawable.sedan)
+                3 -> holder.binding.itineraryDetailDateImgTransportation.setImageResource(R.drawable.bicycle)
+                4 -> holder.binding.itineraryDetailDateImgTransportation.setImageResource(R.drawable.train)
+            }
+
+            holder.binding.itineraryDetailDateImgTransportation.visibility = View.VISIBLE
+            holder.binding.itineraryDetailDateTvTrafficTime.visibility = View.VISIBLE
+
+        }
+
+
     }
 
     class OnClickListener(val clickListener: (place: Place) -> Unit) {
@@ -116,5 +149,24 @@ class AddItineraryDtailDateAdapter(val onClickListener: AddItineraryDtailDateAda
         }
 
 
+    }
+
+
+    override fun onItemDissmiss(position: Int) {
+        val list = currentList.toMutableList()
+        viewModel.delectFireBaseItem(list,position)
+
+        list.removeAt(position)
+        submitList(list)
+//        notifyItemRemoved(position)
+    }
+
+    override fun onItemMove(fromPosition: Int, toPosition: Int) {
+        val list = currentList.toMutableList()
+        Collections.swap(list,fromPosition,toPosition)
+        submitList(list)
+        viewModel.updateMoveList(list,fromPosition,toPosition)
+
+//        notifyItemMoved(fromPosition,toPosition)
     }
 }

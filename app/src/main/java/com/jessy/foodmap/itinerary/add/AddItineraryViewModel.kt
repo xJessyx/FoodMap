@@ -1,4 +1,4 @@
-package com.jessy.foodmap.itinerary
+package com.jessy.foodmap.itinerary.add
 
 import android.content.ContentValues.TAG
 import android.util.Log
@@ -8,6 +8,7 @@ import androidx.lifecycle.ViewModel
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.jessy.foodmap.data.Journey
+import com.jessy.foodmap.login.UserManager.Companion.user
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 import java.time.temporal.ChronoUnit
@@ -51,7 +52,8 @@ class AddItineraryViewModel : ViewModel() {
     }
 
     fun addItineraryItem() {
-
+        var coEditUser= mutableListOf<String>()
+        coEditUser.add(user!!.id)
         val data = Journey(
             id = journeyId,
             name =itineraryName.value!!,
@@ -59,6 +61,9 @@ class AddItineraryViewModel : ViewModel() {
             endDate =  itineraryEndDate.value!!,
             image = itineraryImage ?: "",
             totalDay = itineraryTotalDay,
+            share = false,
+            userId = user!!.id,
+            coEditUser = coEditUser
         )
         _addItinerary.value = data
 

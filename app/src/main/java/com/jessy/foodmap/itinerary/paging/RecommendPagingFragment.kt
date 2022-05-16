@@ -47,7 +47,7 @@ class RecommendPagingFragment : Fragment() {
             viewLifecycleOwner,
             Observer{
                 it?.let {
-               findNavController().navigate(NavigationDirections.recommendPagingFragmentItineraryDetailFragment(it))
+               findNavController().navigate(NavigationDirections.myItineraryPagingFragmentItineraryDetailFragment(it))
                viewModel.onDetailNavigated()
            }
         })

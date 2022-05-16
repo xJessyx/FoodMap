@@ -13,8 +13,12 @@ import com.google.firebase.ktx.Firebase
 import com.jessy.foodmap.MainActivity
 import com.jessy.foodmap.NavigationDirections
 import com.jessy.foodmap.R
+import com.jessy.foodmap.data.Journey
+import com.jessy.foodmap.data.Place
+import com.jessy.foodmap.data.PlaceSelectData
 import com.jessy.foodmap.data.StoreInformation
 import com.jessy.foodmap.databinding.FragmentDetailBinding
+import com.jessy.foodmap.login.UserManager
 
 class DetailFragment : Fragment() {
     //    private val viewModel: DetailViewModel by lazy {
@@ -31,7 +35,7 @@ class DetailFragment : Fragment() {
         val articleKey = DetailFragmentArgs.fromBundle(requireArguments()).articleKey
         var viewModel = DetailViewModel(articleKey)
 
-        (activity as MainActivity).hidbottomNavigation()
+        (activity as MainActivity).hidBottomNavigation()
 
 //        viewModel.article.value?.let { binding.detailImg.setImageResource(it.image) }
         //viewModel.article.value = binding.detailImg(articleKey.image)
@@ -50,12 +54,12 @@ class DetailFragment : Fragment() {
 
        viewModel.article.observe(viewLifecycleOwner) {
 
-
-
-           val data = StoreInformation(null, it.placeName,"","",null)
+           val data = PlaceSelectData(StoreInformation(null, it.placeName,"","",it.latitude,it.longitude), Place(),
+               Journey())
 
            binding.detailAddStore.setOnClickListener {
                findNavController().navigate(NavigationDirections.detailFragmentAddPlaceFragment(data))
+               Log.v("placeSelectDataArgs:detailArg","$data")
            }
 
        }
@@ -83,7 +87,7 @@ class DetailFragment : Fragment() {
             if(collectSum % 2 != 0) {
                 binding.detailCollect.setBackgroundResource(R.drawable.star2)
 
-                favoriteUsersItem.add(0, "32fRAA8nlkV2gAojqHB1")
+                favoriteUsersItem.add(0, UserManager.user!!.id)
                 db.collection("articles").document(articleKey.id)
                     .update("favoriteUsers", favoriteUsersItem)
             }else{

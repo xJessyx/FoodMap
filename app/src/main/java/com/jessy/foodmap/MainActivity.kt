@@ -5,9 +5,15 @@ import android.content.pm.PackageManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import android.view.ViewGroup
+import android.widget.Button
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.findNavController
+import com.jessy.foodmap.data.Journey
+import com.jessy.foodmap.data.Place
+import com.jessy.foodmap.data.PlaceSelectData
+import com.jessy.foodmap.data.StoreInformation
 import com.jessy.foodmap.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
@@ -35,8 +41,8 @@ class MainActivity : AppCompatActivity() {
                     return@setOnItemSelectedListener true
                 }
                 R.id.foodMapSearchFragment -> {
-
-                    findNavController(R.id.myNavHostFragment).navigate(NavigationDirections.navigateToFoodMapSearchFragment())
+                        val data = PlaceSelectData(StoreInformation(), Place(),Journey())
+                    findNavController(R.id.myNavHostFragment).navigate(NavigationDirections.navigateToFoodMapSearchFragment(data))
                     return@setOnItemSelectedListener true
                 }
                 R.id.memberFragment -> {
@@ -69,8 +75,11 @@ class MainActivity : AppCompatActivity() {
         binding.toolbar.visibility = View.VISIBLE
     }
 
-    fun hidbottomNavigation(){
+    fun hidBottomNavigation(){
         binding.myBottomNavigationView.visibility = View.GONE
+    }
 
+    fun showBottomNavigation(){
+        binding.myBottomNavigationView.visibility = View.VISIBLE
     }
 }

@@ -1,5 +1,6 @@
 package com.jessy.foodmap.itinerary.paging
 
+import android.icu.util.Calendar
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -10,16 +11,19 @@ import com.jessy.foodmap.data.Article
 import com.jessy.foodmap.data.Journey
 import com.jessy.foodmap.databinding.ItemRecommendPagingBinding
 import com.jessy.foodmap.home.HomeAdapter
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter
 
-class RecommendPagingAdapter(private val onClickListener: OnClickListener) : ListAdapter<Journey, RecommendPagingAdapter.RecommendPagingViewHolder>(
-    RecommendPagingAdapter.DiffCallback()){
+class RecommendPagingAdapter(private val onClickListener: OnClickListener) :
+    ListAdapter<Journey, RecommendPagingAdapter.RecommendPagingViewHolder>(
+        RecommendPagingAdapter.DiffCallback()) {
 
     class RecommendPagingViewHolder private constructor(var binding: ItemRecommendPagingBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(journey: Journey) {
-           binding.journey = journey
-           binding.executePendingBindings()
+            binding.journey = journey
+            binding.executePendingBindings()
 
         }
 
@@ -42,14 +46,20 @@ class RecommendPagingAdapter(private val onClickListener: OnClickListener) : Lis
 
         val item = getItem(position)
 
+
+
         if (item != null) {
             holder.itemView.setOnClickListener {
                 onClickListener.onClick(item)
                 Log.v("item in ", "$item")
             }
+
             holder.bind(item)
+
         }
+
     }
+
     class DiffCallback : DiffUtil.ItemCallback<Journey>() {
 
         override fun areItemsTheSame(oldItem: Journey, newItem: Journey): Boolean {
@@ -57,9 +67,10 @@ class RecommendPagingAdapter(private val onClickListener: OnClickListener) : Lis
         }
 
         override fun areContentsTheSame(oldItem: Journey, newItem: Journey): Boolean {
-            return    oldItem == newItem
+            return oldItem == newItem
         }
     }
+
     class OnClickListener(val clickListener: (journey: Journey) -> Unit) {
         fun onClick(journey: Journey) = clickListener(journey)
     }

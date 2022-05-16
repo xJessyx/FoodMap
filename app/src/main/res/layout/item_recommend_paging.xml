@@ -61,7 +61,7 @@
                     android:layout_marginTop="25dp"
                     android:text="@{journey.name}"
                     android:textColor="@color/white"
-                    android:textSize="20sp"
+                    android:textSize="25sp"
                     android:textStyle="bold"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
@@ -118,26 +118,14 @@
                     android:layout_marginTop="8dp"
                     android:background="@drawable/shape_round2"
                     android:gravity="center"
-                    android:text="@{journey.userId}"
+                    android:text="ya"
                     android:textColor="#292929"
                     android:textSize="20sp"
                     app:layout_constraintStart_toStartOf="@+id/recommend_itineraryStartDate"
                     app:layout_constraintTop_toBottomOf="@+id/recommend_itineraryStartDate"
-                    tools:text="ysssssssssssa" />
+                    tools:text="ya" />
 
 
-                <TextView
-                    android:id="@+id/recommend_status"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginEnd="16dp"
-                    android:layout_marginBottom="16dp"
-                    android:text="@{String.valueOf(journey.status)}"
-                    android:textColor="@color/white"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    tools:text="進行中" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
