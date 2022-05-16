@@ -22,8 +22,10 @@ class JoinAdapter :
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(item:Invite) {
-            binding.joinEmail.text = item.senderEmail
-            Log.v("item.receiveEmail","${item.receiveEmail}")
+            binding.invite = item
+//            binding.joinEmail.text = item.senderEmail
+//            binding.joinName.text = item.senderName
+//            binding.joinImg.
             binding.executePendingBindings()
 
         }

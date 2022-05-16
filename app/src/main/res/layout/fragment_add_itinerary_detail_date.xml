@@ -15,8 +15,8 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/detail_recyclerView_date"
-        android:layout_width="416dp"
-        android:layout_height="606dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="vertical"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintEnd_toEndOf="parent"
@@ -93,8 +93,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="end|bottom"
-        android:layout_marginBottom="60dp"
-        android:backgroundTint="#DFEAFF"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp"
+        android:backgroundTint="#FBE6DA"
         android:contentDescription="submit"
         android:src="@drawable/add2"
         android:visibility="visible"
@@ -103,7 +104,7 @@
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/detail_recyclerView_date"
-        app:layout_constraintVertical_bias="1.0">
+        app:layout_constraintVertical_bias="0.0">
 
     </com.google.android.material.floatingactionbutton.FloatingActionButton>
 

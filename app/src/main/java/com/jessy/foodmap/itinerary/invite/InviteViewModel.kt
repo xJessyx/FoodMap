@@ -1,7 +1,9 @@
 package com.jessy.foodmap.itinerary.invite
 
+import android.app.Activity
 import android.content.ContentValues
 import android.util.Log
+import android.widget.Toast
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -9,6 +11,7 @@ import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.jessy.foodmap.data.Invite
 import com.jessy.foodmap.data.Journey
+import com.jessy.foodmap.data.User
 import com.jessy.foodmap.login.UserManager
 import com.jessy.foodmap.login.UserManager.Companion.user
 
@@ -20,10 +23,19 @@ class InviteViewModel(journeyArg: Journey) : ViewModel() {
    val shareJourney = journeyArg
 
 
+   val _getSenderUser = MutableLiveData<List<User>>()
+   val getSenderUser: LiveData<List<User>>
+      get() = _getSenderUser
+
 
    val _addInvite = MutableLiveData<Invite>()
    val addInvite: LiveData<Invite>
       get() = _addInvite
+
+
+   val _errorUser = MutableLiveData<Boolean>()
+   val errorUser: LiveData<Boolean>
+      get() = _errorUser
 
 
    init {
@@ -46,8 +58,39 @@ class InviteViewModel(journeyArg: Journey) : ViewModel() {
       }
    }
 
+   fun checkUser(email: String) {
 
-   fun addInvitationsItem(email: String) {
+      db.collection ("users")
+         .whereEqualTo("email", email)
+         .get()
+         .addOnSuccessListener { result ->
+
+            val users = mutableListOf<User>()
+            for (document in result) {
+               Log.d(ContentValues.TAG, "${document.id} => ${document.data}")
+               val user = document.toObject(User::class.java)
+               users.add(user)
+            }
+
+            if(result.isEmpty){
+               _errorUser.value= true
+               Log.v("error","${_errorUser.value}")
+            }else{
+               _getSenderUser.value = users
+
+            }
+
+         }
+
+
+         .addOnFailureListener { exception ->
+            Log.d(ContentValues.TAG, "Error getting documents: ", exception)
+         }
+
+   }
+
+
+   fun addInvitationsItem(email: String, list: List<User>) {
          val data = Invite(
             id = inviteId,
             inviteStatus = 0,
@@ -57,11 +100,12 @@ class InviteViewModel(journeyArg: Journey) : ViewModel() {
             receiveId = user!!.id,
             receiveName = user!!.name,
             senderEmail = email,
-            senderId = "",
-            senderName ="",
-            senderImage = ""
+            senderId = list[0].id,
+            senderName =list[0].name,
+            senderImage = list[0].image
          )
       _addInvite.value = data
+   Log.v("data","$data")
 
    }
 

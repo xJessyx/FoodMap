@@ -46,7 +46,7 @@ class MemberFragment : Fragment() {
                     tab.text = "收藏"
                 }
                 1 -> {
-                    tab.text = "我的迷霧地圖"
+                    tab.text = "我的地圖"
                 }
 
             }        }.attach()

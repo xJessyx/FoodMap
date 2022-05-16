@@ -1,9 +1,8 @@
 package com.jessy.foodmap.itinerary.paging
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.TextView
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
@@ -14,6 +13,7 @@ import com.jessy.foodmap.data.Journey
 import com.jessy.foodmap.data.User
 import com.jessy.foodmap.databinding.ItemAvatarBinding
 import com.jessy.foodmap.databinding.ItemMyLtineraryPagingBinding
+import io.grpc.InternalChannelz.id
 
 class MyItineraryPagingAdapter (private val onClickListener: OnClickListener) :
     ListAdapter<Journey, MyItineraryPagingAdapter.MyItineraryPagingViewHolder>(
@@ -36,7 +36,7 @@ class MyItineraryPagingAdapter (private val onClickListener: OnClickListener) :
 //                    .navigate(NavigationDirections.myItineraryPagingFragmentInviteFragment(journey))
 //            }
 
-//            for ((index, userId) in journey.coEditUser.withIndex()){
+         // for ((index, userId) in journey.coEditUser.withIndex()){
                 for (i in 0..journey.coEditUser.size){
 
                     if (i == journey.coEditUser.size){
@@ -57,10 +57,13 @@ class MyItineraryPagingAdapter (private val onClickListener: OnClickListener) :
                                 .navigate(NavigationDirections.myItineraryPagingFragmentInviteFragment(journey))
                         }
 
-                    }else{
-                        //val user = coEditUsers.find { it.id == userId }
-                        val user = coEditUsers.find { it.id ==  coEditUsers[i].id}
-
+                    }
+                    else{
+                       // val user = coEditUsers.find { it.id == userId }
+                      val user = coEditUsers.find {
+                          it.id ==  journey.coEditUser[i]
+                      }
+                        Log.v("user_coedit","$user")
 //                val itemLayout = LayoutInflater.from(binding.root.context).inflate(
 //                    R.layout.item_avatar,
 //                    binding.myitineraryLinearLayout,
@@ -72,6 +75,7 @@ class MyItineraryPagingAdapter (private val onClickListener: OnClickListener) :
                             false
                         )
                         bindingAvatar.imageUrl = user?.image
+                        Log.v("user?.image","${user?.image}")
                         binding.myitineraryLinearLayout.addView(bindingAvatar.root)
                     }
 

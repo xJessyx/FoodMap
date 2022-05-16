@@ -21,7 +21,6 @@
             android:layout_width="match_parent"
             android:layout_height="55dp"
             android:scaleType="centerCrop"
-            android:textAlignment="center"
             android:textSize="16sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
@@ -36,34 +35,33 @@
                 android:layout_gravity="center"
                 android:fontFamily="@font/smallcase"
                 android:text="Member"
-                android:textColor="#381100"
+                android:textColor="#E45D0F"
                 android:textSize="50sp"
                 android:textStyle="bold" />
 
         </androidx.appcompat.widget.Toolbar>
 
         <androidx.cardview.widget.CardView
-            app:cardCornerRadius="360dp"
-            android:scaleType="centerCrop"
             android:id="@+id/member_card"
-            android:layout_width="145dp"
-            android:layout_height="145dp"
-            android:layout_marginLeft="16dp"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="16dp"
+            android:scaleType="centerCrop"
+            app:cardCornerRadius="360dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/member_toolbar">
 
 
-
-        <ImageView
-
-            android:id="@+id/member_img"
-            android:layout_width="145dp"
-            android:layout_height="145dp"
-            android:layout_gravity="center"
-            imageUrl="@{viewModel.memberImg}"
-       />
+            <ImageView
+                android:id="@+id/member_img"
+                imageUrl="@{viewModel.memberImg}"
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                android:layout_gravity="center" />
 
         </androidx.cardview.widget.CardView>
+
 
         <TextView
             android:id="@+id/member_tv_name"
@@ -74,33 +72,35 @@
             android:text="name："
             android:textColor="#333333"
             android:textSize="20sp"
+            app:layout_constraintBottom_toTopOf="@+id/member_email_name"
             app:layout_constraintStart_toEndOf="@+id/member_card"
             app:layout_constraintTop_toTopOf="@+id/member_card"
+            app:layout_constraintVertical_bias="0.0"
+            app:layout_constraintVertical_chainStyle="packed"
             tools:text="name：" />
-
 
         <TextView
             android:id="@+id/member_tv_gender"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
             android:fontFamily="@font/smallcase"
             android:text="gnetder:"
             android:textColor="#333333"
             android:textSize="20sp"
+            app:layout_constraintBottom_toTopOf="@+id/member_tv_age"
             app:layout_constraintStart_toStartOf="@+id/member_email_name"
             app:layout_constraintTop_toBottomOf="@+id/member_email_name"
             tools:text="gnetder:" />
 
         <TextView
             android:id="@+id/member_tv_age"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
+            android:layout_width="42dp"
+            android:layout_height="25dp"
             android:fontFamily="@font/smallcase"
             android:text="age："
             android:textColor="#333333"
             android:textSize="20sp"
+            app:layout_constraintBottom_toTopOf="@+id/member_tv_grade"
             app:layout_constraintStart_toStartOf="@+id/member_tv_gender"
             app:layout_constraintTop_toBottomOf="@+id/member_tv_gender"
             tools:text="age：" />
@@ -109,11 +109,11 @@
             android:id="@+id/member_tv_grade"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
             android:fontFamily="@font/smallcase"
             android:text="level："
             android:textColor="#333333"
             android:textSize="20sp"
+            app:layout_constraintBottom_toBottomOf="@+id/member_card"
             app:layout_constraintStart_toStartOf="@+id/member_tv_age"
             app:layout_constraintTop_toBottomOf="@+id/member_tv_age"
             tools:text="level：" />
@@ -123,7 +123,7 @@
             android:id="@+id/member_tv_name_person"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
+            android:layout_marginStart="8dp"
             android:fontFamily="@font/smallcase"
             android:textColor="#333333"
             android:textSize="20sp"
@@ -175,12 +175,12 @@
         <TextView
             android:id="@+id/member_email_name"
             android:layout_width="wrap_content"
-            android:fontFamily="@font/smallcase"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
+            android:fontFamily="@font/smallcase"
+            android:text="email:"
             android:textColor="#333333"
             android:textSize="20sp"
-            android:text="email:"
+            app:layout_constraintBottom_toTopOf="@+id/member_tv_gender"
             app:layout_constraintStart_toStartOf="@+id/member_tv_name"
             app:layout_constraintTop_toBottomOf="@+id/member_tv_name"
             tools:text="email：" />
@@ -189,11 +189,11 @@
             android:id="@+id/member_email"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginRight="8dp"
             android:ellipsize="end"
             android:fontFamily="@font/smallcase"
             android:textColor="#333333"
             android:textSize="20sp"
-            android:layout_marginRight="8dp"
             app:layout_constraintBottom_toBottomOf="@+id/member_email_name"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
@@ -212,9 +212,9 @@
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/member_card"
-            app:tabIndicatorColor="#31404E"
+            app:tabIndicatorColor="#140A01"
             app:tabIndicatorHeight="4dp"
-            app:tabSelectedTextColor="#31404E">
+            app:tabSelectedTextColor="#140A01">
 
         </com.google.android.material.tabs.TabLayout>
 

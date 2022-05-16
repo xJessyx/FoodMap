@@ -1,6 +1,7 @@
 package com.jessy.foodmap.itinerary.invite.paging
 
 import android.content.ContentValues
+import android.content.ContentValues.TAG
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -27,49 +28,69 @@ class JoinViewModel : ViewModel() {
     val getJoinInvite: LiveData<List<Invite>>
         get() = _getJoinInvite
 
-    fun getWaitJoinInviteItem(journeyIdArg:String) {
+    fun getWaitJoinInviteItem(journeyId: String) {
         db.collection("invitations")
-            .whereEqualTo("journeyId",journeyIdArg)
+            .whereEqualTo("journeyId", journeyId)
             .whereEqualTo("receiveId", UserManager.user?.id)
-            .whereEqualTo("inviteStatus",0)
-            .get()
-            .addOnSuccessListener { result ->
-                for (document in result) {
-                    Log.d(ContentValues.TAG, "${document.id} => ${document.data}")
-                    val data = document.toObject(Invite::class.java)
-                    getWaitJoinInviteList.add(data)
-                }
-                Log.v("FieldValue.arrayUnion","$getWaitJoinInviteList")
-                _getWaitJoinInvite.value = getWaitJoinInviteList
+            .whereEqualTo("inviteStatus", 0)
+            .addSnapshotListener { snapshot, e ->
 
-            }
-            .addOnFailureListener { exception ->
-                Log.d(ContentValues.TAG, "Error getting documents: ", exception)
+                Log.d("yaya", "addSnapshotListener")
+                if (e != null) {
+                    Log.w("yaya", "Listen failed.", e)
+                    return@addSnapshotListener
+                }
+
+                if (snapshot?.documents?.isNullOrEmpty() == false) {
+
+                    for (document in snapshot.documents) {
+                        Log.d(ContentValues.TAG, "${document.id} => ${document.data}")
+                        val data = document.toObject(Invite::class.java)
+                        data?.let {
+
+                            getWaitJoinInviteList.add(data)
+                        }
+                    }
+                    _getWaitJoinInvite.value = getWaitJoinInviteList
+
+                } else {
+                    Log.d("yaya", "Current data: null")
+                }
+
             }
     }
 
-    fun getJoinInviteItem(journeyIdArg:String) {
+    fun getJoinInviteItem(journeyIdArg: String) {
         db.collection("invitations")
-            .whereEqualTo("journeyId",journeyIdArg)
+            .whereEqualTo("journeyId", journeyIdArg)
             .whereEqualTo("receiveId", UserManager.user?.id)
-            .whereEqualTo("inviteStatus",1)
-            .get()
-            .addOnSuccessListener { result ->
-                for (document in result) {
-                    Log.d(ContentValues.TAG, "${document.id} => ${document.data}")
-                    val data = document.toObject(Invite::class.java)
-                    getJoinInviteList.add(data)
+            .whereEqualTo("inviteStatus", 1)
+
+            .addSnapshotListener { snapshot, e ->
+
+                Log.d("yaya", "addSnapshotListener")
+                if (e != null) {
+                    Log.w("yaya", "Listen failed.", e)
+                    return@addSnapshotListener
                 }
-                Log.v("getJoinInviteList","$getJoinInviteList")
 
-                _getJoinInvite.value = getJoinInviteList
+                if (snapshot?.documents?.isNullOrEmpty() == false) {
 
-            }
-            .addOnFailureListener { exception ->
-                Log.d(ContentValues.TAG, "Error getting documents: ", exception)
+                    for (document in snapshot.documents) {
+                        Log.d(ContentValues.TAG, "${document.id} => ${document.data}")
+                        val data = document.toObject(Invite::class.java)
+                        data?.let {
+
+                            getJoinInviteList.add(data)
+                        }
+                    }
+                    _getJoinInvite.value = getJoinInviteList
+
+                } else {
+                    Log.d("yaya", "Current data: null")
+                }
+
             }
     }
-
-
 
 }

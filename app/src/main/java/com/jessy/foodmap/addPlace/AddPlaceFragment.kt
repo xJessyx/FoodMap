@@ -9,6 +9,7 @@ import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
+import android.view.View.TEXT_ALIGNMENT_CENTER
 import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
@@ -18,6 +19,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.jessy.foodmap.MainActivity
 import com.jessy.foodmap.NavigationDirections
+import com.jessy.foodmap.R
 import com.jessy.foodmap.databinding.FragmentAddPlaceBinding
 import java.util.*
 
@@ -108,13 +110,37 @@ class AddPlaceFragment : Fragment() {
             lunch.clear()
             lunch.add(placeSelectDataArg.journey.name)
             Log.v("placeSelectDataArg.journey.name", "${placeSelectDataArg.journey.name}")
-            setJourneySpinner(lunch)
+//            setJourneySpinner(lunch)
+            val adapter =
+                ArrayAdapter(activity as Activity, android.R.layout.simple_spinner_dropdown_item, lunch)
+
+           // adapter.setDropDownViewResource(R.layout.layout_item_center)
+
+
+            selectJourney?.adapter = adapter
+            selectJourney?.isEnabled = false
+            viewModel.journeySinner = placeSelectDataArg.journey.name
+
+
             viewModel.journeyId = placeSelectDataArg.journey.id
 
-            lunchDay.add("第" + placeSelectDataArg.place.day.toString() + "天")
-            Log.v("placeSelectDataArg.place.day.toString()",
-                "${placeSelectDataArg.place.day.toString()}")
-            setDaySinner(lunchDay)
+            val day = placeSelectDataArg.place.day
+//            for (i in 1..day) {
+//                lunchDay.add("第 $i 天")
+//            }
+            lunchDay.add("第 $day 天")
+            selectDay?.isEnabled = false
+            viewModel.daySinner = day
+
+            Log.v("lunchDay",
+                "${lunchDay}")
+
+            val adapter2 =
+                ArrayAdapter(activity as Activity,
+                    android.R.layout.simple_spinner_dropdown_item,
+                    lunchDay)
+            selectDay?.adapter = adapter2
+
             setTransportationSinner()
 
 
@@ -129,15 +155,11 @@ class AddPlaceFragment : Fragment() {
                     lunch.add(item.name)
                 }
                 lunchDay.clear()
-                Log.v("lunchDay1","$lunchDay")
 
                 setJourneySpinner(lunch)
 
                 setTransportationSinner()
             }
-
-
-
 
         }
 
@@ -156,8 +178,6 @@ class AddPlaceFragment : Fragment() {
     }
 
     fun setJourneySpinner(lunch: MutableList<String>) {
-
-
         val adapter =
             ArrayAdapter(activity as Activity, android.R.layout.simple_spinner_dropdown_item, lunch)
         selectJourney?.adapter = adapter
@@ -186,9 +206,8 @@ class AddPlaceFragment : Fragment() {
                             viewModel.journeyId = item.id
                         }
                     }
-                    setDaySinner(lunchDay)
+                    setDaySinner(lunchDay,0)
 
-                    Log.v("lunchDay3","$lunchDay")
 
                 }
 
@@ -201,7 +220,7 @@ class AddPlaceFragment : Fragment() {
         }
     }
 
-    fun setDaySinner(lunchDay: MutableList<String>) {
+    fun setDaySinner(lunchDay: MutableList<String>, day: Int) {
         val adapter2 =
             ArrayAdapter(activity as Activity,
                 android.R.layout.simple_spinner_dropdown_item,
@@ -217,7 +236,10 @@ class AddPlaceFragment : Fragment() {
             ) {
                 view!!.textAlignment = View.TEXT_ALIGNMENT_CENTER
 
+
                 viewModel.daySinner = selectDay?.selectedItemPosition!!.toInt()
+
+                Log.v("viewModel.daySinner","${viewModel.daySinner}")
             }
 
             override fun onNothingSelected(parent: AdapterView<*>?) {

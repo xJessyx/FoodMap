@@ -58,7 +58,7 @@ class AddPlaceViewModel : ViewModel() {
     fun addFireBasePlace() {
 
         val placeObject = addPlace.value
-
+        Log.v("placeObject","$placeObject")
         if (placeObject != null ) {
             db.collection("journeys").document(journeyId)
                 .collection("places").document(placeId)

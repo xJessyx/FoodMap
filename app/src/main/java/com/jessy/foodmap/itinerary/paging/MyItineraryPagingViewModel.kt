@@ -133,23 +133,26 @@ class MyItineraryPagingViewModel : ViewModel() {
         //FieldValue.arrayUnion直接增加list的item
     }
 
-    fun updateSenderData(
-        id: String,
-        senderId: String,
-        senderImage: String,
-        senderName: String) {
-
-        val SenderData = mapOf(
-            senderId to senderId,
-            senderImage to senderImage,
-            senderName to senderName
-        )
-        db.collection("invitations").document(id)
-            .update(SenderData)
-    }
+//    fun updateSenderData(
+//        id: String,
+//        senderId: String,
+//        senderImage: String,
+//        senderName: String) {
+//
+//        val SenderData = mapOf(
+//            senderId to senderId,
+//            senderImage to senderImage,
+//            senderName to senderName
+//        )
+//        db.collection("invitations").document(id)
+//            .update(SenderData)
+//    }
 
     fun queryAllUsers(ids: List<String>) {
         Log.d("yaya", "queryAllUsers ids=$ids")
+        if (ids.isNullOrEmpty()) {
+            return
+        }
         db.collection("users")
             .whereIn("id", ids)
             .get()

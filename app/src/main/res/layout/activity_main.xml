@@ -31,7 +31,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Home"
-                android:textColor="#381100"
+                android:textColor="#E45D0F"
                 android:fontFamily="@font/smallcase"
                 android:layout_gravity="center"
                 android:textSize="50sp"

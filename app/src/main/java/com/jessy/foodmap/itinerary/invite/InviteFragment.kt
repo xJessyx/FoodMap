@@ -51,13 +51,26 @@ class InviteFragment : Fragment() {
                     if (TextUtils.isEmpty(email)) {
                         Toast.makeText(activity as Activity, "請輸入要邀請的email", Toast.LENGTH_SHORT).show()
                     } else {
-                        viewModel.addInvitationsItem(email)
+                        viewModel.checkUser(email)
 
-                        viewModel.addInvite.observe(viewLifecycleOwner){
-                            viewModel.addFireBaseInvitations()
+                        viewModel.getSenderUser.observe(viewLifecycleOwner){
+                            it?.let {
+                                viewModel.addInvitationsItem(email,it)
 
+                                viewModel.addInvite.observe(viewLifecycleOwner){
+
+                                    viewModel.addFireBaseInvitations()
+                                }
+                            }
                         }
+
+                        viewModel.errorUser.observe(viewLifecycleOwner){
+                            Toast.makeText(activity as Activity, "查無此人", Toast.LENGTH_SHORT).show()
+                        }
+
                     }
+
+
                 }
                 .show()
         }

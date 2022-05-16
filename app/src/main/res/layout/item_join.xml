@@ -4,7 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
+        <variable
+            name="invite"
+            type="com.jessy.foodmap.data.Invite" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -13,17 +15,38 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <ImageView
+            android:id="@+id/join_img"
+            imageUrlCircle="@{invite.senderImage}"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/join_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:text="@{invite.senderName}"
+            android:textSize="18sp"
+            app:layout_constraintStart_toEndOf="@+id/join_img"
+            app:layout_constraintTop_toTopOf="@+id/join_img"
+            tools:text="減小樂" />
+
         <TextView
             android:id="@+id/join_email"
-            android:layout_marginLeft="16dp"
-            android:layout_marginTop="16dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="fill_horizontal|left"
-            android:textSize="26sp"
-            android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
+            android:text="@{invite.senderEmail}"
+            android:textSize="16sp"
+            android:layout_marginTop="3dp"
+            app:layout_constraintBottom_toBottomOf="@+id/join_img"
+            app:layout_constraintStart_toStartOf="@+id/join_name"
+            app:layout_constraintTop_toBottomOf="@+id/join_name"
             tools:text="aa@gmai.com" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

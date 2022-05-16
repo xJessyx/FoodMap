@@ -110,7 +110,7 @@ class MyItineraryPagingFragment : Fragment(){
             }
             .setNeutralButton("拒絕") { _, _ -> Toast.makeText(activity as Activity, "已拒絕行程", Toast.LENGTH_SHORT).show()
                 viewModel.updateInviteStatusFalse(id)
-                viewModel.updateSenderData(id,senderId,senderImage,senderName)
+           //     viewModel.updateSenderData(id,senderId,senderImage,senderName)
             }
             .show()
     }

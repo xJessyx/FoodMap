@@ -64,8 +64,14 @@ class AddItineraryDetailDateFragment(position: Int, journey: Journey) : Fragment
 
         viewModel.places.observe(viewLifecycleOwner) {
             it?.let {
-                calculateTravelTime(it)
+                if(it.isEmpty()){
+                    Log.v("Place 尚未有地點","$it")
+                }else{
+                    calculateTravelTime(it)
+
+                }
             }
+
         }
 
 

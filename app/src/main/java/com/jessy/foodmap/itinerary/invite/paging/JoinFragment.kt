@@ -21,12 +21,12 @@ private val viewModel: JoinViewModel by lazy {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View? {
-        val journeyIdArg = requireArguments()["journeyId"]
-        Log.v("journeyIdArg join ","$journeyIdArg")
+        val journeyId = requireArguments().getString("journeyId") ?: ""
+        Log.v("journeyIdArg join ","$journeyId")
         val binding = FragmentJoinBinding.inflate(inflater, container, false)
         binding.lifecycleOwner = this
 
-        viewModel.getJoinInviteItem(journeyIdArg as String)
+        viewModel.getJoinInviteItem(journeyId)
 
        val adapter =JoinAdapter()
         binding.joinRecyclerView.adapter = adapter
