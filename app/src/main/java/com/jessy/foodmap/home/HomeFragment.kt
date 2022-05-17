@@ -1,6 +1,7 @@
 package com.jessy.foodmap.home
 
 import android.os.Bundle
+import android.os.Handler
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -41,6 +42,7 @@ class homeFragment : Fragment() {
         binding.viewModel = viewModel
         viewModel.getFireBaseArticle()
 
+
         viewModel.getAllArticlesLiveData.observe(viewLifecycleOwner){
             (binding.homeRecyclerView.adapter as HomeAdapter).submitList(it)
 
@@ -57,12 +59,8 @@ class homeFragment : Fragment() {
         )
 
         binding.homePostFabBtn.setOnClickListener {
-//                view ->
-//            Snackbar.make(view, "Here's a Snackbar", Snackbar.LENGTH_LONG)
-//                .setAction("Action", null)
-//                .show()
-            findNavController().navigate(NavigationDirections.homeFragmentAddArticleFragment())
 
+            findNavController().navigate(NavigationDirections.homeFragmentAddArticleFragment())
 
         }
 

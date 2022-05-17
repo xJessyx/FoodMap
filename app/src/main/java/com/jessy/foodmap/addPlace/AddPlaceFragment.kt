@@ -112,9 +112,9 @@ class AddPlaceFragment : Fragment() {
             Log.v("placeSelectDataArg.journey.name", "${placeSelectDataArg.journey.name}")
 //            setJourneySpinner(lunch)
             val adapter =
-                ArrayAdapter(activity as Activity, android.R.layout.simple_spinner_dropdown_item, lunch)
+                ArrayAdapter(activity as Activity, R.layout.layout_item_center, lunch)
 
-           // adapter.setDropDownViewResource(R.layout.layout_item_center)
+            adapter.setDropDownViewResource(R.layout.layout_item_center)
 
 
             selectJourney?.adapter = adapter
@@ -137,9 +137,12 @@ class AddPlaceFragment : Fragment() {
 
             val adapter2 =
                 ArrayAdapter(activity as Activity,
-                    android.R.layout.simple_spinner_dropdown_item,
+
+                    R.layout.layout_item_center,
                     lunchDay)
             selectDay?.adapter = adapter2
+
+            adapter.setDropDownViewResource(R.layout.layout_item_center)
 
             setTransportationSinner()
 
