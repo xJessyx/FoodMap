@@ -32,6 +32,7 @@ class HomeAdapter(val onClickListener: OnClickListener): ListAdapter<Article,
 
         fun bind(article: Article) {
           binding.article = article
+            binding.homeTotalLike.text = article.likeUsers.size.toString()
             binding.executePendingBindings()
 
         }

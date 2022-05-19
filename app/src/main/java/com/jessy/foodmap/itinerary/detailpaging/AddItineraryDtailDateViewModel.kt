@@ -51,39 +51,6 @@ class AddItineraryDtailDateViewModel (position : Int,journeyArg: Journey): ViewM
     fun updateMoveList(list: MutableList<Place>,fromPosition: Int, toPosition: Int){
 
 
-
-//        db.collection("journeys").document(journeyItemId)
-//            .collection("places").document(list[fromPosition].id)
-//            .update("startTime",list[toPosition].startTime)
-//            .addOnSuccessListener {
-//                Log.d(ContentValues.TAG, "startTime success")
-//
-//            }
-//            .addOnFailureListener {
-//                Log.w(ContentValues.TAG, "Error adding document")
-//            }
-//        db.collection("journeys").document(journeyItemId)
-//            .collection("places").document(list[fromPosition].id)
-//            .update("name",list[toPosition].name)
-//            .addOnSuccessListener {
-//                Log.d(ContentValues.TAG, "name success")
-//
-//            }
-//            .addOnFailureListener {
-//                Log.w(ContentValues.TAG, "Error adding document")
-//            }
-//        db.collection("journeys").document(journeyItemId)
-//            .collection("places").document(list[fromPosition].id)
-//            .update("dwellTime",list[toPosition].dwellTime)
-//            .addOnSuccessListener {
-//                Log.d(ContentValues.TAG, "dwellTime success")
-//
-//            }
-//            .addOnFailureListener {
-//                Log.w(ContentValues.TAG, "Error adding document")
-//            }
-
-
         if (!isUpdating) {
             isUpdating = true
             val updateMap = mapOf(

@@ -122,7 +122,7 @@ class MapsPagingFragment : Fragment(), OnMapReadyCallback {
             val name = viewModel.myAllPlace.value!![i].name
 
             val offsetItem =
-                MarkerItem(lat!!, lng!!, name, "Snippet $i")
+                MarkerItem(lat!!, lng!!, name, "")
             Log.v("viewModel.myAllPlaceList.size","${viewModel.myAllPlaceList.size}")
             Log.v("i","$i")
             Log.v("offsetItem","${offsetItem.position}")

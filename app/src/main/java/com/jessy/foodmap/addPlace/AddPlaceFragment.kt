@@ -37,8 +37,7 @@ class AddPlaceFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
-    ): View? {
-        (activity as MainActivity).hideToolBar()
+    ): View? {        (activity as MainActivity).hideToolBar()
 
         val binding = FragmentAddPlaceBinding.inflate(inflater, container, false)
         binding.lifecycleOwner = this
@@ -91,7 +90,7 @@ class AddPlaceFragment : Fragment() {
                 viewModel.addFireBasePlace()
 
                 Toast.makeText(activity as Activity, "已新增成功!!!", Toast.LENGTH_SHORT).show()
-                findNavController().navigate(NavigationDirections.addPlaceFragmentItineraryPlanningFragment())
+                findNavController().navigate(NavigationDirections.addPlaceFragmentMyItineraryPagingFragment())
 
 
             } else {
@@ -168,6 +167,7 @@ class AddPlaceFragment : Fragment() {
 
 
         return binding.root
+
     }
 
     object TimeUtil {

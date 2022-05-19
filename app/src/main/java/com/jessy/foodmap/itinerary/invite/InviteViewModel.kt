@@ -82,7 +82,6 @@ class InviteViewModel(journeyArg: Journey) : ViewModel() {
 
          }
 
-
          .addOnFailureListener { exception ->
             Log.d(ContentValues.TAG, "Error getting documents: ", exception)
          }

@@ -17,8 +17,8 @@ import com.jessy.foodmap.login.UserManager.Companion.user
 
 class MyItineraryPagingViewModel : ViewModel() {
 
-//    val ownerImage=MutableLiveData<String>()
-  //  val coeditImage:String? =null
+    //    val ownerImage=MutableLiveData<String>()
+    //  val coeditImage:String? =null
     val db = Firebase.firestore
     var getAllJourney = mutableListOf<Journey>()
 
@@ -41,48 +41,39 @@ class MyItineraryPagingViewModel : ViewModel() {
         get() = _checkInvite
 
 
-//    fun getFireBaseJourney() {
-//        Log.v("userId","${user?.id}")
-//        db.collection("journeys")
-//           .whereEqualTo("userId", user?.id)
-//            .whereEqualTo("share",false)
-//        .orderBy("startDate", Query.Direction.DESCENDING)
-//            .get()
-//                .addOnSuccessListener { result ->
-//                for (document in result) {
-//                    Log.d(ContentValues.TAG, "${document.id} => ${document.data}")
-//                    val data = document.toObject(Journey::class.java)
-//                    getAllJourney.add(data)
-//                }
-//                _getAllJourneyLiveData.value = getAllJourney
-//
-//            }
-//            .addOnFailureListener { exception ->
-//                Log.d(ContentValues.TAG, "Error getting documents: ", exception)
-//            }
-//        }
-
-
+    val _loadStatus = MutableLiveData<Boolean>()
+    val loadStatus: LiveData<Boolean>
+        get() = _loadStatus
 
     fun getFireBaseCoEditJourney() {
-        Log.v("coEditUser","${user?.id}")
         db.collection("journeys")
             .whereArrayContains("coEditUser", user!!.id)
-            .whereEqualTo("share",false)
+            .whereEqualTo("share", false)
             .orderBy("startDate", Query.Direction.DESCENDING)
-            .get()
-            .addOnSuccessListener { result ->
-                for (document in result) {
-                    Log.d(ContentValues.TAG, "${document.id} => ${document.data}")
-                    val data = document.toObject(Journey::class.java)
-                    getAllJourney.add(data)
+            .addSnapshotListener { snapshot, e ->
+
+                if (e != null) {
+                    Log.w("yaya", "Listen failed.", e)
+                    return@addSnapshotListener
                 }
-                _getAllJourneyLiveData.value = getAllJourney
+
+                if (snapshot?.documents?.isNullOrEmpty() == false) {
+
+                    for (document in snapshot.documents) {
+                        Log.d(ContentValues.TAG, "${document.id} => ${document.data}")
+                        val data = document.toObject(Journey::class.java)
+                        data?.let {
+                            getAllJourney.add(data)
+                        }
+                    }
+                    _getAllJourneyLiveData.value = getAllJourney
+                    Log.v("getAllJourney","${getAllJourney}")
+                } else {
+                    Log.d("yaya", "Current data: null")
+                }
 
             }
-            .addOnFailureListener { exception ->
-                Log.d(ContentValues.TAG, "Error getting documents: ", exception)
-            }
+
     }
 
     fun navigateToDetailDate(journey: Journey) {
@@ -93,10 +84,10 @@ class MyItineraryPagingViewModel : ViewModel() {
         _navigateToDetailDate.value = null
     }
 
-    fun checkInviteItem(){
+    fun checkInviteItem() {
         db.collection("invitations")
             .whereEqualTo("senderEmail", user?.email)
-            .whereEqualTo("inviteStatus",0)
+            .whereEqualTo("inviteStatus", 0)
             .get()
             .addOnSuccessListener { result ->
                 for (document in result) {
@@ -117,36 +108,19 @@ class MyItineraryPagingViewModel : ViewModel() {
             .update("inviteStatus", 1)
     }
 
-    fun updateInviteStatusFalse(id: String){
+    fun updateInviteStatusFalse(id: String) {
         db.collection("invitations").document(id)
             .update("inviteStatus", 2)
     }
 
-    fun updateCoEdit(journeyId: String,
-                     receiveId: String){
-//        var coEditUser= mutableListOf<String>()
-//        coEditUser.add(user!!.id)
-        //coEditUser.add(receiveId)
+    fun updateCoEdit(
+        journeyId: String,
+    ) {
 
         db.collection("journeys").document(journeyId)
             .update("coEditUser", FieldValue.arrayUnion(user!!.id))
-        //FieldValue.arrayUnion直接增加list的item
     }
 
-//    fun updateSenderData(
-//        id: String,
-//        senderId: String,
-//        senderImage: String,
-//        senderName: String) {
-//
-//        val SenderData = mapOf(
-//            senderId to senderId,
-//            senderImage to senderImage,
-//            senderName to senderName
-//        )
-//        db.collection("invitations").document(id)
-//            .update(SenderData)
-//    }
 
     fun queryAllUsers(ids: List<String>) {
         Log.d("yaya", "queryAllUsers ids=$ids")

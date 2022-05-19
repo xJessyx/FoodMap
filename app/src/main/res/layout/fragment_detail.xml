@@ -122,23 +122,27 @@
                 app:layout_constraintStart_toStartOf="@+id/detail_tv_date"
                 app:layout_constraintTop_toBottomOf="@+id/detail_tv_date" />
 
-            <ImageButton
+            <ToggleButton
                 android:id="@+id/detail_like"
                 android:layout_width="25dp"
                 android:layout_height="25dp"
+                android:textOff=""
+                android:textOn=""
                 android:layout_marginEnd="8dp"
-                android:background="@drawable/heart"
+                android:background="@drawable/btn_like_image"
                 android:textColor="@color/black"
                 app:layout_constraintBottom_toBottomOf="@+id/detail_collect"
                 app:layout_constraintEnd_toStartOf="@+id/detail_collect"
                 app:layout_constraintTop_toTopOf="@+id/detail_collect" />
 
-            <ImageButton
+            <ToggleButton
                 android:id="@+id/detail_collect"
                 android:layout_width="25dp"
                 android:layout_height="25dp"
+                android:textOff=""
+                android:textOn=""
                 android:layout_marginEnd="8dp"
-                android:background="@drawable/star"
+                android:background="@drawable/btn_collect_image"
                 android:textColor="@color/black"
                 app:layout_constraintBottom_toBottomOf="@+id/detail_chat"
                 app:layout_constraintEnd_toStartOf="@+id/detail_chat"
