@@ -6,6 +6,9 @@
     >
     <data>
         <variable
+            name="viewModel"
+            type="com.jessy.foodmap.detail.DetailViewModel" />
+        <variable
             name="messages"
             type="com.jessy.foodmap.data.Messages" />
     </data>
@@ -20,6 +23,7 @@
         android:layout_marginLeft="8dp"
         android:layout_marginRight="16dp"
         android:ellipsize="end"
+        android:text="@{messages.content}"
         android:textColor="@color/black"
         android:textSize="14dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -34,6 +38,8 @@
         android:layout_height="40dp"
         android:layout_marginTop="8dp"
         android:layout_marginLeft="8dp"
+        app:imageUrlCircle="@{messages.userImage}"
+
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -45,6 +51,7 @@
         android:lineSpacingExtra="6dp"
         android:textColor="#6C6C6C"
         android:textSize="12dp"
+        app:timeToDisplayFormat="@{messages.createdTime}"
         android:ellipsize="end"
         app:layout_constraintBottom_toBottomOf="@+id/detail_message_img"
         app:layout_constraintEnd_toEndOf="@+id/detail_message_tv_conent"

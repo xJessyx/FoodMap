@@ -7,10 +7,12 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.google.firebase.firestore.FieldValue
+import com.google.firebase.firestore.Query
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.jessy.foodmap.data.Article
 import com.jessy.foodmap.data.Messages
+import com.jessy.foodmap.data.Place
 import com.jessy.foodmap.login.UserManager.Companion.user
 
 class DetailViewModel(private val articleKey: Article) : ViewModel() {
@@ -31,7 +33,8 @@ class DetailViewModel(private val articleKey: Article) : ViewModel() {
         get() = _addMessage
 
 
-    var _getMessageList = mutableListOf<Article>()
+    val messageCotent = MutableLiveData<String>()
+
     val _getMessageLiveData = MutableLiveData<List<Messages>>()
     val getMessageLiveData: LiveData<List<Messages>>
         get() = _getMessageLiveData
@@ -92,33 +95,8 @@ class DetailViewModel(private val articleKey: Article) : ViewModel() {
     }
 
     fun checkFavoriteStatus() {
-            db.collection("articles")
-                .whereArrayContains("favoriteUsers", user!!.id)
-                .get()
-                .addOnSuccessListener { result ->
-
-                    for (document in result) {
-                        Log.d(ContentValues.TAG, "${document.id} => ${document.data}")
-                        val data = document.toObject(Article::class.java)
-
-                        if (data.id == article.value?.id) {
-                            _favoriteStatus.value = true
-                        }
-
-                    }
-                    if (result.isEmpty) {
-                        _favoriteStatus.value = false
-                    }
-                }
-                .addOnFailureListener { exception ->
-                    Log.d(ContentValues.TAG, "Error getting documents: ", exception)
-                }
-
-    }
-
-    fun checkLikeStatus() {
         db.collection("articles")
-            .whereArrayContains("likeUsers", user!!.id)
+            .whereArrayContains("favoriteUsers", user!!.id)
             .get()
             .addOnSuccessListener { result ->
 
@@ -127,38 +105,109 @@ class DetailViewModel(private val articleKey: Article) : ViewModel() {
                     val data = document.toObject(Article::class.java)
 
                     if (data.id == article.value?.id) {
-                        _likeStatus.value = true
+                        _favoriteStatus.value = true
                     }
 
                 }
                 if (result.isEmpty) {
-                    _likeStatus.value = false
+                    _favoriteStatus.value = false
                 }
-
             }
             .addOnFailureListener { exception ->
                 Log.d(ContentValues.TAG, "Error getting documents: ", exception)
             }
-    }
-
-
-    fun getFireBaseMessages(){
-        db.collection("")
 
     }
 
-    fun addFireBaseMessages(){
+    fun checkLikeStatus() {
+        user?.id?.let {
+            db.collection("articles")
+                .whereArrayContains("likeUsers", it)
+                .get()
+                .addOnSuccessListener { result ->
+
+                    for (document in result) {
+                        Log.d(ContentValues.TAG, "${document.id} => ${document.data}")
+                        val data = document.toObject(Article::class.java)
+
+                        if (data.id == article.value?.id) {
+                            _likeStatus.value = true
+                        }
+
+                    }
+                    if (result.isEmpty) {
+                        _likeStatus.value = false
+                    }
+
+                }
+                .addOnFailureListener { exception ->
+                    Log.d(ContentValues.TAG, "Error getting documents: ", exception)
+                }
+        }
+    }
+
+
+    fun getFireBaseMessages() {
+
+        var MessageList = mutableListOf<Messages>()
+
+        article.value?.let {
+            db.collection("articles").document(it.id)
+                .collection("messages")
+                .orderBy("createTime", Query.Direction.DESCENDING)
+                .get()
+                .addOnSuccessListener { result ->
+                    for (document in result) {
+                        Log.d(ContentValues.TAG, "${document.id} => ${document.data}")
+                        val data = document.toObject(Messages::class.java)
+                        MessageList.add(data)
+
+                    }
+                    _getMessageLiveData.value = MessageList
+
+                }
+                .addOnFailureListener { exception ->
+                    Log.d(ContentValues.TAG, "Error getting documents: ", exception)
+                }
+        }
 
     }
+
+    fun addFireBaseMessages() {
+
+        val message = addMessage.value
+
+        if (message != null) {
+
+            val newDoc = article.value?.id?.let {
+                db.collection("articles").document(it)
+                    .collection("messages").document()
+            }
+            val id = newDoc?.id
+
+            message.id = id
+            if (newDoc != null) {
+                newDoc.set(message)
+                    .addOnSuccessListener {
+                        Log.d(ContentValues.TAG, "DocumentSnapshot successfull")
+                    }
+                    .addOnFailureListener { e ->
+                        Log.w(ContentValues.TAG, "Error adding document", e)
+                    }
+            }
+
+        }
+
+    }
+
+
     fun addMessagesItem() {
         val data = Messages(
-
-         id ="",
-         userName ="",
-         userImage = "",
-         userId ="",
-         content = "",
-         createdTime = -1,
+            userName = user?.name,
+            userImage = user?.image,
+            userId = user?.id,
+            content = messageCotent.value,
+            createdTime = Calendar.getInstance().timeInMillis
 
         )
 

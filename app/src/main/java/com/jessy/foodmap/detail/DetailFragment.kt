@@ -33,6 +33,10 @@ class DetailFragment : Fragment() {
         binding.viewModel = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
 
+        val adapter = DetailAdapter()
+        binding.detailRecyclerView.adapter = adapter
+
+
 
         viewModel.article.observe(viewLifecycleOwner) {
 
@@ -54,6 +58,16 @@ class DetailFragment : Fragment() {
 
         viewModel.checkFavoriteStatus()
         viewModel.checkLikeStatus()
+        viewModel.getFireBaseMessages()
+        viewModel.addFireBaseMessages()
+
+        viewModel.getMessageLiveData.observe(viewLifecycleOwner) {
+            it?.let {
+                adapter.submitList(it)
+            }
+        }
+
+        viewModel
 
 
         viewModel.favoriteStatus.observe(viewLifecycleOwner) {

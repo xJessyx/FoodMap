@@ -28,13 +28,13 @@
         <entry key="..\:/Users/as110/AppWorkSchoolProject/FoodMap/app/src/main/res/layout/activity_welcome.xml" value="0.12406015037593984" />
         <entry key="..\:/Users/as110/AppWorkSchoolProject/FoodMap/app/src/main/res/layout/finishpage.xml" value="0.1911231884057971" />
         <entry key="..\:/Users/as110/AppWorkSchoolProject/FoodMap/app/src/main/res/layout/fragment_add_aarticle.xml" value="0.25364583333333335" />
-        <entry key="..\:/Users/as110/AppWorkSchoolProject/FoodMap/app/src/main/res/layout/fragment_add_article.xml" value="0.20923913043478262" />
+        <entry key="..\:/Users/as110/AppWorkSchoolProject/FoodMap/app/src/main/res/layout/fragment_add_article.xml" value="0.1" />
         <entry key="..\:/Users/as110/AppWorkSchoolProject/FoodMap/app/src/main/res/layout/fragment_add_itinerary.xml" value="0.2" />
         <entry key="..\:/Users/as110/AppWorkSchoolProject/FoodMap/app/src/main/res/layout/fragment_add_itinerary_detail_date.xml" value="0.264" />
         <entry key="..\:/Users/as110/AppWorkSchoolProject/FoodMap/app/src/main/res/layout/fragment_add_itineray_detail_date.xml" value="0.1490036231884058" />
         <entry key="..\:/Users/as110/AppWorkSchoolProject/FoodMap/app/src/main/res/layout/fragment_add_place.xml" value="0.22456140350877193" />
         <entry key="..\:/Users/as110/AppWorkSchoolProject/FoodMap/app/src/main/res/layout/fragment_collect_paging.xml" value="0.1" />
-        <entry key="..\:/Users/as110/AppWorkSchoolProject/FoodMap/app/src/main/res/layout/fragment_detail.xml" value="0.458477508650519" />
+        <entry key="..\:/Users/as110/AppWorkSchoolProject/FoodMap/app/src/main/res/layout/fragment_detail.xml" value="0.17664670658682635" />
         <entry key="..\:/Users/as110/AppWorkSchoolProject/FoodMap/app/src/main/res/layout/fragment_direction.xml" value="0.1" />
         <entry key="..\:/Users/as110/AppWorkSchoolProject/FoodMap/app/src/main/res/layout/fragment_food_map_search.xml" value="0.2" />
         <entry key="..\:/Users/as110/AppWorkSchoolProject/FoodMap/app/src/main/res/layout/fragment_home.xml" value="0.4" />
@@ -65,7 +65,7 @@
         <entry key="..\:/Users/as110/AppWorkSchoolProject/FoodMap/app/src/main/res/layout/item_member_collect.xml" value="0.17798913043478262" />
         <entry key="..\:/Users/as110/AppWorkSchoolProject/FoodMap/app/src/main/res/layout/item_member_collect_class.xml" value="0.17798913043478262" />
         <entry key="..\:/Users/as110/AppWorkSchoolProject/FoodMap/app/src/main/res/layout/item_member_collects.xml" value="0.2" />
-        <entry key="..\:/Users/as110/AppWorkSchoolProject/FoodMap/app/src/main/res/layout/item_message.xml" value="0.4290657439446367" />
+        <entry key="..\:/Users/as110/AppWorkSchoolProject/FoodMap/app/src/main/res/layout/item_message.xml" value="0.23046875" />
         <entry key="..\:/Users/as110/AppWorkSchoolProject/FoodMap/app/src/main/res/layout/item_my_ltinerary_paging.xml" value="0.4" />
         <entry key="..\:/Users/as110/AppWorkSchoolProject/FoodMap/app/src/main/res/layout/item_recommend_paging.xml" value="0.264" />
         <entry key="..\:/Users/as110/AppWorkSchoolProject/FoodMap/app/src/main/res/layout/join_fragment.xml" value="0.1766304347826087" />

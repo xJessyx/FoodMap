@@ -245,6 +245,7 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/shape_round3"
                 android:hint="留言..."
+                android:text="@{viewModel.messageCotent}"
                 android:gravity="center_vertical"
                 android:autoSizeTextType="uniform"
                 android:ellipsize = "end"
