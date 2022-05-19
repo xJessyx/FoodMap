@@ -21,7 +21,7 @@ fun bindImage(imgView: ImageView, imgUrl: String?) {
 
             .apply(
                 RequestOptions()
-                    .placeholder(R.drawable.load)
+                    .placeholder(R.drawable.load_img)
                     .error(R.drawable.ic_broken_image)
             )
             .into(imgView)

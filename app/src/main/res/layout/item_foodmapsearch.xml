@@ -15,10 +15,10 @@
 
 
         <ImageView
-            android:layout_marginLeft="5dp"
             android:id="@+id/foodMapSearch_img"
             android:layout_width="104dp"
             android:layout_height="110dp"
+            android:layout_marginLeft="5dp"
             android:layout_marginTop="10dp"
             android:layout_marginRight="5dp"
             android:scaleType="centerCrop"
@@ -28,69 +28,85 @@
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/map_back" />
 
-        <LinearLayout
-            android:layout_width="104dp"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/foodMapSearch_cons_layout"
+            android:layout_width="0dp"
             android:layout_height="90dp"
-            android:paddingLeft="6dp"
             android:background="@color/white"
-            android:orientation="vertical"
-            app:layout_constraintBottom_toBottomOf="parent"
+            android:paddingLeft="3dp"
+            android:paddingRight="3dp"
             app:layout_constraintEnd_toEndOf="@+id/foodMapSearch_img"
+            app:layout_constraintLeft_toLeftOf="@+id/foodMapSearch_img"
             app:layout_constraintStart_toStartOf="@+id/foodMapSearch_img"
             app:layout_constraintTop_toBottomOf="@+id/foodMapSearch_img">
 
+
             <TextView
                 android:id="@+id/foodMapSearch_title"
-                android:layout_width="93dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="3dp"
                 android:ellipsize="end"
                 android:textColor="@color/black"
                 android:textSize="10sp"
+
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/foodMapSearch_address"
+                app:layout_constraintTop_toTopOf="parent"
                 tools:text="甜甜圈專賣店" />
 
             <TextView
                 android:id="@+id/foodMapSearch_address"
-                android:layout_width="93dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:ellipsize="end"
                 android:textSize="8sp"
+                android:layout_marginTop="3dp"
+                app:layout_constraintEnd_toEndOf="@+id/foodMapSearch_cons_layout"
+                app:layout_constraintStart_toStartOf="@+id/foodMapSearch_title"
+                app:layout_constraintTop_toBottomOf="@+id/foodMapSearch_title"
                 tools:text="台北彎彎曲第一人民廣場
-                5號" />
+                        5號" />
 
-            <LinearLayout
-                android:layout_width="104dp"
-                android:layout_height="25dp"
-                android:background="@color/white"
-                android:paddingBottom="3dp">
+            <TextView
+                android:id="@+id/foodMapSearch_scoreName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:text="評分："
+                android:textSize="8sp"
+                app:layout_constraintStart_toStartOf="@+id/foodMapSearch_title"
+                app:layout_constraintTop_toBottomOf="@+id/foodMapSearch_address" />
 
-                <TextView
-                    android:id="@+id/foodMapSearch_scoreName"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="評分："
-                    android:textSize="8sp" />
+            <TextView
+                android:id="@+id/foodMapSearch_score"
+                android:layout_width="51dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="3dp"
+                android:textSize="8sp"
+                app:layout_constraintBottom_toBottomOf="@+id/foodMapSearch_scoreName"
+                app:layout_constraintStart_toEndOf="@+id/foodMapSearch_scoreName"
+                app:layout_constraintTop_toTopOf="@+id/foodMapSearch_scoreName"
+                app:layout_constraintVertical_bias="0.0"
+                tools:text="5.0" />
 
-                <TextView
-                    android:id="@+id/foodMapSearch_score"
-                    android:layout_width="51dp"
-                    android:layout_height="wrap_content"
-                    android:textSize="8sp"
-                    tools:text="5.0" />
-
-                <Button
-                    android:id="@+id/foodMapSearch_addPlace"
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    android:background="@drawable/add3"
-                    android:text=""
-                    android:textAlignment="center"
-                    android:textColor="@color/black"
-                    android:textSize="9sp" />
-
-
-            </LinearLayout>
-        </LinearLayout>
+            <Button
+                android:id="@+id/foodMapSearch_addPlace"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_marginTop="3dp"
+                android:layout_marginBottom="3dp"
+                android:background="@drawable/add3"
+                android:text=""
+                android:textAlignment="center"
+                android:textColor="@color/black"
+                android:textSize="9sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/foodMapSearch_score"
+                app:layout_constraintTop_toBottomOf="@+id/foodMapSearch_address"
+                app:layout_constraintVertical_bias="1.0" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

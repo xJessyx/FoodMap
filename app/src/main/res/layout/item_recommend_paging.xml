@@ -39,6 +39,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:scaleType="centerCrop"
+                    android:src="@drawable/ice_cream"
                         app:imageUrl="@{journey.image}"/>
 <!--                android:alpha="0.6"-->
 
