@@ -8,12 +8,16 @@ class MarkerItem(
     lat: Double,
     lng: Double,
     title: String,
-    snippet: String
-) : ClusterItem {
+    snippet: String,
+//    alpha: Float,
+
+    ) : ClusterItem {
 
     private val position: LatLng
     private val title: String
     private val snippet: String
+  //  private val alpha : Float
+
 
     override fun getPosition(): LatLng {
         return position
@@ -26,10 +30,15 @@ class MarkerItem(
     override fun getSnippet(): String? {
         return snippet
     }
+//    override fun getAlpha(): Float {
+//        return alpha
+//    }
+
 
     init {
         position = LatLng(lat, lng)
         this.title = title
         this.snippet = snippet
+  //      this.alpha = alpha
     }
 }

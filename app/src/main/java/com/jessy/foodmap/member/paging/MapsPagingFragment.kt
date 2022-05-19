@@ -2,7 +2,6 @@ package com.jessy.foodmap.member.paging
 
 import android.app.Activity
 import android.content.ContentValues.TAG
-import android.content.pm.PackageManager
 import android.content.res.Resources
 import androidx.fragment.app.Fragment
 
@@ -19,13 +18,8 @@ import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MapStyleOptions
-import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
-import com.google.android.libraries.places.api.Places
-import com.google.android.libraries.places.api.model.AutocompleteSessionToken
-import com.google.android.libraries.places.api.net.PlacesClient
 import com.google.maps.android.clustering.ClusterManager
-import com.jessy.foodmap.MainActivity
 import com.jessy.foodmap.R
 import com.jessy.foodmap.data.MarkerItem
 import com.jessy.foodmap.databinding.FragmentMapsPagingBinding
@@ -123,9 +117,7 @@ class MapsPagingFragment : Fragment(), OnMapReadyCallback {
 
             val offsetItem =
                 MarkerItem(lat!!, lng!!, name, "")
-            Log.v("viewModel.myAllPlaceList.size","${viewModel.myAllPlaceList.size}")
-            Log.v("i","$i")
-            Log.v("offsetItem","${offsetItem.position}")
+
             clusterManager.addItem(offsetItem)
         }
     }
@@ -134,8 +126,15 @@ class MapsPagingFragment : Fragment(), OnMapReadyCallback {
 
         mMap = googleMap
         setMapStyle(mMap)
-
-
+//        googleMap.addMarker(
+//            MarkerOptions()
+//                .position(LatLng(24.9324563, 121.3689134))
+//                .title("Marker z1")
+//                .zIndex(5.0f)
+//                .alpha(0.1f)
+//        )
     }
+
+
 
 }

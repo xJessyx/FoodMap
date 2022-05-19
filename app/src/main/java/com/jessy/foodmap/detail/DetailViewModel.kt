@@ -1,6 +1,7 @@
 package com.jessy.foodmap.detail
 
 import android.content.ContentValues
+import android.icu.util.Calendar
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -9,9 +10,13 @@ import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.jessy.foodmap.data.Article
+import com.jessy.foodmap.data.Messages
 import com.jessy.foodmap.login.UserManager.Companion.user
 
 class DetailViewModel(private val articleKey: Article) : ViewModel() {
+
+    val db = Firebase.firestore
+
 
     val _favoriteStatus = MutableLiveData<Boolean>()
     val favoriteStatus: LiveData<Boolean>
@@ -21,8 +26,16 @@ class DetailViewModel(private val articleKey: Article) : ViewModel() {
     val likeStatus: LiveData<Boolean>
         get() = _likeStatus
 
+    val _addMessage = MutableLiveData<Messages>()
+    val addMessage: LiveData<Messages>
+        get() = _addMessage
 
-    val db = Firebase.firestore
+
+    var _getMessageList = mutableListOf<Article>()
+    val _getMessageLiveData = MutableLiveData<List<Messages>>()
+    val getMessageLiveData: LiveData<List<Messages>>
+        get() = _getMessageLiveData
+
     private val _article = MutableLiveData<Article>().apply {
         value = articleKey
 
@@ -78,7 +91,6 @@ class DetailViewModel(private val articleKey: Article) : ViewModel() {
 
     }
 
-
     fun checkFavoriteStatus() {
             db.collection("articles")
                 .whereArrayContains("favoriteUsers", user!!.id)
@@ -127,7 +139,30 @@ class DetailViewModel(private val articleKey: Article) : ViewModel() {
             .addOnFailureListener { exception ->
                 Log.d(ContentValues.TAG, "Error getting documents: ", exception)
             }
+    }
+
+
+    fun getFireBaseMessages(){
+        db.collection("")
 
     }
 
+    fun addFireBaseMessages(){
+
+    }
+    fun addMessagesItem() {
+        val data = Messages(
+
+         id ="",
+         userName ="",
+         userImage = "",
+         userId ="",
+         content = "",
+         createdTime = -1,
+
+        )
+
+        _addMessage.value = data
+
+    }
 }
