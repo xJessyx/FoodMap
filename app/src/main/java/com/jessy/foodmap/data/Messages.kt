@@ -12,6 +12,6 @@ data class Messages (
     var userImage:String? = "",
     var userId:String? ="",
     var content: String? = "",
-    var createdTime: Long? = -1,
+    var createTime: Long? = -1,
 
 ): Parcelable

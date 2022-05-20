@@ -12,53 +12,68 @@
             name="messages"
             type="com.jessy.foodmap.data.Messages" />
     </data>
-<androidx.constraintlayout.widget.ConstraintLayout
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/detail_message_tv_conent"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="16dp"
-        android:ellipsize="end"
-        android:text="@{messages.content}"
-        android:textColor="@color/black"
-        android:textSize="14dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/detail_message_img"
-        app:layout_constraintTop_toTopOf="@+id/detail_message_img"
-        tools:text="這超好吃的!!!!" />
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
-    <ImageView
-        android:id="@+id/detail_message_img"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginLeft="8dp"
-        app:imageUrlCircle="@{messages.userImage}"
+        <TextView
+            android:id="@+id/detail_message_tv_conent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="3dp"
+            android:layout_marginRight="8dp"
+            android:ellipsize="end"
+            android:text="@{messages.content}"
+            android:textColor="@color/black"
+            android:textSize="15sp"
+            app:layout_constraintBottom_toBottomOf="@+id/detail_message_tv_userName"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toEndOf="@+id/detail_message_tv_userName"
+            app:layout_constraintTop_toTopOf="@+id/detail_message_tv_userName"
+            tools:text="這超好吃的!!!!" />
 
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/detail_message_tv_createTime"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="3dp"
-        android:lineSpacingExtra="6dp"
-        android:textColor="#6C6C6C"
-        android:textSize="12dp"
-        app:timeToDisplayFormat="@{messages.createdTime}"
-        android:ellipsize="end"
-        app:layout_constraintBottom_toBottomOf="@+id/detail_message_img"
-        app:layout_constraintEnd_toEndOf="@+id/detail_message_tv_conent"
-        app:layout_constraintStart_toStartOf="@+id/detail_message_tv_conent"
-        app:layout_constraintTop_toBottomOf="@+id/detail_message_tv_conent"
-        app:layout_constraintVertical_bias="0.0"
-        tools:text="1天" />
+        <TextView
+            android:id="@+id/detail_message_tv_userName"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:ellipsize="end"
+            android:text="@{messages.userName}"
+            android:textColor="@color/black"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toEndOf="@+id/detail_message_img"
+            app:layout_constraintTop_toTopOf="@+id/detail_message_img"
+            tools:text="yaya" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <ImageView
+            android:id="@+id/detail_message_img"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginBottom="25dp"
+            app:imageUrlCircle="@{messages.userImage}"
+
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/detail_message_tv_createTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="1dp"
+            android:ellipsize="end"
+            android:lineSpacingExtra="6dp"
+            android:textColor="#6C6C6C"
+            android:textSize="12dp"
+            app:layout_constraintStart_toStartOf="@+id/detail_message_tv_userName"
+            app:layout_constraintTop_toBottomOf="@+id/detail_message_tv_userName"
+            app:timeToDisplayFormat="@{messages.createTime}"
+            tools:text="1天" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

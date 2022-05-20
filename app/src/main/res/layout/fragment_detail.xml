@@ -110,10 +110,10 @@
 
                 <Button
                     android:id="@+id/detail_bt_back"
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
                     android:layout_marginStart="13dp"
-                    android:layout_marginTop="16dp"
+                    android:layout_marginTop="13dp"
                     android:background="@drawable/back"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -168,8 +168,8 @@
 
                 <androidx.cardview.widget.CardView
                     android:id="@+id/detail_cardView"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
                     android:layout_marginStart="10dp"
                     app:cardCornerRadius="360dp"
                     app:layout_constraintBottom_toBottomOf="@+id/detail_bt_back"
@@ -178,8 +178,8 @@
 
                     <ImageView
                         android:id="@+id/detail_img_person"
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
                         android:scaleType="centerCrop"
                         app:imageUrl="@{viewModel.article.authorImage}"
                         tools:layout_editor_absoluteX="50dp"
@@ -204,27 +204,39 @@
                     android:layout_height="1dp"
                     android:layout_marginTop="8dp"
                     android:background="@color/black"
-                    app:layout_constraintBottom_toTopOf="@+id/detail_recyclerView"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/detail_content"
                     app:layout_constraintVertical_bias="1.0" />
 
+                <TextView
+                    android:id="@+id/detail_messageTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="全部留言"
+                    android:background="#8E8E8E	"
+                    android:textSize="20dp"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginTop="16dp"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/detail_view" />
+
                 <androidx.recyclerview.widget.RecyclerView
-                    android:orientation="vertical"
-                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                     android:id="@+id/detail_recyclerView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
                     android:layout_marginBottom="8dp"
+                    android:layout_marginTop="8dp"
+                    android:orientation="vertical"
+                    app:layout_constraintTop_toBottomOf="@+id/detail_messageTitle"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/detail_view">
+                    app:layout_constraintStart_toStartOf="parent">
 
                 </androidx.recyclerview.widget.RecyclerView>
+
             </androidx.constraintlayout.widget.ConstraintLayout>
         </ScrollView>
 
@@ -241,22 +253,34 @@
             app:layout_constraintStart_toStartOf="parent">
 
             <EditText
+                android:id="@+id/detail_ed_message"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/shape_round3"
-                android:hint="留言..."
-                android:text="@{viewModel.messageCotent}"
-                android:gravity="center_vertical"
-                android:autoSizeTextType="uniform"
-                android:ellipsize = "end"
-                android:textSize="16sp"
                 android:layout_marginLeft="8dp"
                 android:layout_marginRight="8dp"
+                android:autoSizeTextType="uniform"
+                android:background="@drawable/shape_round3"
+                android:ellipsize="end"
+                android:gravity="center_vertical"
+                android:hint="留言..."
+                android:text="@={viewModel.messageCotent}"
+                android:textSize="16sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
+
+            <Button
+                android:id="@+id/detail_sendBtn"
+                android:layout_width="23dp"
+                android:layout_height="23dp"
+                android:layout_marginEnd="16dp"
+                android:background="@drawable/send"
+                app:layout_constraintBottom_toBottomOf="@+id/detail_ed_message"
+                app:layout_constraintEnd_toEndOf="@+id/detail_ed_message"
+                app:layout_constraintTop_toTopOf="@+id/detail_ed_message" />
+
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

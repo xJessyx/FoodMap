@@ -11,6 +11,7 @@ import com.google.firebase.firestore.Query
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.jessy.foodmap.data.Article
+import com.jessy.foodmap.data.Invite
 import com.jessy.foodmap.data.Messages
 import com.jessy.foodmap.data.Place
 import com.jessy.foodmap.login.UserManager.Companion.user
@@ -32,9 +33,7 @@ class DetailViewModel(private val articleKey: Article) : ViewModel() {
     val addMessage: LiveData<Messages>
         get() = _addMessage
 
-
     val messageCotent = MutableLiveData<String>()
-
     val _getMessageLiveData = MutableLiveData<List<Messages>>()
     val getMessageLiveData: LiveData<List<Messages>>
         get() = _getMessageLiveData
@@ -46,9 +45,6 @@ class DetailViewModel(private val articleKey: Article) : ViewModel() {
     val article: LiveData<Article>
         get() = _article
 
-    init {
-        Log.d("DetailViewModel init", "articleKey:$articleKey")
-    }
 
     fun updateLike() {
         article.value?.let {
@@ -155,19 +151,45 @@ class DetailViewModel(private val articleKey: Article) : ViewModel() {
             db.collection("articles").document(it.id)
                 .collection("messages")
                 .orderBy("createTime", Query.Direction.DESCENDING)
-                .get()
-                .addOnSuccessListener { result ->
-                    for (document in result) {
-                        Log.d(ContentValues.TAG, "${document.id} => ${document.data}")
-                        val data = document.toObject(Messages::class.java)
-                        MessageList.add(data)
+                //.get()
+//                .addOnSuccessListener { result ->
+//                    for (document in result) {
+//                        Log.d(ContentValues.TAG, "${document.id} => ${document.data}")
+//                        val data = document.toObject(Messages::class.java)
+//                        MessageList.add(data)
+//
+//                    }
+//                    _getMessageLiveData.value = MessageList
+//
+//                }
+//                .addOnFailureListener { exception ->
+//                    Log.d(ContentValues.TAG, "Error getting documents: ", exception)
+//                }
 
+                .addSnapshotListener { snapshot, e ->
+
+                    Log.d("yaya", "addSnapshotListener")
+                    if (e != null) {
+                        Log.w("yaya", "Listen failed.", e)
+                        return@addSnapshotListener
                     }
-                    _getMessageLiveData.value = MessageList
 
-                }
-                .addOnFailureListener { exception ->
-                    Log.d(ContentValues.TAG, "Error getting documents: ", exception)
+                    if (snapshot?.documents?.isNullOrEmpty() == false) {
+
+                        for (document in snapshot.documents) {
+                            Log.d(ContentValues.TAG, "${document.id} => ${document.data}")
+                            val data = document.toObject(Messages::class.java)
+                            data?.let {
+
+                                MessageList.add(data)
+                            }
+                        }
+                        _getMessageLiveData.value = MessageList
+
+                    } else {
+                        Log.d("yaya", "Current data: null")
+                    }
+
                 }
         }
 
@@ -207,11 +229,11 @@ class DetailViewModel(private val articleKey: Article) : ViewModel() {
             userImage = user?.image,
             userId = user?.id,
             content = messageCotent.value,
-            createdTime = Calendar.getInstance().timeInMillis
-
+            createTime = Calendar.getInstance().timeInMillis
         )
 
         _addMessage.value = data
+        Log.v("data","$data")
 
     }
 }

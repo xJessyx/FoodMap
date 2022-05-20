@@ -1,11 +1,13 @@
 package com.jessy.foodmap.detail
 
+import android.app.Activity
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.fragment.findNavController
 import com.jessy.foodmap.NavigationDirections
@@ -59,16 +61,12 @@ class DetailFragment : Fragment() {
         viewModel.checkFavoriteStatus()
         viewModel.checkLikeStatus()
         viewModel.getFireBaseMessages()
-        viewModel.addFireBaseMessages()
 
         viewModel.getMessageLiveData.observe(viewLifecycleOwner) {
             it?.let {
                 adapter.submitList(it)
             }
         }
-
-        viewModel
-
 
         viewModel.favoriteStatus.observe(viewLifecycleOwner) {
             if (it) {
@@ -97,26 +95,29 @@ class DetailFragment : Fragment() {
 
         }
 
-        Log.v("isChecked", "ssssssssss")
         binding.detailCollect.setOnCheckedChangeListener { _, isChecked ->
-            Log.v("aaa", "$isChecked")
 
             if (isChecked) {
-                Log.v("bb", "$isChecked")
                 viewModel.updateCollect()
             } else {
-                Log.v("cc", "$isChecked")
-
                 viewModel.updateRemoveCollect()
             }
-            Log.v("dd", "$isChecked")
-
         }
 
         binding.detailBtBack.setOnClickListener {
             this.findNavController().navigateUp()
         }
 
+        binding.detailSendBtn.setOnClickListener {
+
+
+                viewModel.addMessagesItem()
+                viewModel.addMessage.observe(viewLifecycleOwner) {
+                    Toast.makeText(activity as Activity, "已新增成功!!!", Toast.LENGTH_SHORT).show()
+                    viewModel.addFireBaseMessages()
+                }
+
+        }
 
         return binding.root
     }
