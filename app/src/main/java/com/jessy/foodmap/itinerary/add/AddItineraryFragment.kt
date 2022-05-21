@@ -38,8 +38,8 @@ class AddItineraryFragment : BottomSheetDialogFragment() {
     private var imgPath: String = ""
     private var riversRef: StorageReference? = null
     private var mStorageRef: StorageReference? = null
-    var addArticle_upload_progress: ProgressBar? =null
-    var pick_img: ImageButton?=null
+    var addArticle_upload_progress: ProgressBar? = null
+    var pick_img: ImageButton? = null
     private val viewModel: AddItineraryViewModel by lazy {
         ViewModelProvider(this).get(AddItineraryViewModel::class.java)
     }
@@ -66,7 +66,7 @@ class AddItineraryFragment : BottomSheetDialogFragment() {
         initData()
 
         binding.addItineraryEdStartDate.setOnClickListener {
-           setStartData()
+            setStartData()
         }
 
         binding.addItineraryEdEndDate.setOnClickListener {
@@ -75,16 +75,16 @@ class AddItineraryFragment : BottomSheetDialogFragment() {
 
         binding.addItineraryBtn.setOnClickListener {
 
-            if( (viewModel.itineraryName.value != null) &&( viewModel.itineraryStartDate.value !=null) &&( viewModel.itineraryEndDate.value !=null) ) {
+            if ((viewModel.itineraryName.value != null) && (viewModel.itineraryStartDate.value != null) && (viewModel.itineraryEndDate.value != null)) {
                 viewModel.differenceDay()
                 viewModel.addItineraryItem()
                 viewModel.addFireBaseJourney()
-                viewModel.addItinerary.observe(viewLifecycleOwner){
+                viewModel.addItinerary.observe(viewLifecycleOwner) {
                     it?.let {
                         Toast.makeText(activity as Activity, "已新增成功!!!", Toast.LENGTH_SHORT).show()
 
-                        findNavController().navigate(NavigationDirections.addItineraryFragmentToItineraryDetailFragment(it))
-                        Log.v("it", "$it")
+                        findNavController().navigate(NavigationDirections.addItineraryFragmentToItineraryDetailFragment(
+                            it))
 
                     }
                 }
@@ -102,7 +102,7 @@ class AddItineraryFragment : BottomSheetDialogFragment() {
         return binding.root
     }
 
-    private fun setStartData(){
+    private fun setStartData() {
         val c = Calendar.getInstance()
         val year = c.get(Calendar.YEAR)
         val month = c.get(Calendar.MONTH)
@@ -110,12 +110,12 @@ class AddItineraryFragment : BottomSheetDialogFragment() {
         DatePickerDialog(activity as Activity, { _, year, month, day ->
             run {
                 val format = "${setDateFormat(year, month, day)}"
-               startDate.text = format
+                startDate.text = format
             }
         }, year, month, day).show()
     }
 
-    private fun setEndData(){
+    private fun setEndData() {
         val c = Calendar.getInstance()
         val year = c.get(Calendar.YEAR)
         val month = c.get(Calendar.MONTH)
@@ -170,12 +170,13 @@ class AddItineraryFragment : BottomSheetDialogFragment() {
         }
 
         uploadTask?.addOnFailureListener { exception ->
-            Log.v("exception.message fail","${exception.message}")
+            Log.v("exception.message fail", "${exception.message}")
 
         }?.addOnSuccessListener {
-            Log.v("upload_successe","upload_success")
+            Log.v("upload_successe", "upload_success")
         }?.addOnProgressListener { taskSnapshot ->
-            val progress = (100.0 * taskSnapshot.bytesTransferred / taskSnapshot.totalByteCount).toInt()
+            val progress =
+                (100.0 * taskSnapshot.bytesTransferred / taskSnapshot.totalByteCount).toInt()
             addArticle_upload_progress!!.progress = progress
             if (progress >= 100) {
                 addArticle_upload_progress!!.visibility = View.GONE
@@ -189,23 +190,31 @@ class AddItineraryFragment : BottomSheetDialogFragment() {
         ImagePicker.with(this)
             .crop()                    //Crop image(Optional), Check Customization for more option
             .compress(1024)            //Final image size will be less than 1 MB(Optional)
-            .maxResultSize(1080, 1080)    //Final image resolution will be less than 1080 x 1080(Optional)
+            .maxResultSize(1080,
+                1080)    //Final image resolution will be less than 1080 x 1080(Optional)
             .start()
     }
 
     //請求權限
     private fun checkPermission() {
-        val permission = ActivityCompat.checkSelfPermission((activity as Activity), android.Manifest.permission.WRITE_EXTERNAL_STORAGE)
+        val permission = ActivityCompat.checkSelfPermission((activity as Activity),
+            android.Manifest.permission.WRITE_EXTERNAL_STORAGE)
         if (permission != PackageManager.PERMISSION_GRANTED) {
             //未取得權限，向使用者要求允許權限
-            ActivityCompat.requestPermissions(activity as Activity, arrayOf(android.Manifest.permission.WRITE_EXTERNAL_STORAGE), REQUEST_EXTERNAL_STORAGE)
+            ActivityCompat.requestPermissions(activity as Activity,
+                arrayOf(android.Manifest.permission.WRITE_EXTERNAL_STORAGE),
+                REQUEST_EXTERNAL_STORAGE)
         } else {
             getLocalImg()
         }
     }
 
     //權限選取回報
-    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String>, grantResults: IntArray) {
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<String>,
+        grantResults: IntArray,
+    ) {
         when (requestCode) {
             REQUEST_EXTERNAL_STORAGE -> {
                 if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
@@ -231,7 +240,7 @@ class AddItineraryFragment : BottomSheetDialogFragment() {
                     if (filePath.isNotEmpty()) {
                         var imgPath = filePath
                         //Toast.makeText(activity as Activity , imgPath, Toast.LENGTH_SHORT).show()
-                        Log.v("imgPath","imgPath =$imgPath")
+                        Log.v("imgPath", "imgPath =$imgPath")
                         pick_img?.let { Glide.with(activity as Activity).load(filePath).into(it) }
 
                         if (imgPath.isNotEmpty()) {
@@ -241,16 +250,18 @@ class AddItineraryFragment : BottomSheetDialogFragment() {
                             Toast.makeText(activity as Activity, "請選取照片", Toast.LENGTH_SHORT).show()
                         }
                     } else {
-                        Toast.makeText(activity as Activity,"讀取圖片失敗", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(activity as Activity, "讀取圖片失敗", Toast.LENGTH_SHORT).show()
                     }
                 }
 
             }
-            ImagePicker.RESULT_ERROR -> Toast.makeText(activity as Activity, ImagePicker.getError(data), Toast.LENGTH_SHORT).show()
-            else -> Toast.makeText(activity as Activity, "Task Cancelled", Toast.LENGTH_SHORT).show()
+            ImagePicker.RESULT_ERROR -> Toast.makeText(activity as Activity,
+                ImagePicker.getError(data),
+                Toast.LENGTH_SHORT).show()
+            else -> Toast.makeText(activity as Activity, "Task Cancelled", Toast.LENGTH_SHORT)
+                .show()
         }
     }
-
 
 
 }

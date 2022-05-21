@@ -108,15 +108,15 @@ class DetailFragment : Fragment() {
 
         binding.detailSendBtn.setOnClickListener {
 
-
                 viewModel.addMessagesItem()
                 viewModel.addMessage.observe(viewLifecycleOwner) {
                     Toast.makeText(activity as Activity, "已新增成功!!!", Toast.LENGTH_SHORT).show()
                     viewModel.addFireBaseMessages()
+                    viewModel.getFireBaseMessages()
+                    binding.detailEdMessage.text.clear()
                 }
 
         }
-
 
         return binding.root
     }
