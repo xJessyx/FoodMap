@@ -10,11 +10,10 @@ import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.Query
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
-import com.jessy.foodmap.data.Article
-import com.jessy.foodmap.data.Invite
-import com.jessy.foodmap.data.Messages
-import com.jessy.foodmap.data.Place
+import com.jessy.foodmap.data.*
+import com.jessy.foodmap.login.UserManager
 import com.jessy.foodmap.login.UserManager.Companion.user
+
 
 class DetailViewModel(private val articleKey: Article) : ViewModel() {
 
@@ -33,10 +32,19 @@ class DetailViewModel(private val articleKey: Article) : ViewModel() {
     val addMessage: LiveData<Messages>
         get() = _addMessage
 
+    val _getFilterMessagesLiveData = MutableLiveData<List<Messages>>()
+    val getFilterMessagesLiveData: LiveData<List<Messages>>
+        get() = _getFilterMessagesLiveData
+
     val messageCotent = MutableLiveData<String>()
     val _getMessageLiveData = MutableLiveData<List<Messages>>()
     val getMessageLiveData: LiveData<List<Messages>>
         get() = _getMessageLiveData
+
+    val _filterUserIdStatus = MutableLiveData<Boolean>()
+    val filterUserIdStatus: LiveData<Boolean>
+        get() = _filterUserIdStatus
+
 
     private val _article = MutableLiveData<Article>().apply {
         value = articleKey
@@ -142,59 +150,6 @@ class DetailViewModel(private val articleKey: Article) : ViewModel() {
         }
     }
 
-
-    fun getFireBaseMessages() {
-
-        var MessageList = mutableListOf<Messages>()
-
-        article.value?.let {
-            db.collection("articles").document(it.id)
-                .collection("messages")
-                .orderBy("createTime", Query.Direction.DESCENDING)
-                //.get()
-//                .addOnSuccessListener { result ->
-//                    for (document in result) {
-//                        Log.d(ContentValues.TAG, "${document.id} => ${document.data}")
-//                        val data = document.toObject(Messages::class.java)
-//                        MessageList.add(data)
-//
-//                    }
-//                    _getMessageLiveData.value = MessageList
-//
-//                }
-//                .addOnFailureListener { exception ->
-//                    Log.d(ContentValues.TAG, "Error getting documents: ", exception)
-//                }
-
-                .addSnapshotListener { snapshot, e ->
-
-                    Log.d("yaya", "addSnapshotListener")
-                    if (e != null) {
-                        Log.w("yaya", "Listen failed.", e)
-                        return@addSnapshotListener
-                    }
-
-                    if (snapshot?.documents?.isNullOrEmpty() == false) {
-
-                        for (document in snapshot.documents) {
-                            Log.d(ContentValues.TAG, "${document.id} => ${document.data}")
-                            val data = document.toObject(Messages::class.java)
-                            data?.let {
-
-                                MessageList.add(data)
-                            }
-                        }
-                        _getMessageLiveData.value = MessageList
-
-                    } else {
-                        Log.d("yaya", "Current data: null")
-                    }
-
-                }
-        }
-
-    }
-
     fun addFireBaseMessages() {
 
         val message = addMessage.value
@@ -233,7 +188,96 @@ class DetailViewModel(private val articleKey: Article) : ViewModel() {
         )
 
         _addMessage.value = data
-        Log.v("data","$data")
+        Log.v("data", "$data")
 
     }
+
+
+    fun getFireBaseMessages() {
+
+        var MessageList = mutableListOf<Messages>()
+
+        article.value?.let {
+            db.collection("articles").document(it.id)
+                .collection("messages")
+                .orderBy("createTime", Query.Direction.DESCENDING)
+
+                .addSnapshotListener { snapshot, e ->
+
+                    if (e != null) {
+                        Log.w("yaya", "Listen failed.", e)
+                        return@addSnapshotListener
+                    }
+
+                    if (snapshot?.documents?.isNullOrEmpty() == false) {
+
+                        for (document in snapshot.documents) {
+                            Log.d(ContentValues.TAG, "${document.id} => ${document.data}")
+                            val data = document.toObject(Messages::class.java)
+                            data?.let {
+                                if (user!!.blockadeUser.contains(data.userId)) {
+
+                                } else {
+                                    MessageList.add(data)
+                                    Log.v("MessageList", "$MessageList")
+                                }
+                            }
+                        }
+                        _getMessageLiveData.value = MessageList
+                        Log.v("MessageList2", "$MessageList")
+
+                    } else {
+                        Log.d("yaya", "Current data: null")
+                    }
+
+                }
+        }
+
+    }
+
+    fun addBlockadeUsers(filterUserId: String?) {
+        if (filterUserId != null) {
+            if (filterUserId.isNotEmpty()) {
+                Log.v("filterUserId != user.id",
+                    "filterUserId =$filterUserId != user.id=${user!!.id}")
+                user?.let {
+                    db.collection("users").document(it.id)
+                        .update("blockadeUser", FieldValue.arrayUnion(filterUserId))
+                    getBlockadeUsers()
+                }
+            }
+
+        }
+    }
+
+    fun getBlockadeUsers() {
+        user?.let {
+            db.collection("users")
+                .whereEqualTo("email", user!!.email)
+                .addSnapshotListener { snapshot, e ->
+                    if (e != null) {
+                        Log.w("yaya", "Listen failed.", e)
+                        return@addSnapshotListener
+                    }
+
+                    if (snapshot?.documents?.isNullOrEmpty() == false) {
+
+                        for (document in snapshot.documents) {
+                            Log.d(ContentValues.TAG, "${document.id} => ${document.data}")
+                            val data = document.toObject(User::class.java)
+                            UserManager.user = data
+                            getFireBaseMessages()
+                            Log.v("UserManager.user", "$data")
+                        }
+                    } else {
+                        Log.d("yaya", "Current data: null")
+                    }
+                }
+        }
+    }
 }
+
+
+
+
+

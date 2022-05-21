@@ -3,10 +3,9 @@ package com.jessy.foodmap.detail
 import android.app.Activity
 import android.os.Bundle
 import android.util.Log
+import android.view.*
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.widget.PopupMenu
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.fragment.findNavController
@@ -35,7 +34,7 @@ class DetailFragment : Fragment() {
         binding.viewModel = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
 
-        val adapter = DetailAdapter()
+        val adapter = DetailAdapter(requireContext(),viewModel)
         binding.detailRecyclerView.adapter = adapter
 
 
@@ -53,13 +52,13 @@ class DetailFragment : Fragment() {
             binding.detailAddStore.setOnClickListener {
                 findNavController().navigate(NavigationDirections.detailFragmentAddPlaceFragment(
                     data))
-                Log.v("placeSelectDataArgs:detailArg", "$data")
             }
 
         }
 
         viewModel.checkFavoriteStatus()
         viewModel.checkLikeStatus()
+        viewModel.getBlockadeUsers()
         viewModel.getFireBaseMessages()
 
         viewModel.getMessageLiveData.observe(viewLifecycleOwner) {
@@ -84,7 +83,6 @@ class DetailFragment : Fragment() {
                 binding.detailLike.setChecked(false)
             }
         }
-
 
         binding.detailLike.setOnCheckedChangeListener { _, isChecked ->
             if (isChecked) {
@@ -118,6 +116,7 @@ class DetailFragment : Fragment() {
                 }
 
         }
+
 
         return binding.root
     }
