@@ -37,8 +37,7 @@ class AddPlaceFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
-    ): View? {
-        (activity as MainActivity).hideToolBar()
+    ): View? {        (activity as MainActivity).hideToolBar()
 
         val binding = FragmentAddPlaceBinding.inflate(inflater, container, false)
         binding.lifecycleOwner = this
@@ -91,7 +90,7 @@ class AddPlaceFragment : Fragment() {
                 viewModel.addFireBasePlace()
 
                 Toast.makeText(activity as Activity, "已新增成功!!!", Toast.LENGTH_SHORT).show()
-                findNavController().navigate(NavigationDirections.addPlaceFragmentItineraryPlanningFragment())
+                findNavController().navigate(NavigationDirections.addPlaceFragmentMyItineraryPagingFragment())
 
 
             } else {
@@ -112,9 +111,9 @@ class AddPlaceFragment : Fragment() {
             Log.v("placeSelectDataArg.journey.name", "${placeSelectDataArg.journey.name}")
 //            setJourneySpinner(lunch)
             val adapter =
-                ArrayAdapter(activity as Activity, android.R.layout.simple_spinner_dropdown_item, lunch)
+                ArrayAdapter(activity as Activity, R.layout.layout_item_center, lunch)
 
-           // adapter.setDropDownViewResource(R.layout.layout_item_center)
+            adapter.setDropDownViewResource(R.layout.layout_item_center)
 
 
             selectJourney?.adapter = adapter
@@ -137,9 +136,12 @@ class AddPlaceFragment : Fragment() {
 
             val adapter2 =
                 ArrayAdapter(activity as Activity,
-                    android.R.layout.simple_spinner_dropdown_item,
+
+                    R.layout.layout_item_center,
                     lunchDay)
             selectDay?.adapter = adapter2
+
+            adapter.setDropDownViewResource(R.layout.layout_item_center)
 
             setTransportationSinner()
 
@@ -165,6 +167,7 @@ class AddPlaceFragment : Fragment() {
 
 
         return binding.root
+
     }
 
     object TimeUtil {

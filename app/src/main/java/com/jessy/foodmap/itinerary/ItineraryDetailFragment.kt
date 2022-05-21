@@ -63,9 +63,8 @@ class ItineraryDetailFragment : BottomSheetDialogFragment() {
         val parseStartDate = LocalDate.parse(journeyArg.startDate, fmt)
 
         val parseEndDate = LocalDate.parse(journeyArg.endDate, fmt)
-        Log.v("journeyArg.userId == UserManager.user!!.id && !journeyArg.share","journeyArg=${journeyArg.userId}UserManager=${user?.id} share=${!journeyArg.share}")
+
         if(journeyArg.userId == user?.id && !journeyArg.share) {
-            Log.v("journeyArg.userId2 == UserManager.user!!.id && !journeyArg.share","journeyArg=${journeyArg.userId}UserManager=${UserManager.user!!.id} share=${!journeyArg.share}")
 
             if (today.isBefore(parseStartDate)) {
                 //binding.itineraryDetailFabBtn.visibility = View.VISIBLE

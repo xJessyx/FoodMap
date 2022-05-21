@@ -45,6 +45,8 @@ class AddItineraryDetailDateFragment(position: Int, journey: Journey) : Fragment
     val db = Firebase.firestore
     val viewModel = AddItineraryDtailDateViewModel(index, journeyArg)
     val adapter = AddItineraryDtailDateAdapter(AddItineraryDtailDateAdapter.OnClickListener {
+
+
     }, viewModel)
 
 
@@ -55,7 +57,6 @@ class AddItineraryDetailDateFragment(position: Int, journey: Journey) : Fragment
         val binding = FragmentAddItineraryDetailDateBinding.inflate(inflater, container, false)
         binding.lifecycleOwner = viewLifecycleOwner
         binding.viewMedel = viewModel
-
         viewModel.getPlaces()
         binding.detailRecyclerViewDate.adapter = adapter
         val callback = ItemTouchHelperCallback(adapter)
@@ -64,9 +65,9 @@ class AddItineraryDetailDateFragment(position: Int, journey: Journey) : Fragment
 
         viewModel.places.observe(viewLifecycleOwner) {
             it?.let {
-                if(it.isEmpty()){
-                    Log.v("Place 尚未有地點","$it")
-                }else{
+                if (it.isEmpty()) {
+                    Log.v("Place 尚未有地點", "$it")
+                } else {
                     calculateTravelTime(it)
 
                 }
@@ -82,7 +83,7 @@ class AddItineraryDetailDateFragment(position: Int, journey: Journey) : Fragment
         val parseEndDate = LocalDate.parse(journeyArg.endDate, fmt)
 
 
-        if(journeyArg.userId == UserManager.user?.id && !journeyArg.share) {
+        if (journeyArg.userId == UserManager.user?.id && !journeyArg.share) {
 
             if (today.isBefore(parseStartDate)) {
                 binding.itineraryDetailFabBtn.visibility = View.VISIBLE
@@ -102,11 +103,21 @@ class AddItineraryDetailDateFragment(position: Int, journey: Journey) : Fragment
         binding.itineraryDetailFabBtn.setOnClickListener {
 
 
-                val selectItem = PlaceSelectData(StoreInformation(),
-                    Place("","",index+1,0,0,0,0,null,null), Journey(journeyArg.id,journeyArg.image,journeyArg.name,journeyArg.startDate,journeyArg.endDate,journeyArg.totalDay,journeyArg.status,journeyArg.userId,journeyArg.share))
+            val selectItem = PlaceSelectData(StoreInformation(),
+                Place("", "", index + 1, 0, 0, 0, 0, null, null),
+                Journey(journeyArg.id,
+                    journeyArg.image,
+                    journeyArg.name,
+                    journeyArg.startDate,
+                    journeyArg.endDate,
+                    journeyArg.totalDay,
+                    journeyArg.status,
+                    journeyArg.userId,
+                    journeyArg.share))
 
-                findNavController().navigate(NavigationDirections.addItineraryDetailDateFragmentFoodMapSearchFragment(selectItem))
-                Log.v("selectItem","${selectItem.place},${selectItem.journey}")
+            findNavController().navigate(NavigationDirections.addItineraryDetailDateFragmentFoodMapSearchFragment(
+                selectItem))
+            Log.v("selectItem", "${selectItem.place},${selectItem.journey}")
 
 
         }
@@ -123,15 +134,16 @@ class AddItineraryDetailDateFragment(position: Int, journey: Journey) : Fragment
             onTravelTimeCalculated(places)
         }
 
-        var endCount = places.size -1
+        var endCount = places.size - 1
 
         for (i in places.indices) {
 
             Log.v("calculateTravelTime", "index: $i")
-            
-            if (i < places.size -1) {
+
+            if (i < places.size - 1) {
                 fromFKIP = places[i].latitude.toString() + "," + places[i].longitude.toString()
-                toMonas = places[i + 1].latitude.toString() + "," + places[i + 1].longitude.toString()
+                toMonas =
+                    places[i + 1].latitude.toString() + "," + places[i + 1].longitude.toString()
 
                 val mode = when (places[i + 1].transportation) {
                     1 -> "walking"
@@ -149,7 +161,6 @@ class AddItineraryDetailDateFragment(position: Int, journey: Journey) : Fragment
                     )
                 val key = info.metaData[resources.getString(R.string.map_api_key_name)].toString()
                 Places.initialize(requireContext(), key)
-
 
 
                 val apiServices = RetrofitClient.apiServices(this)
@@ -200,7 +211,7 @@ class AddItineraryDetailDateFragment(position: Int, journey: Journey) : Fragment
 
                     })
             }
-            
+
 
         }
 
@@ -216,7 +227,7 @@ class AddItineraryDetailDateFragment(position: Int, journey: Journey) : Fragment
         adapter.submitList(places)
         adapter.notifyDataSetChanged()
     }
-    
+
     fun updatePlaceTimes(placeId: String, startTime: Long, trafficTime: Long) {
 
         Log.e("TT", "updatePlaceTimes, placeId=$placeId")

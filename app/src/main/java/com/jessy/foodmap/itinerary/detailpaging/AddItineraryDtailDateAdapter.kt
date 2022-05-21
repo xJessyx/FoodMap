@@ -13,7 +13,10 @@ import com.jessy.foodmap.databinding.ItemAddItineraryDetailDateBinding
 import com.jessy.foodmap.itinerary.ITHelperInterface
 import java.util.*
 
-class AddItineraryDtailDateAdapter(val onClickListener: AddItineraryDtailDateAdapter.OnClickListener,val viewModel: AddItineraryDtailDateViewModel) :
+class AddItineraryDtailDateAdapter(
+    val onClickListener: AddItineraryDtailDateAdapter.OnClickListener,
+    val viewModel: AddItineraryDtailDateViewModel,
+) :
     ListAdapter<Place, AddItineraryDtailDateAdapter.AddItineraryDtailDateViewHolder>(
         AddItineraryDtailDateAdapter.DiffCallback()), ITHelperInterface {
 
@@ -32,18 +35,10 @@ class AddItineraryDtailDateAdapter(val onClickListener: AddItineraryDtailDateAda
     class AddItineraryDtailDateViewHolder private constructor(var binding: ItemAddItineraryDetailDateBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(place: Place,viewModel: AddItineraryDtailDateViewModel) {
-//            val startTime = place.dwellTime!!.plus(place.trafficTime!!).let { it ->
-//                28800000.plus(it)
-//                    .let { TimeUtil.StampToTime(it, Locale.TAIWAN) }
-//            }
-
-       //    val startTime = 28800000 + place.dwellTime!! + place.trafficTime!!
-
-         //   Log.v("startTime","$startTime")
+        fun bind(place: Place, viewModel: AddItineraryDtailDateViewModel) {
 
             binding.itineraryDetailDateTvStartTime.setText(place.startTime?.let {
-                TimeUtil.StampToTime(it,Locale.TAIWAN)
+                TimeUtil.StampToTime(it, Locale.TAIWAN)
             })
 
 
@@ -95,7 +90,7 @@ class AddItineraryDtailDateAdapter(val onClickListener: AddItineraryDtailDateAda
             onClickListener.onClick(item)
         }
 
-        holder.bind(item,viewModel)
+        holder.bind(item, viewModel)
 
         if (position == currentList.size - 1) {
             holder.binding.itineraryDetailDateLine.visibility = View.GONE
@@ -154,7 +149,7 @@ class AddItineraryDtailDateAdapter(val onClickListener: AddItineraryDtailDateAda
 
     override fun onItemDissmiss(position: Int) {
         val list = currentList.toMutableList()
-        viewModel.delectFireBaseItem(list,position)
+        viewModel.delectFireBaseItem(list, position)
 
         list.removeAt(position)
         submitList(list)
@@ -163,9 +158,9 @@ class AddItineraryDtailDateAdapter(val onClickListener: AddItineraryDtailDateAda
 
     override fun onItemMove(fromPosition: Int, toPosition: Int) {
         val list = currentList.toMutableList()
-        Collections.swap(list,fromPosition,toPosition)
+        Collections.swap(list, fromPosition, toPosition)
         submitList(list)
-        viewModel.updateMoveList(list,fromPosition,toPosition)
+        viewModel.updateMoveList(list, fromPosition, toPosition)
 
 //        notifyItemMoved(fromPosition,toPosition)
     }

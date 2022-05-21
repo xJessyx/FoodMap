@@ -109,6 +109,10 @@
             app:nullable="false"/>
     </fragment>
 
+    <dialog
+        android:id="@+id/progressBarFragment"
+        android:name="com.jessy.foodmap.ProgressBarFragment"
+        android:label="ProgressBarFragment" />
 
 <!--    <fragment-->
 <!--        android:id="@+id/joinFragment"-->
@@ -161,9 +165,9 @@
     <action android:id="@+id/navigate_to_home_fragment" app:destination="@id/homeFragment"
         app:popUpTo="@id/navigation"
         app:popUpToInclusive="true" />
-    <action android:id="@+id/home_to_detail_fragment" app:destination="@id/detailFragment"
-        app:popUpTo="@id/navigation"
-        app:popUpToInclusive="true" />
+    <action android:id="@+id/home_to_detail_fragment" app:destination="@id/detailFragment"/>
+<!--        app:popUpTo="@id/navigation"-->
+<!--        app:popUpToInclusive="true" />-->
     <action android:id="@+id/itineraryPlanningFragment_to_addItineraryFragment" app:destination="@id/addItineraryFragment"
         app:popUpTo="@id/navigation"
         app:popUpToInclusive="true" />
@@ -203,7 +207,7 @@
         app:popUpTo="@id/navigation"
         app:popUpToInclusive="true" />
 
-    <action android:id="@+id/addPlaceFragment_itineraryPlanningFragment" app:destination="@id/itineraryPlanningFragment"
+    <action android:id="@+id/addPlaceFragment_myItineraryPagingFragment" app:destination="@id/myItineraryPagingFragment"
         app:popUpTo="@id/navigation"
         app:popUpToInclusive="true" />
 
@@ -224,6 +228,10 @@
         app:popUpToInclusive="true" />
 
     <action android:id="@+id/myItineraryPagingFragment_inviteFragment" app:destination="@id/inviteFragment"
+        app:popUpTo="@id/navigation"
+        app:popUpToInclusive="true" />
+
+    <action android:id="@+id/myItineraryPagingFragment_progressBarFragment" app:destination="@id/progressBarFragment"
         app:popUpTo="@id/navigation"
         app:popUpToInclusive="true" />
 

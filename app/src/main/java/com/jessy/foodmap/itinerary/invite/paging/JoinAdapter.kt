@@ -23,9 +23,6 @@ class JoinAdapter :
 
         fun bind(item:Invite) {
             binding.invite = item
-//            binding.joinEmail.text = item.senderEmail
-//            binding.joinName.text = item.senderName
-//            binding.joinImg.
             binding.executePendingBindings()
 
         }
@@ -47,7 +44,6 @@ class JoinAdapter :
 
 
         val item = getItem(position)
-        Log.v(  "item","$item")
         holder.bind(item)
 
     }

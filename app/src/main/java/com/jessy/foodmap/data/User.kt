@@ -11,7 +11,7 @@ data class User (
     var id:String ="",
     var image :String ="",
     var level:Int = 0,
-    var name:String=""
-    // var password: String="",
+    var name:String="",
+    var blockadeUser:MutableList<String> = mutableListOf()
 
     ): Parcelable

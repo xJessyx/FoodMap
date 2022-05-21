@@ -35,7 +35,6 @@ class JoinViewModel : ViewModel() {
             .whereEqualTo("inviteStatus", 0)
             .addSnapshotListener { snapshot, e ->
 
-                Log.d("yaya", "addSnapshotListener")
                 if (e != null) {
                     Log.w("yaya", "Listen failed.", e)
                     return@addSnapshotListener

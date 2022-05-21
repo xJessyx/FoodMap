@@ -40,17 +40,27 @@ class HomeViewModel : ViewModel(){
     fun getFireBaseArticle(){
         db.collection("articles")
             .orderBy("createdTime", Query.Direction.DESCENDING)
-            .get()
-            .addOnSuccessListener { result ->
-                for (document in result) {
-                    Log.d(ContentValues.TAG, "${document.id} => ${document.data}")
-                    val data = document.toObject(Article::class.java)
-                    getAllArticles.add(data)
+            .addSnapshotListener { snapshot, e ->
+
+                if (e != null) {
+                    Log.w("yaya", "Listen failed.", e)
+                    return@addSnapshotListener
                 }
-                _getAllArticlesLiveData.value = getAllArticles
-            }
-            .addOnFailureListener { exception ->
-                Log.d(ContentValues.TAG, "Error getting documents: ", exception)
+
+                if (snapshot?.documents?.isNullOrEmpty() == false) {
+
+                    for (document in snapshot.documents) {
+                        Log.d(ContentValues.TAG, "${document.id} => ${document.data}")
+                        val data = document.toObject(Article::class.java)
+                        data?.let {
+                            getAllArticles.add(data)
+                        }
+                    }
+                    _getAllArticlesLiveData.value = getAllArticles
+                } else {
+                    Log.d("yaya", "Current data: null")
+                }
+
             }
     }
 

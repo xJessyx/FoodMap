@@ -17,7 +17,7 @@ import io.grpc.InternalChannelz.id
 
 class MyItineraryPagingAdapter (private val onClickListener: OnClickListener) :
     ListAdapter<Journey, MyItineraryPagingAdapter.MyItineraryPagingViewHolder>(
-        MyItineraryPagingAdapter.DiffCallback()) {
+        DiffCallback()) {
 
 
     class MyItineraryPagingViewHolder private constructor(var binding: ItemMyLtineraryPagingBinding) :
@@ -78,10 +78,7 @@ class MyItineraryPagingAdapter (private val onClickListener: OnClickListener) :
                         Log.v("user?.image","${user?.image}")
                         binding.myitineraryLinearLayout.addView(bindingAvatar.root)
                     }
-
             }
-
-
 
         }
 

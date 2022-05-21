@@ -1,14 +1,9 @@
 package com.jessy.foodmap.home
-
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.android.volley.toolbox.ImageLoader
-import com.google.common.collect.Iterables.size
 import com.jessy.foodmap.data.Article
 import com.jessy.foodmap.databinding.ItemHomeArticleBinding
 
@@ -32,6 +27,7 @@ class HomeAdapter(val onClickListener: OnClickListener): ListAdapter<Article,
 
         fun bind(article: Article) {
           binding.article = article
+            binding.homeTotalLike.text = article.likeUsers.size.toString()
             binding.executePendingBindings()
 
         }
