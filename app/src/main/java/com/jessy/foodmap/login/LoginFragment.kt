@@ -39,14 +39,6 @@ class LoginFragment : Fragment() {
             inflater, R.layout.fragment_login, container, false)
         binding.lifecycleOwner = viewLifecycleOwner
 
-
-//        viewModel.newUser.observe(viewLifecycleOwner) {
-//            Log.v("1", "1")
-//            viewModel.addUser()
-//            Log.v("1", "2")
-//
-//        }
-
         viewModel.addUser.observe(viewLifecycleOwner) {
             Log.v("yaya","viewModel.addUser.observe, it=$it")
             Log.v("2", "111")

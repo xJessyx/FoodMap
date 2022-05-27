@@ -54,12 +54,13 @@
 
     <ImageButton
         android:id="@+id/addItinerary_img"
-        android:layout_width="300dp"
-        android:layout_height="250dp"
-        android:layout_marginTop="32dp"
-        android:scaleType="centerCrop"
+        android:layout_width="220dp"
+        android:layout_height="200dp"
+        android:layout_marginTop="12dp"
         android:background="@drawable/add_image2"
+        android:scaleType="centerCrop"
         app:layout_constraintEnd_toEndOf="@+id/addItinerary_view"
+        app:layout_constraintHorizontal_bias="0.487"
         app:layout_constraintStart_toStartOf="@+id/addItinerary_view"
         app:layout_constraintTop_toBottomOf="@+id/addItinerary_view" />
 
@@ -79,55 +80,57 @@
         android:id="@+id/addItinerary_ed_ItineraryName"
         android:layout_width="300dp"
         android:layout_height="50dp"
-        android:layout_marginTop="32dp"
-        android:background="@drawable/shape_round3"
+        android:background="@drawable/shape_round2"
         android:gravity="center"
         android:hint="請輸入行程名稱"
-        android:autoSizeTextType="uniform"
+        android:layout_marginTop="24dp"
         android:text="@={viewModel.itineraryName}"
-        app:layout_constraintEnd_toEndOf="@+id/addItinerary_img"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/addItinerary_img"
+        android:textSize="15sp"
+        app:layout_constraintEnd_toEndOf="@+id/addItinerary_view"
+        app:layout_constraintStart_toStartOf="@+id/addItinerary_view"
         app:layout_constraintTop_toBottomOf="@+id/addItinerary_img" />
 
     <Button
         android:id="@+id/addItinerary_ed_StartDate"
-        android:layout_width="140dp"
-        android:layout_height="80dp"
-        android:layout_marginTop="32dp"
-        android:background="@drawable/shape_oval"
-        android:text="@={viewModel.itineraryStartDate}"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="24dp"
+        android:background="@drawable/shape_round2"
         android:hint="請選擇出發日期"
+        android:text="@={viewModel.itineraryStartDate}"
+        app:layout_constraintEnd_toEndOf="@+id/addItinerary_ed_ItineraryName"
         app:layout_constraintStart_toStartOf="@+id/addItinerary_ed_ItineraryName"
         app:layout_constraintTop_toBottomOf="@+id/addItinerary_ed_ItineraryName" />
 
     <Button
         android:id="@+id/addItinerary_ed_EndDate"
-        android:layout_width="140dp"
-        android:layout_height="80dp"
-        android:layout_marginTop="32dp"
-        android:background="@drawable/shape_oval"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="24dp"
+        android:background="@drawable/shape_round2"
         android:hint="請選擇結束日期"
         android:text="@={viewModel.itineraryEndDate}"
-        app:layout_constraintEnd_toEndOf="@+id/addItinerary_ed_ItineraryName"
-        app:layout_constraintTop_toBottomOf="@+id/addItinerary_ed_ItineraryName" />
+        app:layout_constraintEnd_toEndOf="@+id/addItinerary_ed_StartDate"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/addItinerary_ed_StartDate"
+        app:layout_constraintTop_toBottomOf="@+id/addItinerary_ed_StartDate" />
 
     <Button
         android:id="@+id/addItinerary_btn"
         android:layout_width="150dp"
         android:layout_height="50dp"
-        android:layout_marginTop="48dp"
+        android:layout_marginTop="40dp"
         android:background="@drawable/shape_round"
         android:text="送出"
-        android:layout_marginBottom="32dp"
         android:textColor="@color/white"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/addItinerary_ed_EndDate"
-        app:layout_constraintStart_toStartOf="@+id/addItinerary_ed_StartDate"
-        app:layout_constraintTop_toBottomOf="@+id/addItinerary_ed_StartDate" />
+        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintStart_toStartOf="@+id/addItinerary_ed_EndDate"
+        app:layout_constraintTop_toBottomOf="@+id/addItinerary_ed_EndDate" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
 
 </layout>

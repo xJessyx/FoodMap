@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
+
     <data>
+
         <variable
             name="viewModel"
             type="com.jessy.foodmap.addPlace.AddPlaceViewModel" />
@@ -15,124 +16,150 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
 
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:context=".addPlace.AddPlaceFragment">
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:context=".addPlace.AddPlaceFragment">
 
-        <View
-            android:id="@+id/addPlace_view"
-            android:layout_width="350dp"
-            android:layout_height="3dp"
-            android:layout_marginTop="16dp"
-            android:background="#E45D0F"
+            <View
+                android:id="@+id/addPlace_view"
+                android:layout_width="350dp"
+                android:layout_height="3dp"
+                android:layout_marginTop="16dp"
+                android:background="#E45D0F"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.491"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/addPlace_tv_placeName" />
 
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.491"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/addPlace_tv_placeName" />
+            <TextView
+                android:id="@+id/addPlace_tv_selectJourney"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:text="旅程"
+                android:textSize="20sp"
+                app:layout_constraintEnd_toEndOf="@+id/addPlace_view"
+                app:layout_constraintStart_toStartOf="@+id/addPlace_view"
+                app:layout_constraintTop_toBottomOf="@+id/addPlace_view" />
 
-        <TextView
-            android:id="@+id/addPlace_tv_placeName"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="48dp"
-            android:textColor="@color/black"
-            android:textSize="25sp"
-            android:textStyle="bold"
-            android:gravity="center"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:text="光一續集" />
+            <TextView
+                android:id="@+id/addPlace_tv_placeName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="48dp"
+                android:gravity="center"
+                android:textColor="@color/black"
+                android:textSize="25sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="光一續集" />
 
-        <Spinner
-            android:id="@+id/addPlace_sp_selectJourney"
-            android:layout_width="300dp"
-            android:layout_height="50dp"
-            android:layout_marginTop="48dp"
-            android:autoSizeTextType="uniform"
-            android:background="@drawable/shape_round2"
-            app:layout_constraintEnd_toEndOf="@+id/addPlace_view"
-            app:layout_constraintStart_toStartOf="@+id/addPlace_view"
-            app:layout_constraintTop_toBottomOf="@+id/addPlace_view" />
+            <Spinner
+                android:id="@+id/addPlace_sp_selectJourney"
+                android:layout_width="300dp"
+                android:layout_height="50dp"
+                android:layout_marginTop="12dp"
+                android:autoSizeTextType="uniform"
+                android:background="@drawable/shape_round2"
+                app:layout_constraintEnd_toEndOf="@+id/addPlace_view"
+                app:layout_constraintStart_toStartOf="@+id/addPlace_view"
+                app:layout_constraintTop_toBottomOf="@+id/addPlace_tv_selectJourney" />
 
-        <Spinner
-            android:id="@+id/addPlace_sp_selectDay"
-            android:layout_width="300dp"
-            android:layout_height="50dp"
-            android:layout_marginTop="48dp"
-            android:autoSizeTextType="uniform"
-            android:background="@drawable/shape_round2"
-            app:layout_constraintEnd_toEndOf="@+id/addPlace_sp_selectJourney"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="@+id/addPlace_sp_selectJourney"
-            app:layout_constraintTop_toBottomOf="@+id/addPlace_sp_selectJourney" />
 
-        <Spinner
-            android:id="@+id/addPlace_sp_selectTransportation"
-            android:layout_width="300dp"
-            android:layout_height="50dp"
-            android:layout_marginTop="48dp"
-            android:autoSizeTextType="uniform"
-            android:background="@drawable/shape_round2"
-            app:layout_constraintEnd_toEndOf="@+id/addPlace_sp_selectDay"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="@+id/addPlace_sp_selectDay"
-            app:layout_constraintTop_toBottomOf="@+id/addPlace_sp_selectDay" />
+            <TextView
+                android:id="@+id/addPlace_tv_selectDay"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:text="第幾天"
+                android:textSize="20sp"
+                app:layout_constraintEnd_toEndOf="@+id/addPlace_sp_selectJourney"
+                app:layout_constraintStart_toStartOf="@+id/addPlace_sp_selectJourney"
+                app:layout_constraintTop_toBottomOf="@+id/addPlace_sp_selectJourney" />
 
-        <EditText
-            android:id="@+id/addPlace_sp_selectDwellTime"
-            android:layout_width="300dp"
-            android:layout_height="50dp"
-            android:layout_marginTop="48dp"
-            android:background="@drawable/shape_round2"
-            android:autoSizeTextType="uniform"
-            android:hint="請輸入停留時間"
-            android:gravity="center"
-            android:paddingLeft="8dp"
-            android:textColor="@color/black"
-            android:textSize="16sp"
-            app:layout_constraintEnd_toEndOf="@+id/addPlace_sp_selectTransportation"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="@+id/addPlace_sp_selectTransportation"
-            app:layout_constraintTop_toBottomOf="@+id/addPlace_sp_selectTransportation" />
-        <!--
-android:inputType="time"-->
+            <Spinner
+                android:id="@+id/addPlace_sp_selectDay"
+                android:layout_width="300dp"
+                android:layout_height="50dp"
+                android:layout_marginTop="12dp"
+                android:autoSizeTextType="uniform"
+                android:background="@drawable/shape_round2"
+                app:layout_constraintEnd_toEndOf="@+id/addPlace_sp_selectJourney"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/addPlace_sp_selectJourney"
+                app:layout_constraintTop_toBottomOf="@+id/addPlace_tv_selectDay" />
 
-<!--        <EditText-->
-<!--            android:id="@+id/addPlace_sp_selectStartTime"-->
-<!--            android:layout_width="300dp"-->
-<!--            android:layout_height="50dp"-->
-<!--            android:layout_marginTop="32dp"-->
-<!--            android:autoSizeTextType="uniform"-->
-<!--            android:background="@drawable/shape_round2"-->
-<!--            android:hint="請輸入開始時間"-->
-<!--            android:gravity="center"-->
-<!--            android:paddingLeft="8dp"-->
-<!--            android:textColor="@color/black"-->
-<!--            android:textSize="16sp"-->
-<!--            app:layout_constraintEnd_toEndOf="@+id/addPlace_sp_selectDwellTime"-->
-<!--            app:layout_constraintHorizontal_bias="0.0"-->
-<!--            app:layout_constraintStart_toStartOf="@+id/addPlace_sp_selectDwellTime"-->
-<!--            app:layout_constraintTop_toBottomOf="@+id/addPlace_sp_selectDwellTime" />-->
+            <Spinner
+                android:id="@+id/addPlace_sp_selectTransportation"
+                android:layout_width="300dp"
+                android:layout_height="50dp"
+                android:layout_marginTop="12dp"
+                android:autoSizeTextType="uniform"
+                android:background="@drawable/shape_round2"
+                app:layout_constraintEnd_toEndOf="@+id/addPlace_sp_selectDay"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/addPlace_sp_selectDay"
+                app:layout_constraintTop_toBottomOf="@+id/addPlace_tv_selectTransportation" />
 
-        <Button
-            android:id="@+id/addPlace_bt_submit"
-            android:layout_width="150dp"
-            android:layout_height="50dp"
-            android:layout_marginTop="60dp"
-            android:background="@drawable/shape_round"
-            android:text="送出"
-            android:textColor="@color/white"
-            android:textSize="18sp"
-            app:layout_constraintEnd_toEndOf="@+id/addPlace_sp_selectDwellTime"
-            app:layout_constraintHorizontal_bias="0.504"
-            app:layout_constraintStart_toStartOf="@+id/addPlace_sp_selectDwellTime"
-            app:layout_constraintTop_toBottomOf="@+id/addPlace_sp_selectDwellTime" />
+            <TextView
+                android:id="@+id/addPlace_tv_selectTransportation"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="交通工具"
+                android:textSize="20sp"
+                android:layout_marginTop="12dp"
+                app:layout_constraintEnd_toEndOf="@+id/addPlace_sp_selectDay"
+                app:layout_constraintStart_toStartOf="@+id/addPlace_sp_selectDay"
+                app:layout_constraintTop_toBottomOf="@+id/addPlace_sp_selectDay" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            <TextView
+                android:id="@+id/addPlace_tv_selectDwellTime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:text="停留時間"
+                android:textSize="20sp"
+                app:layout_constraintEnd_toEndOf="@+id/addPlace_sp_selectTransportation"
+                app:layout_constraintStart_toStartOf="@+id/addPlace_sp_selectTransportation"
+                app:layout_constraintTop_toBottomOf="@+id/addPlace_sp_selectTransportation" />
+
+            <EditText
+                android:id="@+id/addPlace_sp_selectDwellTime"
+                android:layout_width="300dp"
+                android:layout_height="50dp"
+
+                android:autoSizeTextType="uniform"
+                android:background="@drawable/shape_round2"
+                android:gravity="center"
+                android:hint="請輸入停留時間"
+                android:layout_marginTop="12dp"
+                android:paddingLeft="8dp"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                app:layout_constraintEnd_toEndOf="@+id/addPlace_sp_selectTransportation"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/addPlace_sp_selectTransportation"
+                app:layout_constraintTop_toBottomOf="@+id/addPlace_tv_selectDwellTime" />
+
+            <Button
+                android:id="@+id/addPlace_bt_submit"
+                android:layout_width="150dp"
+                android:layout_height="50dp"
+                android:layout_marginTop="40dp"
+                android:background="@drawable/shape_round"
+                android:text="送出"
+                android:textColor="@color/white"
+                android:textSize="18sp"
+                app:layout_constraintEnd_toEndOf="@+id/addPlace_sp_selectDwellTime"
+                app:layout_constraintHorizontal_bias="0.504"
+                app:layout_constraintStart_toStartOf="@+id/addPlace_sp_selectDwellTime"
+                app:layout_constraintTop_toBottomOf="@+id/addPlace_sp_selectDwellTime" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
     </ScrollView>
 </layout>
