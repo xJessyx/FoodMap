@@ -41,6 +41,7 @@
                     android:scaleType="centerCrop"
                     app:imageUrl="@{viewModel.article.image}"
                     app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="1.0"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/detail_bt_back" />
 
@@ -263,6 +264,7 @@
                 android:background="@drawable/shape_round3"
                 android:ellipsize="end"
                 android:gravity="center_vertical"
+                android:paddingLeft="16dp"
                 android:hint="留言..."
                 android:text="@={viewModel.messageCotent}"
                 android:textSize="16sp"

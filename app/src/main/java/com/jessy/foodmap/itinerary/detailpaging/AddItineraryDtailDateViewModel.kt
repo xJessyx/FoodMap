@@ -11,24 +11,24 @@ import com.google.firebase.ktx.Firebase
 import com.jessy.foodmap.data.Journey
 import com.jessy.foodmap.data.Place
 
-class AddItineraryDtailDateViewModel (position : Int,journeyArg: Journey): ViewModel(){
+class AddItineraryDtailDateViewModel(position: Int, journeyArg: Journey) : ViewModel() {
 
     val db = Firebase.firestore
 
     val _places = MutableLiveData<List<Place>>()
     val places: LiveData<List<Place>>
         get() = _places
-    var position =position
+    var position = position
     var journeyItemId = journeyArg.id
 
 
-    fun getPlaces(){
+    fun getPlaces() {
 
         var newList = mutableListOf<Place>()
 
         db.collection("journeys").document(journeyItemId)
             .collection("places")
-            .whereEqualTo("day",position+1)
+            .whereEqualTo("day", position + 1)
             .orderBy("startTime", Query.Direction.ASCENDING)
             .get()
             .addOnSuccessListener { result ->
@@ -48,7 +48,7 @@ class AddItineraryDtailDateViewModel (position : Int,journeyArg: Journey): ViewM
 
     var isUpdating = false
 
-    fun updateMoveList(list: MutableList<Place>,fromPosition: Int, toPosition: Int){
+    fun updateMoveList(list: MutableList<Place>, fromPosition: Int, toPosition: Int) {
 
 
         if (!isUpdating) {
@@ -71,11 +71,10 @@ class AddItineraryDtailDateViewModel (position : Int,journeyArg: Journey): ViewM
                 }
         }
 
-
     }
 
 
-    fun delectFireBaseItem(list: MutableList<Place>,position: Int){
+    fun delectFireBaseItem(list: MutableList<Place>, position: Int) {
         db.collection("journeys").document(journeyItemId)
             .collection("places").document(list[position].id)
             .delete()

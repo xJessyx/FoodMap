@@ -34,6 +34,7 @@ class DetailFragment : Fragment() {
         binding.viewModel = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
 
+        binding.detailEdMessage.clearFocus()
         val adapter = DetailAdapter(requireContext(),viewModel)
         binding.detailRecyclerView.adapter = adapter
 
@@ -115,9 +116,12 @@ class DetailFragment : Fragment() {
                     viewModel.getFireBaseMessages()
                     binding.detailEdMessage.text.clear()
                 }
-
         }
 
+       binding.detailChat.setOnClickListener {
+           binding.detailEdMessage.setFocusableInTouchMode(true);
+           binding.detailEdMessage.requestFocus()
+       }
         return binding.root
     }
 

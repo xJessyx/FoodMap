@@ -45,10 +45,7 @@ class AddItineraryDetailDateFragment(position: Int, journey: Journey) : Fragment
     val db = Firebase.firestore
     val viewModel = AddItineraryDtailDateViewModel(index, journeyArg)
     val adapter = AddItineraryDtailDateAdapter(AddItineraryDtailDateAdapter.OnClickListener {
-
-
     }, viewModel)
-
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -117,9 +114,6 @@ class AddItineraryDetailDateFragment(position: Int, journey: Journey) : Fragment
 
             findNavController().navigate(NavigationDirections.addItineraryDetailDateFragmentFoodMapSearchFragment(
                 selectItem))
-            Log.v("selectItem", "${selectItem.place},${selectItem.journey}")
-
-
         }
 
         return binding.root
@@ -171,34 +165,46 @@ class AddItineraryDetailDateFragment(position: Int, journey: Journey) : Fragment
                             call: Call<DirectionResponses>,
                             response: Response<DirectionResponses>,
                         ) {
-                            val legs = response.body()!!.routes!![0]!!.legs!!
-                            var totalDuration: Long = 0
+                                val legs = response.body()?.routes?.get(0)?.legs
+
+                                Log.v("legs","$legs")
+                                var totalDuration: Long = 0
 //
-                            if (response.body()!!.routes?.size != 0) {
-                                for (leg in legs) {
-                                    totalDuration += (leg?.duration?.value ?: 0)
+                                if (response.body()!!.routes?.size != 0) {
+                                    if (legs != null) {
+                                        for (leg in legs) {
+                                            Log.v("legs for","$legs")
+
+                                            totalDuration += (leg?.duration?.value ?: 0)
+                                        }
+                                    }
                                 }
-                            } else {
-                                totalDuration = legs.get(0)!!.duration!!.value!!.toLong()
-                            }
+                                else {
+//                                totalDuration = legs.get(0)!!.duration!!.value!!.toLong()
+                                    totalDuration = (legs?.get(0)?.duration?.value ?: 0) as Long
 
-                            places[i].trafficTime = totalDuration * 1000
-                            places[i + 1].startTime =
-                                28800000 + totalDuration * 1000 + places[i].dwellTime!!
-                            //   AddItineraryDtailDateViewModel._placeLiveData.value =AddItineraryDtailDateViewModel.places
+                                    Log.v("legs else","$legs")
+
+                                }
+
+                                places[i].trafficTime = totalDuration * 1000
+                                places[i + 1].startTime =
+                                    28800000 + totalDuration * 1000 + places[i].dwellTime!!
+                                //   AddItineraryDtailDateViewModel._placeLiveData.value =AddItineraryDtailDateViewModel.places
 
 
-                            Log.e("TT", "updatePlaceTimes, index=$i")
-                            updatePlaceTimes(
-                                placeId = places[i].id,
-                                startTime = places[i].startTime ?: 1,
-                                trafficTime = places[i].trafficTime ?: 0
-                            )
+                                Log.e("TT", "updatePlaceTimes, index=$i")
+                                updatePlaceTimes(
+                                    placeId = places[i].id,
+                                    startTime = places[i].startTime ?: 1,
+                                    trafficTime = places[i].trafficTime ?: 0
+                                )
 
-                            endCount--
-                            if (endCount == 0) {
-                                onTravelTimeCalculated(places)
-                            }
+                                endCount--
+                                if (endCount == 0) {
+                                    onTravelTimeCalculated(places)
+                                }
+
                         }
 
                         override fun onFailure(call: Call<DirectionResponses>, t: Throwable) {
@@ -218,7 +224,6 @@ class AddItineraryDetailDateFragment(position: Int, journey: Journey) : Fragment
     }
 
     fun onTravelTimeCalculated(places: List<Place>) {
-        Log.e("TT", "updatePlaceTimes, index=last")
         updatePlaceTimes(
             placeId = places.last().id,
             startTime = places.last().startTime ?: 1,
@@ -229,8 +234,6 @@ class AddItineraryDetailDateFragment(position: Int, journey: Journey) : Fragment
     }
 
     fun updatePlaceTimes(placeId: String, startTime: Long, trafficTime: Long) {
-
-        Log.e("TT", "updatePlaceTimes, placeId=$placeId")
 
         db.collection("journeys").document(viewModel.journeyItemId)
             .collection("places").document(placeId)
@@ -269,7 +272,6 @@ private interface ApiServices {
         @retrofit2.http.Query("origin") origin: String,
         @retrofit2.http.Query("destination") destination: String,
         @retrofit2.http.Query("key") apiKey: String,
-//            @Query("awypoints")awypoints:Array
     ): Call<DirectionResponses>
 }
 
