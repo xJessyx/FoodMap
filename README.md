@@ -46,4 +46,3 @@ Library
 * ImagePicker - 2.1
 * gosn - 2.8.9
 * Lottie - 3.6.1
-* 
