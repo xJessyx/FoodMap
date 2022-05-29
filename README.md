@@ -45,4 +45,8 @@ Library
 * RecyclerViewSwipeDecorator - 1.2.2
 * ImagePicker - 2.1
 * gosn - 2.8.9
+<<<<<<< HEAD
 * Lottie - 3.6.1
+=======
+* Lottie - 3.6.1
+>>>>>>> 0a33c85 (change README.md)
