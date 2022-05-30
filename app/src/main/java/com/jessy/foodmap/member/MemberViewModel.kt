@@ -12,7 +12,7 @@ import com.jessy.foodmap.data.Journey
 import com.jessy.foodmap.data.User
 import com.jessy.foodmap.login.UserManager.Companion.user
 
-class MemberViewModel: ViewModel() {
+class MemberViewModel : ViewModel() {
 
     val db = Firebase.firestore
     var getUser = mutableListOf<User>()
@@ -23,8 +23,9 @@ class MemberViewModel: ViewModel() {
 
     var memberImg = MutableLiveData<String>()
 
-    fun getFireBaseUser(){
-        db.collection("users",)
+    fun getFireBaseUser() {
+
+        db.collection("users")
             .whereEqualTo("id", user?.id)
             .get()
             .addOnSuccessListener { result ->
@@ -41,5 +42,4 @@ class MemberViewModel: ViewModel() {
             }
     }
 
-
-    }
+}

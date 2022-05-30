@@ -30,14 +30,14 @@ class MemberFragment : Fragment() {
         val pageAdapter = MemberPagingAdapter(requireActivity().supportFragmentManager, lifecycle)
         binding.memberViewpager2.adapter = pageAdapter
         binding.lifecycleOwner = viewLifecycleOwner
-        binding.viewModel =viewModel
+        binding.viewModel = viewModel
 
         viewModel.memberImg.value = user?.image
 
         viewModel.getFireBaseUser()
-        viewModel.getUserLiveData.observe(viewLifecycleOwner){
-                    binding.memberTvNamePerson.text = viewModel.getUser[0].name
-                    binding.memberEmail.text = viewModel.getUser[0].email
+        viewModel.getUserLiveData.observe(viewLifecycleOwner) {
+            binding.memberTvNamePerson.text = viewModel.getUser[0].name
+            binding.memberEmail.text = viewModel.getUser[0].email
         }
 
         TabLayoutMediator(binding.memberTabs, binding.memberViewpager2) { tab, position ->
@@ -48,13 +48,12 @@ class MemberFragment : Fragment() {
                 1 -> {
                     tab.text = "我的地圖"
                 }
-
-            }        }.attach()
+            }
+        }.attach()
 
         return binding.root
 
     }
-
 
 
 }

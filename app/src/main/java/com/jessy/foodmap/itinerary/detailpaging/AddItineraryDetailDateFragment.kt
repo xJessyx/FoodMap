@@ -66,6 +66,7 @@ class AddItineraryDetailDateFragment(position: Int, journey: Journey) : Fragment
                     Log.v("Place 尚未有地點", "$it")
                 } else {
                     calculateTravelTime(it)
+                    Log.v("Place 有地點", "$it")
 
                 }
             }
@@ -136,8 +137,7 @@ class AddItineraryDetailDateFragment(position: Int, journey: Journey) : Fragment
 
             if (i < places.size - 1) {
                 fromFKIP = places[i].latitude.toString() + "," + places[i].longitude.toString()
-                toMonas =
-                    places[i + 1].latitude.toString() + "," + places[i + 1].longitude.toString()
+                toMonas = places[i + 1].latitude.toString() + "," + places[i + 1].longitude.toString()
 
                 val mode = when (places[i + 1].transportation) {
                     1 -> "walking"
@@ -155,7 +155,7 @@ class AddItineraryDetailDateFragment(position: Int, journey: Journey) : Fragment
                     )
                 val key = info.metaData[resources.getString(R.string.map_api_key_name)].toString()
                 Places.initialize(requireContext(), key)
-
+                    Log.v("key","$key")
 
                 val apiServices = RetrofitClient.apiServices(this)
                 apiServices.getDirection(mode as String, fromFKIP, toMonas, key)
@@ -163,8 +163,14 @@ class AddItineraryDetailDateFragment(position: Int, journey: Journey) : Fragment
                         @SuppressLint("NotifyDataSetChanged")
                         override fun onResponse(
                             call: Call<DirectionResponses>,
-                            response: Response<DirectionResponses>,
+                            response: Response<DirectionResponses>
                         ) {
+                            Log.v("response","$response")
+
+                            Log.v("fromFKIP toMonas","${fromFKIP}, $toMonas")
+                            Log.v("response ","${response.body()?.routes}")
+
+                            Log.v("response size","${response.body()?.routes?.size}")
                                 val legs = response.body()?.routes?.get(0)?.legs
 
                                 Log.v("legs","$legs")
@@ -208,7 +214,7 @@ class AddItineraryDetailDateFragment(position: Int, journey: Journey) : Fragment
                         }
 
                         override fun onFailure(call: Call<DirectionResponses>, t: Throwable) {
-                            Log.e("error", t.localizedMessage)
+                            Log.e("DirectionResponses error", t.localizedMessage)
                             endCount--
                             if (endCount == 0) {
                                 onTravelTimeCalculated(places)

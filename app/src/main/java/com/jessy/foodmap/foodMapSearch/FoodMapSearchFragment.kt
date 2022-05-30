@@ -40,8 +40,6 @@ import com.google.android.libraries.places.widget.AutocompleteSupportFragment
 import com.google.android.libraries.places.widget.listener.PlaceSelectionListener
 import com.jessy.foodmap.MainActivity
 import com.jessy.foodmap.R
-import com.jessy.foodmap.data.Journey
-import com.jessy.foodmap.data.PlaceSelectData
 import com.jessy.foodmap.data.StoreInformation
 import com.jessy.foodmap.databinding.FragmentFoodMapSearchBinding
 import com.jessy.foodmap.foodMapSearch.FoodMapSearchFragment.ImgUtil.getBitmapDescriptor
@@ -53,7 +51,7 @@ class FoodMapSearchFragment : Fragment(), OnMapReadyCallback,
     private val viewModel: FoodMapSearchViewModel by lazy {
         ViewModelProvider(this).get(FoodMapSearchViewModel::class.java)
     }
-  var dataAllList =  mutableListOf<StoreInformation>()
+
 
     val MY_PERMISSIONS_REQUEST_LOCATION = 100
     private lateinit var mMap: GoogleMap
@@ -106,10 +104,11 @@ class FoodMapSearchFragment : Fragment(), OnMapReadyCallback,
             Place.Field.ADDRESS,
             Place.Field.PHOTO_METADATAS,
             Place.Field.RATING,
-            Place.Field.LAT_LNG))
+            Place.Field.LAT_LNG)).setCountry("TW")
 
         autocompleteFragment.setOnPlaceSelectedListener(object : PlaceSelectionListener {
             override fun onPlaceSelected(place: Place) {
+
                 getSuggestions(place.name)
             }
 
@@ -117,13 +116,6 @@ class FoodMapSearchFragment : Fragment(), OnMapReadyCallback,
                 Log.i(TAG, "An error occurred: $status")
             }
         })
-//
-//        if (dataAllList.isNotEmpty()){
-//            adapter?.submitList(dataAllList)
-//            Log.v("dataAllList","$dataAllList")
-//            adapter?.notifyDataSetChanged()
-//
-//        }
 
         viewModel.getSuggestionsList.observe(viewLifecycleOwner){
             adapter.submitList(it)
@@ -248,8 +240,9 @@ class FoodMapSearchFragment : Fragment(), OnMapReadyCallback,
     private fun getSuggestions(query: String) {
         var findAutocompletePredictionsRequest = FindAutocompletePredictionsRequest
             .builder()
-            .setSessionToken(autocompleteSessionToken)
+            .setCountries("TW")
             .setTypeFilter(TypeFilter.ESTABLISHMENT)
+            .setSessionToken(autocompleteSessionToken)
             .setQuery(query)
             .build()
 
@@ -258,7 +251,7 @@ class FoodMapSearchFragment : Fragment(), OnMapReadyCallback,
                 OnCompleteListener {
                     if (it.isSuccessful) {
                         Log.d("PlaceTest", "getSuggestions: -----------------------SUCCESS")
-                        Log.d("PlaceTest", "${it.result!!.autocompletePredictions}")
+                        Log.d("PlaceTest", "${it.result!!.autocompletePredictions.get(0)}")
                         Log.d("PlaceTest", "size=${it.result!!.autocompletePredictions.size}")
                         predictionList =
                             it.result!!.autocompletePredictions
