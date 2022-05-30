@@ -85,19 +85,17 @@ class FoodMapSearchFragment : Fragment(), OnMapReadyCallback,
         binding.searchRecyclerView.adapter = adapter
         binding.viewModel = viewModel
 
-
         //   Initialize
         val autocompleteFragment =
             childFragmentManager.findFragmentById(R.id.search_autocomplete)
                     as AutocompleteSupportFragment
 
-        val mapFragment = childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment
+        val mapFragment = childFragmentManager.findFragmentById(R.id.search_map) as SupportMapFragment
         mapFragment.getMapAsync(this)
 
         initPlaces()
         checkGPS()
         locationManager()
-
 
         autocompleteFragment.setPlaceFields(listOf(Place.Field.ID,
             Place.Field.NAME,
@@ -123,7 +121,6 @@ class FoodMapSearchFragment : Fragment(), OnMapReadyCallback,
         }
         return binding.root
     }
-
 
     override fun onRequestPermissionsResult(
         requestCode: Int,
@@ -215,9 +212,9 @@ class FoodMapSearchFragment : Fragment(), OnMapReadyCallback,
 
     @SuppressLint("MissingPermission")
     override fun onMapReady(googleMap: GoogleMap) {
-
         mMap = googleMap
         mMap.isMyLocationEnabled = true
+
     }
 
     // Initialize the SDK
@@ -368,7 +365,6 @@ class FoodMapSearchFragment : Fragment(), OnMapReadyCallback,
             }
         }
     }
-
 
 }
 

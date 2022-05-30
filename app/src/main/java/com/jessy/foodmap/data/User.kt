@@ -7,7 +7,6 @@ import kotlinx.parcelize.Parcelize
 data class User (
     var age:Int=0,
     var email: String="",
-    var gender: String="",
     var id:String ="",
     var image :String ="",
     var level:Int = 0,

@@ -41,36 +41,20 @@ class MapsPagingFragment : Fragment(), OnMapReadyCallback {
         binding.lifecycleOwner = viewLifecycleOwner
 
         viewModel.getMyAllJourney()
-        val mapFragment = childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment?
-        mapFragment?.getMapAsync(this)
+        val mapFragment = childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment
+        mapFragment.getMapAsync(this)
 
-        viewModel.myAllJourney.observe(viewLifecycleOwner){
+        viewModel.myAllJourney.observe(viewLifecycleOwner) {
             viewModel.getMyAllPlace()
         }
-        // Set the lat/long coordinates for the marker.
-//        val lat = 51.5009
-//        val lng = -0.122
-//
-//// Set the title and snippet strings.
-//        val title = "This is the title"
-//        val snippet = "and this is the snippet."
-//
-//// Create a cluster item for the marker and set the title and snippet using the constructor.
-//        val infoWindowItem = MarkerItem(lat, lng, title, snippet)
-//
-//// Add the cluster item (marker) to the cluster manager.
-//        clusterManager.addItem(infoWindowItem)
 
-        viewModel.myAllPlace.observe(viewLifecycleOwner){
+        viewModel.myAllPlace.observe(viewLifecycleOwner) {
 
-            //addItems()
             setUpClusterer()
-
         }
         return binding.root
 
     }
-
 
 
     private fun setMapStyle(map: GoogleMap) {
@@ -85,27 +69,21 @@ class MapsPagingFragment : Fragment(), OnMapReadyCallback {
             if (!success) {
                 Log.e(TAG, "Style parsing failed.")
             }
-        }catch (e: Resources.NotFoundException) {
+        } catch (e: Resources.NotFoundException) {
             Log.e(TAG, "Can't find style. Error: ", e)
         }
     }
 
 
     private fun setUpClusterer() {
-        // Position the map.,
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(LatLng(25.105239181734905, 121.54844413550062), 10f))
 
-        // Initialize the manager with the context and the map.
-        // (Activity extends context, so we can pass 'this' in the constructor.)
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(LatLng(25.105239181734905,
+            121.54844413550062), 10f))
         clusterManager = ClusterManager(context, mMap)
-
-        // Point the map's listeners at the listeners implemented by the cluster
-        // manager.
         mMap.setOnCameraIdleListener(clusterManager)
         mMap.setOnMarkerClickListener(clusterManager)
 
-        // Add cluster items (markers) to the cluster manager.
-       addItems()
+        addItems()
     }
 
     private fun addItems() {
@@ -114,7 +92,6 @@ class MapsPagingFragment : Fragment(), OnMapReadyCallback {
             val lat = viewModel.myAllPlace.value!![i].latitude
             val lng = viewModel.myAllPlace.value!![i].longitude
             val name = viewModel.myAllPlace.value!![i].name
-
             val offsetItem =
                 MarkerItem(lat!!, lng!!, name, "")
 
@@ -126,15 +103,8 @@ class MapsPagingFragment : Fragment(), OnMapReadyCallback {
 
         mMap = googleMap
         setMapStyle(mMap)
-//        googleMap.addMarker(
-//            MarkerOptions()
-//                .position(LatLng(24.9324563, 121.3689134))
-//                .title("Marker z1")
-//                .zIndex(5.0f)
-//                .alpha(0.1f)
-//        )
-    }
 
+    }
 
 
 }

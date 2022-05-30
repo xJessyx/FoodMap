@@ -75,22 +75,9 @@
             app:layout_constraintBottom_toTopOf="@+id/member_email_name"
             app:layout_constraintStart_toEndOf="@+id/member_card"
             app:layout_constraintTop_toTopOf="@+id/member_card"
-            app:layout_constraintVertical_bias="0.0"
-            app:layout_constraintVertical_chainStyle="packed"
+            app:layout_constraintVertical_bias="0.5"
+            app:layout_constraintVertical_chainStyle="spread_inside"
             tools:text="name：" />
-
-        <TextView
-            android:id="@+id/member_tv_gender"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/smallcase"
-            android:text="gnetder:"
-            android:textColor="#333333"
-            android:textSize="20sp"
-            app:layout_constraintBottom_toTopOf="@+id/member_tv_age"
-            app:layout_constraintStart_toStartOf="@+id/member_email_name"
-            app:layout_constraintTop_toBottomOf="@+id/member_email_name"
-            tools:text="gnetder:" />
 
         <TextView
             android:id="@+id/member_tv_age"
@@ -101,8 +88,8 @@
             android:textColor="#333333"
             android:textSize="20sp"
             app:layout_constraintBottom_toTopOf="@+id/member_tv_grade"
-            app:layout_constraintStart_toStartOf="@+id/member_tv_gender"
-            app:layout_constraintTop_toBottomOf="@+id/member_tv_gender"
+            app:layout_constraintStart_toStartOf="@+id/member_email_name"
+            app:layout_constraintTop_toBottomOf="@+id/member_email_name"
             tools:text="age：" />
 
         <TextView
@@ -133,30 +120,17 @@
             tools:text="小纖女" />
 
         <TextView
-            android:id="@+id/member_tv_gender_person"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/smallcase"
-            android:text="MAN"
-            android:textColor="#333333"
-            android:textSize="20sp"
-            app:layout_constraintBottom_toBottomOf="@+id/member_tv_gender"
-            app:layout_constraintStart_toStartOf="@+id/member_email"
-            app:layout_constraintTop_toTopOf="@+id/member_tv_gender"
-            tools:text="MAN" />
-
-        <TextView
             android:id="@+id/member_tv_age_person"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/smallcase"
-            android:text="20"
+            android:text="18"
             android:textColor="#333333"
             android:textSize="20sp"
             app:layout_constraintBottom_toBottomOf="@+id/member_tv_age"
-            app:layout_constraintStart_toStartOf="@+id/member_tv_gender_person"
+            app:layout_constraintStart_toStartOf="@+id/member_email"
             app:layout_constraintTop_toTopOf="@+id/member_tv_age"
-            tools:text="20" />
+            tools:text="18" />
 
         <TextView
             android:id="@+id/member_tv_grade_person"
@@ -180,7 +154,7 @@
             android:text="email:"
             android:textColor="#333333"
             android:textSize="20sp"
-            app:layout_constraintBottom_toTopOf="@+id/member_tv_gender"
+            app:layout_constraintBottom_toTopOf="@+id/member_tv_age"
             app:layout_constraintStart_toStartOf="@+id/member_tv_name"
             app:layout_constraintTop_toBottomOf="@+id/member_tv_name"
             tools:text="email：" />
@@ -206,7 +180,7 @@
             android:id="@+id/member_tabs"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="25dp"
+            android:layout_marginTop="16dp"
             android:textSize="18sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"

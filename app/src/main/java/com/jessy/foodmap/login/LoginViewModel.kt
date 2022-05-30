@@ -42,7 +42,6 @@ class LoginViewModel : ViewModel() {
         val data = User(
             age = 18,
             email = email,
-            gender = "M",
             id = userDocumentId,
             image = image,
             level = 1,
