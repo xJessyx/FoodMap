@@ -8,7 +8,6 @@ plugins {
     id "kotlin-kapt"
     id 'com.google.android.libraries.mapsplatform.secrets-gradle-plugin'
     id 'com.google.firebase.crashlytics'
-    // id 'com.google.secrets_gradle_plugin' version '0.4'
 
 }
 
@@ -21,20 +20,7 @@ android {
         targetSdk 32
         versionCode 9
         versionName "2.0.7"
-
-
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-
-//        Properties properties = new Properties()
-//
-//        properties.load(project.rootProject.file('local.properties').newDataInputStream())
-//        manifestPlaceholders = [MAPS_API_KEY: "${properties.getProperty('MAPS_API_KEY')}"]
-
-//        def properties = new Properties()
-//        properties.load(project.rootProject.file('local.properties').newDataInputStream())
-//        def MAPS_API_KEY = properties.getProperty("maps_api_key")
-//        buildConfigField("String", "MAPS_API_KEY", "\"${MAPS_API_KEY}\"")
-
 
     }
 
@@ -74,7 +60,6 @@ android {
 
         //viewBinding true
         dataBinding {
-            //noinspection DataBindingWithoutKapt
             enabled true
         }
     }
