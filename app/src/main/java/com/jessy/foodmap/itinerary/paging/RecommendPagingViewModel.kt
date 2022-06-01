@@ -9,7 +9,6 @@ import com.google.firebase.firestore.Query
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.jessy.foodmap.data.Journey
-import com.jessy.foodmap.data.Place
 
 class RecommendPagingViewModel : ViewModel() {
 
@@ -23,7 +22,6 @@ class RecommendPagingViewModel : ViewModel() {
     private val _navigateToDetailDate = MutableLiveData<Journey>()
     val navigateToDetailDate: LiveData<Journey>
         get() = _navigateToDetailDate
-
 
     fun getFireBaseJourney() {
         db.collection("journeys")

@@ -33,25 +33,12 @@ class LoginFragment : Fragment() {
         (activity as MainActivity).hidBottomNavigation()
         (activity as MainActivity).hideToolBar()
 
-
-
         binding = DataBindingUtil.inflate(
             inflater, R.layout.fragment_login, container, false)
         binding.lifecycleOwner = viewLifecycleOwner
-
-
-//        viewModel.newUser.observe(viewLifecycleOwner) {
-//            Log.v("1", "1")
-//            viewModel.addUser()
-//            Log.v("1", "2")
-//
-//        }
-
         viewModel.addUser.observe(viewLifecycleOwner) {
-            Log.v("yaya","viewModel.addUser.observe, it=$it")
-            Log.v("2", "111")
+
             viewModel.addFireBaseUser(it)
-            Log.v("2", "1222")
 
         }
 
@@ -91,9 +78,7 @@ class LoginFragment : Fragment() {
                 viewModel.userName = account.displayName.toString()
                 viewModel.email = account.email.toString()
                 viewModel.image = account.photoUrl.toString()
-
                 viewModel.getFireBaseUser()
-
 
             } catch (e: ApiException) {
                 Log.i("givemepass", "signInResult:failed code=" + e.statusCode)

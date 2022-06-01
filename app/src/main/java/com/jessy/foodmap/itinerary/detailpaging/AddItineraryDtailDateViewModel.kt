@@ -15,7 +15,7 @@ class AddItineraryDtailDateViewModel(position: Int, journeyArg: Journey) : ViewM
 
     val db = Firebase.firestore
 
-    val _places = MutableLiveData<List<Place>>()
+    private val _places = MutableLiveData<List<Place>>()
     val places: LiveData<List<Place>>
         get() = _places
     var position = position
@@ -72,7 +72,6 @@ class AddItineraryDtailDateViewModel(position: Int, journeyArg: Journey) : ViewM
         }
 
     }
-
 
     fun delectFireBaseItem(list: MutableList<Place>, position: Int) {
         db.collection("journeys").document(journeyItemId)

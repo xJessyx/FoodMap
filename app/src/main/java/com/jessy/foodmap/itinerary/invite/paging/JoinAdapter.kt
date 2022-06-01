@@ -1,18 +1,12 @@
 package com.jessy.foodmap.itinerary.invite.paging
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.navigation.findNavController
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.jessy.foodmap.NavigationDirections
 import com.jessy.foodmap.data.Invite
-import com.jessy.foodmap.data.Journey
 import com.jessy.foodmap.databinding.ItemJoinBinding
-import com.jessy.foodmap.databinding.ItemMyLtineraryPagingBinding
-import com.jessy.foodmap.itinerary.paging.MyItineraryPagingAdapter
 
 class JoinAdapter :
     ListAdapter<Invite, JoinAdapter.JoinViewHolder>(
@@ -21,7 +15,7 @@ class JoinAdapter :
     class JoinViewHolder private constructor(var binding: ItemJoinBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(item:Invite) {
+        fun bind(item: Invite) {
             binding.invite = item
             binding.executePendingBindings()
 
@@ -47,6 +41,7 @@ class JoinAdapter :
         holder.bind(item)
 
     }
+
     class DiffCallback : DiffUtil.ItemCallback<Invite>() {
 
         override fun areItemsTheSame(oldItem: Invite, newItem: Invite): Boolean {

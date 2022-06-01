@@ -29,7 +29,7 @@ class MapsPagingFragment : Fragment(), OnMapReadyCallback {
     private lateinit var clusterManager: ClusterManager<MarkerItem>
     private lateinit var mMap: GoogleMap
     private val viewModel: MapsPagingViewModel by lazy {
-        ViewModelProvider(this).get(MapsPagingViewModel::class.java)
+        ViewModelProvider(this)[MapsPagingViewModel::class.java]
     }
 
     override fun onCreateView(
@@ -39,7 +39,6 @@ class MapsPagingFragment : Fragment(), OnMapReadyCallback {
     ): View? {
         val binding = FragmentMapsPagingBinding.inflate(inflater, container, false)
         binding.lifecycleOwner = viewLifecycleOwner
-
         viewModel.getMyAllJourney()
         val mapFragment = childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment
         mapFragment.getMapAsync(this)
@@ -47,7 +46,6 @@ class MapsPagingFragment : Fragment(), OnMapReadyCallback {
         viewModel.myAllJourney.observe(viewLifecycleOwner) {
             viewModel.getMyAllPlace()
         }
-
         viewModel.myAllPlace.observe(viewLifecycleOwner) {
 
             setUpClusterer()

@@ -1,7 +1,6 @@
 package com.jessy.foodmap.home
 
 import android.os.Bundle
-import android.os.Handler
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,7 +13,7 @@ import com.jessy.foodmap.MainActivity
 import com.jessy.foodmap.NavigationDirections
 import com.jessy.foodmap.databinding.FragmentHomeBinding
 
-class homeFragment : Fragment() {
+class HomeFragment : Fragment() {
     private val viewModel: HomeViewModel by lazy {
         ViewModelProvider(this).get(HomeViewModel::class.java)
     }
@@ -29,12 +28,9 @@ class homeFragment : Fragment() {
 
         val binding = FragmentHomeBinding.inflate(inflater, container, false)
         var manager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
-        binding.homeRecyclerView.layoutManager = manager  //佈局管理
+        binding.homeRecyclerView.layoutManager = manager
         manager.setAutoMeasureEnabled(true)
         binding.homeRecyclerView.setHasFixedSize(true)
-//        binding.homeRecyclerView.setNestedScrollingEnabled(false)
-//        val decoration = SpacesItemDecoration(6)
-//        binding.homeRecyclerView.addItemDecoration(decoration)
         binding.homeRecyclerView.adapter = HomeAdapter(HomeAdapter.OnClickListener {
             viewModel.navigateToDetail(it)
         })

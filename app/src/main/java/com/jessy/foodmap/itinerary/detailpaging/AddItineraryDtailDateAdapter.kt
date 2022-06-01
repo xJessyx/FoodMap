@@ -14,6 +14,7 @@ import com.jessy.foodmap.itinerary.ITHelperInterface
 import java.util.*
 
 class AddItineraryDtailDateAdapter(
+
     val onClickListener: AddItineraryDtailDateAdapter.OnClickListener,
     val viewModel: AddItineraryDtailDateViewModel,
 ) :
@@ -30,7 +31,6 @@ class AddItineraryDtailDateAdapter(
             return oldItem == newItem
         }
     }
-
 
     class AddItineraryDtailDateViewHolder private constructor(var binding: ItemAddItineraryDetailDateBinding) :
         RecyclerView.ViewHolder(binding.root) {
@@ -59,7 +59,6 @@ class AddItineraryDtailDateAdapter(
                 3 -> binding.itineraryDetailDateImgTransportation.setImageResource(R.drawable.bicycle)
                 4 -> binding.itineraryDetailDateImgTransportation.setImageResource(R.drawable.train)
             }
-
 
         }
 
@@ -112,9 +111,7 @@ class AddItineraryDtailDateAdapter(
 
             holder.binding.itineraryDetailDateImgTransportation.visibility = View.VISIBLE
             holder.binding.itineraryDetailDateTvTrafficTime.visibility = View.VISIBLE
-
         }
-
 
     }
 
@@ -126,23 +123,17 @@ class AddItineraryDtailDateAdapter(
 
         @JvmStatic
         fun StampToTime(time: Long, locale: Locale): String {
-            // 進來的time以秒為單位，Date輸入為毫秒為單位，要注意
-
             val simpleDateFormat = SimpleDateFormat("HH:mm", locale)
-
             return simpleDateFormat.format(Date(time))
         }
 
 
         @JvmStatic
         fun StampToTimeText(time: Long, locale: Locale): String {
-            // 進來的time以秒為單位，Date輸入為毫秒為單位，要注意
-
             val simpleDateFormat = SimpleDateFormat("HH 時 mm 分", locale)
 
             return simpleDateFormat.format(Date(time))
         }
-
 
     }
 
@@ -150,10 +141,8 @@ class AddItineraryDtailDateAdapter(
     override fun onItemDissmiss(position: Int) {
         val list = currentList.toMutableList()
         viewModel.delectFireBaseItem(list, position)
-
         list.removeAt(position)
         submitList(list)
-//        notifyItemRemoved(position)
     }
 
     override fun onItemMove(fromPosition: Int, toPosition: Int) {
@@ -162,6 +151,5 @@ class AddItineraryDtailDateAdapter(
         submitList(list)
         viewModel.updateMoveList(list, fromPosition, toPosition)
 
-//        notifyItemMoved(fromPosition,toPosition)
     }
 }

@@ -16,17 +16,12 @@ class LoginViewModel : ViewModel() {
     var userName: String = ""
     var email: String = ""
     var image: String = ""
-    val _addUser = MutableLiveData<User>()
+    private val _addUser = MutableLiveData<User>()
     val addUser: LiveData<User>
         get() = _addUser
 
     var userDocumentId = db.collection("users").document().id
     var getUser = mutableListOf<User>()
-//
-//    val _newUser = MutableLiveData<String>()
-//    val newUser: LiveData<String>
-//        get() = _newUser
-
     val _getUserLiveData = MutableLiveData<List<User>>()
     val getUserLiveData: LiveData<List<User>>
         get() = _getUserLiveData
@@ -35,9 +30,7 @@ class LoginViewModel : ViewModel() {
     val navigateToHome: LiveData<Boolean>
         get() = _navigateToHome
 
-
-
-    fun addUser() {
+    private fun addUser() {
         Log.v("Data1", "data")
         val data = User(
             age = 18,
@@ -47,12 +40,8 @@ class LoginViewModel : ViewModel() {
             level = 1,
             name = userName
         )
-        Log.v("Data2", "$data")
-
         _addUser.value = data
         UserManager.user = data
-        Log.v("_addUser.value","${_addUser.value}")
-        Log.v("2 add ", "${UserManager.user}")
     }
 
     fun addFireBaseUser(user: User) {
@@ -61,7 +50,6 @@ class LoginViewModel : ViewModel() {
         db.collection("users").document(userDocumentId)
             .set(userObject)
             .addOnSuccessListener {
-                Log.d(ContentValues.TAG, "DocumentSnapshot successfull")
                 _navigateToHome.value = true
             }
             .addOnFailureListener { e ->
@@ -80,26 +68,19 @@ class LoginViewModel : ViewModel() {
                     val data = document.toObject(User::class.java)
                     getUser.add(data)
                     UserManager.user = data
-                    Log.v("user get", "${UserManager.user}")
                 }
                 if (result.isEmpty()) {
-//                    _newUser.value = "true"
                     addUser()
 
-                    Log.v("result.isEmpty()", "${result.isEmpty()}")
                 } else {
                     _getUserLiveData.value = getUser
                     _navigateToHome.value = true
-                    Log.v("getUser", "${getUser}")
                 }
 
             }
             .addOnFailureListener { exception ->
                 Log.d(ContentValues.TAG, "Error getting documents: ", exception)
-
             }
-
-
     }
 
     fun onHomeNavigated() {

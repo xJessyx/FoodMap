@@ -20,14 +20,13 @@ class CollectPagingFragment : Fragment() {
     private val viewModel: HomeViewModel by lazy {
         ViewModelProvider(this).get(HomeViewModel::class.java)
     }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View? {
         val binding = FragmentCollectPagingBinding.inflate(inflater, container, false)
         binding.lifecycleOwner = viewLifecycleOwner
-
-
         var manager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
         binding.collectRecyclerView.layoutManager = manager  //佈局管理
         manager.setAutoMeasureEnabled(true)
@@ -39,8 +38,8 @@ class CollectPagingFragment : Fragment() {
 
         viewModel.getFireBaseArticleCollect()
 
-        viewModel.getAllArticlesCollectLiveData.observe(viewLifecycleOwner){
-            Log.v("it","$it")
+        viewModel.getAllArticlesCollectLiveData.observe(viewLifecycleOwner) {
+
             (binding.collectRecyclerView.adapter as HomeAdapter).submitList(it)
 
         }

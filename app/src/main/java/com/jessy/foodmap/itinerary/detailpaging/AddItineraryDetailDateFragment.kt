@@ -3,7 +3,6 @@ package com.jessy.foodmap.itinerary.detailpaging
 import android.annotation.SuppressLint
 import android.content.ContentValues
 import android.content.pm.PackageManager
-import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -67,12 +66,10 @@ class AddItineraryDetailDateFragment(position: Int, journey: Journey) : Fragment
                 } else {
                     calculateTravelTime(it)
                     Log.v("Place 有地點", "$it")
-
                 }
             }
 
         }
-
 
         val today = LocalDate.now()
         val fmt = DateTimeFormatter.ofPattern("yyyy-MM-dd")
@@ -132,12 +129,10 @@ class AddItineraryDetailDateFragment(position: Int, journey: Journey) : Fragment
         var endCount = places.size - 1
 
         for (i in places.indices) {
-
-            Log.v("calculateTravelTime", "index: $i")
-
             if (i < places.size - 1) {
                 fromFKIP = places[i].latitude.toString() + "," + places[i].longitude.toString()
-                toMonas = places[i + 1].latitude.toString() + "," + places[i + 1].longitude.toString()
+                toMonas =
+                    places[i + 1].latitude.toString() + "," + places[i + 1].longitude.toString()
 
                 val mode = when (places[i + 1].transportation) {
                     1 -> "walking"
@@ -155,7 +150,7 @@ class AddItineraryDetailDateFragment(position: Int, journey: Journey) : Fragment
                     )
                 val key = info.metaData[resources.getString(R.string.map_api_key_name)].toString()
                 Places.initialize(requireContext(), key)
-                    Log.v("key","$key")
+                Log.v("key", "$key")
 
                 val apiServices = RetrofitClient.apiServices(this)
                 apiServices.getDirection(mode as String, fromFKIP, toMonas, key)
@@ -163,53 +158,41 @@ class AddItineraryDetailDateFragment(position: Int, journey: Journey) : Fragment
                         @SuppressLint("NotifyDataSetChanged")
                         override fun onResponse(
                             call: Call<DirectionResponses>,
-                            response: Response<DirectionResponses>
+                            response: Response<DirectionResponses>,
                         ) {
-                            Log.v("response","$response")
 
-                            Log.v("fromFKIP toMonas","${fromFKIP}, $toMonas")
-                            Log.v("response ","${response.body()?.routes}")
+                            val legs = response.body()?.routes?.get(0)?.legs
+                            Log.v("legs", "$legs")
+                            var totalDuration: Long = 0
+                            if (response.body()!!.routes?.size != 0) {
+                                if (legs != null) {
+                                    for (leg in legs) {
+                                        Log.v("legs for", "$legs")
 
-                            Log.v("response size","${response.body()?.routes?.size}")
-                                val legs = response.body()?.routes?.get(0)?.legs
-
-                                Log.v("legs","$legs")
-                                var totalDuration: Long = 0
-//
-                                if (response.body()!!.routes?.size != 0) {
-                                    if (legs != null) {
-                                        for (leg in legs) {
-                                            Log.v("legs for","$legs")
-
-                                            totalDuration += (leg?.duration?.value ?: 0)
-                                        }
+                                        totalDuration += (leg?.duration?.value ?: 0)
                                     }
                                 }
-                                else {
-//                                totalDuration = legs.get(0)!!.duration!!.value!!.toLong()
-                                    totalDuration = (legs?.get(0)?.duration?.value ?: 0) as Long
+                            } else {
+                                totalDuration = (legs?.get(0)?.duration?.value ?: 0) as Long
 
-                                    Log.v("legs else","$legs")
+                                Log.v("legs else", "$legs")
 
-                                }
+                            }
 
-                                places[i].trafficTime = totalDuration * 1000
-                                places[i + 1].startTime =
-                                    28800000 + totalDuration * 1000 + places[i].dwellTime!!
-                                //   AddItineraryDtailDateViewModel._placeLiveData.value =AddItineraryDtailDateViewModel.places
+                            places[i].trafficTime = totalDuration * 1000
+                            places[i + 1].startTime =
+                                28800000 + totalDuration * 1000 + places[i].dwellTime!!
 
+                            updatePlaceTimes(
+                                placeId = places[i].id,
+                                startTime = places[i].startTime ?: 1,
+                                trafficTime = places[i].trafficTime ?: 0
+                            )
 
-                                Log.e("TT", "updatePlaceTimes, index=$i")
-                                updatePlaceTimes(
-                                    placeId = places[i].id,
-                                    startTime = places[i].startTime ?: 1,
-                                    trafficTime = places[i].trafficTime ?: 0
-                                )
-
-                                endCount--
-                                if (endCount == 0) {
-                                    onTravelTimeCalculated(places)
-                                }
+                            endCount--
+                            if (endCount == 0) {
+                                onTravelTimeCalculated(places)
+                            }
 
                         }
 
@@ -247,14 +230,9 @@ class AddItineraryDetailDateFragment(position: Int, journey: Journey) : Fragment
             .addOnSuccessListener {
                 Log.d(ContentValues.TAG, "success")
                 Log.v("trafficTime", "${trafficTime}")
-
-                Log.e("TT", "placeId=$placeId success")
-
             }
             .addOnFailureListener {
                 Log.w(ContentValues.TAG, "Error adding document")
-
-                Log.e("TT", "placeId=$placeId fail")
             }
 
         db.collection("journeys").document(viewModel.journeyItemId)

@@ -15,7 +15,7 @@ import java.time.temporal.ChronoUnit
 
 class AddItineraryViewModel : ViewModel() {
 
-    val _addItinerary = MutableLiveData<Journey>()
+    private val _addItinerary = MutableLiveData<Journey>()
     val addItinerary: LiveData<Journey>
         get() = _addItinerary
     val db = Firebase.firestore

@@ -1,7 +1,6 @@
 package com.jessy.foodmap.home.addArticles
 
 import android.app.Activity
-import android.content.ContentResolver
 import android.content.ContentValues.TAG
 import android.content.Intent
 import android.content.pm.PackageManager
@@ -47,7 +46,6 @@ class AddArticleFragment : Fragment() {
     private lateinit var placesClient: PlacesClient
     lateinit var autocompleteSessionToken: AutocompleteSessionToken
    val REQUEST_EXTERNAL_STORAGE = 1
-    //private var imgPath: String = ""
     private var riversRef: StorageReference? = null
     private var mStorageRef: StorageReference? = null
     var addArticle_upload_progress: ProgressBar? =null
@@ -65,16 +63,13 @@ class AddArticleFragment : Fragment() {
         addArticle_upload_progress = binding.addArticleUploadProgress
         pick_img = binding.addArticleImg
 
-        // Initialize the AutocompleteSupportFragment.
         val autocompleteFragment =
             childFragmentManager.findFragmentById(R.id.addArticle_autocomplete)
                     as AutocompleteSupportFragment
         initData()
         initPlaces()
-        // Specify the types of place data to return.
         autocompleteFragment.setPlaceFields(listOf(Place.Field.ID, Place.Field.NAME, Place.Field.LAT_LNG))
 
-        // Set up a PlaceSelectionListener to handle the response.
         autocompleteFragment.setOnPlaceSelectedListener(object : PlaceSelectionListener {
             override fun onPlaceSelected(place: Place) {
                 Log.i(TAG, "Place: ${place.name}, ${place.id}")
@@ -92,7 +87,6 @@ class AddArticleFragment : Fragment() {
 
         binding.addArticleImg.setOnClickListener {
             checkPermission()
-
         }
 
         binding.addArticleBtn.setOnClickListener {
@@ -124,8 +118,6 @@ class AddArticleFragment : Fragment() {
 
         val key = info.metaData[resources.getString(R.string.map_api_key_name)].toString()
         Places.initialize(requireContext(), key)
-
-//        Places.initialize(requireActivity().getApplicationContext(), BuildConfig.MAPS_API_KEY)
         placesClient = Places.createClient(activity as Activity)
         autocompleteSessionToken = AutocompleteSessionToken.newInstance()
     }
@@ -161,13 +153,12 @@ class AddArticleFragment : Fragment() {
 
             }
         }
+        uploadTask.addOnFailureListener { exception ->
+            Log.v("exception.message fail","${exception.message}")
 
-        uploadTask?.addOnFailureListener { exception ->
-                Log.v("exception.message fail","${exception.message}")
-
-        }?.addOnSuccessListener {
+        }.addOnSuccessListener {
             Log.v("upload_successe","upload_success")
-        }?.addOnProgressListener { taskSnapshot ->
+        }.addOnProgressListener { taskSnapshot ->
             val progress = (100.0 * taskSnapshot.bytesTransferred / taskSnapshot.totalByteCount).toInt()
             addArticle_upload_progress!!.progress = progress
             if (progress >= 100) {

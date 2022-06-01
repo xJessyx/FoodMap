@@ -11,7 +11,6 @@ class InvitePagingAdapter (val journeyId:String, fragmentManager: FragmentManage
     FragmentStateAdapter(fragmentManager, lifecycle) {
 
     var fragments: ArrayList<Fragment> = arrayListOf(
-        // TODO set argument
 
         WaitingJoinFragment.newInstance(journeyId),
         JoinFragment.newInstance(journeyId)
@@ -22,7 +21,6 @@ class InvitePagingAdapter (val journeyId:String, fragmentManager: FragmentManage
     }
 
     override fun createFragment( position: Int,): Fragment {
-    //return fragments[position]
 
         return  fragments[position]
     }

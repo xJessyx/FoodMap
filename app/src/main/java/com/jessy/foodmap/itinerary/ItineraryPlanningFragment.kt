@@ -23,7 +23,6 @@ class ItineraryPlanningFragment : Fragment() {
         (activity as MainActivity).hideToolBar()
 
         val binding = FragmentItineraryPlanningBinding.inflate(inflater, container, false)
-
         val pageAdapter = ItinerayPagingAdapter(requireActivity().supportFragmentManager, lifecycle)
         binding.itineraryPlanningViewPager2.adapter = pageAdapter
         binding.lifecycleOwner = viewLifecycleOwner

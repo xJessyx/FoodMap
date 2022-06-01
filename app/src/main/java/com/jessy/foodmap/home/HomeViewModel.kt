@@ -18,21 +18,17 @@ class HomeViewModel : ViewModel(){
 
     val db = Firebase.firestore
 
-
-    // Handle navigation to detail
     private val _navigateToDetail = MutableLiveData<Article>()
-
     val navigateToDetail: LiveData<Article>
         get() = _navigateToDetail
-  //  var articleId = db.collection("articles").document().id
 
-    var getAllArticles = mutableListOf<Article>()
-    val _getAllArticlesLiveData = MutableLiveData<List<Article>>()
+    private var getAllArticles = mutableListOf<Article>()
+    private val _getAllArticlesLiveData = MutableLiveData<List<Article>>()
     val getAllArticlesLiveData: LiveData<List<Article>>
         get() = _getAllArticlesLiveData
 
-    var getAllArticlesCollect = mutableListOf<Article>()
-    val _getAllArticlesCollectLiveData = MutableLiveData<List<Article>>()
+    private var getAllArticlesCollect = mutableListOf<Article>()
+    private val _getAllArticlesCollectLiveData = MutableLiveData<List<Article>>()
     val getAllArticlesCollectLiveData: LiveData<List<Article>>
         get() = _getAllArticlesCollectLiveData
 
@@ -67,7 +63,6 @@ class HomeViewModel : ViewModel(){
     fun getFireBaseArticleCollect(){
         db.collection("articles")
             .whereArrayContains("favoriteUsers", user!!.id)
-           // .orderBy("createdTime", Query.Direction.DESCENDING)
             .get()
             .addOnSuccessListener { result ->
                 for (document in result) {

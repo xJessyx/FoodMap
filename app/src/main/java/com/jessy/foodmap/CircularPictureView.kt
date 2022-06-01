@@ -7,6 +7,7 @@ import android.graphics.drawable.Drawable
 import android.util.AttributeSet
 import android.widget.ImageView
 import android.annotation.SuppressLint;
+
 @SuppressLint("AppCompatCustomView")
 
 class CircularPictureView : ImageView {
@@ -16,7 +17,9 @@ class CircularPictureView : ImageView {
 
     constructor(context: Context?) : this(context, null)
     constructor(context: Context?, attrs: AttributeSet?) : this(context, attrs, 0)
-    constructor(context: Context?, attrs: AttributeSet?, defStyleAttr: Int) : super(context, attrs, defStyleAttr)
+    constructor(context: Context?, attrs: AttributeSet?, defStyleAttr: Int) : super(context,
+        attrs,
+        defStyleAttr)
 
     override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec)
@@ -34,7 +37,8 @@ class CircularPictureView : ImageView {
                 Shader.TileMode.CLAMP,
                 Shader.TileMode.CLAMP)
         }
-        mScale = bitmap?.height?.let { Math.min(it, bitmap?.width) }?.let { mRadius.times(2.0).div(it).toFloat() }!!
+        mScale = bitmap?.height?.let { Math.min(it, bitmap?.width) }
+            ?.let { mRadius.times(2.0).div(it).toFloat() }!!
         val matrix = Matrix()
         matrix.setScale(mScale, mScale)
         bitmapShader!!.setLocalMatrix(matrix)
@@ -42,13 +46,6 @@ class CircularPictureView : ImageView {
         paint.shader = bitmapShader
         //话圆形 质地昂中心点坐标 半径 画笔
         canvas?.drawCircle(mRadius.toFloat(), mRadius.toFloat(), mRadius.toFloat(), paint)
-        /*
-        *
-        *  if (canvas != null) {
-            canvas.drawCircle(mRadius.toFloat(), mRadius.toFloat(), mRadius.toFloat(),paint)
-        }
-        * */
-
     }
 
     /**
@@ -60,7 +57,13 @@ class CircularPictureView : ImageView {
         }
         val width = drawable?.intrinsicWidth
         val height = drawable?.intrinsicHeight
-        val bitmap = width?.let { height?.let { it1 -> Bitmap.createBitmap(it, it1, Bitmap.Config.ARGB_8888) } }
+        val bitmap = width?.let {
+            height?.let { it1 ->
+                Bitmap.createBitmap(it,
+                    it1,
+                    Bitmap.Config.ARGB_8888)
+            }
+        }
         val canvas = bitmap?.let { Canvas(it) }
         width?.let { height?.let { it1 -> drawable.setBounds(0, 0, it, it1) } }
         if (canvas != null) {

@@ -15,16 +15,14 @@ import com.jessy.foodmap.login.UserManager
 class JoinViewModel : ViewModel() {
 
     val db = Firebase.firestore
-
     var getWaitJoinInviteList = mutableListOf<Invite>()
-
-    val _getWaitJoinInvite = MutableLiveData<List<Invite>>()
+    private val _getWaitJoinInvite = MutableLiveData<List<Invite>>()
     val getWaitJoinInvite: LiveData<List<Invite>>
         get() = _getWaitJoinInvite
 
-    var getJoinInviteList = mutableListOf<Invite>()
+    private var getJoinInviteList = mutableListOf<Invite>()
 
-    val _getJoinInvite = MutableLiveData<List<Invite>>()
+    private val _getJoinInvite = MutableLiveData<List<Invite>>()
     val getJoinInvite: LiveData<List<Invite>>
         get() = _getJoinInvite
 

@@ -11,7 +11,7 @@
         android:label="LoginFragment" />
     <fragment
         android:id="@+id/homeFragment"
-        android:name="com.jessy.foodmap.home.homeFragment"
+        android:name="com.jessy.foodmap.home.HomeFragment"
         android:label="fragment_home"
         tools:layout="@layout/fragment_home" >
 

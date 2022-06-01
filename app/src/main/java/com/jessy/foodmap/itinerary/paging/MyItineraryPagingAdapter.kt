@@ -26,17 +26,7 @@ class MyItineraryPagingAdapter (private val onClickListener: OnClickListener) :
         fun bind(journey: Journey, coEditUsers: List<User>) {
             binding.journey = journey
             binding.executePendingBindings()
-//            binding.myitineraryCoeditImage.setOnClickListener {
-//                it.findNavController()
-//                    .navigate(NavigationDirections.myItineraryPagingFragmentInviteFragment(journey))
-//            }
 
-//            binding.myitineraryCoEditIamge.setOnClickListener {
-//                it.findNavController()
-//                    .navigate(NavigationDirections.myItineraryPagingFragmentInviteFragment(journey))
-//            }
-
-         // for ((index, userId) in journey.coEditUser.withIndex()){
                 for (i in 0..journey.coEditUser.size){
 
                     if (i == journey.coEditUser.size){
@@ -47,10 +37,7 @@ class MyItineraryPagingAdapter (private val onClickListener: OnClickListener) :
                         )
                        bindingAvatar.imageAvatar.setImageResource(R.drawable.add7)
 
-//                      val addUserImage = "https://cdn-icons-png.flaticon.com/512/3336/3336302.png"
-//                        bindingAvatar.imageUrl = addUserImage
                        binding.myitineraryLinearLayout.addView(bindingAvatar.root)
-
 
                         bindingAvatar.imageAvatar.setOnClickListener {
                             it.findNavController()
@@ -59,23 +46,15 @@ class MyItineraryPagingAdapter (private val onClickListener: OnClickListener) :
 
                     }
                     else{
-                       // val user = coEditUsers.find { it.id == userId }
                       val user = coEditUsers.find {
                           it.id ==  journey.coEditUser[i]
                       }
-                        Log.v("user_coedit","$user")
-//                val itemLayout = LayoutInflater.from(binding.root.context).inflate(
-//                    R.layout.item_avatar,
-//                    binding.myitineraryLinearLayout,
-//                    false
-//                )
                         val bindingAvatar = ItemAvatarBinding.inflate(
                             LayoutInflater.from(binding.root.context),
                             binding.myitineraryLinearLayout,
                             false
                         )
                         bindingAvatar.imageUrl = user?.image
-                        Log.v("user?.image","${user?.image}")
                         binding.myitineraryLinearLayout.addView(bindingAvatar.root)
                     }
             }
@@ -106,8 +85,6 @@ class MyItineraryPagingAdapter (private val onClickListener: OnClickListener) :
 
         val item = getItem(position)
 
-
-
         if (item != null) {
             holder.itemView.setOnClickListener {
                 onClickListener.onClick(item)
@@ -122,7 +99,6 @@ class MyItineraryPagingAdapter (private val onClickListener: OnClickListener) :
 
         }
     }
-
 
     class DiffCallback : DiffUtil.ItemCallback<Journey>() {
 

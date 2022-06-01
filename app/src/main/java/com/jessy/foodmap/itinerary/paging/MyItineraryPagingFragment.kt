@@ -3,7 +3,6 @@ package com.jessy.foodmap.itinerary.paging
 import android.app.Activity
 import android.app.AlertDialog
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -13,8 +12,8 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.jessy.foodmap.NavigationDirections
+import com.jessy.foodmap.R
 import com.jessy.foodmap.databinding.FragmentMyItineraryPagingBinding
-import com.jessy.foodmap.login.UserManager
 import com.jessy.foodmap.itinerary.paging.MyItineraryPagingAdapter as MyItineraryPagingAdapter1
 
 class MyItineraryPagingFragment : Fragment() {
@@ -39,7 +38,6 @@ class MyItineraryPagingFragment : Fragment() {
 
         binding.viewModel = viewModel
 
-//        viewModel.getFireBaseJourney()
         viewModel.getAllJourneyLiveData.observe(viewLifecycleOwner) {
             it?.let {
                 // query all user's info
@@ -51,7 +49,6 @@ class MyItineraryPagingFragment : Fragment() {
                     }
                 }
                 viewModel.queryAllUsers(allCoworkUsers)
-
             }
 
         }
@@ -63,7 +60,7 @@ class MyItineraryPagingFragment : Fragment() {
                 viewModel.getAllJourneyLiveData.value?.let {
                     adapter.submitList(it)
                     adapter.notifyDataSetChanged()
-                    viewModel._loadStatus.value =false
+                    viewModel._loadStatus.value = false
 
                 }
 
@@ -71,7 +68,6 @@ class MyItineraryPagingFragment : Fragment() {
         }
 
         viewModel.getFireBaseCoEditJourney()
-
         viewModel.checkInviteItem()
 
         viewModel.checkInvite.observe(viewLifecycleOwner) {
@@ -92,11 +88,11 @@ class MyItineraryPagingFragment : Fragment() {
                 }
             })
 
-        viewModel.loadStatus.observe(viewLifecycleOwner){
-            if (it == true){
+        viewModel.loadStatus.observe(viewLifecycleOwner) {
+            if (it == true) {
                 findNavController().navigate(NavigationDirections.myItineraryPagingFragmentProgressBarFragment())
 
-            }else{
+            } else {
                 findNavController().popBackStack()
             }
 
@@ -114,20 +110,20 @@ class MyItineraryPagingFragment : Fragment() {
 
         ) {
         AlertDialog.Builder(activity as Activity)
-            .setTitle("旅程邀請")
+            .setTitle(R.string.journey_invitation)
             .setMessage("$receiveName 邀請是否要加入【$journeyName】 行程")
-            .setPositiveButton("加入") { _, _ ->
-                Toast.makeText(activity as Activity, "已加入行程", Toast.LENGTH_SHORT).show()
+            .setPositiveButton(R.string.join) { _, _ ->
+                Toast.makeText(activity as Activity, R.string.trip_added, Toast.LENGTH_SHORT).show()
                 viewModel.updateInviteStatusTrue(id)
                 viewModel.updateCoEdit(journeyId)
             }
-            .setNeutralButton("拒絕") { _, _ ->
-                Toast.makeText(activity as Activity, "已拒絕行程", Toast.LENGTH_SHORT).show()
+            .setNeutralButton(R.string.reject) { _, _ ->
+                Toast.makeText(activity as Activity, R.string.trip_rejected, Toast.LENGTH_SHORT)
+                    .show()
                 viewModel.updateInviteStatusFalse(id)
-                //     viewModel.updateSenderData(id,senderId,senderImage,senderName)
+
             }
             .show()
     }
-
 
 }

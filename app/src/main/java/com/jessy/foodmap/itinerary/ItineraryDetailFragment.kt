@@ -54,7 +54,6 @@ class ItineraryDetailFragment : BottomSheetDialogFragment() {
         binding.itineraryDeatailViewPager2.adapter = pageAdapter
         TabLayoutMediator(binding.itineraryDeatailTabs,
             binding.itineraryDeatailViewPager2) { tab, position ->
-
             tab.text = "第 ${position + 1} 天"
         }.attach()
 
@@ -79,7 +78,6 @@ class ItineraryDetailFragment : BottomSheetDialogFragment() {
 
                 binding.itineraryDetailSwitch.setOnClickListener {
                     if (binding.itineraryDetailSwitch.isChecked) {
-//                EndSwitch.setBackgroundColor(Color.DKGRAY)
                         binding.itineraryDetailSwitch.setTextColor(Color.WHITE)
                         db.collection("journeys").document(journeyArg.id)
                             .update("share", true)

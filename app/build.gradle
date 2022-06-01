@@ -19,7 +19,7 @@ android {
         applicationId "com.jessy.foodmap"
         minSdk 30
         targetSdk 32
-        versionCode 8
+        versionCode 9
         versionName "2.0.7"
 
 

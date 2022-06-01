@@ -5,4 +5,22 @@
     <string name="title_activity_maps">MapsActivity</string>
     <string name="map_api_key_name">com.google.android.geo.API_KEY</string>
     <string name="base_url">https://maps.googleapis.com</string>
+    <string name="image_error">讀取圖片失敗</string>
+    <string name="select_image">請選取照片</string>
+    <string name="no_select_image">尚未選擇圖片</string>
+    <string name="edit_email">請輸入要邀請的email</string>
+    <string name="yes">確定</string>
+    <string name="no_such_person">查無此人</string>
+    <string name="journey_invitation">旅程邀請</string>
+    <string name="join">加入</string>
+    <string name="trip_added">已加入行程</string>
+    <string name="reject">拒絕</string>
+    <string name="trip_rejected">已拒絕行程</string>
+
+
+
+
+
+
+
 </resources>

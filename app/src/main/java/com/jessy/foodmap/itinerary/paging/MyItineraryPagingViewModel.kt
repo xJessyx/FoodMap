@@ -17,8 +17,6 @@ import com.jessy.foodmap.login.UserManager.Companion.user
 
 class MyItineraryPagingViewModel : ViewModel() {
 
-    //    val ownerImage=MutableLiveData<String>()
-    //  val coeditImage:String? =null
     val db = Firebase.firestore
     var getAllJourney = mutableListOf<Journey>()
 

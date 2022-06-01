@@ -27,8 +27,6 @@ class WaitingJoinFragment : Fragment() {
         savedInstanceState: Bundle?,
     ): View? {
         val journeyId = requireArguments().getString("journeyId") ?: ""
-        Log.v("journeyIdArg join ", "$journeyId")
-
         val binding = FragmentWaitingJoinBinding.inflate(inflater, container, false)
         binding.lifecycleOwner = this
         binding.viewModel = viewModel
@@ -37,11 +35,8 @@ class WaitingJoinFragment : Fragment() {
         binding.waitingJoinRecyclerView.adapter = adapter
         binding.waitingJoinRecyclerView.addItemDecoration(DividerItemDecoration(activity as Activity,
             DividerItemDecoration.VERTICAL))
-//        binding.waitingJoinRecyclerView.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
-
         viewModel.getWaitJoinInvite.observe(viewLifecycleOwner) {
             it?.let {
-
                 adapter.submitList(it)
                 adapter.notifyDataSetChanged()
             }
