@@ -22,11 +22,11 @@ class LoginViewModel : ViewModel() {
 
     var userDocumentId = db.collection("users").document().id
     var getUser = mutableListOf<User>()
-    val _getUserLiveData = MutableLiveData<List<User>>()
+    private val _getUserLiveData = MutableLiveData<List<User>>()
     val getUserLiveData: LiveData<List<User>>
         get() = _getUserLiveData
 
-    val _navigateToHome = MutableLiveData<Boolean>()
+    private val _navigateToHome = MutableLiveData<Boolean>()
     val navigateToHome: LiveData<Boolean>
         get() = _navigateToHome
 

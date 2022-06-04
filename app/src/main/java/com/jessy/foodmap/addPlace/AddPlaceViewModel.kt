@@ -16,11 +16,11 @@ import com.jessy.foodmap.data.Place
 class AddPlaceViewModel : ViewModel() {
     val db = Firebase.firestore
 
-    val _addPlace = MutableLiveData<Place>()
-    val addPlace: LiveData<Place>
+    private val _addPlace = MutableLiveData<Place>()
+    private val addPlace: LiveData<Place>
         get() = _addPlace
 
-    val _addAllJourney = MutableLiveData<List<Journey>>()
+    private val _addAllJourney = MutableLiveData<List<Journey>>()
     val addAllJourney: LiveData<List<Journey>>
         get() = _addAllJourney
 

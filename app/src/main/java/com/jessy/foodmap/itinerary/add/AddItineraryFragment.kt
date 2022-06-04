@@ -38,7 +38,7 @@ class AddItineraryFragment : BottomSheetDialogFragment() {
     private var riversRef: StorageReference? = null
     private var mStorageRef: StorageReference? = null
     private var addArticle_upload_progress: ProgressBar? = null
-    var pick_img: ImageButton? = null
+    private var pick_img: ImageButton? = null
     private val viewModel: AddItineraryViewModel by lazy {
         ViewModelProvider(this)[AddItineraryViewModel::class.java]
     }

@@ -45,9 +45,9 @@ class AddArticleFragment : Fragment() {
     }
     private lateinit var placesClient: PlacesClient
     lateinit var autocompleteSessionToken: AutocompleteSessionToken
-   val REQUEST_EXTERNAL_STORAGE = 1
-    private var riversRef: StorageReference? = null
-    private var mStorageRef: StorageReference? = null
+    private val REQUEST_EXTERNAL_STORAGE = 1
+    var riversRef: StorageReference? = null
+    var mStorageRef: StorageReference? = null
     var addArticle_upload_progress: ProgressBar? =null
     var pick_img: ImageButton ?=null
 

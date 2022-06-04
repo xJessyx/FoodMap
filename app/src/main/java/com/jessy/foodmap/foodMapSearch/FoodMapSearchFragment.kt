@@ -49,7 +49,7 @@ class FoodMapSearchFragment : Fragment(), OnMapReadyCallback,
     ActivityCompat.OnRequestPermissionsResultCallback {
 
     private val viewModel: FoodMapSearchViewModel by lazy {
-        ViewModelProvider(this).get(FoodMapSearchViewModel::class.java)
+        ViewModelProvider(this)[FoodMapSearchViewModel::class.java]
     }
 
 

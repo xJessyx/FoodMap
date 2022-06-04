@@ -19,7 +19,7 @@ class InviteViewModel(journeyArg: Journey) : ViewModel() {
     var inviteId = db.collection("invitations").document().id
     private val shareJourney = journeyArg
 
-    val _getSenderUser = MutableLiveData<List<User>>()
+    private val _getSenderUser = MutableLiveData<List<User>>()
     val getSenderUser: LiveData<List<User>>
         get() = _getSenderUser
 

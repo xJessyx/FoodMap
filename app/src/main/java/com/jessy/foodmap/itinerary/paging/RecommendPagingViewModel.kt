@@ -15,7 +15,7 @@ class RecommendPagingViewModel : ViewModel() {
     val db = Firebase.firestore
     var getAllJourney = mutableListOf<Journey>()
 
-    val _getAllJourneyLiveData = MutableLiveData<List<Journey>>()
+    private val _getAllJourneyLiveData = MutableLiveData<List<Journey>>()
     val getAllJourneyLiveData: LiveData<List<Journey>>
         get() = _getAllJourneyLiveData
 

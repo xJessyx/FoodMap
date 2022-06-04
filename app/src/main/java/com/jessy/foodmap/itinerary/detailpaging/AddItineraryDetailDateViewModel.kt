@@ -11,7 +11,7 @@ import com.google.firebase.ktx.Firebase
 import com.jessy.foodmap.data.Journey
 import com.jessy.foodmap.data.Place
 
-class AddItineraryDtailDateViewModel(position: Int, journeyArg: Journey) : ViewModel() {
+class AddItineraryDetailDateViewModel(position: Int, journeyArg: Journey) : ViewModel() {
 
     val db = Firebase.firestore
 
@@ -20,6 +20,7 @@ class AddItineraryDtailDateViewModel(position: Int, journeyArg: Journey) : ViewM
         get() = _places
     var position = position
     var journeyItemId = journeyArg.id
+
 
 
     fun getPlaces() {

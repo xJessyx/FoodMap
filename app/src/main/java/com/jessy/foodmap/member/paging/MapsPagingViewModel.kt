@@ -21,7 +21,6 @@ class MapsPagingViewModel(private val repository: PublisherRepository) : ViewMod
     val status: LiveData<LoadApiStatus>
         get() = _status
 
-
     var myAllJourney = MutableLiveData<List<Journey>>()
     var myAllPlace = MutableLiveData<List<Place>>()
 

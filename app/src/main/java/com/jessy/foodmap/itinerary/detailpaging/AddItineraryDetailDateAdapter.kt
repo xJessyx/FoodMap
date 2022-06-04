@@ -13,13 +13,13 @@ import com.jessy.foodmap.databinding.ItemAddItineraryDetailDateBinding
 import com.jessy.foodmap.itinerary.ITHelperInterface
 import java.util.*
 
-class AddItineraryDtailDateAdapter(
+class AddItineraryDetailDateAdapter(
 
-    val onClickListener: AddItineraryDtailDateAdapter.OnClickListener,
-    val viewModel: AddItineraryDtailDateViewModel,
+    val onClickListener: AddItineraryDetailDateAdapter.OnClickListener,
+    val viewModel: AddItineraryDetailDateViewModel,
 ) :
-    ListAdapter<Place, AddItineraryDtailDateAdapter.AddItineraryDtailDateViewHolder>(
-        AddItineraryDtailDateAdapter.DiffCallback()), ITHelperInterface {
+    ListAdapter<Place, AddItineraryDetailDateAdapter.AddItineraryDtailDateViewHolder>(
+        AddItineraryDetailDateAdapter.DiffCallback()), ITHelperInterface {
 
     class DiffCallback : DiffUtil.ItemCallback<Place>() {
 
@@ -35,7 +35,7 @@ class AddItineraryDtailDateAdapter(
     class AddItineraryDtailDateViewHolder private constructor(var binding: ItemAddItineraryDetailDateBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(place: Place, viewModel: AddItineraryDtailDateViewModel) {
+        fun bind(place: Place, viewModel: AddItineraryDetailDateViewModel) {
 
             binding.itineraryDetailDateTvStartTime.setText(place.startTime?.let {
                 TimeUtil.StampToTime(it, Locale.TAIWAN)

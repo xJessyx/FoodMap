@@ -42,8 +42,8 @@ class AddItineraryDetailDateFragment(position: Int, journey: Journey) : Fragment
     val index = position
     val journeyArg = journey
     val db = Firebase.firestore
-    val viewModel = AddItineraryDtailDateViewModel(index, journeyArg)
-    val adapter = AddItineraryDtailDateAdapter(AddItineraryDtailDateAdapter.OnClickListener {
+    val viewModel = AddItineraryDetailDateViewModel(index, journeyArg)
+    val adapter = AddItineraryDetailDateAdapter(AddItineraryDetailDateAdapter.OnClickListener {
     }, viewModel)
 
     override fun onCreateView(
