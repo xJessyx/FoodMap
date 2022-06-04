@@ -27,13 +27,5 @@ class FoodMapSearchViewModel : ViewModel(){
     val _getSuggestionsList: LiveData<List<StoreInformation>>
         get() = _getSuggestionsList
 
-//
-
-    //--------------------------------------------------------------------------------------------------
-
-
-
-
-//--------------------------------------------------------------------------------------------------
 
 }
