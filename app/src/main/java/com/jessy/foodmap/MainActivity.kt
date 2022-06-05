@@ -1,13 +1,9 @@
 package com.jessy.foodmap
 
-import android.content.pm.ApplicationInfo
-import android.content.pm.PackageManager
+
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
-import android.view.ViewGroup
-import android.widget.Button
-import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.findNavController
 import com.jessy.foodmap.data.Journey
@@ -18,7 +14,6 @@ import com.jessy.foodmap.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -47,19 +42,6 @@ class MainActivity : AppCompatActivity() {
                 }
                 R.id.memberFragment -> {
                     findNavController(R.id.myNavHostFragment).navigate(NavigationDirections.navigateToMemberFragment())
-//                    when (viewModel.isLoggedIn) {
-//                        true -> {
-//                            findNavController(R.id.myNavHostFragment).navigate(
-//                                NavigationDirections.navigateToProfileFragment(
-//                                    viewModel.user.value
-//                                )
-//                            )
-//                        }
-//                        false -> {
-//                            findNavController(R.id.myNavHostFragment).navigate(NavigationDirections.navigateToLoginDialog())
-//                            return@setOnItemSelectedListener false
-//                        }
-//                    }
                     return@setOnItemSelectedListener true
                 }
             }

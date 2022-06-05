@@ -10,7 +10,6 @@ import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.tabs.TabLayoutMediator
 import com.jessy.foodmap.MainActivity
 import com.jessy.foodmap.databinding.FragmentMemberBinding
-import com.jessy.foodmap.itinerary.paging.MyItineraryPagingViewModel
 import com.jessy.foodmap.login.UserManager.Companion.user
 
 
@@ -26,14 +25,11 @@ class MemberFragment : Fragment() {
     ): View? {
         (activity as MainActivity).hideToolBar()
         val binding = FragmentMemberBinding.inflate(inflater, container, false)
-
         val pageAdapter = MemberPagingAdapter(requireActivity().supportFragmentManager, lifecycle)
         binding.memberViewpager2.adapter = pageAdapter
         binding.lifecycleOwner = viewLifecycleOwner
         binding.viewModel = viewModel
-
         viewModel.memberImg.value = user?.image
-
         viewModel.getFireBaseUser()
         viewModel.getUserLiveData.observe(viewLifecycleOwner) {
             binding.memberTvNamePerson.text = viewModel.getUser[0].name

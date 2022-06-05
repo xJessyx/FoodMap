@@ -16,8 +16,7 @@ class MemberViewModel : ViewModel() {
 
     val db = Firebase.firestore
     var getUser = mutableListOf<User>()
-
-    val _getUserLiveData = MutableLiveData<List<User>>()
+    private val _getUserLiveData = MutableLiveData<List<User>>()
     val getUserLiveData: LiveData<List<User>>
         get() = _getUserLiveData
 

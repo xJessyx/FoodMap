@@ -34,14 +34,13 @@ import java.io.File
 class AddItineraryFragment : BottomSheetDialogFragment() {
     lateinit var startDate: Button
     lateinit var endDate: Button
-    val REQUEST_EXTERNAL_STORAGE = 1
-    private var imgPath: String = ""
+    private val REQUEST_EXTERNAL_STORAGE = 1
     private var riversRef: StorageReference? = null
     private var mStorageRef: StorageReference? = null
-    var addArticle_upload_progress: ProgressBar? = null
-    var pick_img: ImageButton? = null
+    private var addArticle_upload_progress: ProgressBar? = null
+    private var pick_img: ImageButton? = null
     private val viewModel: AddItineraryViewModel by lazy {
-        ViewModelProvider(this).get(AddItineraryViewModel::class.java)
+        ViewModelProvider(this)[AddItineraryViewModel::class.java]
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -89,7 +88,6 @@ class AddItineraryFragment : BottomSheetDialogFragment() {
                     }
                 }
 
-
             } else {
                 Toast.makeText(activity as Activity, "有資料尚未填寫!!!", Toast.LENGTH_SHORT).show()
             }
@@ -109,7 +107,7 @@ class AddItineraryFragment : BottomSheetDialogFragment() {
         val day = c.get(Calendar.DAY_OF_MONTH)
         DatePickerDialog(activity as Activity, { _, year, month, day ->
             run {
-                val format = "${setDateFormat(year, month, day)}"
+                val format = setDateFormat(year, month, day)
                 startDate.text = format
             }
         }, year, month, day).show()
@@ -122,7 +120,7 @@ class AddItineraryFragment : BottomSheetDialogFragment() {
         val day = c.get(Calendar.DAY_OF_MONTH)
         DatePickerDialog(activity as Activity, { _, year, month, day ->
             run {
-                val format = "${setDateFormat(year, month, day)}"
+                val format = setDateFormat(year, month, day)
                 endDate.text = format
             }
         }, year, month, day).show()
@@ -161,7 +159,6 @@ class AddItineraryFragment : BottomSheetDialogFragment() {
             if (task.isSuccessful) {
                 val downloadUri = task.result
                 viewModel.itineraryImage = downloadUri.toString()
-                Log.v("downloadUri", "$downloadUri")
 
             } else {
                 Log.v("downloadUri error", "下載失敗")
@@ -169,12 +166,12 @@ class AddItineraryFragment : BottomSheetDialogFragment() {
             }
         }
 
-        uploadTask?.addOnFailureListener { exception ->
+        uploadTask.addOnFailureListener { exception ->
             Log.v("exception.message fail", "${exception.message}")
 
-        }?.addOnSuccessListener {
+        }.addOnSuccessListener {
             Log.v("upload_successe", "upload_success")
-        }?.addOnProgressListener { taskSnapshot ->
+        }.addOnProgressListener { taskSnapshot ->
             val progress =
                 (100.0 * taskSnapshot.bytesTransferred / taskSnapshot.totalByteCount).toInt()
             addArticle_upload_progress!!.progress = progress
@@ -247,10 +244,14 @@ class AddItineraryFragment : BottomSheetDialogFragment() {
                             addArticle_upload_progress!!.visibility = View.VISIBLE
                             uploadImg(imgPath)
                         } else {
-                            Toast.makeText(activity as Activity, "請選取照片", Toast.LENGTH_SHORT).show()
+                            Toast.makeText(activity as Activity,
+                                R.string.select_image,
+                                Toast.LENGTH_SHORT).show()
                         }
                     } else {
-                        Toast.makeText(activity as Activity, "讀取圖片失敗", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(activity as Activity,
+                            R.string.image_error,
+                            Toast.LENGTH_SHORT).show()
                     }
                 }
 
@@ -258,10 +259,11 @@ class AddItineraryFragment : BottomSheetDialogFragment() {
             ImagePicker.RESULT_ERROR -> Toast.makeText(activity as Activity,
                 ImagePicker.getError(data),
                 Toast.LENGTH_SHORT).show()
-            else -> Toast.makeText(activity as Activity, "Task Cancelled", Toast.LENGTH_SHORT)
+            else -> Toast.makeText(activity as Activity,
+                R.string.no_select_image,
+                Toast.LENGTH_SHORT)
                 .show()
         }
     }
-
 
 }

@@ -8,7 +8,6 @@ import androidx.viewpager2.adapter.FragmentStateAdapter
 class ItinerayPagingAdapter (fragmentManager: FragmentManager, lifecycle: Lifecycle) :
     FragmentStateAdapter(fragmentManager, lifecycle) {
 
-
     var fragments: ArrayList<Fragment> = arrayListOf(
         MyItineraryPagingFragment(),
         RecommendPagingFragment()

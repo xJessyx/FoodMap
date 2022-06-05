@@ -16,11 +16,10 @@ import com.jessy.foodmap.R
 import com.jessy.foodmap.databinding.FragmentInviteBinding
 import com.jessy.foodmap.itinerary.invite.paging.InvitePagingAdapter
 
-
 class InviteFragment : Fragment() {
 
     private val viewModel: InviteViewModel by lazy {
-        ViewModelProvider(this).get(InviteViewModel::class.java)
+        ViewModelProvider(this)[InviteViewModel::class.java]
     }
 
     override fun onCreateView(
@@ -32,8 +31,9 @@ class InviteFragment : Fragment() {
         binding.lifecycleOwner = viewLifecycleOwner
         val journeyArg = InviteFragmentArgs.fromBundle(requireArguments()).journeyKey
         val viewModel = InviteViewModel(journeyArg)
-        binding.viewModel =viewModel
-        val pageAdapter = InvitePagingAdapter(journeyArg.id,requireActivity().supportFragmentManager, lifecycle)
+        binding.viewModel = viewModel
+        val pageAdapter =
+            InvitePagingAdapter(journeyArg.id, requireActivity().supportFragmentManager, lifecycle)
         binding.inviteViewpager2.adapter = pageAdapter
 
         binding.inviteItineraryName.text = journeyArg.name
@@ -43,38 +43,40 @@ class InviteFragment : Fragment() {
             val item = LayoutInflater.from(activity as Activity).inflate(R.layout.item_layout, null)
 
             AlertDialog.Builder(activity as Activity)
-                .setTitle("請輸入要邀請的email")
+                .setTitle(R.string.edit_email)
                 .setView(item)
-                .setPositiveButton("確定") { _, _ ->
+                .setPositiveButton(R.string.yes) { _, _ ->
                     val editText = item.findViewById(R.id.edit_text) as EditText
                     val email = editText.text.toString()
                     if (TextUtils.isEmpty(email)) {
-                        Toast.makeText(activity as Activity, "請輸入要邀請的email", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(activity as Activity,
+                            R.string.edit_email,
+                            Toast.LENGTH_SHORT)
+                            .show()
                     } else {
                         viewModel.checkUser(email)
-
-                        viewModel.getSenderUser.observe(viewLifecycleOwner){
+                        viewModel.getSenderUser.observe(viewLifecycleOwner) {
                             it?.let {
-                                viewModel.addInvitationsItem(email,it)
+                                viewModel.addInvitationsItem(email, it)
 
-                                viewModel.addInvite.observe(viewLifecycleOwner){
+                                viewModel.addInvite.observe(viewLifecycleOwner) {
 
                                     viewModel.addFireBaseInvitations()
                                 }
                             }
                         }
 
-                        viewModel.errorUser.observe(viewLifecycleOwner){
-                            Toast.makeText(activity as Activity, "查無此人", Toast.LENGTH_SHORT).show()
+                        viewModel.errorUser.observe(viewLifecycleOwner) {
+                            Toast.makeText(activity as Activity,
+                                R.string.no_such_person,
+                                Toast.LENGTH_SHORT).show()
                         }
 
                     }
 
-
                 }
                 .show()
         }
-
 
         TabLayoutMediator(binding.inviteTabs, binding.inviteViewpager2) { tab, position ->
             when (position) {
@@ -88,9 +90,7 @@ class InviteFragment : Fragment() {
 
         }.attach()
 
-    return binding.root
+        return binding.root
     }
-
-
 
 }

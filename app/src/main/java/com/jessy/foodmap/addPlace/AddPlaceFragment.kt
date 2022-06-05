@@ -9,7 +9,6 @@ import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
-import android.view.View.TEXT_ALIGNMENT_CENTER
 import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
@@ -37,7 +36,8 @@ class AddPlaceFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
-    ): View? {        (activity as MainActivity).hideToolBar()
+    ): View? {
+        (activity as MainActivity).hideToolBar()
 
         val binding = FragmentAddPlaceBinding.inflate(inflater, container, false)
         binding.lifecycleOwner = this
@@ -45,12 +45,8 @@ class AddPlaceFragment : Fragment() {
         selectJourney = binding.addPlaceSpSelectJourney
         selectDay = binding.addPlaceSpSelectDay
         selectTransportation = binding.addPlaceSpSelectTransportation
-
-//        val storeInformationArg = AddPlaceFragmentArgs.fromBundle(requireArguments()).storeKey
         val placeSelectDataArg =
             AddPlaceFragmentArgs.fromBundle(requireArguments()).placeSelectDataKey
-
-        Log.v("placeSelectDataArg", "$placeSelectDataArg")
 
         if (placeSelectDataArg != null) {
             if (placeSelectDataArg.storelnformation.storeTitle.isNotEmpty()) {
@@ -124,9 +120,7 @@ class AddPlaceFragment : Fragment() {
             viewModel.journeyId = placeSelectDataArg.journey.id
 
             val day = placeSelectDataArg.place.day
-//            for (i in 1..day) {
-//                lunchDay.add("第 $i 天")
-//            }
+
             lunchDay.add("第 $day 天")
             selectDay?.isEnabled = false
             viewModel.daySinner = day
@@ -195,9 +189,9 @@ class AddPlaceFragment : Fragment() {
                 view!!.textAlignment = View.TEXT_ALIGNMENT_CENTER
                 viewModel.journeySinner = selectJourney?.selectedItem.toString()
                 lunchDay.clear()
-                Log.v("lunchDay2","$lunchDay")
+                Log.v("lunchDay2", "$lunchDay")
 
-                if(lunch.size >1  ){
+                if (lunch.size > 1) {
 
                     for (item in viewModel.getAllJourney) {
                         if (item.name == selectJourney?.selectedItem.toString()) {
@@ -209,8 +203,7 @@ class AddPlaceFragment : Fragment() {
                             viewModel.journeyId = item.id
                         }
                     }
-                    setDaySinner(lunchDay,0)
-
+                    setDaySinner(lunchDay, 0)
 
                 }
 
@@ -239,10 +232,9 @@ class AddPlaceFragment : Fragment() {
             ) {
                 view!!.textAlignment = View.TEXT_ALIGNMENT_CENTER
 
-
                 viewModel.daySinner = selectDay?.selectedItemPosition!!.toInt()
 
-                Log.v("viewModel.daySinner","${viewModel.daySinner}")
+                Log.v("viewModel.daySinner", "${viewModel.daySinner}")
             }
 
             override fun onNothingSelected(parent: AdapterView<*>?) {

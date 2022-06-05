@@ -20,28 +20,28 @@ class DetailViewModel(private val articleKey: Article) : ViewModel() {
     val db = Firebase.firestore
 
 
-    val _favoriteStatus = MutableLiveData<Boolean>()
+    private val _favoriteStatus = MutableLiveData<Boolean>()
     val favoriteStatus: LiveData<Boolean>
         get() = _favoriteStatus
 
-    val _likeStatus = MutableLiveData<Boolean>()
+    private val _likeStatus = MutableLiveData<Boolean>()
     val likeStatus: LiveData<Boolean>
         get() = _likeStatus
 
-    val _addMessage = MutableLiveData<Messages>()
+    private val _addMessage = MutableLiveData<Messages>()
     val addMessage: LiveData<Messages>
         get() = _addMessage
 
-    val _getFilterMessagesLiveData = MutableLiveData<List<Messages>>()
+    private val _getFilterMessagesLiveData = MutableLiveData<List<Messages>>()
     val getFilterMessagesLiveData: LiveData<List<Messages>>
         get() = _getFilterMessagesLiveData
 
     val messageCotent = MutableLiveData<String>()
-    val _getMessageLiveData = MutableLiveData<List<Messages>>()
+    private val _getMessageLiveData = MutableLiveData<List<Messages>>()
     val getMessageLiveData: LiveData<List<Messages>>
         get() = _getMessageLiveData
 
-    val _filterUserIdStatus = MutableLiveData<Boolean>()
+    private val _filterUserIdStatus = MutableLiveData<Boolean>()
     val filterUserIdStatus: LiveData<Boolean>
         get() = _filterUserIdStatus
 

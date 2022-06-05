@@ -18,9 +18,6 @@ import com.jessy.foodmap.data.StoreInformation
 import com.jessy.foodmap.databinding.FragmentDetailBinding
 
 class DetailFragment : Fragment() {
-//        private val viewModel: DetailViewModel by lazy {
-//        ViewModelProvider(this).get(DetailViewModel::class.java)
-//    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

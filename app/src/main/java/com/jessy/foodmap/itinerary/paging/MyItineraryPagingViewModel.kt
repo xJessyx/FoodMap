@@ -12,21 +12,18 @@ import com.google.firebase.ktx.Firebase
 import com.jessy.foodmap.data.Invite
 import com.jessy.foodmap.data.Journey
 import com.jessy.foodmap.data.User
-import com.jessy.foodmap.login.UserManager
 import com.jessy.foodmap.login.UserManager.Companion.user
 
 class MyItineraryPagingViewModel : ViewModel() {
 
-    //    val ownerImage=MutableLiveData<String>()
-    //  val coeditImage:String? =null
     val db = Firebase.firestore
     var getAllJourney = mutableListOf<Journey>()
 
-    val _getAllJourneyLiveData = MutableLiveData<List<Journey>>()
+    private val _getAllJourneyLiveData = MutableLiveData<List<Journey>>()
     val getAllJourneyLiveData: LiveData<List<Journey>>
         get() = _getAllJourneyLiveData
 
-    val _coEditUserInfos = MutableLiveData<List<User>>()
+    private val _coEditUserInfos = MutableLiveData<List<User>>()
     val coEditUserInfos: LiveData<List<User>>
         get() = _coEditUserInfos
 
@@ -36,7 +33,7 @@ class MyItineraryPagingViewModel : ViewModel() {
 
     var checkInviteList = mutableListOf<Invite>()
 
-    val _checkInvite = MutableLiveData<List<Invite>>()
+    private val _checkInvite = MutableLiveData<List<Invite>>()
     val checkInvite: LiveData<List<Invite>>
         get() = _checkInvite
 
@@ -67,7 +64,7 @@ class MyItineraryPagingViewModel : ViewModel() {
                         }
                     }
                     _getAllJourneyLiveData.value = getAllJourney
-                    Log.v("getAllJourney","${getAllJourney}")
+                    Log.v("getAllJourney", "${getAllJourney}")
                 } else {
                     Log.d("yaya", "Current data: null")
                 }

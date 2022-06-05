@@ -14,8 +14,7 @@ import com.jessy.foodmap.login.UserManager.Companion.user
 class AddArticleViewModel : ViewModel() {
     val db = Firebase.firestore
 
-
-    val _addArticle = MutableLiveData<Article>()
+    private val _addArticle = MutableLiveData<Article>()
     val addArticle: LiveData<Article>
         get() = _addArticle
 
@@ -33,10 +32,7 @@ class AddArticleViewModel : ViewModel() {
         if (article != null) {
             val newDoc = db.collection("articles").document()
             val id = newDoc.id
-            Log.d("new article", "newDoc id = $id")
             article.id = id
-            Log.d("new article", "article = $article")
-
             newDoc.set(article)
                 .addOnSuccessListener {
                     Log.d(ContentValues.TAG, "DocumentSnapshot successfull")
@@ -63,11 +59,7 @@ class AddArticleViewModel : ViewModel() {
             longitude = articleLongitude
 
         )
-        Log.v("user!!.id", "${user!!.id}")
-
         _addArticle.value = data
-
     }
-
 
 }

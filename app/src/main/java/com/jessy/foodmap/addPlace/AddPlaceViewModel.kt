@@ -4,7 +4,6 @@ import android.content.ContentValues
 import android.content.ContentValues.TAG
 import android.util.Log
 import androidx.lifecycle.LiveData
-
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.google.firebase.firestore.ktx.firestore
@@ -16,15 +15,15 @@ import com.jessy.foodmap.data.Place
 class AddPlaceViewModel : ViewModel() {
     val db = Firebase.firestore
 
-    val _addPlace = MutableLiveData<Place>()
-    val addPlace: LiveData<Place>
+    private val _addPlace = MutableLiveData<Place>()
+    private val addPlace: LiveData<Place>
         get() = _addPlace
 
-    val _addAllJourney = MutableLiveData<List<Journey>>()
+    private val _addAllJourney = MutableLiveData<List<Journey>>()
     val addAllJourney: LiveData<List<Journey>>
         get() = _addAllJourney
 
-   var journeySinner : String =""
+    var journeySinner : String =""
     var daySinner : Int = 0
     var transportationSinner : Int = 0
     var dwellTime : Long? = null
@@ -58,7 +57,6 @@ class AddPlaceViewModel : ViewModel() {
     fun addFireBasePlace() {
 
         val placeObject = addPlace.value
-        Log.v("placeObject","$placeObject")
         if (placeObject != null ) {
             db.collection("journeys").document(journeyId)
                 .collection("places").document(placeId)

@@ -11,16 +11,14 @@ import com.google.firebase.ktx.Firebase
 import com.jessy.foodmap.data.Journey
 import com.jessy.foodmap.data.Place
 
-class AddItineraryDtailDateViewModel(position: Int, journeyArg: Journey) : ViewModel() {
+class AddItineraryDetailDateViewModel(position: Int, journeyArg: Journey) : ViewModel() {
 
     val db = Firebase.firestore
-
-    val _places = MutableLiveData<List<Place>>()
+    private val _places = MutableLiveData<List<Place>>()
     val places: LiveData<List<Place>>
         get() = _places
     var position = position
     var journeyItemId = journeyArg.id
-
 
     fun getPlaces() {
 
@@ -50,7 +48,6 @@ class AddItineraryDtailDateViewModel(position: Int, journeyArg: Journey) : ViewM
 
     fun updateMoveList(list: MutableList<Place>, fromPosition: Int, toPosition: Int) {
 
-
         if (!isUpdating) {
             isUpdating = true
             val updateMap = mapOf(
@@ -72,7 +69,6 @@ class AddItineraryDtailDateViewModel(position: Int, journeyArg: Journey) : ViewM
         }
 
     }
-
 
     fun delectFireBaseItem(list: MutableList<Place>, position: Int) {
         db.collection("journeys").document(journeyItemId)

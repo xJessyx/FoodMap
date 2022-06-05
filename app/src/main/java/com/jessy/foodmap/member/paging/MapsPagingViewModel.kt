@@ -7,30 +7,38 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
+import com.jessy.foodmap.data.Article
 import com.jessy.foodmap.data.Journey
 import com.jessy.foodmap.data.Place
+import com.jessy.foodmap.data.source.PublisherRepository
 import com.jessy.foodmap.login.UserManager
+import com.jessy.foodmap.network.LoadApiStatus
 
-class MapsPagingViewModel :ViewModel() {
+class MapsPagingViewModel(private val repository: PublisherRepository) : ViewModel() {
+
+    private val _status = MutableLiveData<LoadApiStatus>()
+
+    val status: LiveData<LoadApiStatus>
+        get() = _status
 
     val db = Firebase.firestore
     var myAllJourneyList = mutableListOf<Journey>()
     var myAllPlaceList = mutableListOf<Place>()
 
 
-    val _myAllJourney = MutableLiveData<List<Journey>>()
+    private val _myAllJourney = MutableLiveData<List<Journey>>()
     val myAllJourney: LiveData<List<Journey>>
         get() = _myAllJourney
 
-    val _myAllPlace = MutableLiveData<List<Place>>()
+    private val _myAllPlace = MutableLiveData<List<Place>>()
     val myAllPlace: LiveData<List<Place>>
         get() = _myAllPlace
 
-    fun getMyAllJourney(){
+    fun getMyAllJourney() {
 
         db.collection("journeys")
             .whereEqualTo("userId", UserManager.user!!.id)
-            .whereEqualTo("status",2)
+            .whereEqualTo("status", 2)
             .get()
             .addOnSuccessListener { result ->
                 for (document in result) {
@@ -39,16 +47,14 @@ class MapsPagingViewModel :ViewModel() {
                     myAllJourneyList.add(data)
                 }
                 _myAllJourney.value = myAllJourneyList
-                Log.v("myAllJourneyList","$myAllJourneyList")
             }
             .addOnFailureListener { exception ->
                 Log.d(ContentValues.TAG, "Error getting documents: ", exception)
             }
     }
 
-
-    fun getMyAllPlace(){
-        for (i in myAllJourneyList){
+    fun getMyAllPlace() {
+        for (i in myAllJourneyList) {
 
             db.collection("journeys").document(i.id)
                 .collection("places")
@@ -60,7 +66,6 @@ class MapsPagingViewModel :ViewModel() {
                         myAllPlaceList.add(data)
                     }
                     _myAllPlace.value = myAllPlaceList
-                    Log.v("myAllPlaceList","$myAllPlaceList")
                 }
                 .addOnFailureListener { exception ->
                     Log.d(ContentValues.TAG, "Error getting documents: ", exception)
@@ -69,4 +74,6 @@ class MapsPagingViewModel :ViewModel() {
         }
 
     }
+
+
 }
