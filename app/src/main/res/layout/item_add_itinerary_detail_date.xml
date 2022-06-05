@@ -9,7 +9,7 @@
             type="com.jessy.foodmap.data.Place" />
         <variable
             name="viewModel"
-            type="com.jessy.foodmap.itinerary.detailpaging.AddItineraryDtailDateViewModel" />
+            type="com.jessy.foodmap.itinerary.detailpaging.AddItineraryDetailDateViewModel" />
     </data>
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"

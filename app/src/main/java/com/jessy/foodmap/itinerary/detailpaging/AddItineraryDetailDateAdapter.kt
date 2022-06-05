@@ -18,7 +18,7 @@ class AddItineraryDetailDateAdapter(
     val onClickListener: AddItineraryDetailDateAdapter.OnClickListener,
     val viewModel: AddItineraryDetailDateViewModel,
 ) :
-    ListAdapter<Place, AddItineraryDetailDateAdapter.AddItineraryDtailDateViewHolder>(
+    ListAdapter<Place, AddItineraryDetailDateAdapter.AddItineraryDetailDateViewHolder>(
         AddItineraryDetailDateAdapter.DiffCallback()), ITHelperInterface {
 
     class DiffCallback : DiffUtil.ItemCallback<Place>() {
@@ -32,7 +32,7 @@ class AddItineraryDetailDateAdapter(
         }
     }
 
-    class AddItineraryDtailDateViewHolder private constructor(var binding: ItemAddItineraryDetailDateBinding) :
+    class AddItineraryDetailDateViewHolder private constructor(var binding: ItemAddItineraryDetailDateBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(place: Place, viewModel: AddItineraryDetailDateViewModel) {
@@ -40,8 +40,6 @@ class AddItineraryDetailDateAdapter(
             binding.itineraryDetailDateTvStartTime.setText(place.startTime?.let {
                 TimeUtil.StampToTime(it, Locale.TAIWAN)
             })
-
-
 
             binding.itineraryDetailDateTvDwellTime.setText(place.dwellTime?.let {
                 TimeUtil.StampToTimeText(it, Locale.TAIWAN).toString()
@@ -63,11 +61,11 @@ class AddItineraryDetailDateAdapter(
         }
 
         companion object {
-            fun from(parent: ViewGroup): AddItineraryDtailDateViewHolder {
+            fun from(parent: ViewGroup): AddItineraryDetailDateViewHolder {
                 val layoutInflater = LayoutInflater.from(parent.context)
                 val binding =
                     ItemAddItineraryDetailDateBinding.inflate(layoutInflater, parent, false)
-                return AddItineraryDtailDateViewHolder(binding)
+                return AddItineraryDetailDateViewHolder(binding)
             }
         }
     }
@@ -75,12 +73,12 @@ class AddItineraryDetailDateAdapter(
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int,
-    ): AddItineraryDtailDateViewHolder {
-        return AddItineraryDtailDateViewHolder.from(parent)
+    ): AddItineraryDetailDateViewHolder {
+        return AddItineraryDetailDateViewHolder.from(parent)
     }
 
     override fun onBindViewHolder(
-        holder: AddItineraryDtailDateViewHolder,
+        holder: AddItineraryDetailDateViewHolder,
         position: Int,
     ) {
 
@@ -136,7 +134,6 @@ class AddItineraryDetailDateAdapter(
         }
 
     }
-
 
     override fun onItemDissmiss(position: Int) {
         val list = currentList.toMutableList()

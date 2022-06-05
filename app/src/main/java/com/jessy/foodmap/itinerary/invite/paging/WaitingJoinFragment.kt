@@ -2,19 +2,13 @@ package com.jessy.foodmap.itinerary.invite.paging
 
 import android.app.Activity
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DividerItemDecoration
-import androidx.recyclerview.widget.LinearLayoutManager
-import com.jessy.foodmap.R
-import com.jessy.foodmap.databinding.FragmentJoinBinding
 import com.jessy.foodmap.databinding.FragmentWaitingJoinBinding
-import com.jessy.foodmap.itinerary.ItineraryDetailFragmentArgs
-import com.jessy.foodmap.itinerary.invite.InviteFragmentArgs
 
 class WaitingJoinFragment : Fragment() {
 

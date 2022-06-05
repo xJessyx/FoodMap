@@ -7,7 +7,6 @@ import kotlin.properties.Delegates
 
 class PublisherApplication : Application() {
 
-    // Depends on the flavor,
     val repository: PublisherRepository
         get() = ServiceLocator.provideRepository(this)
 

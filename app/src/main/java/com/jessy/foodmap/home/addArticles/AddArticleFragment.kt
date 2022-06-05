@@ -51,7 +51,6 @@ class AddArticleFragment : Fragment() {
     var addArticle_upload_progress: ProgressBar? =null
     var pick_img: ImageButton ?=null
 
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
@@ -234,9 +233,6 @@ class AddArticleFragment : Fragment() {
             else -> Toast.makeText(activity as Activity, "Task Cancelled", Toast.LENGTH_SHORT).show()
         }
     }
-
-
-
 }
 
 fun Fragment.getFilePathFromContentUri(

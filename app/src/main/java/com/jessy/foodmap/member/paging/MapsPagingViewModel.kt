@@ -21,77 +21,59 @@ class MapsPagingViewModel(private val repository: PublisherRepository) : ViewMod
     val status: LiveData<LoadApiStatus>
         get() = _status
 
-    var myAllJourney = MutableLiveData<List<Journey>>()
-    var myAllPlace = MutableLiveData<List<Place>>()
-
-//    init {
-//        getMyAllJourneyResult()
-//        getMyAllPlaceResult()
-//    }
-
-//    val db = Firebase.firestore
-//    var myAllJourneyList = mutableListOf<Journey>()
-//    var myAllPlaceList = mutableListOf<Place>()
-//
-//
-//    private val _myAllJourney = MutableLiveData<List<Journey>>()
-//    val myAllJourney: LiveData<List<Journey>>
-//        get() = _myAllJourney
-//
-//    private val _myAllPlace = MutableLiveData<List<Place>>()
-//    val myAllPlace: LiveData<List<Place>>
-//        get() = _myAllPlace
+    val db = Firebase.firestore
+    var myAllJourneyList = mutableListOf<Journey>()
+    var myAllPlaceList = mutableListOf<Place>()
 
 
+    private val _myAllJourney = MutableLiveData<List<Journey>>()
+    val myAllJourney: LiveData<List<Journey>>
+        get() = _myAllJourney
 
-//    fun getMyAllJourney() {
-//
-//        db.collection("journeys")
-//            .whereEqualTo("userId", UserManager.user!!.id)
-//            .whereEqualTo("status", 2)
-//            .get()
-//            .addOnSuccessListener { result ->
-//                for (document in result) {
-//                    Log.d(ContentValues.TAG, "${document.id} => ${document.data}")
-//                    val data = document.toObject(Journey::class.java)
-//                    myAllJourneyList.add(data)
-//                }
-//                _myAllJourney.value = myAllJourneyList
-//            }
-//            .addOnFailureListener { exception ->
-//                Log.d(ContentValues.TAG, "Error getting documents: ", exception)
-//            }
-//    }
-//
-//    fun getMyAllPlace() {
-//        for (i in myAllJourneyList) {
-//
-//            db.collection("journeys").document(i.id)
-//                .collection("places")
-//                .get()
-//                .addOnSuccessListener { result ->
-//                    for (document in result) {
-//                        Log.d(ContentValues.TAG, "${document.id} => ${document.data}")
-//                        val data = document.toObject(Place::class.java)
-//                        myAllPlaceList.add(data)
-//                    }
-//                    _myAllPlace.value = myAllPlaceList
-//                }
-//                .addOnFailureListener { exception ->
-//                    Log.d(ContentValues.TAG, "Error getting documents: ", exception)
-//                }
-//
-//        }
-//
-//    }
+    private val _myAllPlace = MutableLiveData<List<Place>>()
+    val myAllPlace: LiveData<List<Place>>
+        get() = _myAllPlace
 
-    fun getMyAllJourneyResult() {
-        myAllJourney = repository.getMyAllJourney()
-        _status.value = LoadApiStatus.DONE
+    fun getMyAllJourney() {
+
+        db.collection("journeys")
+            .whereEqualTo("userId", UserManager.user!!.id)
+            .whereEqualTo("status", 2)
+            .get()
+            .addOnSuccessListener { result ->
+                for (document in result) {
+                    Log.d(ContentValues.TAG, "${document.id} => ${document.data}")
+                    val data = document.toObject(Journey::class.java)
+                    myAllJourneyList.add(data)
+                }
+                _myAllJourney.value = myAllJourneyList
+            }
+            .addOnFailureListener { exception ->
+                Log.d(ContentValues.TAG, "Error getting documents: ", exception)
+            }
     }
-    fun getMyAllPlaceResult() {
-        myAllPlace = repository.getMyAllPlace()
-        Log.v("myAllPlace ViewModel","${myAllPlace.value}")
-        _status.value = LoadApiStatus.DONE
+
+    fun getMyAllPlace() {
+        for (i in myAllJourneyList) {
+
+            db.collection("journeys").document(i.id)
+                .collection("places")
+                .get()
+                .addOnSuccessListener { result ->
+                    for (document in result) {
+                        Log.d(ContentValues.TAG, "${document.id} => ${document.data}")
+                        val data = document.toObject(Place::class.java)
+                        myAllPlaceList.add(data)
+                    }
+                    _myAllPlace.value = myAllPlaceList
+                }
+                .addOnFailureListener { exception ->
+                    Log.d(ContentValues.TAG, "Error getting documents: ", exception)
+                }
+
+        }
+
     }
+
+
 }

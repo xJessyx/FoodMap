@@ -1,6 +1,5 @@
 package com.jessy.foodmap.member.paging
 
-import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.ContentValues.TAG
 import android.content.res.Resources
@@ -27,10 +26,8 @@ import com.jessy.foodmap.ext.getVmFactory
 class MapsPagingFragment : Fragment(), OnMapReadyCallback {
 
     private val viewModel by viewModels<MapsPagingViewModel> { getVmFactory() }
-
     private lateinit var clusterManager: ClusterManager<MarkerItem>
     private lateinit var mMap: GoogleMap
-
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -40,12 +37,12 @@ class MapsPagingFragment : Fragment(), OnMapReadyCallback {
 
         val binding = FragmentMapsPagingBinding.inflate(inflater, container, false)
         binding.lifecycleOwner = viewLifecycleOwner
-        viewModel.getMyAllJourneyResult()
+        viewModel.getMyAllJourney()
         val mapFragment = childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment
         mapFragment.getMapAsync(this)
 
         viewModel.myAllJourney.observe(viewLifecycleOwner) {
-            viewModel.getMyAllPlaceResult()
+            viewModel.getMyAllPlace()
             Log.v("myAllJourney","${it}")
         }
         viewModel.myAllPlace.observe(viewLifecycleOwner) {
@@ -107,13 +104,10 @@ class MapsPagingFragment : Fragment(), OnMapReadyCallback {
         }
     }
 
-    @SuppressLint("MissingPermission")
     override fun onMapReady(googleMap: GoogleMap) {
         mMap = googleMap
         setMapStyle(mMap)
-       mMap.isMyLocationEnabled = true
 
     }
-
 
 }

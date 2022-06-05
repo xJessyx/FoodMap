@@ -29,8 +29,6 @@ class FoodMapSearchAdapter(
             binding.foodMapSearchAddress.setText(storeInformation.storeAddress)
             binding.foodMapSearchScore.setText(storeInformation.storeScore)
 
-
-
                 placeSelectDataArgs?.let {
                     placeSelectDataArgs.storelnformation.storeTitle = storeInformation.storeTitle
                     placeSelectDataArgs.storelnformation.latitude = storeInformation.latitude
@@ -39,7 +37,6 @@ class FoodMapSearchAdapter(
                     placeSelectDataArgs.place.latitude = storeInformation.latitude
                     placeSelectDataArgs.place.longitude = storeInformation.longitude
                 }
-
 
             binding.foodMapSearchAddPlace.setOnClickListener {
                 it.findNavController()
@@ -59,7 +56,6 @@ class FoodMapSearchAdapter(
             }
         }
     }
-
 
     class DiffCallback : DiffUtil.ItemCallback<StoreInformation>() {
 
@@ -90,9 +86,7 @@ class FoodMapSearchAdapter(
             onClickListener.onClick(item)
         }
         holder.bind(item, placeSelectDataArgs)
-
     }
-
 
     class OnClickListener(val clickListener: (storeInformation: StoreInformation) -> Unit) {
         fun onClick(storeInformation: StoreInformation) = clickListener(storeInformation)

@@ -14,14 +14,11 @@ import com.jessy.foodmap.data.Place
 class AddItineraryDetailDateViewModel(position: Int, journeyArg: Journey) : ViewModel() {
 
     val db = Firebase.firestore
-
     private val _places = MutableLiveData<List<Place>>()
     val places: LiveData<List<Place>>
         get() = _places
     var position = position
     var journeyItemId = journeyArg.id
-
-
 
     fun getPlaces() {
 
@@ -50,7 +47,6 @@ class AddItineraryDetailDateViewModel(position: Int, journeyArg: Journey) : View
     var isUpdating = false
 
     fun updateMoveList(list: MutableList<Place>, fromPosition: Int, toPosition: Int) {
-
 
         if (!isUpdating) {
             isUpdating = true

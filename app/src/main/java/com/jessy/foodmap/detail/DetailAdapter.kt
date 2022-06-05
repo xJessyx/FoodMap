@@ -1,4 +1,5 @@
 package com.jessy.foodmap.detail
+
 import android.content.Context
 import androidx.recyclerview.widget.ListAdapter
 import android.view.LayoutInflater
@@ -17,29 +18,28 @@ import com.jessy.foodmap.login.UserManager.Companion.user
 class DetailAdapter(val context: Context, val viewModel: DetailViewModel) : ListAdapter<Messages,
         DetailAdapter.DetailViewHolder>(DiffCallback()) {
 
-
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int):DetailViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DetailViewHolder {
         return DetailViewHolder.from(parent)
     }
 
     override fun onBindViewHolder(holder: DetailViewHolder, position: Int) {
         val item = getItem(position)
-
-        holder.bind(item, context,viewModel)
+        holder.bind(item, context, viewModel)
     }
 
     class DetailViewHolder private constructor(var binding: ItemMessageBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(messages: Messages,context: Context,viewModel: DetailViewModel) {
+        fun bind(messages: Messages, context: Context, viewModel: DetailViewModel) {
 
             binding.messages = messages
             binding.detailMessageMoreBtn.setOnClickListener {
-                showPopup(context,it, viewModel,messages.userId)
+                showPopup(context, it, viewModel, messages.userId)
             }
             binding.executePendingBindings()
 
         }
+
         fun showPopup(context: Context, view: View, viewModel: DetailViewModel, userId: String?) {
             val popup = PopupMenu(context, view)
             popup.inflate(R.menu.article_more_menu)
@@ -48,9 +48,8 @@ class DetailAdapter(val context: Context, val viewModel: DetailViewModel) : List
 
                 when (item!!.itemId) {
                     R.id.blockade -> {
-//                        Toast.makeText(context, item.title, Toast.LENGTH_SHORT).show()
-                            viewModel.addBlockadeUsers(userId)
-                            Toast.makeText(context,"已完成", Toast.LENGTH_SHORT).show()
+                        viewModel.addBlockadeUsers(userId)
+                        Toast.makeText(context, "已完成", Toast.LENGTH_SHORT).show()
                     }
 
                 }
@@ -80,7 +79,5 @@ class DetailAdapter(val context: Context, val viewModel: DetailViewModel) : List
             return oldItem == newItem
         }
     }
-
-
 
 }

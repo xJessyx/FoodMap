@@ -12,7 +12,6 @@ import com.google.firebase.ktx.Firebase
 import com.jessy.foodmap.data.Invite
 import com.jessy.foodmap.data.Journey
 import com.jessy.foodmap.data.User
-import com.jessy.foodmap.login.UserManager
 import com.jessy.foodmap.login.UserManager.Companion.user
 
 class MyItineraryPagingViewModel : ViewModel() {
@@ -65,7 +64,7 @@ class MyItineraryPagingViewModel : ViewModel() {
                         }
                     }
                     _getAllJourneyLiveData.value = getAllJourney
-                    Log.v("getAllJourney","${getAllJourney}")
+                    Log.v("getAllJourney", "${getAllJourney}")
                 } else {
                     Log.d("yaya", "Current data: null")
                 }

@@ -244,10 +244,14 @@ class AddItineraryFragment : BottomSheetDialogFragment() {
                             addArticle_upload_progress!!.visibility = View.VISIBLE
                             uploadImg(imgPath)
                         } else {
-                            Toast.makeText(activity as Activity, R.string.select_image, Toast.LENGTH_SHORT).show()
+                            Toast.makeText(activity as Activity,
+                                R.string.select_image,
+                                Toast.LENGTH_SHORT).show()
                         }
                     } else {
-                        Toast.makeText(activity as Activity, R.string.image_error, Toast.LENGTH_SHORT).show()
+                        Toast.makeText(activity as Activity,
+                            R.string.image_error,
+                            Toast.LENGTH_SHORT).show()
                     }
                 }
 
@@ -255,7 +259,9 @@ class AddItineraryFragment : BottomSheetDialogFragment() {
             ImagePicker.RESULT_ERROR -> Toast.makeText(activity as Activity,
                 ImagePicker.getError(data),
                 Toast.LENGTH_SHORT).show()
-            else -> Toast.makeText(activity as Activity, R.string.no_select_image, Toast.LENGTH_SHORT)
+            else -> Toast.makeText(activity as Activity,
+                R.string.no_select_image,
+                Toast.LENGTH_SHORT)
                 .show()
         }
     }

@@ -55,6 +55,4 @@ class HomeAdapter(val onClickListener: OnClickListener): ListAdapter<Article,
     class OnClickListener(val clickListener: (article:Article) -> Unit) {
         fun onClick(article:Article) = clickListener(article)
     }
-
-
 }

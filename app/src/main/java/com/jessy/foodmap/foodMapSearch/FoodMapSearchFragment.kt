@@ -52,7 +52,6 @@ class FoodMapSearchFragment : Fragment(), OnMapReadyCallback,
         ViewModelProvider(this)[FoodMapSearchViewModel::class.java]
     }
 
-
     val MY_PERMISSIONS_REQUEST_LOCATION = 100
     private lateinit var mMap: GoogleMap
     private var locationManager: LocationManager? = null
@@ -72,7 +71,8 @@ class FoodMapSearchFragment : Fragment(), OnMapReadyCallback,
         val binding = FragmentFoodMapSearchBinding.inflate(inflater, container, false)
         binding.lifecycleOwner = viewLifecycleOwner
 
-        var placeSelectDataArgs = FoodMapSearchFragmentArgs.fromBundle(requireArguments()).placeSelectDataKey
+        var placeSelectDataArgs =
+            FoodMapSearchFragmentArgs.fromBundle(requireArguments()).placeSelectDataKey
         val adapter =
 
             FoodMapSearchAdapter(FoodMapSearchAdapter.OnClickListener {
@@ -90,7 +90,8 @@ class FoodMapSearchFragment : Fragment(), OnMapReadyCallback,
             childFragmentManager.findFragmentById(R.id.search_autocomplete)
                     as AutocompleteSupportFragment
 
-        val mapFragment = childFragmentManager.findFragmentById(R.id.search_map) as SupportMapFragment
+        val mapFragment =
+            childFragmentManager.findFragmentById(R.id.search_map) as SupportMapFragment
         mapFragment.getMapAsync(this)
 
         initPlaces()
@@ -115,7 +116,7 @@ class FoodMapSearchFragment : Fragment(), OnMapReadyCallback,
             }
         })
 
-        viewModel.getSuggestionsList.observe(viewLifecycleOwner){
+        viewModel.getSuggestionsList.observe(viewLifecycleOwner) {
             adapter.submitList(it)
             adapter.notifyDataSetChanged()
         }
@@ -201,7 +202,7 @@ class FoodMapSearchFragment : Fragment(), OnMapReadyCallback,
 
 //            mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(LatLng(location.latitude,
 //                location.longitude), 12.0f))
-         //   Log.v("座標", "${location.latitude} - ${location.longitude}")
+            //   Log.v("座標", "${location.latitude} - ${location.longitude}")
 
         }
 
@@ -227,8 +228,6 @@ class FoodMapSearchFragment : Fragment(), OnMapReadyCallback,
 
         val key = info.metaData[resources.getString(R.string.map_api_key_name)].toString()
         Places.initialize(requireContext(), key)
-
-//        Places.initialize(requireActivity().getApplicationContext(), BuildConfig.MAPS_API_KEY)
         placesClient = Places.createClient(activity as Activity)
         autocompleteSessionToken = AutocompleteSessionToken.newInstance()
     }
@@ -298,7 +297,7 @@ class FoodMapSearchFragment : Fragment(), OnMapReadyCallback,
                                 response.place.name,
                                 response.place.address,
                                 response.place.rating.toString(),
-                                response.place.latLng.latitude,response.place.latLng.longitude)
+                                response.place.latLng.latitude, response.place.latLng.longitude)
                             dataList.add(place)
                             mMap.addMarker(MarkerOptions()
                                 .position(response.place.latLng)
@@ -315,8 +314,7 @@ class FoodMapSearchFragment : Fragment(), OnMapReadyCallback,
                                 .title(response.place.name)
                             )
                             viewModel.getSuggestionsList.value = dataList
-//                            adapter?.submitList(dataList)
-//                            adapter?.notifyDataSetChanged()
+
                         }.addOnFailureListener { exception: Exception ->
                             if (exception is ApiException) {
                                 Log.e(TAG, "Place not found: " + exception.message)
@@ -365,6 +363,5 @@ class FoodMapSearchFragment : Fragment(), OnMapReadyCallback,
             }
         }
     }
-
 }
 

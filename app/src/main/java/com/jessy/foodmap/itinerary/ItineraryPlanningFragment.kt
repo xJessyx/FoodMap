@@ -40,12 +40,11 @@ class ItineraryPlanningFragment : Fragment() {
             }
         }.attach()
 
-        binding.itineraryPlanningFabBtn.setOnClickListener {
-                view ->
+        binding.itineraryPlanningFabBtn.setOnClickListener { view ->
             Snackbar.make(view, "Here's a Snackbar", Snackbar.LENGTH_LONG)
                 .setAction("Action", null)
                 .show()
-                findNavController().navigate(NavigationDirections.itineraryPlanningFragmentToAddItineraryFragment())
+            findNavController().navigate(NavigationDirections.itineraryPlanningFragmentToAddItineraryFragment())
         }
         return binding.root
 

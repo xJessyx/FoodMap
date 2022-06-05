@@ -22,11 +22,5 @@ class DefaultPublisherRepository (private val remoteDataSource: PublisherDataSou
         return remoteDataSource.getArticleCollect()
     }
 
-    override fun getMyAllJourney(): MutableLiveData<List<Journey>> {
-        return remoteDataSource.getMyAllJourney()
-    }
 
-    override fun getMyAllPlace(): MutableLiveData<List<Place>> {
-        return remoteDataSource.getMyAllPlace()
-    }
 }

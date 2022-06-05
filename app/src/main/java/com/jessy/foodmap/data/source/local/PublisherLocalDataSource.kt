@@ -22,11 +22,4 @@ class PublisherLocalDataSource (val context: Context) : PublisherDataSource {
         TODO("Not yet implemented")
     }
 
-    override fun getMyAllJourney(): MutableLiveData<List<Journey>> {
-        TODO("Not yet implemented")
-    }
-
-    override fun getMyAllPlace(): MutableLiveData<List<Place>> {
-        TODO("Not yet implemented")
-    }
 }

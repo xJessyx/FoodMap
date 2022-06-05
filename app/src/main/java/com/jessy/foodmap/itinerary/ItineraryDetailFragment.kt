@@ -45,11 +45,11 @@ class ItineraryDetailFragment : BottomSheetDialogFragment() {
         val journeyArg = ItineraryDetailFragmentArgs.fromBundle(requireArguments()).journeyKey
         binding.viewModel = viewModel
         binding.itineraryDeatailName.text = journeyArg.name
-        binding.itineraryDeatailStartDate.text =journeyArg.startDate
-        binding.itineraryDeatailEndDate.text= journeyArg.endDate
+        binding.itineraryDeatailStartDate.text = journeyArg.startDate
+        binding.itineraryDeatailEndDate.text = journeyArg.endDate
         viewModel.itineraryDeatailImg = journeyArg.image
 
-        val pageAdapter = ItineraryDetailPagingAdapter(this,journeyArg)
+        val pageAdapter = ItineraryDetailPagingAdapter(this, journeyArg)
 
         binding.itineraryDeatailViewPager2.adapter = pageAdapter
         TabLayoutMediator(binding.itineraryDeatailTabs,
@@ -63,14 +63,14 @@ class ItineraryDetailFragment : BottomSheetDialogFragment() {
 
         val parseEndDate = LocalDate.parse(journeyArg.endDate, fmt)
 
-        if(journeyArg.userId == user?.id && !journeyArg.share) {
+        if (journeyArg.userId == user?.id && !journeyArg.share) {
 
             if (today.isBefore(parseStartDate)) {
                 //binding.itineraryDetailFabBtn.visibility = View.VISIBLE
                 Log.v("today< start", "$today <  $parseStartDate")
 
             } else if (today.isAfter(parseEndDate)) {
-               // binding.itineraryDetailFabBtn.visibility = View.GONE
+                // binding.itineraryDetailFabBtn.visibility = View.GONE
                 binding.itineraryDetailShare.visibility = View.VISIBLE
                 binding.itineraryDetailSwitch.visibility = View.VISIBLE
                 db.collection("journeys").document(journeyArg.id)
@@ -93,14 +93,12 @@ class ItineraryDetailFragment : BottomSheetDialogFragment() {
                 Log.v("today > end", "$today >  $parseEndDate")
 
             } else {
-              //  binding.itineraryDetailFabBtn.visibility = View.VISIBLE
+                //  binding.itineraryDetailFabBtn.visibility = View.VISIBLE
                 Log.v("start <today< end", " $parseStartDate < $today <  $parseEndDate ")
                 db.collection("journeys").document(journeyArg.id)
                     .update("status", 1)
             }
         }
-
-
         return binding.root
     }
 

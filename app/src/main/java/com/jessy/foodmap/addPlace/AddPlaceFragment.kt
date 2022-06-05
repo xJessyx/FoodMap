@@ -9,7 +9,6 @@ import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
-import android.view.View.TEXT_ALIGNMENT_CENTER
 import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
@@ -206,7 +205,6 @@ class AddPlaceFragment : Fragment() {
                     }
                     setDaySinner(lunchDay, 0)
 
-
                 }
 
             }
@@ -233,7 +231,6 @@ class AddPlaceFragment : Fragment() {
                 id: Long,
             ) {
                 view!!.textAlignment = View.TEXT_ALIGNMENT_CENTER
-
 
                 viewModel.daySinner = selectDay?.selectedItemPosition!!.toInt()
 

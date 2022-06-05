@@ -1,7 +1,6 @@
 package com.jessy.foodmap.itinerary.invite.paging
 
 import android.content.ContentValues
-import android.content.ContentValues.TAG
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -9,7 +8,6 @@ import androidx.lifecycle.ViewModel
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.jessy.foodmap.data.Invite
-import com.jessy.foodmap.data.Journey
 import com.jessy.foodmap.login.UserManager
 
 class JoinViewModel : ViewModel() {

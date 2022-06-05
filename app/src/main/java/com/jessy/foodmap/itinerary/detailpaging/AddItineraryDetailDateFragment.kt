@@ -153,7 +153,7 @@ class AddItineraryDetailDateFragment(position: Int, journey: Journey) : Fragment
                 Log.v("key", "$key")
 
                 val apiServices = RetrofitClient.apiServices(this)
-                apiServices.getDirection(mode as String, fromFKIP, toMonas, key)
+                apiServices.getDirection(mode.toString(), fromFKIP, toMonas, key)
                     .enqueue(object : Callback<DirectionResponses> {
                         @SuppressLint("NotifyDataSetChanged")
                         override fun onResponse(

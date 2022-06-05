@@ -22,10 +22,9 @@ class AddItineraryViewModel : ViewModel() {
     val itineraryName = MutableLiveData<String>()
     val itineraryStartDate = MutableLiveData<String>()
     val itineraryEndDate = MutableLiveData<String>()
-    var itineraryTotalDay :Int =0
-    var itineraryImage:String?= null
+    var itineraryTotalDay: Int = 0
+    var itineraryImage: String? = null
     var journeyId = db.collection("journeys").document().id
-
 
     fun addFireBaseJourney() {
         val itineraryObject = addItinerary.value
@@ -42,23 +41,23 @@ class AddItineraryViewModel : ViewModel() {
         }
     }
 
-     fun differenceDay(){
+    fun differenceDay() {
         val format = DateTimeFormatter.ofPattern("yyyy-MM-dd")
         val mStart = LocalDate.parse(itineraryStartDate.value, format)
         val mEnd = LocalDate.parse(itineraryEndDate.value, format)
         val difference = ChronoUnit.DAYS.between(mStart, mEnd)
-         itineraryTotalDay = difference.toInt()+1
-        Log.v("difference","$difference")
+        itineraryTotalDay = difference.toInt() + 1
+        Log.v("difference", "$difference")
     }
 
     fun addItineraryItem() {
-        var coEditUser= mutableListOf<String>()
+        var coEditUser = mutableListOf<String>()
         coEditUser.add(user!!.id)
         val data = Journey(
             id = journeyId,
-            name =itineraryName.value!!,
-            startDate =  itineraryStartDate.value!!,
-            endDate =  itineraryEndDate.value!!,
+            name = itineraryName.value!!,
+            startDate = itineraryStartDate.value!!,
+            endDate = itineraryEndDate.value!!,
             image = itineraryImage ?: "",
             totalDay = itineraryTotalDay,
             share = false,
@@ -66,7 +65,6 @@ class AddItineraryViewModel : ViewModel() {
             coEditUser = coEditUser
         )
         _addItinerary.value = data
-
     }
 
 }

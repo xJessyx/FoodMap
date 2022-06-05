@@ -35,7 +35,6 @@ class InviteViewModel(journeyArg: Journey) : ViewModel() {
         inviteImg.value = journeyArg.image
     }
 
-
     fun addFireBaseInvitations() {
 
         val dataObject = addInvite.value

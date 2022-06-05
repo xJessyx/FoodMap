@@ -14,8 +14,4 @@ interface PublisherDataSource {
 
     fun getArticleCollect(): MutableLiveData<List<Article>>
 
-    fun getMyAllJourney(): MutableLiveData<List<Journey>>
-
-    fun getMyAllPlace(): MutableLiveData<List<Place>>
-
 }

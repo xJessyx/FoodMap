@@ -1,6 +1,5 @@
 package com.jessy.foodmap.itinerary.paging
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.navigation.findNavController
@@ -13,12 +12,10 @@ import com.jessy.foodmap.data.Journey
 import com.jessy.foodmap.data.User
 import com.jessy.foodmap.databinding.ItemAvatarBinding
 import com.jessy.foodmap.databinding.ItemMyLtineraryPagingBinding
-import io.grpc.InternalChannelz.id
 
 class MyItineraryPagingAdapter (private val onClickListener: OnClickListener) :
     ListAdapter<Journey, MyItineraryPagingAdapter.MyItineraryPagingViewHolder>(
         DiffCallback()) {
-
 
     class MyItineraryPagingViewHolder private constructor(var binding: ItemMyLtineraryPagingBinding) :
         RecyclerView.ViewHolder(binding.root) {

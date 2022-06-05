@@ -28,6 +28,7 @@ object PublisherRemoteDataSource : PublisherDataSource {
     private const val KEY_STATUS = "status"
     private const val KEY_FAVORITEUSERS = "favoriteUsers"
 
+
     private val myAllJourneyList = mutableListOf<Journey>()
 
     override suspend fun getArticles(): Result<List<Article>> = suspendCoroutine { continuation ->
@@ -101,65 +102,6 @@ object PublisherRemoteDataSource : PublisherDataSource {
             }
 
         return collectLiveData
-    }
-
-
-    override fun getMyAllJourney(): MutableLiveData<List<Journey>> {
-        val myAllJourneyLiveData = MutableLiveData<List<Journey>>()
-
-        FirebaseFirestore.getInstance()
-            .collection(PATH_JOURNEYS)
-            .whereEqualTo(KEY_USERID, UserManager.user!!.id)
-            .whereEqualTo(KEY_STATUS, 2)
-            .addSnapshotListener { snapshot, exception ->
-
-                exception?.let {
-                    Log.v("exception", "$exception")
-                }
-
-                for (document in snapshot!!) {
-                    val journey = document.toObject(Journey::class.java)
-                    myAllJourneyList.add(journey)
-                }
-
-                myAllJourneyLiveData.value = myAllJourneyList
-            }
-
-        return myAllJourneyLiveData
-    }
-
-    override fun getMyAllPlace(): MutableLiveData<List<Place>> {
-        val myAllPlaceLiveData = MutableLiveData<List<Place>>()
-        val myCompleteItinerary = mutableListOf<Place>()
-        val myAllPlace = MutableLiveData<List<Place>>()
-
-        for (i in myAllJourneyList) {
-
-            FirebaseFirestore.getInstance()
-                .collection(PATH_JOURNEYS).document(i.id)
-                .collection(PATH_PLACES)
-                .addSnapshotListener { snapshot, exception ->
-                    val myPlaceList = mutableListOf<Place>()
-                    for (document in snapshot!!) {
-                        val place = document.toObject(Place::class.java)
-                        myPlaceList.add(place)
-                        Log.v("myPlaceList", "$myPlaceList")
-                    }
-                    myCompleteItinerary += myPlaceList
-                    Log.v("myCompleteItinerary", "$myCompleteItinerary")
-                    myAllPlaceLiveData.value = myCompleteItinerary
-                    Log.v("myAllPlaceLiveData", "${myAllPlaceLiveData.value}")
-
-                }
-            myAllPlace.value = myCompleteItinerary
-            Log.v("myAllPlace", "${myAllPlace.value}")
-
-        }
-        myAllPlaceLiveData.value = myAllPlace.value
-        Log.v("myAllPlaceLiveData", "${myAllPlaceLiveData.value}")
-
-        return myAllPlaceLiveData
-
     }
 
 }
