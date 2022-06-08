@@ -18,23 +18,23 @@
     新增行程必須加入圖片、出發日期、結束日期，之後便可新增各個景點。
     新增完行程後，若想改變行程先後順序可直接移動地點做變動，也可直接刪除單一地點。
 
-<img src='https://github.com/xJessyx/FoodMap/blob/main/gif/foodMap_addItinerary.gif' width = 70% height = 50% /></a>
+<img src='https://github.com/xJessyx/FoodMap/blob/main/gif/foodMap_addItinerary.gif' width = 30% height = 30% /></a>
 
 * <h4>共同編輯</h4>
     你可以透過 email 邀請好友共同編輯行程，若是對方同意你便可以在已加入的tab中看到。
 
-<img src='https://github.com/xJessyx/FoodMap/blob/main/gif/foodMap_addFriend.gif' width = 70% height = 50% /></a>
+<img src='https://github.com/xJessyx/FoodMap/blob/main/gif/foodMap_addFriend.gif' width = 30% height = 50% /></a>
 
 * <h4>動態貼文</h4>
     你可以觀看他人推薦的貼文並選擇like、collect、留言，當然你如果看到不正當的言論也可以檢舉並封鎖他人的留言。
     你也可以選擇新增自己的貼文與大家分享，需輸入照片、標題、內文、地點，便可創立屬於自己的貼文。
 
-<img src='https://github.com/xJessyx/FoodMap/blob/main/gif/foodMap_addArticle.gif' width = 70% height = 50% /></a>
+<img src='https://github.com/xJessyx/FoodMap/blob/main/gif/foodMap_addArticle.gif' width = 30% height = 30% /></a>
 
 * <h4>搜尋地圖</h4>
     你可以在這裡搜尋所有你想找的地點，輸入關鍵字便會出現模糊搜尋可供選擇，當然你也可以點選下方的搜尋地點卡片去找到它在地圖上的位置。
 
-<img src='https://github.com/xJessyx/FoodMap/blob/main/gif/foodMap_searchMap.gif' width = 70% height = 50% /></a>
+<img src='https://github.com/xJessyx/FoodMap/blob/main/gif/foodMap_searchMap.gif' width = 30% height = 30% /></a>
 
 Library
 -----
