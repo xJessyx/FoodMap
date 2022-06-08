@@ -70,11 +70,13 @@
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:visibility="gone"
+        android:layout_marginBottom="6dp"
+        android:visibility="visible"
+        app:layout_constraintBottom_toTopOf="@+id/addItinerary_ed_ItineraryName"
         app:layout_constraintEnd_toEndOf="@+id/addItinerary_img"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/addItinerary_img"
-        app:layout_constraintTop_toBottomOf="@+id/addItinerary_img" />
+        app:layout_constraintTop_toBottomOf="@+id/addItinerary_img"
+        app:layout_constraintVertical_bias="0.9" />
 
     <EditText
         android:id="@+id/addItinerary_ed_ItineraryName"
