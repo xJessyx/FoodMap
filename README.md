@@ -23,7 +23,7 @@
 * <h4>共同編輯</h4>
     你可以透過 email 邀請好友共同編輯行程，若是對方同意你便可以在已加入的tab中看到。
 
-<img src='https://github.com/xJessyx/FoodMap/blob/main/gif/foodMap_addFriend.gif' width = 30% height = 50% /></a>
+<img src='https://github.com/xJessyx/FoodMap/blob/main/gif/foodMap_addFriend.gif' width = 50% height = 50% /></a>
 
 * <h4>動態貼文</h4>
     你可以觀看他人推薦的貼文並選擇like、collect、留言，當然你如果看到不正當的言論也可以檢舉並封鎖他人的留言。
@@ -38,11 +38,11 @@
 
 Library
 -----
-* retrofit2 - 2.9.0
+* Retrofit2  - 2.9.0
 * Firebase
-* viewpager2 - 1.0.0
-* navigation - 2.4.0-alpha02
+* ViewPager2 - 1.0.0
+* Navigation - 2.4.0-alpha02
 * RecyclerViewSwipeDecorator - 1.2.2
 * ImagePicker - 2.1
-* gosn - 2.8.9
+* Gson - 2.8.9
 * Lottie - 3.6.1
